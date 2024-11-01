@@ -7,11 +7,11 @@ export const metadata: Metadata = {
   description: '',
 }
 
-const RootLayout=({
+const RootLayout = ({
   children,
 }: Readonly<{
   children: React.ReactNode
-}>) =>{
+}>) => {
   return (
     <html lang="ko">
       <body>{children}</body>
