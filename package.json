@@ -7,7 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "prettier": "prettier --write .",
     "storybook": "storybook dev -p 6006",
+    "type-check": "tsc --noEmit -p ./tsconfig.json",
     "build-storybook": "storybook build"
   },
   "dependencies": {
@@ -43,6 +45,7 @@
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-react": "^7.37.2",
     "eslint-plugin-storybook": "^0.10.1",
+    "lefthook": "^1.8.2",
     "prettier": "^3.3.3",
     "sass": "^1.80.5",
     "storybook": "^8.4.0",
