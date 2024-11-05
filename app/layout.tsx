@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
 
+import '@/shared/styles/global.scss'
+
 import { pretendard } from './fonts'
 
 export const metadata: Metadata = {

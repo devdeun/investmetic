@@ -32,6 +32,16 @@ $color-salmon-200: #fed8d7;
 $color-salmon-100: #ffeceb;
 
 /* Typography */
+$font-family-base:
+  var(--font-pretendard),
+  -apple-system,
+  BlinkMacSystemFont,
+  system-ui,
+  Roboto,
+  'Helvetica Neue',
+  sans-serif;
+
+// Size
 $text-h1: 54px;
 $text-h2: 36px;
 $text-h3: 30px;
@@ -41,6 +51,11 @@ $text-b2: 16px;
 $text-b3: 14px;
 $text-c1: 12px;
 $text-c2: 10px;
+
+// Weight
+$text-bold: 700;
+$text-semibold: 600;
+$text-medium: 500;
 
 /* Breakpoints */
 $breakpoint-sm: 576px;

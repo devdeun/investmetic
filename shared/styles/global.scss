@@ -1,0 +1,19 @@
+@import './base/variables';
+@import './base/reset';
+
+body {
+  font-family: $font-family-base;
+  font-weight: $text-medium;
+  font-size: $text-b2;
+  letter-spacing: -0.02em;
+  line-height: 132%;
+  color: $color-black;
+  background-color: $color-white;
+}
+
+input,
+textarea {
+  &::placeholder {
+    opacity: 1; /* Firefox */
+  }
+}
