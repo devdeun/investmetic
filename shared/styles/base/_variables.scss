@@ -1,0 +1,57 @@
+/* Colors */
+// Grayscale
+$color-black: #0a0a0a;
+$color-gray-800: #1d1d1d;
+$color-gray-700: #363636;
+$color-gray-600: #4d4d4d;
+$color-gray-500: #797979;
+$color-gray-400: #a7a7a7;
+$color-gray-300: #cccccc;
+$color-gray-200: #ececec;
+$color-gray-100: #fafafa;
+$color-white: #ffffff;
+
+// Primary
+$color-indigo-800: #0f21a9;
+$color-indigo-700: #1228ce;
+$color-indigo-600: #1e37eb;
+$color-indigo-500: #4533eb;
+$color-indigo-400: #5668f0;
+$color-indigo-300: #7c8af4;
+$color-indigo-200: #a1abf7;
+$color-indigo-100: #d9ddfc;
+
+// Secondary
+$color-salmon-800: #fb2a23;
+$color-salmon-700: #fb514b;
+$color-salmon-600: #fc6e69;
+$color-salmon-500: #fd8b87;
+$color-salmon-400: #fd9e9b;
+$color-salmon-300: #fdb2af;
+$color-salmon-200: #fed8d7;
+$color-salmon-100: #ffeceb;
+
+/* Typography */
+$text-h1: 54px;
+$text-h2: 36px;
+$text-h3: 30px;
+$text-h4: 24px;
+$text-b1: 20px;
+$text-b2: 16px;
+$text-b3: 14px;
+$text-c1: 12px;
+$text-c2: 10px;
+
+/* Breakpoints */
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+
+/* Z-index */
+$z-index: (
+  modal: 1000,
+  header: 100,
+  base: 1,
+  hidden: -1,
+);
