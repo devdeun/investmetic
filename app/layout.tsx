@@ -1,10 +1,10 @@
-import { Providers } from './providers'
+import { QueryProvider } from '@/shared/providers'
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html lang="ko">
       <body>
-        <Providers>{children}</Providers>
+        <QueryProvider>{children}</QueryProvider>
       </body>
     </html>
   )
