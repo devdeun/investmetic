@@ -8,6 +8,14 @@ const nextConfig = {
       @import "@/shared/styles/base/functions";
     `,
   },
+  async rewrites() {
+    return [
+      {
+        source: '/api/:path*',
+        destination: `${process.env.API_HOST}/api/:path*`,
+      },
+    ]
+  },
 }
 
 export default nextConfig
