@@ -1,17 +1,13 @@
 // 서버 컴포넌트
-
-const { API_HOST } = process.env
-
 const Title = async () => {
   const fetchPost = async () => {
     try {
-      const res = await fetch(`${API_HOST}/api/posts`)
-      if (res.ok) {
-        return res.json()
-      }
-      return []
+      const res = await fetch('http://localhost:3000/api/posts')
+      if (!res.ok) throw new Error('Fetch 요청 실패~')
+      return res.json()
     } catch (e) {
-      console.log('error', e)
+      console.error(e)
+      return { title: '잘못된 제목입니다' }
     }
   }
 

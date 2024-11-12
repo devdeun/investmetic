@@ -1,9 +1,8 @@
 import { HttpResponse, http } from 'msw'
 
-const { API_HOST } = process.env
-
+// const { API_HOST } = process.env
 export const userHandlers = [
-  http.get(`${API_HOST}/api/users/check/email`, ({ request }) => {
+  http.get('/api/users/check/email', ({ request }) => {
     const url = new URL(request.url)
     const email = url.searchParams.get('email')
 
@@ -22,11 +21,12 @@ export const userHandlers = [
       message: '사용 가능한 이메일입니다.',
     })
   }),
-  http.post(`${API_HOST}/api/users/signup`, async ({ request }) => {
+
+  http.post('/api/users/signup', async ({ request }) => {
     const newUser = (await request.json()) as { userName: string; password: string }
     const { userName, password } = newUser
 
-    if (!userName || !password)
+    if (!userName || !password) {
       return HttpResponse.json(
         {
           isSuccess: false,
@@ -35,6 +35,7 @@ export const userHandlers = [
         },
         { status: 400 }
       )
+    }
 
     return HttpResponse.json(
       {
@@ -44,10 +45,11 @@ export const userHandlers = [
       { status: 201 }
     )
   }),
-  http.delete(`${API_HOST}/api/users/:userId`, async ({ params }) => {
+
+  http.delete('/api/users/:userId', ({ params }) => {
     const { userId } = params
 
-    if (!userId)
+    if (!userId) {
       return HttpResponse.json(
         {
           isSuccess: false,
@@ -56,6 +58,7 @@ export const userHandlers = [
         },
         { status: 400 }
       )
+    }
 
     return HttpResponse.json(
       {
