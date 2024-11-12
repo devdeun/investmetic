@@ -2,10 +2,11 @@ import { inKoreanData } from './inKorean'
 import styles from './statistics.module.scss'
 
 interface Props {
+  title: string
   statisticsData: { [key: string]: string | number }
 }
 
-const StatisticsTable = ({ statisticsData }: Props) => {
+const StatisticsTable = ({ title, statisticsData }: Props) => {
   const inKoreanDataToArray: string[][] = Object.entries(inKoreanData)
 
   const mappedDataInKorean: { [key: string]: string | number } = {}
@@ -28,6 +29,7 @@ const StatisticsTable = ({ statisticsData }: Props) => {
 
   return (
     <div className={styles.container}>
+      <p>{title}</p>
       <table>
         <tbody>
           {groupedData.map((row, index) => (

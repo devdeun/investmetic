@@ -77,10 +77,10 @@ const Strategies = () => {
   return (
     <>
       <VerticalTable tableHead={head} tableBody={body} countPerPage={2} currentPage={1} />
-      <StatisticsTable statisticsData={assetManagementData} />
-      <StatisticsTable statisticsData={profitLoss} />
-      <StatisticsTable statisticsData={ddMddInfo} />
-      <StatisticsTable statisticsData={tradingInfo} />
+      <StatisticsTable title={'자산 및 운영 정보'} statisticsData={assetManagementData} />
+      <StatisticsTable title={'손익률 관련 정보'} statisticsData={profitLoss} />
+      <StatisticsTable title={'DD & MDD 정보'} statisticsData={ddMddInfo} />
+      <StatisticsTable title={'거래 관련 정보'} statisticsData={tradingInfo} />
     </>
   )
 }
