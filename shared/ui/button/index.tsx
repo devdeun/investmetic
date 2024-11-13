@@ -11,7 +11,7 @@ const cx = classNames.bind(styles)
 export type ButtonSizeType = 'small' | 'medium' | 'large'
 export type ButtonVariantType = 'outline' | 'filled'
 
-interface ButtonProps extends ComponentProps<'button'> {
+interface Props extends ComponentProps<'button'> {
   size?: ButtonSizeType
   variant?: ButtonVariantType
 }
@@ -23,7 +23,7 @@ export const Button = ({
   disabled = false,
   className,
   ...props
-}: ButtonProps) => (
+}: Props) => (
   <button
     className={cx('button', size, variant, { disabled }, className)}
     disabled={disabled}
