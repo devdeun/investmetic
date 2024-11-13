@@ -12,13 +12,13 @@ type ButtonSizeType = 'small' | 'medium' | 'large'
 type ButtonVariantType = 'outline' | 'filled'
 
 interface ButtonProps extends ComponentProps<'button'> {
-  size: ButtonSizeType
+  size?: ButtonSizeType
   variant?: ButtonVariantType
 }
 
 export const Button = ({
   children,
-  size,
+  size = 'medium',
   variant = 'outline',
   disabled = false,
   className,
