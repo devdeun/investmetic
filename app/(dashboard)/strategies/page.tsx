@@ -1,37 +1,6 @@
 import StatisticsTable from '@/shared/ui/table/statistics'
-import VerticalTable from '@/shared/ui/table/vertical'
 
 const Strategies = () => {
-  const head = ['날짜', '원금', '입출금', '일손익', '일손익률', '누적손익', '누적수익률']
-  const body = [
-    {
-      date: '2015-03-12', // 날짜
-      principal: 100000000, // 원금
-      transaction: 0, // 입출금
-      dailyProfitLoss: 332410, // 일 손익
-      dailyProfitLossRate: 0.33, // 일 수익률
-      cumulativeProfitLoss: 302280, // 누적 손익
-      cumulativeProfitLossRate: 0.3, // 누적 수익률
-    },
-    {
-      date: '2015-03-13',
-      principal: 100000000,
-      transaction: 0,
-      dailyProfitLoss: 332410,
-      dailyProfitLossRate: 0.33,
-      cumulativeProfitLoss: 302280,
-      cumulativeProfitLossRate: 0.3,
-    },
-    {
-      date: '2015-03-14',
-      principal: 100000000,
-      transaction: 0,
-      dailyProfitLoss: 332410,
-      dailyProfitLossRate: 0.33,
-      cumulativeProfitLoss: 302280,
-      cumulativeProfitLossRate: 0.3,
-    },
-  ]
   // 자산 및 운영 정보
   const assetManagementData = {
     balance: 896217437, // 잔고
@@ -76,7 +45,6 @@ const Strategies = () => {
   }
   return (
     <>
-      <VerticalTable tableHead={head} tableBody={body} countPerPage={2} currentPage={1} />
       <StatisticsTable title={'자산 및 운영 정보'} statisticsData={assetManagementData} />
       <StatisticsTable title={'손익률 관련 정보'} statisticsData={profitLoss} />
       <StatisticsTable title={'DD & MDD 정보'} statisticsData={ddMddInfo} />
