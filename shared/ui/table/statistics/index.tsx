@@ -15,7 +15,6 @@ interface Props {
 
 const StatisticsTable = ({ title, statisticsData }: Props) => {
   const inKoreanDataToArray: string[][] = Object.entries(inKoreanData)
-
   const mappedDataInKorean: { [key: string]: string | number } = {}
   for (const [key, value] of inKoreanDataToArray) {
     if (statisticsData[key] !== undefined) {
@@ -23,24 +22,27 @@ const StatisticsTable = ({ title, statisticsData }: Props) => {
     }
   }
 
-  const groupedData = []
-  const mappedDataInKoreanToArray = Object.entries(mappedDataInKorean)
-  for (let i = 0; i < mappedDataInKoreanToArray.length; i += 2) {
-    groupedData.push([
-      mappedDataInKoreanToArray[i][0],
-      mappedDataInKoreanToArray[i][1],
-      mappedDataInKoreanToArray[i + 1]?.[0],
-      mappedDataInKoreanToArray[i + 1]?.[1],
-    ])
-  }
+  const groupedData = Array.from(
+    { length: Math.ceil(Object.entries(mappedDataInKorean).length / 2) },
+    (_, idx) => {
+      const index = idx * 2
+      const mappedDataInKoreanToArray = Object.entries(mappedDataInKorean)
+      return [
+        mappedDataInKoreanToArray[index][0],
+        mappedDataInKoreanToArray[index][1],
+        mappedDataInKoreanToArray[index + 1]?.[0],
+        mappedDataInKoreanToArray[index + 1]?.[1],
+      ]
+    }
+  )
 
   return (
     <div className={cx('container')}>
       <p>{title}</p>
       <table>
         <tbody>
-          {groupedData.map((row, index) => (
-            <tr key={index}>
+          {groupedData.map((row, idx) => (
+            <tr key={idx}>
               <td>{row[0]}</td>
               <td>{row[1]}</td>
               {row[2] && (

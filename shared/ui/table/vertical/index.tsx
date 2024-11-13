@@ -34,8 +34,8 @@ const VerticalTable = ({ tableHead, tableBody, countPerPage, currentPage }: Prop
         <tbody>
           {croppedTableBody.map((row) => (
             <tr key={Object.values(row)[0]}>
-              {Object.entries(row).map((rowData, index) => (
-                <td key={index}>{rowData[1]}</td>
+              {Object.entries(row).map((rowData, idx) => (
+                <td key={idx}>{rowData[1]}</td>
               ))}
             </tr>
           ))}
