@@ -1,5 +1,5 @@
-import VerticalTable from '@/shared/ui/table/ vertical'
 import StatisticsTable from '@/shared/ui/table/statistics'
+import VerticalTable from '@/shared/ui/table/vertical'
 
 const Strategies = () => {
   const head = ['날짜', '원금', '입출금', '일손익', '일손익률', '누적손익', '누적수익률']
