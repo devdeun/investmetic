@@ -1,9 +1,9 @@
 import type { Meta, StoryFn } from '@storybook/react'
 
-import VerticalTable from '../index'
+import VerticalTable from './index'
 
 const meta: Meta = {
-  title: 'Shared/UI/Table',
+  title: 'component/Table',
   component: VerticalTable,
   tags: ['autodocs'],
 }

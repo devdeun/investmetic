@@ -1,9 +1,9 @@
 import type { Meta, StoryFn } from '@storybook/react'
 
-import StatisticsTable from '../index'
+import StatisticsTable from './index'
 
 const meta: Meta = {
-  title: 'Shared/UI/Statistics-Table',
+  title: 'component/Statistics-Table',
   component: StatisticsTable,
   tags: ['autodocs'],
 }
