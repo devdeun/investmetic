@@ -1,9 +1,16 @@
+import classNames from 'classnames/bind'
+
 import { inKoreanData } from './inKorean'
 import styles from './statistics.module.scss'
 
+const cx = classNames.bind(styles)
+
+interface StatisticsDataModel {
+  [key: string]: string | number
+}
 interface Props {
   title: string
-  statisticsData: { [key: string]: string | number }
+  statisticsData: StatisticsDataModel
 }
 
 const StatisticsTable = ({ title, statisticsData }: Props) => {
@@ -28,7 +35,7 @@ const StatisticsTable = ({ title, statisticsData }: Props) => {
   }
 
   return (
-    <div className={styles.container}>
+    <div className={cx('container')}>
       <p>{title}</p>
       <table>
         <tbody>

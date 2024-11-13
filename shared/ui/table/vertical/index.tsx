@@ -1,6 +1,10 @@
+import classNames from 'classnames/bind'
+
 import { DailyAnalysisModel, MonthlyAnalysisModel } from '@/shared/types/strategy-details-data'
 
 import styles from './vertical.module.scss'
+
+const cx = classNames.bind(styles)
 
 type TableBodyDataType = DailyAnalysisModel | MonthlyAnalysisModel
 
@@ -18,7 +22,7 @@ const VerticalTable = ({ tableHead, tableBody, countPerPage, currentPage }: Prop
   )
 
   return (
-    <div className={styles.container}>
+    <div className={cx('container')}>
       <table>
         <thead>
           <tr>

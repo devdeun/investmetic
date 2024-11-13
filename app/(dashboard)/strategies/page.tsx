@@ -1,5 +1,5 @@
-const Strategies = () => {
+const StrategiesPage = () => {
   return <></>
 }
 
-export default Strategies
+export default StrategiesPage
