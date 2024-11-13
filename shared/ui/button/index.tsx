@@ -14,6 +14,7 @@ export type ButtonVariantType = 'outline' | 'filled'
 interface Props extends ComponentProps<'button'> {
   size?: ButtonSizeType
   variant?: ButtonVariantType
+  onClick: () => void
 }
 
 export const Button = ({
@@ -21,11 +22,13 @@ export const Button = ({
   size = 'medium',
   variant = 'outline',
   disabled = false,
+  onClick,
   className,
   ...props
 }: Props) => (
   <button
     className={cx('button', size, variant, { disabled }, className)}
+    onClick={onClick}
     disabled={disabled}
     {...props}
   >

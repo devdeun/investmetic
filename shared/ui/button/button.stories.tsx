@@ -88,10 +88,10 @@ export const Disabled: StoryType = {
 export const GroupExample: StoryType = {
   render: () => (
     <div style={{ display: 'flex', gap: '8px' }}>
-      <Button size="medium" variant="outline">
+      <Button size="medium" variant="outline" onClick={() => {}}>
         취소
       </Button>
-      <Button size="medium" variant="filled">
+      <Button size="medium" variant="filled" onClick={() => {}}>
         확인
       </Button>
     </div>
