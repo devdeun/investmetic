@@ -8,8 +8,8 @@ import styles from './button.module.scss'
 
 const cx = classNames.bind(styles)
 
-type ButtonSizeType = 'small' | 'medium' | 'large'
-type ButtonVariantType = 'outline' | 'filled'
+export type ButtonSizeType = 'small' | 'medium' | 'large'
+export type ButtonVariantType = 'outline' | 'filled'
 
 interface ButtonProps extends ComponentProps<'button'> {
   size?: ButtonSizeType
