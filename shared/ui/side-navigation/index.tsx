@@ -22,7 +22,7 @@ const SideNavigation = ({ children }: Props) => {
         <h1>
           <Link href={PATH.HOME} className={cx('logo')}>
             <Logo />
-            <TextLogo className={cx('text')} />
+            <TextLogo className={cx('text')} aria-label="인베스트메틱" />
           </Link>
         </h1>
       </header>
