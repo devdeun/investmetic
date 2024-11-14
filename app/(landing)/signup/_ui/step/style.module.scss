@@ -1,6 +1,5 @@
 .step {
   display: flex;
-  align-items: top;
   justify-content: center;
   margin: 20px 0;
   .bar {
@@ -35,9 +34,7 @@
 
   p {
     margin-top: 20px;
-    &.current {
-      color: $color-gray-700;
-    }
+    &.current,
     &.done {
       color: $color-gray-700;
     }
