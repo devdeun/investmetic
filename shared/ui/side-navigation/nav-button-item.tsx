@@ -12,7 +12,7 @@ interface Props {
   children: React.ReactNode
 }
 
-const ButtonItem = ({ icon: Icon, onClick, children }: Props) => {
+const NavButtonItem = ({ icon: Icon, onClick, children }: Props) => {
   return (
     <li className={cx('navigation-item')}>
       <button type="button" onClick={onClick} className={cx('button')}>
@@ -23,4 +23,4 @@ const ButtonItem = ({ icon: Icon, onClick, children }: Props) => {
   )
 }
 
-export default ButtonItem
+export default NavButtonItem

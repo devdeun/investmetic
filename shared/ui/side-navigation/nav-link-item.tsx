@@ -16,7 +16,7 @@ interface Props {
   textClassName?: keyof typeof styles
 }
 
-const LinkItem = ({ href, icon: Icon, textClassName, children }: Props) => {
+const NavLinkItem = ({ href, icon: Icon, textClassName, children }: Props) => {
   const path = usePathname()
   const isActive = path.startsWith(href)
 
@@ -30,4 +30,4 @@ const LinkItem = ({ href, icon: Icon, textClassName, children }: Props) => {
   )
 }
 
-export default LinkItem
+export default NavLinkItem

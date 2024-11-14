@@ -7,8 +7,8 @@ import classNames from 'classnames/bind'
 
 import { fetchUser } from '@/shared/api/user'
 import { PATH } from '@/shared/constants/path'
-import ButtonItem from '@/shared/ui/side-navigation/button-item'
-import LinkItem from '@/shared/ui/side-navigation/link-item'
+import NavButtonItem from '@/shared/ui/side-navigation/nav-button-item'
+import NavLinkItem from '@/shared/ui/side-navigation/nav-link-item'
 
 import styles from './styles.module.scss'
 
@@ -24,20 +24,20 @@ const UserNavigation = () => {
   return (
     <nav className={cx('user-navigation')} aria-label="사용자 메뉴">
       <ul>
-        <LinkItem href={PATH.PROFILE} icon={ProfileIcon} textClassName="user">
+        <NavLinkItem href={PATH.PROFILE} icon={ProfileIcon} textClassName="user">
           <span className={cx('nickname')}>{user.nickname}</span>
           <span className={cx('email')}>{user.email}</span>
-        </LinkItem>
+        </NavLinkItem>
 
         {isAdmin && (
-          <LinkItem href={isAdminPage ? PATH.STRATEGIES : PATH.ADMIN_USERS} icon={ChangeIcon}>
+          <NavLinkItem href={isAdminPage ? PATH.STRATEGIES : PATH.ADMIN_USERS} icon={ChangeIcon}>
             {isAdminPage ? '메인 대시보드' : '관리자 대시보드'}
-          </LinkItem>
+          </NavLinkItem>
         )}
 
-        <ButtonItem icon={SignOutIcon} onClick={() => {}}>
+        <NavButtonItem icon={SignOutIcon} onClick={() => {}}>
           로그아웃
-        </ButtonItem>
+        </NavButtonItem>
       </ul>
     </nav>
   )

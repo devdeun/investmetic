@@ -11,7 +11,7 @@ import {
 import { fetchUser } from '@/shared/api/user'
 import { PATH } from '@/shared/constants/path'
 import SideNavigation from '@/shared/ui/side-navigation'
-import LinkItem from '@/shared/ui/side-navigation/link-item'
+import NavLinkItem from '@/shared/ui/side-navigation/nav-link-item'
 
 const AdminNavigation = () => {
   const user = fetchUser()
@@ -19,23 +19,23 @@ const AdminNavigation = () => {
 
   return (
     <SideNavigation>
-      <LinkItem href={PATH.ADMIN_USERS} icon={TradersIcon}>
+      <NavLinkItem href={PATH.ADMIN_USERS} icon={TradersIcon}>
         회원 관리
-      </LinkItem>
-      <LinkItem href={PATH.ADMIN_NOTICES} icon={NoticeIcon}>
+      </NavLinkItem>
+      <NavLinkItem href={PATH.ADMIN_NOTICES} icon={NoticeIcon}>
         공지사항
-      </LinkItem>
+      </NavLinkItem>
       {isTrader && (
-        <LinkItem href={PATH.ADMIN_CATEGORY} icon={CategoryIcon}>
+        <NavLinkItem href={PATH.ADMIN_CATEGORY} icon={CategoryIcon}>
           종목 및 매매 유형
-        </LinkItem>
+        </NavLinkItem>
       )}
-      <LinkItem href={PATH.ADMIN_STRATEGIES} icon={StrategyRankingIcon}>
+      <NavLinkItem href={PATH.ADMIN_STRATEGIES} icon={StrategyRankingIcon}>
         전략 관리
-      </LinkItem>
-      <LinkItem href={PATH.ADMIN_QUESTIONS} icon={QuestionIcon}>
+      </NavLinkItem>
+      <NavLinkItem href={PATH.ADMIN_QUESTIONS} icon={QuestionIcon}>
         문의 내역
-      </LinkItem>
+      </NavLinkItem>
     </SideNavigation>
   )
 }
