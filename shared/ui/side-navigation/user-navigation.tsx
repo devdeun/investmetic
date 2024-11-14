@@ -24,7 +24,7 @@ const UserNavigation = () => {
   return (
     <nav className={cx('user-navigation')} aria-label="사용자 메뉴">
       <ul>
-        <LinkItem href={'/profile'} icon={ProfileIcon} textClassName="user">
+        <LinkItem href={PATH.PROFILE} icon={ProfileIcon} textClassName="user">
           <span className={cx('nickname')}>{user.nickname}</span>
           <span className={cx('email')}>{user.email}</span>
         </LinkItem>

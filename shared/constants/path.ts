@@ -9,6 +9,7 @@ export const PATH = {
   TRADERS: '/traders',
 
   // My
+  PROFILE: 'my/profile',
   FAVORITES: '/my/favorites',
   MY_STRATEGIES: '/my/strategies',
   STRATEGIES_MANAGE: '/my/strategies/manage',
