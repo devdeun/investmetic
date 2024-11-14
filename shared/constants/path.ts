@@ -2,6 +2,10 @@ export const PATH = {
   // Auth
   SIGN_IN: '/signin',
   SIGN_UP: '/signup',
+  SIGN_UP_USER_TYPE: '/signup/user-type',
+  SIGN_UP_TERMS_OF_USE: '/signup/terms-of-use',
+  SIGN_UP_INFORMATION: '/signup/information',
+  SIGN_UP_COMPLETE: '/signup/complete',
 
   // Main
   HOME: '/',
