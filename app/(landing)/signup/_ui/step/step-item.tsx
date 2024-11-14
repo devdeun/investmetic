@@ -33,20 +33,26 @@ const StepItem = ({ children, step, pathname, icon: Icon }: Props) => {
     validateIsDoneStatus()
   }, [currentPath])
 
-  const isCurrentStep = currentPath === pathname
-
   const validateIsDoneStatus = () => {
     const currentPathIdx = STEP_HISTORY.findIndex((path) => path === currentPath)
     if (currentPathIdx > step - 1) {
       setIsDone(true)
     }
   }
+
+  const isCurrentStep = currentPath === pathname
+
+  const stepCondition = {
+    current: isCurrentStep,
+    done: isDone,
+  }
+
   return (
     <div className={cx('step-item')}>
-      <div className={cx('circle', isCurrentStep && 'current', isDone && 'done')}>
+      <div className={cx('circle', stepCondition)}>
         {isCurrentStep || isDone ? <Icon className={cx('icon')} /> : step}
       </div>
-      <p className={cx(isCurrentStep && 'current', isDone && 'done')}>{children}</p>
+      <p className={cx(stepCondition)}>{children}</p>
     </div>
   )
 }
