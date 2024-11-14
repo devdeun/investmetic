@@ -8,15 +8,11 @@ import {
   TradersIcon,
 } from '@/public/icons'
 
-import { fetchUser } from '@/shared/api/user'
 import { PATH } from '@/shared/constants/path'
 import SideNavigation from '@/shared/ui/side-navigation'
 import NavLinkItem from '@/shared/ui/side-navigation/nav-link-item'
 
 const AdminNavigation = () => {
-  const user = fetchUser()
-  const isTrader = user.role.includes('trader')
-
   return (
     <SideNavigation>
       <NavLinkItem href={PATH.ADMIN_USERS} icon={TradersIcon}>
@@ -25,11 +21,9 @@ const AdminNavigation = () => {
       <NavLinkItem href={PATH.ADMIN_NOTICES} icon={NoticeIcon}>
         공지사항
       </NavLinkItem>
-      {isTrader && (
-        <NavLinkItem href={PATH.ADMIN_CATEGORY} icon={CategoryIcon}>
-          종목 및 매매 유형
-        </NavLinkItem>
-      )}
+      <NavLinkItem href={PATH.ADMIN_CATEGORY} icon={CategoryIcon}>
+        종목 및 매매 유형
+      </NavLinkItem>
       <NavLinkItem href={PATH.ADMIN_STRATEGIES} icon={StrategyRankingIcon}>
         전략 관리
       </NavLinkItem>
