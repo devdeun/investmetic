@@ -64,24 +64,22 @@
   font-style: normal;
   font-weight: $text-semibold;
   line-height: 132%;
+  letter-spacing: -0.02em;
 }
 
 @mixin typo-b1 {
   @extend %base-body;
   font-size: $text-b1;
-  letter-spacing: -0.4px;
 }
 
 @mixin typo-b2 {
   @extend %base-body;
   font-size: $text-b2;
-  letter-spacing: -0.32px;
 }
 
 @mixin typo-b3 {
   @extend %base-body;
   font-size: $text-b3;
-  letter-spacing: -0.28px;
 }
 
 // caption
@@ -89,16 +87,15 @@
   font-style: normal;
   font-weight: $text-medium;
   line-height: 132%;
+  letter-spacing: -0.02em;
 }
 
 @mixin typo-c1 {
   @extend %base-caption;
   font-size: $text-c1;
-  letter-spacing: -0.24px;
 }
 
 @mixin typo-c2 {
   @extend %base-caption;
   font-size: $text-c2;
-  letter-spacing: -0.2px;
 }
