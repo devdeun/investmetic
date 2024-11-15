@@ -9,11 +9,11 @@ export const PATH = {
   TRADERS: '/traders',
 
   // My
-  PROFILE: 'my/profile',
+  PROFILE: '/my/profile',
   FAVORITES: '/my/favorites',
   MY_STRATEGIES: '/my/strategies',
   STRATEGIES_MANAGE: '/my/strategies/manage',
-  MY_QUESTIONS: 'my/questions',
+  MY_QUESTIONS: '/my/questions',
 
   // Admin
   ADMIN: '/admin',
