@@ -1,7 +1,7 @@
 'use client'
 
 import {
-  FavoriteIcon,
+  BookmarkIcon,
   QuestionIcon,
   StrategyIcon,
   StrategyRankingIcon,
@@ -30,7 +30,7 @@ const DashboardNavigation = () => {
           나의 전략
         </NavLinkItem>
       )}
-      <NavLinkItem href={PATH.FAVORITES} icon={FavoriteIcon}>
+      <NavLinkItem href={PATH.FAVORITES} icon={BookmarkIcon}>
         구독한 전략
       </NavLinkItem>
       <NavLinkItem href={PATH.MY_QUESTIONS} icon={QuestionIcon}>
