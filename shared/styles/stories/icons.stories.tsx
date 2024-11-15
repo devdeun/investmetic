@@ -21,6 +21,7 @@ import {
   QuestionIcon,
   SearchIcon,
   SignOutIcon,
+  StarIcon,
   StatisticsIcon,
   StrategyIcon,
   StrategyRankingIcon,
@@ -59,6 +60,7 @@ const icons = [
   { name: 'StrategyRankingIcon', icon: StrategyRankingIcon },
   { name: 'StrategyIcon', icon: StrategyIcon },
   { name: 'TradersIcon', icon: TradersIcon },
+  { name: 'StarIcon', icon: StarIcon },
 ]
 
 export const Icons: Story = {
