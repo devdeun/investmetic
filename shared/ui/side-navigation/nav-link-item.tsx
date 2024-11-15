@@ -5,6 +5,8 @@ import { usePathname } from 'next/navigation'
 
 import classNames from 'classnames/bind'
 
+import { PATH } from '@/shared/constants/path'
+
 import styles from './styles.module.scss'
 
 const cx = classNames.bind(styles)
@@ -18,7 +20,7 @@ interface Props {
 
 const NavLinkItem = ({ href, icon: Icon, textClassName, children }: Props) => {
   const path = usePathname()
-  const isActive = path.startsWith(href)
+  const isActive = path.startsWith(href) && href !== PATH.PROFILE
 
   return (
     <li className={cx('navigation-item')}>

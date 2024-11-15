@@ -13,6 +13,7 @@
 
   &:not(:hover) {
     width: 90px;
+    overflow: hidden;
 
     .text {
       opacity: 0;
