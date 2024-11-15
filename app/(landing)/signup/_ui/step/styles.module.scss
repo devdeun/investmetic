@@ -10,6 +10,7 @@
   margin-top: 24px;
   background-color: $color-white;
   position: relative;
+
   &.next,
   &.prev {
     &::after {
@@ -22,13 +23,15 @@
       background-color: $color-orange-200;
     }
   }
+
   &.next::after {
-    animation: gaugeUp 0.5s linear forwards;
+    animation: gaugeUp 0.3s linear forwards;
   }
 
   &.prev::after {
     animation: gaugeDown 0.5s linear forwards;
   }
+
   &.fix {
     background-color: $color-orange-200;
     animation: none;
@@ -43,6 +46,7 @@
     width: 100%;
   }
 }
+
 @keyframes gaugeDown {
   to {
     width: 0;
@@ -55,6 +59,7 @@
 .step-item {
   color: $color-gray-400;
   font-weight: $text-semibold;
+
   .circle {
     width: 58px;
     height: 52px;
@@ -64,14 +69,38 @@
     border-radius: 25px;
     background-color: $color-white;
     font-size: $text-h4;
+    position: relative;
+    overflow: hidden;
+
     &.next {
       background-color: $color-orange-200;
     }
+
     &.current {
-      background-color: $color-orange-400;
+      position: relative;
+
+      &::after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 0;
+        width: 0;
+        height: 100%;
+        background-color: $color-orange-400;
+        transform: translateY(-50%);
+        animation: fillCircle 0.3s 0.3s forwards;
+        z-index: 1;
+      }
+
+      &.prev {
+        background-color: $color-orange-400;
+        animation: none;
+      }
     }
+
     .icon {
       color: $color-gray-700;
+      z-index: 2;
     }
   }
 
@@ -81,5 +110,14 @@
     &.next {
       color: $color-gray-700;
     }
+  }
+}
+
+@keyframes fillCircle {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
   }
 }
