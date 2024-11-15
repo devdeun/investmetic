@@ -1,7 +1,7 @@
 import classNames from 'classnames/bind'
 
 import { inKoreanData } from './inKorean'
-import styles from './statistics.module.scss'
+import styles from './styles.module.scss'
 
 const cx = classNames.bind(styles)
 
