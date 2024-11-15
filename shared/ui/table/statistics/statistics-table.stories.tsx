@@ -3,7 +3,7 @@ import type { Meta, StoryFn } from '@storybook/react'
 import StatisticsTable from './index'
 
 const meta: Meta = {
-  title: 'component/Statistics-Table',
+  title: 'components/Statistics-Table',
   component: StatisticsTable,
   tags: ['autodocs'],
 }

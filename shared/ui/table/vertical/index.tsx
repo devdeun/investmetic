@@ -2,7 +2,7 @@ import classNames from 'classnames/bind'
 
 import { DailyAnalysisModel, MonthlyAnalysisModel } from '@/shared/types/strategy-details-data'
 
-import styles from './vertical.module.scss'
+import styles from './styles.module.scss'
 
 const cx = classNames.bind(styles)
 
