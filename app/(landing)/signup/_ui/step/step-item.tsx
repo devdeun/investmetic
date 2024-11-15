@@ -1,42 +1,61 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from 'react'
 
 import { usePathname } from 'next/navigation'
 
+import { STEP_OF_PATH } from '@/app/(landing)/signup/_ui/step'
 import classNames from 'classnames/bind'
 
 import { PATH } from '@/shared/constants/path'
+import useStepHistoryStore from '@/shared/stores/use-step-history-store'
 
 import styles from './style.module.scss'
 
-const cx = classNames.bind(styles)
+/* eslint-disable react-hooks/exhaustive-deps */
 
-const STEP_HISTORY = [
-  PATH.SIGN_UP_USER_TYPE,
-  PATH.SIGN_UP_TERMS_OF_USE,
-  PATH.SIGN_UP_INFORMATION,
-  PATH.SIGN_UP_COMPLETE,
-]
+const cx = classNames.bind(styles)
 
 interface Props {
   children: React.ReactNode
   step: number
   pathname: string
   icon: React.ElementType
+  prevStep: number
 }
 
-const StepItem = ({ children, step, pathname, icon: Icon }: Props) => {
-  const [isDone, setIsDone] = useState(false)
+const StepItem = ({ children, step, pathname, icon: Icon, prevStep }: Props) => {
+  const stepHistory = useStepHistoryStore((state) => state.stepHistory)
+  const [isNextStep, setIsNextStep] = useState(false)
+  const [isPrevStep, setIsPrev] = useState(false)
+  const [isFix, setIsFix] = useState(false)
   const currentPath = usePathname()
 
   useEffect(() => {
-    validateIsDoneStatus()
+    if (currentPathIdx - (prevStep - 1) > 0) {
+      handleNextStep()
+    } else if (stepHistory.length !== 0) {
+      handlePrevStep()
+    }
   }, [currentPath])
 
-  const validateIsDoneStatus = () => {
-    const currentPathIdx = STEP_HISTORY.findIndex((path) => path === currentPath)
-    if (currentPathIdx > step - 1) {
-      setIsDone(true)
+  const currentPathIdx = Object.keys(STEP_OF_PATH).findIndex((path) => path === currentPath)
+  const stepIdx = step - 1
+
+  const handleNextStep = () => {
+    if (currentPathIdx > stepIdx) {
+      setIsNextStep(true)
+      if (currentPathIdx - step > 0) {
+        setIsFix(true)
+      }
+    }
+  }
+
+  const handlePrevStep = () => {
+    if (currentPathIdx === stepIdx) {
+      setIsPrev(true)
+    }
+    if (currentPathIdx - stepIdx > 0) {
+      setIsNextStep(true)
+      setIsFix(true)
     }
   }
 
@@ -44,16 +63,21 @@ const StepItem = ({ children, step, pathname, icon: Icon }: Props) => {
 
   const stepCondition = {
     current: isCurrentStep,
-    done: isDone,
+    next: isNextStep,
+    prev: isPrevStep,
+    fix: isFix,
   }
 
   return (
-    <div className={cx('step-item')}>
-      <div className={cx('circle', stepCondition)}>
-        {isCurrentStep || isDone ? <Icon className={cx('icon')} /> : step}
+    <>
+      <div className={cx('step-item')}>
+        <div className={cx('circle', stepCondition)}>
+          {isCurrentStep || isNextStep ? <Icon className={cx('icon')} /> : step}
+        </div>
+        <p className={cx(stepCondition)}>{children}</p>
       </div>
-      <p className={cx(stepCondition)}>{children}</p>
-    </div>
+      {pathname !== PATH.SIGN_UP_COMPLETE && <div className={cx('bar', stepCondition)}> </div>}
+    </>
   )
 }
 

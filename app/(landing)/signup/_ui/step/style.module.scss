@@ -2,30 +2,78 @@
   display: flex;
   justify-content: center;
   margin: 20px 0;
-  .bar {
-    width: 60px;
-    height: 3px;
-    margin-top: 25px;
-    background-color: $color-white;
+}
+
+.bar {
+  width: 60px;
+  height: 4px;
+  margin-top: 24px;
+  background-color: $color-white;
+  position: relative;
+  &.next {
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      background-color: $color-orange-200;
+      animation: gaugeUp 0.5s linear forwards;
+    }
+  }
+  &.fix {
+    background-color: $color-orange-200;
+    animation: none;
+  }
+  &.prev {
+    &::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      background-color: $color-orange-200;
+      animation: gaugeDown 0.5s linear forwards;
+    }
   }
 }
+
+@keyframes gaugeUp {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+@keyframes gaugeDown {
+  to {
+    width: 0;
+  }
+  from {
+    width: 100%;
+  }
+}
+
 .step-item {
   color: $color-gray-400;
   font-weight: $text-semibold;
   .circle {
-    width: 55px;
-    height: 50px;
+    width: 58px;
+    height: 52px;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 25px;
     background-color: $color-white;
     font-size: $text-h4;
+    &.next {
+      background-color: $color-orange-200;
+    }
     &.current {
       background-color: $color-orange-400;
-    }
-    &.done {
-      background-color: $color-orange-200;
     }
     .icon {
       color: $color-gray-700;
@@ -35,7 +83,7 @@
   p {
     margin-top: 20px;
     &.current,
-    &.done {
+    &.next {
       color: $color-gray-700;
     }
   }
