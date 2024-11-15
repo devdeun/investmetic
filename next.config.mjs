@@ -1,12 +1,15 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  experimental: {
+    appDir: true,
+  },
   sassOptions: {
     includePaths: ['./shared/styles'],
     prependData: `
-      @import "@/shared/styles/base/variables";
-      @import "@/shared/styles/base/mixins";
-      @import "@/shared/styles/base/functions";
-    `,
+    @import "@/shared/styles/base/variables";
+    @import "@/shared/styles/base/mixins";
+    @import "@/shared/styles/base/functions";
+  `,
   },
   async rewrites() {
     return [
@@ -19,6 +22,7 @@ const nextConfig = {
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
+      issuer: /\.[jt]sx?$/,
       use: ['@svgr/webpack'],
     })
 
