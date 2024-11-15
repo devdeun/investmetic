@@ -50,7 +50,7 @@ const ColorSection = ({ title, colors }: ColorSectionProps) => (
 export const Colors: Story = {
   render: () => (
     <>
-      <h1>Colors</h1>
+      <h1 style={{ margin: '24px 0', fontSize: '32px', fontWeight: 'bold' }}>Colors</h1>
 
       <ColorSection
         title="Grayscale"

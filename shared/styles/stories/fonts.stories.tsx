@@ -56,7 +56,7 @@ const TypographySection = ({ title, fonts }: TypographySectionProps) => (
 export const Typography: Story = {
   render: () => (
     <>
-      <h1>Typography</h1>
+      <h1 style={{ margin: '24px 0', fontSize: '32px', fontWeight: 'bold' }}>Typography</h1>
 
       <TypographySection
         title="Headings"
