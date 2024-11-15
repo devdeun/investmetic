@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef } from 'react'
+import { useEffect } from 'react'
 
 import { usePathname } from 'next/navigation'
 
@@ -27,15 +27,11 @@ const Step = () => {
   const stepHistory = useStepHistoryStore((state) => state.stepHistory)
   const addStep = useStepHistoryStore((state) => state.addStep)
   const removeStep = useStepHistoryStore((state) => state.removeStep)
-  const initialRender = useRef(true)
   const currentPath = usePathname()
 
   useEffect(() => {
-    if (initialRender.current) {
-      initialRender.current = false
-      handleStepHistoryControl()
-    }
-  }, [currentPath])
+    handleStepHistoryControl()
+  }, [])
 
   const handleStepHistoryControl = () => {
     addStep(currentPath)
