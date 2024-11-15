@@ -27,3 +27,75 @@
     @content;
   }
 }
+
+// typescales
+// header
+%base-headline {
+  font-style: normal;
+  line-height: normal;
+}
+
+@mixin typo-h1 {
+  @extend %base-headline;
+  font-size: $text-h1;
+  font-weight: $text-bold;
+}
+
+@mixin typo-h2 {
+  @extend %base-headline;
+  font-size: $text-h2;
+  font-weight: $text-bold;
+}
+
+@mixin typo-h3 {
+  @extend %base-headline;
+  font-size: $text-h3;
+  font-weight: $text-semibold;
+}
+
+@mixin typo-h4 {
+  @extend %base-headline;
+  font-size: $text-h4;
+  font-weight: $text-semibold;
+}
+
+// body
+%base-body {
+  font-style: normal;
+  font-weight: $text-semibold;
+  line-height: 132%;
+  letter-spacing: -0.02em;
+}
+
+@mixin typo-b1 {
+  @extend %base-body;
+  font-size: $text-b1;
+}
+
+@mixin typo-b2 {
+  @extend %base-body;
+  font-size: $text-b2;
+}
+
+@mixin typo-b3 {
+  @extend %base-body;
+  font-size: $text-b3;
+}
+
+// caption
+%base-caption {
+  font-style: normal;
+  font-weight: $text-medium;
+  line-height: 132%;
+  letter-spacing: -0.02em;
+}
+
+@mixin typo-c1 {
+  @extend %base-caption;
+  font-size: $text-c1;
+}
+
+@mixin typo-c2 {
+  @extend %base-caption;
+  font-size: $text-c2;
+}
