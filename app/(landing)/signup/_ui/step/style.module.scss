@@ -10,22 +10,7 @@
   margin-top: 24px;
   background-color: $color-white;
   position: relative;
-  &.next {
-    &::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 0;
-      height: 100%;
-      background-color: $color-orange-200;
-      animation: gaugeUp 0.5s linear forwards;
-    }
-  }
-  &.fix {
-    background-color: $color-orange-200;
-    animation: none;
-  }
+  &.next,
   &.prev {
     &::after {
       content: '';
@@ -35,8 +20,18 @@
       width: 0;
       height: 100%;
       background-color: $color-orange-200;
-      animation: gaugeDown 0.5s linear forwards;
     }
+  }
+  &.next::after {
+    animation: gaugeUp 0.5s linear forwards;
+  }
+
+  &.prev::after {
+    animation: gaugeDown 0.5s linear forwards;
+  }
+  &.fix {
+    background-color: $color-orange-200;
+    animation: none;
   }
 }
 
