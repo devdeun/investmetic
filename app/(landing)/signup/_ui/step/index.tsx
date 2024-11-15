@@ -33,11 +33,11 @@ const Step = () => {
   useEffect(() => {
     if (initialRender.current) {
       initialRender.current = false
-      addHistory()
+      handleStepHistoryControl()
     }
   }, [currentPath])
 
-  const addHistory = () => {
+  const handleStepHistoryControl = () => {
     addStep(currentPath)
     if (stepHistory.length > 1) {
       removeStep()
