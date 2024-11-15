@@ -3,7 +3,7 @@ import type { Meta, StoryFn } from '@storybook/react'
 import VerticalTable from './index'
 
 const meta: Meta = {
-  title: 'component/Table',
+  title: 'components/Table',
   component: VerticalTable,
   tags: ['autodocs'],
 }
