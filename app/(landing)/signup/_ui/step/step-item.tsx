@@ -8,7 +8,7 @@ import classNames from 'classnames/bind'
 import { PATH } from '@/shared/constants/path'
 import useStepHistoryStore from '@/shared/stores/use-step-history-store'
 
-import styles from './style.module.scss'
+import styles from './styles.module.scss'
 
 /* eslint-disable react-hooks/exhaustive-deps */
 
