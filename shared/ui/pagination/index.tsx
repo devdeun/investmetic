@@ -23,7 +23,7 @@ const Pagination = ({ currentPage, maxPage, onPageChange }: Props) => {
   const [pages, setPages] = useState<PageType[]>([])
 
   const getSequentialPages = useCallback((start: number, length: number) => {
-    return Array.from({ length }, (_, i) => start + i)
+    return Array.from({ length }, (_, idx) => start + idx)
   }, [])
 
   const calculatePages = useCallback(() => {
@@ -53,20 +53,20 @@ const Pagination = ({ currentPage, maxPage, onPageChange }: Props) => {
   }
 
   return (
-    <div className={styles.paginationContainer}>
+    <div className={styles.pagination}>
       {currentPage !== 1 && (
         <button className={styles.left} onClick={handleLeft}>
           <ChevronLeftIcon />
         </button>
       )}
-      {pages.map((page, index) => (
+      {pages.map((page, idx) => (
         <button
-          key={`${page}-${index}`}
+          key={`${page}-${idx}`}
           className={cx(styles.page, {
             [styles.active]: page === currentPage,
           })}
           disabled={page === DOTS}
-          style={page === DOTS ? { cursor: 'default', border: 0 } : {}}
+          style={page === DOTS ? { cursor: 'default' } : {}}
           onClick={() => handlePageClick(page)}
         >
           {page}

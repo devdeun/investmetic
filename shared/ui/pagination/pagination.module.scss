@@ -1,4 +1,4 @@
-.paginationContainer {
+.pagination {
   display: flex;
   justify-content: center;
   gap: 10px;
@@ -20,12 +20,13 @@
   .page {
     &:hover {
       border: 1px solid $color-orange-200;
-      scale: 1.1;
+      background-color: $color-gray-100;
       transition: 0.3s;
     }
 
     &.active {
       background: $color-orange-400;
+      border: 1px solid $color-orange-400;
       color: $color-white;
       transition: 0.3s;
     }
