@@ -19,6 +19,22 @@ const config: StorybookConfig = {
     if (config.module?.rules) {
       const rules = config.module.rules as Array<any>
       const scssRule = rules.find((rule) => rule.test && rule.test.toString().includes('scss'))
+      const imageRule = config.module?.rules?.find((rule) => {
+        const test = (rule as { test: RegExp }).test
+
+        if (!test) {
+          return false
+        }
+
+        return test.test('.svg')
+      }) as { [key: string]: any }
+
+      imageRule.exclude = /\.svg$/
+
+      config.module?.rules?.push({
+        test: /\.svg$/,
+        use: ['@svgr/webpack'],
+      })
 
       if (scssRule) {
         const sassLoader = scssRule.use.find(
