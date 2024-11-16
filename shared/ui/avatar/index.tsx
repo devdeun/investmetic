@@ -1,6 +1,6 @@
 'use client'
 
-import { CSSProperties } from 'react'
+import { CSSProperties, useState } from 'react'
 
 import Image, { StaticImageData } from 'next/image'
 
@@ -20,9 +20,15 @@ interface Props {
 }
 
 const Avatar = ({ src, size = 'small', avatarStyle }: Props) => {
+  const [isValidImage, setIsValidImage] = useState(true)
+
   return (
     <div className={cx('avatar', size, avatarStyle)}>
-      {src ? <Image src={src} alt="프로필" fill /> : <ProfileIcon />}
+      {src && isValidImage ? (
+        <Image src={src} alt="프로필" fill onError={() => setIsValidImage(false)} />
+      ) : (
+        <ProfileIcon />
+      )}
     </div>
   )
 }
