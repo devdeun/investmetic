@@ -7,10 +7,10 @@ const nextConfig = {
   sassOptions: {
     includePaths: ['./shared/styles'],
     prependData: `
-      @import "@/shared/styles/base/variables";
-      @import "@/shared/styles/base/mixins";
-      @import "@/shared/styles/base/functions";
-    `,
+    @import "@/shared/styles/base/variables";
+    @import "@/shared/styles/base/mixins";
+    @import "@/shared/styles/base/functions";
+  `,
   },
   async rewrites() {
     if (process.env.NODE_ENV === 'development') {
@@ -23,6 +23,7 @@ const nextConfig = {
       },
     ]
   },
+
   webpack: (config, { isServer }) => {
     if (isServer) {
       if (Array.isArray(config.resolve.alias)) {
