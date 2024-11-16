@@ -37,7 +37,7 @@ export const Textarea = ({ rows = 5, className, ...props }: Props) => {
         onChange={handleInputChange}
         rows={rows}
         onFocus={handleFocus}
-        className={cx('textarea', { focused: isFocused })}
+        className={cx('textarea', className, { focused: isFocused })}
         {...props}
       />
     </div>
