@@ -27,6 +27,7 @@ interface Props extends ComponentProps<'input'> {
   variant?: InputVariantType
   type?: InputType
   setIsInvalid?: (isValid: boolean) => void
+  className?: string
 }
 
 export const Input = ({
@@ -34,6 +35,7 @@ export const Input = ({
   variant = 'default',
   type = 'text',
   setIsInvalid,
+  className,
   ...props
 }: Props) => {
   const [value, setValue] = useState<string>('')
@@ -60,7 +62,7 @@ export const Input = ({
       <input
         value={value}
         onChange={handleInputChange}
-        className={cx('input', inputSize, {
+        className={cx('input', inputSize, className, {
           error: !!errorMessage,
         })}
         {...props}
