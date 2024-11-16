@@ -25,8 +25,7 @@ export const STEP_OF_PATH: { [key: string]: number } = {
 }
 const Step = () => {
   const stepHistory = useStepHistoryStore((state) => state.stepHistory)
-  const addStep = useStepHistoryStore((state) => state.addStep)
-  const removeStep = useStepHistoryStore((state) => state.removeStep)
+  const { addStep, removeStep } = useStepHistoryStore((state) => state.actions)
   const currentPath = usePathname()
 
   useEffect(() => {
