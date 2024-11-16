@@ -17,7 +17,6 @@ const meta: Meta<typeof Textarea> = {
   },
 }
 
-export default meta
 type StoryType = StoryObj<typeof Textarea>
 
 export const Default: StoryType = {}
@@ -52,3 +51,5 @@ export const WithLongText: StoryType = {
     placeholder: 'Textarea with long text',
   },
 }
+
+export default meta

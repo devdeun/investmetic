@@ -3,7 +3,7 @@
   border: 1px solid $color-gray-300;
   border-radius: 2px;
   height: 48px;
-  font-size: $text-b3;
+  @include typo-body3;
   padding: 14px 24px;
   display: inline-block;
 

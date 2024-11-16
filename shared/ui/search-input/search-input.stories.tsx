@@ -13,7 +13,6 @@ const meta: Meta<typeof SearchInput> = {
   },
 }
 
-export default meta
 type StoryType = StoryObj<typeof SearchInput>
 
 export const Default: StoryType = {}
@@ -32,3 +31,5 @@ export const SearchExample: StoryType = {
     </div>
   ),
 }
+
+export default meta

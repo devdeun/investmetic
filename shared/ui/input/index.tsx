@@ -61,6 +61,7 @@ export const Input = ({
     <div>
       <input
         value={value}
+        type={type}
         onChange={handleInputChange}
         className={cx('input', inputSize, className, {
           error: !!errorMessage,

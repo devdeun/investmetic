@@ -5,7 +5,7 @@
   color: $color-gray-400;
   width: 100%;
   height: 100%;
-  font-size: $text-b3;
+  @include typo-body3;
 
   &:focus {
     color: $color-gray-500;

@@ -36,7 +36,6 @@ const meta: Meta<typeof Input> = {
   },
 }
 
-export default meta
 type StoryType = StoryObj<typeof Input>
 
 export const Default: StoryType = {}
@@ -81,3 +80,5 @@ export const WithValidation: StoryType = {
     input.dispatchEvent(new Event('input', { bubbles: true }))
   },
 }
+
+export default meta

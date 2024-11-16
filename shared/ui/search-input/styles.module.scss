@@ -13,8 +13,8 @@
   color: $color-gray-400;
   width: 100%;
   height: 100%;
-  font-size: $text-c1;
   display: inline-block;
+  @include typo-caption3;
 
   &:focus {
     color: $color-gray-500;
