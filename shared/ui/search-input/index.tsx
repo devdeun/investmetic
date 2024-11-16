@@ -1,6 +1,6 @@
 'use client'
 
-import { ComponentProps, useState } from 'react'
+import { ComponentProps } from 'react'
 
 import { SearchIcon } from '@/public/icons'
 import classNames from 'classnames/bind'
@@ -15,21 +15,9 @@ interface Props extends ComponentProps<'input'> {
 }
 
 export const SearchInput = ({ placeholder = '', handleSearchIconClick, ...props }: Props) => {
-  const [value, setValue] = useState('')
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value)
-  }
-
   return (
-    <div className={cx('search-input-wrapper')}>
-      <input
-        value={value}
-        onChange={handleInputChange}
-        placeholder={placeholder}
-        className={cx('search-input')}
-        {...props}
-      />
+    <div className={cx('search-input-container')}>
+      <input placeholder={placeholder} className={cx('search-input')} {...props} />
       <SearchIcon className={cx('search-icon')} onClick={handleSearchIconClick} />
     </div>
   )

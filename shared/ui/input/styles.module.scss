@@ -3,9 +3,9 @@
   border: 1px solid $color-gray-300;
   border-radius: 2px;
   height: 48px;
-  @include typo-body3;
   padding: 14px 24px;
   display: inline-block;
+  @include typo-b3;
 
   &:focus {
     color: $color-gray-500;
@@ -38,6 +38,7 @@
 
 .error-message {
   color: $color-orange-500;
+
   font-size: $text-b3;
   margin-top: 10px;
   margin-bottom: 10px;
