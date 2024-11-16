@@ -17,12 +17,13 @@ import styles from './styles.module.scss'
 
 const cx = classNames.bind(styles)
 
-export const STEP_OF_PATH: { [key: string]: number } = {
-  [PATH.SIGN_UP_USER_TYPE]: 1,
-  [PATH.SIGN_UP_TERMS_OF_USE]: 2,
-  [PATH.SIGN_UP_INFORMATION]: 3,
-  [PATH.SIGN_UP_COMPLETE]: 4,
-}
+export const STEPS = [
+  { path: PATH.SIGN_UP_USER_TYPE, icon: ProfileIcon, step: 1, label: '회원 선택' },
+  { path: PATH.SIGN_UP_TERMS_OF_USE, icon: BarsIcon, step: 2, label: '약관 동의' },
+  { path: PATH.SIGN_UP_INFORMATION, icon: PencilIcon, step: 3, label: '정보 입력' },
+  { path: PATH.SIGN_UP_COMPLETE, icon: CheckIcon, step: 4, label: '가입 완료' },
+]
+
 const Step = () => {
   const stepHistory = useStepHistoryStore((state) => state.stepHistory)
   const { addStep, removeStep } = useStepHistoryStore((state) => state.actions)
@@ -39,26 +40,25 @@ const Step = () => {
     }
   }
 
-  let prevStep = STEP_OF_PATH[stepHistory[0]]
-  const currentStep = STEP_OF_PATH[stepHistory[1]]
+  let prevStep = STEPS[STEPS.findIndex((step) => step.path === stepHistory[0])]?.step
+  const currentStep = STEPS[STEPS.findIndex((step) => step.path === stepHistory[1])]?.step
   if (currentStep === 1) {
     prevStep = 0
   }
 
   return (
     <div className={cx('step')}>
-      <StepItem step={1} pathname={PATH.SIGN_UP_USER_TYPE} icon={ProfileIcon} prevStep={prevStep}>
-        회원 선택
-      </StepItem>
-      <StepItem step={2} pathname={PATH.SIGN_UP_TERMS_OF_USE} icon={BarsIcon} prevStep={prevStep}>
-        약관 동의
-      </StepItem>
-      <StepItem step={3} pathname={PATH.SIGN_UP_INFORMATION} icon={PencilIcon} prevStep={prevStep}>
-        정보 입력
-      </StepItem>
-      <StepItem step={4} pathname={PATH.SIGN_UP_COMPLETE} icon={CheckIcon} prevStep={prevStep}>
-        가입 완료
-      </StepItem>
+      {STEPS.map((step) => (
+        <StepItem
+          key={step.path}
+          step={step.step}
+          pathname={step.path}
+          icon={step.icon}
+          prevStep={prevStep}
+        >
+          {step.label}
+        </StepItem>
+      ))}
     </div>
   )
 }

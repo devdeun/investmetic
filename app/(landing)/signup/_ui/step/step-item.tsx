@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 
 import { usePathname } from 'next/navigation'
 
-import { STEP_OF_PATH } from '@/app/(landing)/signup/_ui/step'
+import { STEPS } from '@/app/(landing)/signup/_ui/step'
 import classNames from 'classnames/bind'
 
 import { PATH } from '@/shared/constants/path'
@@ -37,7 +37,7 @@ const StepItem = ({ children, step, pathname, icon: Icon, prevStep }: Props) => 
     }
   }, [currentPath])
 
-  const currentPathIdx = Object.keys(STEP_OF_PATH).findIndex((path) => path === currentPath)
+  const currentPathIdx = STEPS.findIndex((step) => step.path === currentPath)
   const stepIdx = step - 1
 
   const handleNextStep = () => {
