@@ -70,9 +70,14 @@ export const Large: StoryType = {
   },
 }
 
-export const Disabled: StoryType = {
+export const WithValidation: StoryType = {
   args: {
-    disabled: true,
-    placeholder: 'Disabled input',
+    type: 'email',
+    placeholder: 'Enter a valid email',
+  },
+  play: async ({ canvasElement }) => {
+    const input = canvasElement.querySelector('input') as HTMLInputElement
+    input.value = 'invalid email'
+    input.dispatchEvent(new Event('input', { bubbles: true }))
   },
 }
