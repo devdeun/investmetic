@@ -1,6 +1,6 @@
 import type { Meta, StoryFn } from '@storybook/react'
 
-import TotalStar, { ColorType, SizeType } from './index'
+import TotalStar, { SizeType, TextColorType } from './index'
 
 const meta: Meta<typeof TotalStar> = {
   title: 'components/TotalStar',
@@ -8,26 +8,26 @@ const meta: Meta<typeof TotalStar> = {
   tags: ['autodocs'],
 }
 
-const star: StoryFn<{ size: SizeType; color: ColorType }> = (args) => (
+const star: StoryFn<{ size: SizeType; textColor: TextColorType }> = (args) => (
   <TotalStar averageRating={4.9} totalElements={62} {...args} />
 )
 
 export const Primary = star.bind({})
 Primary.args = {
   size: 'small',
-  color: 'gray',
+  textColor: 'gray',
 }
 
 export const ForStrategiesPage = star.bind({})
 Primary.args = {
   size: 'small',
-  color: 'black',
+  textColor: 'black',
 }
 
 export const ForReviewPage = star.bind({})
 ForReviewPage.args = {
   size: 'medium',
-  color: 'gray',
+  textColor: 'gray',
 }
 
 export default meta
