@@ -34,7 +34,6 @@ export const Input = ({
   variant = 'default',
   type = 'text',
   setIsInvalid,
-  className,
   ...props
 }: Props) => {
   const [value, setValue] = useState<string>('')
@@ -61,14 +60,9 @@ export const Input = ({
       <input
         value={value}
         onChange={handleInputChange}
-        className={cx(
-          'input',
-          inputSize,
-          {
-            error: !!errorMessage,
-          },
-          className
-        )}
+        className={cx('input', inputSize, {
+          error: !!errorMessage,
+        })}
         {...props}
       />
       {errorMessage && <p className={cx('error-message')}>{errorMessage}</p>}
