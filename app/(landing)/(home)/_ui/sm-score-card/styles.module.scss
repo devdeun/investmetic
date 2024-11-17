@@ -58,6 +58,7 @@
   font-weight: $text-semibold;
   color: $color-black;
   margin-top: -0.5rem;
+  @include ellipsis(2);
 }
 
 .chart-area {
