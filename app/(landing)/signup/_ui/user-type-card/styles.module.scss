@@ -3,6 +3,12 @@
   padding: 43px 44px 53px;
   text-align: left;
   background-color: $color-white;
+  border: 2px solid $color-white;
+  transition: 0.2s ease-in-out;
+
+  &:hover {
+    border: 2px solid $color-orange-400;
+  }
 }
 
 .title {
