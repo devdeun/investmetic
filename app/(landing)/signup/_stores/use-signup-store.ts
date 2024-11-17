@@ -4,6 +4,7 @@ import { UserType } from '@/shared/types/user'
 
 interface StateModel {
   userType: UserType | null
+  nickname: string | null
 }
 
 interface ActionModel {
@@ -16,6 +17,7 @@ interface ActionsModel {
 
 const initialState = {
   userType: null,
+  nickname: null,
 } as const
 
 const useSignupStore = create<StateModel & ActionsModel>((set) => ({
