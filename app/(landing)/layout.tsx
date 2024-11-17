@@ -3,7 +3,11 @@ interface Props {
 }
 
 const HomeLayout = ({ children }: Props) => {
-  return <>{children}</>
+  return (
+    <>
+      <main className="landing-main">{children}</main>
+    </>
+  )
 }
 
 export default HomeLayout
