@@ -11,6 +11,7 @@ const meta: Meta<typeof SearchInput> = {
   argTypes: {
     handleSearchIconClick: { action: 'clicked' },
   },
+  tags: ['autodocs'],
 }
 
 type StoryType = StoryObj<typeof SearchInput>

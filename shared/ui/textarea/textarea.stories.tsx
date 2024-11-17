@@ -15,6 +15,7 @@ const meta: Meta<typeof Textarea> = {
       defaultValue: 5,
     },
   },
+  tags: ['autodocs'],
 }
 
 type StoryType = StoryObj<typeof Textarea>
@@ -31,7 +32,7 @@ export const Disabled: StoryType = {
 export const Scroll: StoryType = {
   args: {
     value: 'Hello \n\n Banana \n\n Banana \n\n Banana \n\n Banana \n\n Banana',
-    placeholder: 'Textarea with long text',
+    placeholder: 'Textarea with scroll',
   },
 }
 
