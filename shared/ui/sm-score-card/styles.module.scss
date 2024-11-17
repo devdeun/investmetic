@@ -36,8 +36,8 @@
 }
 
 .rank {
-  font-size: 20px;
-  font-weight: 700;
+  font-size: $text-b1;
+  font-weight: $text-bold;
   color: $color-black;
 }
 
@@ -46,16 +46,16 @@
   align-items: center;
 
   .profile-name {
-    font-size: 12px;
+    font-size: $text-c1;
     color: $color-gray-500;
-    font-weight: 500;
+    font-weight: $text-medium;
     margin-left: 0.5rem;
   }
 }
 
 .title {
-  font-size: 16px;
-  font-weight: 600;
+  font-size: $text-b2;
+  font-weight: $text-semibold;
   color: $color-black;
   margin-top: -0.5rem;
 }
@@ -87,8 +87,8 @@
   display: flex;
   gap: 0.5rem;
   align-items: center;
-  font-size: 16px;
-  font-weight: 600;
+  font-size: $text-b2;
+  font-weight: $text-semibold;
   margin-bottom: 7px;
 
   .label {

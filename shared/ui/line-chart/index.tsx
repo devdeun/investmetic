@@ -10,7 +10,7 @@ const HighchartsReact = dynamic(() => import('highcharts-react-official'), {
   ssr: false,
 })
 
-interface ChartProps {
+interface Props {
   data: number[]
   isNegative?: boolean
   size?: CardSizeType
@@ -21,7 +21,7 @@ const getChartDimensions = (size: CardSizeType) => ({
   width: size === 'small' ? 90 : 185,
 })
 
-const Chart = ({ data, isNegative = false, size = 'small' }: ChartProps) => {
+const LineChart = ({ data, isNegative = false, size = 'small' }: Props) => {
   const dimensions = getChartDimensions(size)
 
   const chartOptions: Highcharts.Options = {
@@ -65,4 +65,4 @@ const Chart = ({ data, isNegative = false, size = 'small' }: ChartProps) => {
   return <HighchartsReact highcharts={Highcharts} options={chartOptions} />
 }
 
-export default Chart
+export default LineChart
