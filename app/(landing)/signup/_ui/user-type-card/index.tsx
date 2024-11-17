@@ -12,12 +12,12 @@ import styles from './styles.module.scss'
 const cx = classNames.bind(styles)
 
 interface Props {
-  role: RoleSelectType
+  userType: RoleSelectType
   title: string
   highlight: string
 }
 
-const UserTypeCard = ({ role, title, highlight }: Props) => {
+const UserTypeCard = ({ userType, title, highlight }: Props) => {
   const router = useRouter()
 
   const handleTypeSelect = () => {
