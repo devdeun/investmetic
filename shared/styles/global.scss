@@ -53,3 +53,10 @@ textarea {
     filter: blur(150px);
   }
 }
+
+.dashboard-main {
+  width: calc(100% - $navigation-width);
+  max-width: $max-width;
+  padding: 0 28px;
+  margin-left: $navigation-width;
+}
