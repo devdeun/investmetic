@@ -1,13 +1,13 @@
 import { create } from 'zustand'
 
-import { RoleSelectType } from '@/shared/types/user'
+import { UserType } from '@/shared/types/user'
 
 interface StateModel {
-  userType: RoleSelectType | null
+  userType: UserType | null
 }
 
 interface ActionModel {
-  setUserType: (userType: RoleSelectType) => void
+  setUserType: (userType: UserType) => void
 }
 
 interface ActionsModel {

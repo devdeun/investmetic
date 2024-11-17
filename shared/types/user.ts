@@ -6,6 +6,6 @@ export interface UserModel {
   role: RoleType
 }
 
-export type RoleType = 'trader' | 'investor' | 'trader_admin' | 'investor_admin'
+export type UserType = 'trader' | 'investor'
 
-export type RoleSelectType = 'trader' | 'investor'
+export type RoleType = UserType | `${UserType}_admin`

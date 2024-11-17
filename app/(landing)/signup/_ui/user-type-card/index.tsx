@@ -6,14 +6,14 @@ import useSignupStore from '@/app/(landing)/signup/_stores/use-signup-store'
 import classNames from 'classnames/bind'
 
 import { PATH } from '@/shared/constants/path'
-import { RoleSelectType } from '@/shared/types/user'
+import { UserType } from '@/shared/types/user'
 
 import styles from './styles.module.scss'
 
 const cx = classNames.bind(styles)
 
 interface Props {
-  userType: RoleSelectType
+  userType: UserType
   title: string
   highlight: string
 }
