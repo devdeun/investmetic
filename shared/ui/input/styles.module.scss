@@ -25,6 +25,10 @@
   &.large {
     width: 400px;
   }
+  &.full {
+    width: 100%;
+    height: 100%;
+  }
   &:disabled {
     color: $color-gray-200;
     border-color: $color-gray-200;
@@ -38,8 +42,7 @@
 
 .error-message {
   color: $color-orange-500;
-
-  font-size: $text-b3;
   margin-top: 10px;
   margin-bottom: 10px;
+  @include typo-b3;
 }

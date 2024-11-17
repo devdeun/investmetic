@@ -21,23 +21,6 @@ type StoryType = StoryObj<typeof Textarea>
 
 export const Default: StoryType = {}
 
-export const Focused: StoryType = {
-  args: {
-    placeholder: 'Focused textarea',
-  },
-  play: async ({ canvasElement }) => {
-    const textarea = canvasElement.querySelector('textarea') as HTMLTextAreaElement
-    textarea.focus()
-  },
-}
-
-export const CustomClass: StoryType = {
-  args: {
-    className: 'custom-textarea',
-    placeholder: 'Textarea with custom class',
-  },
-}
-
 export const Disabled: StoryType = {
   args: {
     disabled: true,
@@ -45,9 +28,9 @@ export const Disabled: StoryType = {
   },
 }
 
-export const WithLongText: StoryType = {
+export const Scroll: StoryType = {
   args: {
-    value: 'Hello \n\n Banana \n\n Banana',
+    value: 'Hello \n\n Banana \n\n Banana \n\n Banana \n\n Banana \n\n Banana',
     placeholder: 'Textarea with long text',
   },
 }

@@ -6,32 +6,19 @@ const meta: Meta<typeof Input> = {
   title: 'Components/Input',
   component: Input,
   args: {
-    inputSize: 'small',
-    variant: 'default',
+    inputSize: 'medium',
+    errorMessage: null,
     placeholder: 'Enter text',
     type: 'text',
   },
   argTypes: {
     inputSize: {
       control: { type: 'radio' },
-      options: ['small', 'medium', 'large'],
-    },
-    variant: {
-      control: { type: 'radio' },
-      options: ['default', 'error'],
+      options: ['small', 'medium', 'large', 'full'],
     },
     type: {
       control: { type: 'select' },
-      options: [
-        'name',
-        'nickname',
-        'email',
-        'verificationCode',
-        'password',
-        'confirmPassword',
-        'phone',
-        'text',
-      ],
+      options: ['email', 'password', 'phone', 'text'],
     },
   },
 }
@@ -39,14 +26,6 @@ const meta: Meta<typeof Input> = {
 type StoryType = StoryObj<typeof Input>
 
 export const Default: StoryType = {}
-
-export const Error: StoryType = {
-  args: {
-    variant: 'error',
-    value: 'Invalid Input',
-    placeholder: 'Invalid value',
-  },
-}
 
 export const Small: StoryType = {
   args: {
@@ -69,15 +48,10 @@ export const Large: StoryType = {
   },
 }
 
-export const WithValidation: StoryType = {
+export const Full: StoryType = {
   args: {
-    type: 'email',
-    placeholder: 'Enter a valid email',
-  },
-  play: async ({ canvasElement }) => {
-    const input = canvasElement.querySelector('input') as HTMLInputElement
-    input.value = 'invalid email'
-    input.dispatchEvent(new Event('input', { bubbles: true }))
+    inputSize: 'full',
+    placeholder: 'full input',
   },
 }
 
