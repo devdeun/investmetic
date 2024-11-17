@@ -1,0 +1,108 @@
+.card-wrapper {
+  background-color: $color-white;
+  border-radius: 5px;
+  padding: 14px 18px;
+  width: 300px;
+  min-width: 300px;
+  display: flex;
+  flex-direction: column;
+
+  &.small {
+    height: 160px;
+  }
+
+  &.large {
+    height: 340px;
+  }
+}
+
+.top-frame {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex: 1;
+
+  &.large {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.content-area {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.rank {
+  font-size: $text-b1;
+  font-weight: $text-bold;
+  color: $color-black;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+
+  .profile-name {
+    font-size: $text-c1;
+    color: $color-gray-500;
+    font-weight: $text-medium;
+    margin-left: 0.5rem;
+  }
+}
+
+.title {
+  font-size: $text-b2;
+  font-weight: $text-semibold;
+  color: $color-black;
+  margin-top: -0.5rem;
+  @include ellipsis(2);
+}
+
+.chart-area {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  justify-content: center;
+
+  &.large {
+    width: 100%;
+  }
+
+  &.small {
+    margin-left: 2rem;
+  }
+}
+
+.bottom-frame {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 14px;
+}
+
+.sm-score,
+.profit {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  font-size: $text-b2;
+  font-weight: $text-semibold;
+  margin-bottom: 7px;
+
+  .label {
+    color: $color-gray-700;
+  }
+
+  .value {
+    &.negative {
+      color: $color-indigo;
+    }
+
+    &:not(.negative) {
+      color: $color-orange-800;
+    }
+  }
+}
