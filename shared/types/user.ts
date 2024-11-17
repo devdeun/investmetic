@@ -7,3 +7,5 @@ export interface UserModel {
 }
 
 export type RoleType = 'trader' | 'investor' | 'trader_admin' | 'investor_admin'
+
+export type RoleSelectType = 'trader' | 'investor'
