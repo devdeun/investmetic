@@ -12,6 +12,7 @@ const cx = classNames.bind(styles)
 interface Props {
   subscriptionStatus: boolean
 }
+
 const Subscribe = ({ subscriptionStatus }: Props) => {
   const [isSubscribed, setIsSubscribed] = useState(false)
 
@@ -19,24 +20,18 @@ const Subscribe = ({ subscriptionStatus }: Props) => {
     if (subscriptionStatus) {
       setIsSubscribed(true)
     }
-  }, [])
+  }, [subscriptionStatus])
 
-  const handleSubscribe = (event: React.MouseEvent) => {
-    event.preventDefault()
+  const handleSubscribe = (e: React.MouseEvent) => {
+    e.preventDefault()
     setIsSubscribed(!isSubscribed)
   }
 
   return (
     <div className={cx('subscribe-icon')}>
-      {isSubscribed ? (
-        <button onClick={handleSubscribe}>
-          <BookmarkIcon />
-        </button>
-      ) : (
-        <button onClick={handleSubscribe}>
-          <BookmarkOutlineIcon />
-        </button>
-      )}
+      <button onClick={handleSubscribe}>
+        {isSubscribed ? <BookmarkIcon /> : <BookmarkOutlineIcon />}
+      </button>
     </div>
   )
 }
