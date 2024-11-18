@@ -32,7 +32,7 @@ const DetailsSideItem = ({ title, data, imageUrl, hasGap = true }: Props) => {
         {title === '트레이더' ? (
           <>
             <div className={cx('avatar')}>
-              <Avatar size="medium" src={imageUrl} />
+              <Avatar src={imageUrl} />
               <p>{data}</p>
             </div>
             <LinkButton href={PATH.MY_QUESTIONS} size="small" style={{ height: '30px' }}>
