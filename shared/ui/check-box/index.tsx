@@ -1,6 +1,6 @@
 'use client'
 
-import { CircleIcon } from '@/public/icons'
+import { CheckedCircleIcon, CircleIcon } from '@/public/icons'
 import classNames from 'classnames/bind'
 
 import styles from './styles.module.scss'
@@ -28,8 +28,7 @@ const Checkbox = ({ label, isChecked, onChange, className = '', textColor = 'gra
           [`checked${textColor}`]: isChecked,
         })}
       >
-        <CircleIcon />
-        {isChecked && <div className={cx('innerCircle', textColor)} />}
+        {isChecked ? <CheckedCircleIcon /> : <CircleIcon />}
       </div>
       {label && <span className={cx('label', textColor)}>{label}</span>}
     </div>

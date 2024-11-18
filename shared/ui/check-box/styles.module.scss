@@ -11,27 +11,17 @@
   justify-content: center;
   flex-shrink: 0;
   position: relative;
-}
 
-.innerCircle {
-  position: absolute;
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-
-  &.gray500 {
-    background-color: $color-gray-500;
+  &.checkedgray500 svg circle {
+    fill: $color-gray-500;
   }
 
-  &.gray600 {
-    background-color: $color-gray-600;
+  &.checkedgray600 svg circle {
+    fill: $color-gray-600;
   }
 
-  &.gray800 {
-    background-color: $color-gray-800;
+  &.checkedgray800 svg circle {
+    fill: $color-gray-800;
   }
 }
 
