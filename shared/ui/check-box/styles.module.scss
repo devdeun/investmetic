@@ -1,0 +1,53 @@
+.checkboxContainer {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.innerCircle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  &.gray500 {
+    background-color: $color-gray-500;
+  }
+
+  &.gray600 {
+    background-color: $color-gray-600;
+  }
+
+  &.gray800 {
+    background-color: $color-gray-800;
+  }
+}
+
+.label {
+  font-size: $text-c1;
+  font-weight: $text-medium;
+
+  &.gray500 {
+    color: $color-gray-500;
+  }
+
+  &.gray600 {
+    color: $color-gray-600;
+  }
+
+  &.gray800 {
+    color: $color-gray-800;
+  }
+}
