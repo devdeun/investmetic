@@ -36,8 +36,7 @@
 }
 
 .label {
-  font-size: $text-c1;
-  font-weight: $text-medium;
+  @include typo-c1;
 
   &.gray500 {
     color: $color-gray-500;
