@@ -62,7 +62,7 @@ const Dropdown = ({
     </DropdownContext.Provider>
   )
 }
-interface ItemProps {
+export interface ItemProps {
   value: string
   label: string
   hasCheck?: boolean

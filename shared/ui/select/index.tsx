@@ -2,23 +2,21 @@
 
 import { CSSProperties } from 'react'
 
-import Dropdown from '../dropdown'
+import Dropdown, { DropdownProps, ItemProps } from '../dropdown'
 
 interface OptionModel {
   value: string
   label: string
 }
 
-interface SelectProps {
-  title?: string
-  isRounded?: boolean
-  isMultiple?: boolean
-  hasCheck?: boolean
-  containerStyle?: CSSProperties
-  titleStyle?: CSSProperties
-  onChange?: (value: string | string[]) => void
-  options: OptionModel[]
-}
+type SelectType = Pick<DropdownProps, 'isMultiple' | 'containerStyle' | 'labelStyle'> &
+  Pick<ItemProps, 'hasCheck'> & {
+    title?: string
+    isRounded?: boolean
+    titleStyle?: CSSProperties
+    onChange?: (value: string | string[]) => void
+    options: OptionModel[]
+  }
 
 const Select = ({
   isRounded = false,
@@ -29,7 +27,7 @@ const Select = ({
   onChange,
   options,
   title = options[0].label,
-}: SelectProps) => {
+}: SelectType) => {
   if (!options.length) return null
 
   const roundStyle = { borderRadius: '40px', overflow: 'hidden' }

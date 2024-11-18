@@ -16,12 +16,9 @@ export const useDropdown = ({ onChange, isMultiple = false }: UseDropdownProps) 
     if (isMultiple) {
       // 다중 선택 모드
       setSelectedValues((prev) => {
-        if (prev.includes(value)) {
-          const result = prev.filter((item) => item !== value)
-          onChange?.(result)
-          return result
-        }
-        const result = [...prev, value]
+        const result = prev.includes(value)
+          ? prev.filter((item) => item !== value)
+          : [...prev, value]
         onChange?.(result)
         return result
       })

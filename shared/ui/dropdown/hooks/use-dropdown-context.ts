@@ -1,4 +1,3 @@
-// hooks/useDropdown.ts
 import { useContext } from 'react'
 
 import { DropdownContext } from '..'
