@@ -1,0 +1,13 @@
+.container {
+  @include typo-c2;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: transparent;
+  color: $color-gray-500;
+
+  svg {
+    width: 9px;
+    flex-shrink: 0;
+  }
+}

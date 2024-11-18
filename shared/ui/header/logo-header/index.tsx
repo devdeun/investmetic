@@ -1,3 +1,4 @@
+// NOTE: 이름 공모전 개최
 import Header from '..'
 import Logo from '../../logo'
 import HeaderLinks from '../_ui/header-links'
