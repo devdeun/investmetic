@@ -14,11 +14,11 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
   return (
     <html lang="ko" className={pretendard.variable}>
       <body>
+        <div id="modal-root"></div>
         <QueryProvider>
           <MSWInitializer />
           {children}
         </QueryProvider>
-        <div id="modal-root"></div>
       </body>
     </html>
   )

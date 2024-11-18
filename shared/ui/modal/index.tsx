@@ -2,6 +2,7 @@
 
 import { ReactNode } from 'react'
 
+import { CloseIcon } from '@/public/icons'
 import classNames from 'classnames/bind'
 import { createPortal } from 'react-dom'
 
@@ -17,16 +18,16 @@ interface Props {
   icon?: ReactNode
   isModalOpen: boolean
   hasTwoButtons?: boolean
-  confirmModal?: () => void
+  confirmButton: () => void
   closeModal: () => void
 }
 
 const Modal = ({
-  title = MODAL_TITLES.SUBSCRIBE,
+  title = MODAL_TITLES.LOGIN,
   icon,
   isModalOpen,
   hasTwoButtons = false,
-  // confirmModal,
+  confirmButton,
   closeModal,
 }: Props) => {
   if (!isModalOpen) return null
@@ -37,15 +38,17 @@ const Modal = ({
 
   return createPortal(
     <>
-      <div className={cx('overlay')}>오버레이</div>
-      <div className={cx('modal')}>
-        {/* <div onClick={closeModal}>X</div> */}
+      <div className={cx('overlay')}></div>
+      <div className={cx('modal', { 'has-two-buttons': hasTwoButtons })}>
+        <CloseIcon className={cx('close-icon')} onClick={closeModal}></CloseIcon>
         <div className={cx('icon')}>{icon}</div>
         <p className={cx('title')}>{title}</p>
 
         {hasTwoButtons ? (
           <div className={cx('two-buttons')}>
-            {/* <Button onClick={confirmModal}>예 </Button> */}
+            <Button className={cx('confirm-button')} onClick={confirmButton}>
+              예
+            </Button>
             <Button onClick={closeModal}>아니오</Button>
           </div>
         ) : (
