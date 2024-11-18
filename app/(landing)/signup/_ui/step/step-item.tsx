@@ -23,11 +23,12 @@ interface Props {
 }
 
 const StepItem = ({ children, step, pathname, icon: Icon, prevStep }: Props) => {
+  const currentPath = usePathname()
+  const currentPathIdx = STEPS.findIndex((step) => step.path === currentPath)
   const stepHistory = useStepHistoryStore((state) => state.stepHistory)
   const [isNextStep, setIsNextStep] = useState(false)
   const [isPrevStep, setIsPrev] = useState(false)
-  const [isFix, setIsFix] = useState(false)
-  const currentPath = usePathname()
+  const [isFixedStep, setIsFixedStep] = useState(() => currentPathIdx - step >= 0)
 
   useEffect(() => {
     if (currentPathIdx - (prevStep - 1) > 0) {
@@ -37,14 +38,13 @@ const StepItem = ({ children, step, pathname, icon: Icon, prevStep }: Props) => 
     }
   }, [currentPath])
 
-  const currentPathIdx = STEPS.findIndex((step) => step.path === currentPath)
   const stepIdx = step - 1
 
   const handleNextStep = () => {
     if (currentPathIdx > stepIdx) {
       setIsNextStep(true)
       if (currentPathIdx - step > 0) {
-        setIsFix(true)
+        setIsFixedStep(true)
       }
     }
   }
@@ -55,7 +55,7 @@ const StepItem = ({ children, step, pathname, icon: Icon, prevStep }: Props) => 
     }
     if (currentPathIdx - stepIdx > 0) {
       setIsNextStep(true)
-      setIsFix(true)
+      setIsFixedStep(true)
     }
   }
 
@@ -65,14 +65,14 @@ const StepItem = ({ children, step, pathname, icon: Icon, prevStep }: Props) => 
     current: isCurrentStep,
     next: isNextStep,
     prev: isPrevStep,
-    fix: isFix,
+    fix: isFixedStep,
   }
 
   return (
     <>
       <div className={cx('step-item')}>
         <div className={cx('circle', stepCondition)}>
-          {isCurrentStep || isNextStep ? <Icon className={cx('icon')} /> : step}
+          {isFixedStep || isCurrentStep || isNextStep ? <Icon className={cx('icon')} /> : step}
         </div>
         <p className={cx(stepCondition)}>{children}</p>
       </div>
