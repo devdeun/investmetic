@@ -34,7 +34,7 @@ export const TwoButtons: StoryType = {
   },
 }
 
-export const WithCustomIcon: StoryType = {
+export const WithIcon: StoryType = {
   args: {
     icon: <ModalAlertIcon />,
   },
