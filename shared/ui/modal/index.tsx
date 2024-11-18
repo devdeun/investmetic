@@ -5,6 +5,8 @@ import { ReactNode } from 'react'
 import classNames from 'classnames/bind'
 import { createPortal } from 'react-dom'
 
+import { MODAL_TITLES } from '@/shared/constants/modal-titles'
+
 import { Button } from '../button'
 import styles from './styles.module.scss'
 
@@ -20,7 +22,7 @@ interface Props {
 }
 
 const Modal = ({
-  title,
+  title = MODAL_TITLES.SUBSCRIBE,
   icon,
   isModalOpen,
   hasTwoButtons = false,
