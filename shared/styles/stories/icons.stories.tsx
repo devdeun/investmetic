@@ -10,8 +10,12 @@ import {
   ChevronLeftIcon,
   ChevronRightIcon,
   ChevronUpIcon,
+  CloseIcon,
   DailyGraphIcon,
   FileIcon,
+  ModalAlertIcon,
+  ModalCheckIcon,
+  ModalSubscribeIcon,
   MoneyIcon,
   MonthlyGraphIcon,
   NoticeIcon,
@@ -61,6 +65,10 @@ const icons = [
   { name: 'StrategyIcon', icon: StrategyIcon },
   { name: 'TradersIcon', icon: TradersIcon },
   { name: 'StarIcon', icon: StarIcon },
+  { name: 'CloseIcon', icon: CloseIcon },
+  { name: 'ModalAlertIcon', icon: ModalAlertIcon },
+  { name: 'ModalSubscribeIcon', icon: ModalSubscribeIcon },
+  { name: 'ModalCheckIcon', icon: ModalCheckIcon },
 ]
 
 export const Icons: Story = {
