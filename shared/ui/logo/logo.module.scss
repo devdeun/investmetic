@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  svg {
+    flex-shrink: 0;
+  }
+}
+
+.text {
+  color: $color-gray-500;
+  line-height: normal;
+}
