@@ -1,8 +1,8 @@
 import Link from 'next/link'
 
-import AreaChart from '@/app/(dashboard)/strategies/_ui/strategies-item/area-chart'
-import StrategiesSummary from '@/app/(dashboard)/strategies/_ui/strategies-item/strategies-summary'
-import Subscribe from '@/app/(dashboard)/strategies/_ui/strategies-item/subscribe'
+import AreaChart from '@/app/(dashboard)/_ui/strategies-item/area-chart'
+import StrategiesSummary from '@/app/(dashboard)/_ui/strategies-item/strategies-summary'
+import Subscribe from '@/app/(dashboard)/_ui/strategies-item/subscribe'
 import classNames from 'classnames/bind'
 
 import { StrategiesModel } from '@/shared/types/strategy-details-data'
@@ -14,6 +14,7 @@ const cx = classNames.bind(styles)
 interface Props {
   strategiesData: StrategiesModel
 }
+
 const StrategiesItem = ({ strategiesData: data }: Props) => {
   return (
     <Link className={cx('container')} href={`/strategies/${data.strategyId}`}>

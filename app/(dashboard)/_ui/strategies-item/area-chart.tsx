@@ -12,6 +12,7 @@ const HighchartsReact = dynamic(() => import('highcharts-react-official'), {
 interface Props {
   profitRateChartData: ProfitRateChartDataModel[]
 }
+
 const AreaChart = ({ profitRateChartData }: Props) => {
   const profit = profitRateChartData.map((data) => data.profitRate)
   const chartOptions: Highcharts.Options = {

@@ -1,4 +1,4 @@
-import StrategiesIcon from '@/app/(dashboard)/strategies/_ui/strategies-item/strategies-icon'
+import StrategiesIcon from '@/app/(dashboard)/_ui/strategies-item/strategies-icon'
 import classNames from 'classnames/bind'
 
 import Avatar from '@/shared/ui/avatar'
@@ -21,6 +21,7 @@ interface Props {
   averageRating: number
   totalReview: number
 }
+
 const StrategiesSummary = ({
   icon,
   title,

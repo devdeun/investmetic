@@ -1,4 +1,4 @@
-import StrategiesItem from '@/app/(dashboard)/strategies/_ui/strategies-item'
+import StrategiesItem from '@/app/(dashboard)/_ui/strategies-item'
 import type { Meta, StoryFn } from '@storybook/react'
 
 import { StrategiesModel } from '@/shared/types/strategy-details-data'
