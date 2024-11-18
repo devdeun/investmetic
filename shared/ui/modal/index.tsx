@@ -6,8 +6,6 @@ import { CloseIcon } from '@/public/icons'
 import classNames from 'classnames/bind'
 import { createPortal } from 'react-dom'
 
-import { MODAL_TITLES } from '@/shared/constants/modal-titles'
-
 import { Button } from '../button'
 import styles from './styles.module.scss'
 
@@ -23,7 +21,7 @@ interface Props {
 }
 
 const Modal = ({
-  title = MODAL_TITLES.LOGIN,
+  title,
   icon,
   isModalOpen,
   hasTwoButtons = false,
