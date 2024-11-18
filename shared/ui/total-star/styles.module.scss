@@ -1,0 +1,34 @@
+.container {
+  display: flex;
+  align-items: center;
+  .icon {
+    color: $color-yellow;
+  }
+  &.small {
+    @include typo-c1;
+  }
+  &.medium {
+    @include typo-b2;
+  }
+  &.black {
+    color: $color-gray-800;
+  }
+  &.gray {
+    color: $color-gray-400;
+  }
+  p {
+    padding-top: 2px;
+    margin-left: 2px;
+  }
+}
+.icon-wrapper {
+  display: block;
+  &.small {
+    width: 22px;
+    height: 22px;
+  }
+  &.medium {
+    width: 28px;
+    height: 28px;
+  }
+}
