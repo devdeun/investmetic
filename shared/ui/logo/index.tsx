@@ -1,7 +1,6 @@
 import Link from 'next/link'
 
-import ImageLogo from '@/public/images/logo.svg'
-import TextLogo from '@/public/images/text-logo.svg'
+import { ImageLogo, TextLogo } from '@/public/images'
 import classNames from 'classnames/bind'
 
 import { PATH } from '@/shared/constants/path'

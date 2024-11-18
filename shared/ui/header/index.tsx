@@ -12,7 +12,7 @@ interface Props {
   styles?: CSSProperties
 }
 
-const Header = ({ Left, Right }: Props) => {
+const Header = ({ Left, Right, styles }: Props) => {
   return (
     <header className={cx('container')} style={styles}>
       {Left}

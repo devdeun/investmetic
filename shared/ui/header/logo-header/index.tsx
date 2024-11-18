@@ -1,6 +1,7 @@
 // NOTE: 이름 공모전 개최
+import Logo from '@/shared/ui/logo'
+
 import Header from '..'
-import Logo from '../../logo'
 import HeaderLinks from '../_ui/header-links'
 
 const headerStyles = {
