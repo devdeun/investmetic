@@ -1,43 +1,83 @@
+import React from 'react'
+
 import { Meta, StoryObj } from '@storybook/react'
 import { ModalAlertIcon } from 'public/icons/index'
+
+import { Button } from '@/shared/ui/button'
 
 import Modal from './index'
 
 const meta: Meta<typeof Modal> = {
   title: 'Components/Modal',
   component: Modal,
-  args: {
-    title: '기본 모달 제목',
-    icon: <ModalAlertIcon />,
-    isModalOpen: true,
-    hasTwoButtons: false,
-    confirmButton: () => alert('확인 버튼 클릭'),
-    closeModal: () => alert('닫기 버튼 클릭'),
-  },
-  argTypes: {
-    title: { control: 'text' },
-    isModalOpen: { control: 'boolean' },
-    hasTwoButtons: { control: 'boolean' },
-    confirmButton: { action: 'confirmButton' },
-    closeModal: { action: 'closeModal' },
-  },
   tags: ['autodocs'],
 }
 
+export default meta
+
 type StoryType = StoryObj<typeof Modal>
 
-export const Default: StoryType = {}
+const ModalStory = ({
+  title,
+  icon,
+  hasTwoButtons,
+}: {
+  title?: string
+  icon?: React.ReactNode
+  hasTwoButtons?: boolean
+}) => {
+  const [isOpen, setIsOpen] = React.useState(false)
+
+  React.useEffect(() => {
+    if (typeof window !== 'undefined' && !document.getElementById('modal-root')) {
+      const modalRoot = document.createElement('div')
+      modalRoot.id = 'modal-root'
+      document.body.appendChild(modalRoot)
+    }
+  }, [])
+
+  return (
+    <div style={{ padding: '20px' }}>
+      <Button onClick={() => setIsOpen(true)}>모달 열기</Button>
+      <Modal
+        title={title}
+        icon={icon}
+        isOpen={isOpen}
+        hasTwoButtons={hasTwoButtons}
+        closeModal={() => setIsOpen(false)}
+        confirmButton={() => {
+          alert('확인')
+          setIsOpen(false)
+        }}
+      />
+    </div>
+  )
+}
+
+export const Default: StoryType = {
+  render: () => <ModalStory title="기본 모달 제목" />,
+}
 
 export const TwoButtons: StoryType = {
-  args: {
-    hasTwoButtons: true,
-  },
+  render: () => <ModalStory title="정말 삭제하시겠습니까?" hasTwoButtons={true} />,
 }
 
 export const WithIcon: StoryType = {
-  args: {
-    icon: <ModalAlertIcon />,
-  },
+  render: () => <ModalStory title="알림이 있습니다." icon={<ModalAlertIcon />} />,
 }
 
-export default meta
+export const LongText: StoryType = {
+  render: () => (
+    <ModalStory title="이것은 긴 텍스트가 있는 모달입니다. 이것은 긴 텍스트가 있는 모달입니다. 이것은 긴 텍스트가 있는 모달입니다." />
+  ),
+}
+
+export const FullFeatured: StoryType = {
+  render: () => (
+    <ModalStory
+      title="모든 기능이 포함된 모달입니다. 확인해주세요."
+      icon={<ModalAlertIcon />}
+      hasTwoButtons={true}
+    />
+  ),
+}

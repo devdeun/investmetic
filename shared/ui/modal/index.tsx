@@ -14,7 +14,7 @@ const cx = classNames.bind(styles)
 interface Props {
   title?: string
   icon?: ReactNode
-  isModalOpen: boolean
+  isOpen: boolean
   hasTwoButtons?: boolean
   confirmButton: () => void
   closeModal: () => void
@@ -23,12 +23,12 @@ interface Props {
 const Modal = ({
   title,
   icon,
-  isModalOpen,
+  isOpen,
   hasTwoButtons = false,
   confirmButton,
   closeModal,
 }: Props) => {
-  if (!isModalOpen) return null
+  if (!isOpen) return null
 
   const modalRoot = document.getElementById('modal-root')
 
