@@ -18,6 +18,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
           <MSWInitializer />
           {children}
         </QueryProvider>
+        <div id="modal-root"></div>
       </body>
     </html>
   )
