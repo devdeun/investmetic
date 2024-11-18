@@ -1,0 +1,47 @@
+// NOTE: color, padding 등 세부 수치들 미정, 일단 제일 가까운 걸로 함
+
+.container {
+  width: 100%;
+  padding: 7px 11px;
+  border: 1px solid $color-gray-300;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  @include typo-c2;
+}
+
+.trigger {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  color: $color-gray-400;
+  background-color: #fff;
+}
+
+.options {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background-color: #fff;
+}
+
+.option {
+  border-top-color: transparent;
+  cursor: pointer;
+
+  .icon {
+    color: $color-gray-300;
+  }
+
+  .selected-icon {
+    color: $color-gray-800;
+  }
+
+  &.selected {
+    background-color: $color-gray-300;
+  }
+
+  &:not(.selected):hover {
+    background-color: #f0f0f0;
+  }
+}
