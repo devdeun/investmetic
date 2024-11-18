@@ -31,6 +31,7 @@
 
   .icon {
     color: $color-gray-300;
+    margin-left: auto;
   }
 
   .selected-icon {
@@ -44,4 +45,8 @@
   &:not(.selected):hover {
     background-color: #f0f0f0;
   }
+}
+
+.with-check-container {
+
 }
