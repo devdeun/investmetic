@@ -1,0 +1,64 @@
+.container {
+  margin-bottom: 24px;
+  display: grid;
+  grid-template-columns: 1.6fr 1.2fr repeat(3, 0.6fr) 0.4fr;
+  height: 158px;
+  width: 100%;
+  align-items: center;
+  background-color: $color-white;
+  .mdd,
+  .sm-score,
+  .profit,
+  .subscribe {
+    place-items: center center;
+  }
+  .mdd,
+  .sm-score {
+    @include typo-b2;
+  }
+  .profit {
+    & span {
+      @include typo-c1;
+    }
+    p {
+      @include typo-b2;
+      color: $color-orange-500;
+    }
+  }
+}
+
+.summary {
+  padding-left: 30px;
+  * {
+    margin: 4px 0;
+  }
+  .title {
+    @include typo-h4;
+  }
+  .trader-profile {
+    display: flex;
+    align-items: center;
+    p {
+      margin-left: 10px;
+      @include typo-b2;
+    }
+  }
+  .total-subscribe-star {
+    display: flex;
+    align-items: center;
+    height: 20px;
+    p {
+      @include typo-c1;
+      padding-top: 10px;
+      &:first-child {
+        margin-right: 6px;
+      }
+    }
+  }
+}
+
+.subscribe-icon {
+  button {
+    background: transparent;
+  }
+}
