@@ -1,6 +1,7 @@
 'use client'
 
 // NOTE: 이름 공모전 개최
+// TODO: 아이콘 바꿔야함
 import { useRouter } from 'next/navigation'
 
 import { ChevronLeftIcon } from '@/public/icons'
@@ -23,7 +24,7 @@ const BackHeader = () => {
 const Left = () => {
   const router = useRouter()
   const onButtonClick = () => {
-    router.back()
+    router?.back()
   }
 
   return (
