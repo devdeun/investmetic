@@ -1,39 +1,32 @@
 import { useEffect, useRef, useState } from 'react'
 
-interface UseDropdownProps {
-  onChange?: (value: string | string[]) => void
+import { DropdownStateModel, DropdownValueType } from '../types'
+
+interface UseDropdownProps extends DropdownStateModel {
   isMultiple?: boolean
 }
 
-export const useDropdown = ({ onChange, isMultiple = false }: UseDropdownProps) => {
+export const useDropdown = ({ isMultiple = false, value, onChange }: UseDropdownProps) => {
+  if (isMultiple && typeof value === 'string') {
+    throw new Error('multiple 옵션은 객체 value와 사용해야합니다.')
+  }
+
   const [isOpen, setIsOpen] = useState(false)
-  const [selectedValues, setSelectedValues] = useState<string[]>([])
   const dropdownRef = useRef<HTMLDivElement>(null)
 
   const toggleOpen = () => setIsOpen((prev) => !prev)
 
-  const handleSelect = (value: string) => {
-    if (isMultiple) {
-      // 다중 선택 모드
-      setSelectedValues((prev) => {
-        const result = prev.includes(value)
-          ? prev.filter((item) => item !== value)
-          : [...prev, value]
-        onChange?.(result)
-        return result
-      })
-    } else {
-      // 단일 선택 모드
-      switchValue(value)
-    }
-  }
+  const handleSelect = (selectedValue: string) => {
+    let result: DropdownValueType = selectedValue
 
-  const switchValue = (value: string) => {
-    setSelectedValues((prev) => {
-      const result = prev[0] === value ? [] : [value]
-      onChange?.(result)
-      return result
-    })
+    if (isMultiple && Array.isArray(value)) {
+      result = value.includes(selectedValue)
+        ? value.filter((v) => v !== selectedValue)
+        : [...value, selectedValue]
+    }
+
+    onChange?.(result)
+    if (!isMultiple) setIsOpen(false)
   }
 
   const handleClickOutside = (event: MouseEvent) => {
@@ -52,9 +45,7 @@ export const useDropdown = ({ onChange, isMultiple = false }: UseDropdownProps) 
   return {
     isOpen,
     toggleOpen,
-    selectedValues,
     handleSelect,
-    switchValue,
     dropdownRef,
   }
 }

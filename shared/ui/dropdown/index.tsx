@@ -9,13 +9,13 @@ import { useDropdown } from './hooks/use-dropdown'
 import { useDropdownContext } from './hooks/use-dropdown-context'
 import RangeOption from './option/range-option'
 import styles from './styles.module.scss'
+import { DropdownItemProps, DropdownValueType } from './types'
 
 const cx = classNames.bind(styles)
 
 interface DropdownContextProps {
   isOpen: boolean
   toggleOpen: () => void
-  selectedValues: string[]
   handleSelect: (value: string) => void
 }
 
@@ -30,7 +30,8 @@ export const DropdownContext = createContext<DropdownContextProps>(defaultContex
 
 export interface DropdownProps {
   Trigger: ReactNode
-  onChange?: (value: string | string[]) => void
+  value: DropdownValueType
+  onChange: (value: DropdownValueType) => void
   isMultiple: boolean
   containerStyle?: CSSProperties
   labelStyle?: CSSProperties
@@ -39,19 +40,21 @@ export interface DropdownProps {
 
 const Dropdown = ({
   Trigger,
+  value,
   onChange,
   isMultiple = false,
   containerStyle,
   labelStyle,
   children,
 }: DropdownProps) => {
-  const { isOpen, toggleOpen, selectedValues, handleSelect, dropdownRef } = useDropdown({
+  const { isOpen, toggleOpen, handleSelect, dropdownRef } = useDropdown({
+    value,
     onChange,
     isMultiple,
   })
 
   return (
-    <DropdownContext.Provider value={{ isOpen, toggleOpen, selectedValues, handleSelect }}>
+    <DropdownContext.Provider value={{ isOpen, toggleOpen, handleSelect }}>
       <div style={containerStyle} ref={dropdownRef}>
         <button onClick={toggleOpen} className={cx('container', 'trigger')} style={labelStyle}>
           {Trigger}
@@ -62,19 +65,11 @@ const Dropdown = ({
     </DropdownContext.Provider>
   )
 }
-export interface ItemProps {
-  value: string
-  label: string
-  hasCheck?: boolean
-  isMultiple?: boolean
-  style?: CSSProperties
-}
 
-const Item = ({ value, label, hasCheck = false, style }: ItemProps) => {
+const Item = ({ isSelected, value, label, hasCheck = false, style }: DropdownItemProps) => {
   const context = useDropdownContext()
 
-  const { handleSelect, selectedValues } = context
-  const isSelected = selectedValues.includes(value)
+  const { handleSelect } = context
 
   return (
     <li
