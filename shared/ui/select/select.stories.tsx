@@ -1,6 +1,9 @@
+import { useState } from 'react'
+
 import type { Meta, StoryObj } from '@storybook/react'
 
-import Select from '.'
+import Select, { SelectType } from '.'
+import { DropdownValueType } from '../dropdown/types'
 
 const meta = {
   title: 'Components/Select',
@@ -37,25 +40,35 @@ const options = [
   },
 ]
 
+const ControlledSelect = (args: SelectType) => {
+  let initialValue = null
+  const { isMultiple } = args
+  if (isMultiple) initialValue = []
+  const [value, setValue] = useState<DropdownValueType>(initialValue)
+  return <Select {...args} value={value} onChange={(newValue) => setValue(newValue)} />
+}
+
 export const Default: StoryType = {
+  render: (args) => <ControlledSelect {...args} />,
   args: {
-    title: '수익률',
+    placeholder: '수익률',
     isRounded: false,
     isMultiple: false,
     hasCheck: false,
-    onChange: () => {},
     options,
   },
 }
 
 export const Rounded: StoryType = {
+  render: (args) => <ControlledSelect {...args} />,
   args: {
     ...Default.args,
     isRounded: true,
   },
 }
 
-export const Muliple: StoryType = {
+export const Multiple: StoryType = {
+  render: (args) => <ControlledSelect {...args} />,
   args: {
     ...Default.args,
     isMultiple: true,
@@ -63,6 +76,7 @@ export const Muliple: StoryType = {
 }
 
 export const WithCheck: StoryType = {
+  render: (args) => <ControlledSelect {...args} />,
   args: {
     ...Default.args,
     hasCheck: true,
