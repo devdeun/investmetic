@@ -2,7 +2,7 @@ import { CSSProperties, ReactNode } from 'react'
 
 import classNames from 'classnames/bind'
 
-import styles from './header.module.scss'
+import styles from './styles.module.scss'
 
 const cx = classNames.bind(styles)
 

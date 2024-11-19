@@ -5,7 +5,7 @@ import classNames from 'classnames/bind'
 
 import { PATH } from '@/shared/constants/path'
 
-import styles from './logo.module.scss'
+import styles from './styles.module.scss'
 
 const cx = classNames.bind(styles)
 

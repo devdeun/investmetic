@@ -8,7 +8,7 @@ import { ChevronLeftIcon } from '@/public/icons'
 import classNames from 'classnames/bind'
 
 import Header from '..'
-import styles from './back-header.module.scss'
+import styles from './styles.module.scss'
 
 const cx = classNames.bind(styles)
 
