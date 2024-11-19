@@ -18,11 +18,11 @@ export default meta
 type StoryType = StoryObj<typeof Modal>
 
 const ModalStory = ({
-  title,
+  contents,
   icon,
   hasTwoButtons,
 }: {
-  title?: string
+  contents?: string
   icon?: React.ReactNode
   hasTwoButtons?: boolean
 }) => {
@@ -40,7 +40,7 @@ const ModalStory = ({
     <div style={{ padding: '20px' }}>
       <Button onClick={() => setIsOpen(true)}>모달 열기</Button>
       <Modal
-        title={title}
+        contents={contents}
         icon={icon}
         isOpen={isOpen}
         hasTwoButtons={hasTwoButtons}
@@ -55,27 +55,27 @@ const ModalStory = ({
 }
 
 export const Default: StoryType = {
-  render: () => <ModalStory title="기본 모달 제목" />,
+  render: () => <ModalStory contents="기본 모달 제목" />,
 }
 
 export const TwoButtons: StoryType = {
-  render: () => <ModalStory title="정말 삭제하시겠습니까?" hasTwoButtons={true} />,
+  render: () => <ModalStory contents="정말 삭제하시겠습니까?" hasTwoButtons={true} />,
 }
 
 export const WithIcon: StoryType = {
-  render: () => <ModalStory title="알림이 있습니다." icon={<ModalAlertIcon />} />,
+  render: () => <ModalStory contents="알림이 있습니다." icon={<ModalAlertIcon />} />,
 }
 
 export const LongText: StoryType = {
   render: () => (
-    <ModalStory title="이것은 긴 텍스트가 있는 모달입니다. 이것은 긴 텍스트가 있는 모달입니다. 이것은 긴 텍스트가 있는 모달입니다." />
+    <ModalStory contents="이것은 긴 텍스트가 있는 모달입니다. 이것은 긴 텍스트가 있는 모달입니다. 이것은 긴 텍스트가 있는 모달입니다." />
   ),
 }
 
 export const FullFeatured: StoryType = {
   render: () => (
     <ModalStory
-      title="모든 기능이 포함된 모달입니다. 확인해주세요."
+      contents="모든 기능이 포함된 모달입니다. 확인해주세요."
       icon={<ModalAlertIcon />}
       hasTwoButtons={true}
     />

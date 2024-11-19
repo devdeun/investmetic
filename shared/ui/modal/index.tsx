@@ -12,7 +12,7 @@ import styles from './styles.module.scss'
 const cx = classNames.bind(styles)
 
 interface Props {
-  title?: string
+  contents?: string
   icon?: ReactNode
   isOpen: boolean
   hasTwoButtons?: boolean
@@ -21,7 +21,7 @@ interface Props {
 }
 
 const Modal = ({
-  title,
+  contents,
   icon,
   isOpen,
   hasTwoButtons = false,
@@ -40,7 +40,7 @@ const Modal = ({
       <div className={cx('modal', { 'has-two-buttons': hasTwoButtons })}>
         <CloseIcon className={cx('close-icon')} onClick={closeModal}></CloseIcon>
         <div className={cx('icon')}>{icon}</div>
-        <p className={cx('title')}>{title}</p>
+        <p className={cx('title')}>{contents}</p>
 
         {hasTwoButtons ? (
           <div className={cx('two-buttons')}>
