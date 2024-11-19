@@ -1,21 +1,20 @@
 'use client'
 
+// TODO: muliple 일 때는 상단에 placeholder를 그대로 둘지 고민
 import { CSSProperties } from 'react'
 
-import Dropdown, { DropdownProps, ItemProps } from '../dropdown'
+import Dropdown, { DropdownProps } from '../dropdown'
+import { DropdownItemProps, DropdownOptionModel, DropdownValueType } from '../dropdown/types'
+import { useSelect } from './hooks/useSelect'
 
-interface OptionModel {
-  value: string
-  label: string
-}
-
-type SelectType = Pick<DropdownProps, 'isMultiple' | 'containerStyle' | 'labelStyle'> &
-  Pick<ItemProps, 'hasCheck'> & {
-    title?: string
+export type SelectType = Pick<DropdownProps, 'isMultiple' | 'containerStyle' | 'labelStyle'> &
+  Pick<DropdownItemProps, 'hasCheck'> & {
+    placeholder?: string
+    value: DropdownValueType
+    onChange: (value: DropdownValueType) => void
     isRounded?: boolean
     titleStyle?: CSSProperties
-    onChange?: (value: string | string[]) => void
-    options: OptionModel[]
+    options: DropdownOptionModel[]
   }
 
 const Select = ({
@@ -24,30 +23,35 @@ const Select = ({
   hasCheck = false,
   containerStyle,
   titleStyle,
+  placeholder,
+  value,
   onChange,
   options,
-  title = options[0].label,
 }: SelectType) => {
+  const { isSelected, findLabel } = useSelect()
+
   if (!options.length) return null
 
   const roundStyle = { borderRadius: '40px', overflow: 'hidden' }
-  const labelStyle = isRounded ? { ...roundStyle, ...titleStyle } : titleStyle
+  const placeholderStyle = isRounded ? { ...roundStyle, ...titleStyle } : titleStyle
 
   return (
     <Dropdown
-      Trigger={<span>{title}</span>}
+      Trigger={<span>{findLabel(options, value) ?? placeholder ?? options[0].label}</span>}
       isMultiple={isMultiple}
+      value={value}
       onChange={onChange}
       containerStyle={containerStyle}
-      labelStyle={labelStyle}
+      labelStyle={placeholderStyle}
     >
-      {options.map(({ value, label }) => (
+      {options.map(({ value: itemValue, label }) => (
         <Dropdown.Item
-          value={value}
+          value={itemValue}
           label={label}
+          isSelected={isSelected(value, itemValue)}
           isMultiple={isMultiple}
           hasCheck={hasCheck}
-          key={label}
+          key={placeholder}
         />
       ))}
     </Dropdown>
