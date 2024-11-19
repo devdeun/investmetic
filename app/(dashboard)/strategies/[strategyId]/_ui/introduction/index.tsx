@@ -15,7 +15,7 @@ interface Props {
 
 const StrategyIntroduction = ({ content }: Props) => {
   const [shouldShowMore, setShouldShowMore] = useState(false)
-  const [isContentOverflow, setIsContentOverflow] = useState(false)
+  const [isOverflow, setIsOverflow] = useState(false)
   const contentRef = useRef<HTMLParagraphElement>(null)
 
   useEffect(() => {
@@ -24,7 +24,7 @@ const StrategyIntroduction = ({ content }: Props) => {
 
   const checkOverflow = () => {
     if (contentRef.current) {
-      setIsContentOverflow(contentRef.current.scrollHeight > contentRef.current.offsetHeight)
+      setIsOverflow(contentRef.current.scrollHeight > contentRef.current.offsetHeight)
     }
   }
 
@@ -34,7 +34,7 @@ const StrategyIntroduction = ({ content }: Props) => {
       <div className={cx('content', { expand: shouldShowMore })}>
         <p ref={contentRef}>{content}</p>
       </div>
-      {isContentOverflow && (
+      {isOverflow && (
         <div className={cx('button-wrapper')}>
           <button onClick={() => setShouldShowMore(!shouldShowMore)}>
             {shouldShowMore ? (
