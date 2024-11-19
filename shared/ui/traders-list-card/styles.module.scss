@@ -1,0 +1,52 @@
+.traders-list-card {
+  background-color: $color-white;
+  border-radius: 8px;
+  width: 300px;
+  height: 220px;
+  padding: 28px 25px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.contents {
+  margin-bottom: 35px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.profile-name {
+  @include typo-h3;
+  font-weight: $text-semibold;
+  position: absolute;
+  margin-top: 5px;
+}
+
+.avatar {
+  position: absolute;
+  right: 0px;
+}
+
+.information {
+  @include typo-b3;
+  color: $color-gray-500;
+  font-weight: $text-semibold;
+  margin-top: 45px;
+  display: flex;
+  flex-direction: column;
+}
+
+.link-button-wrapper {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: auto;
+}
+
+.link-button {
+  align-self: center;
+  text-align: center;
+  border-color: $color-orange-600;
+  width: 100%;
+}
