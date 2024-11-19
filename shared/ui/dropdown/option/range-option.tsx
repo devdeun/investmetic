@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 // import { DropdownContext } from '..'
-import styles from '../dropdown.module.scss'
+import styles from '../styles.module.scss'
 
 const RangeOption = ({ onRangeChange }: { onRangeChange: (min: string, max: string) => void }) => {
   const [range, setRange] = useState({ min: '', max: '' })

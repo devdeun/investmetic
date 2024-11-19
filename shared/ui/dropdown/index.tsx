@@ -5,10 +5,10 @@ import { CSSProperties, ReactNode, createContext } from 'react'
 import { CheckboxIcon, ChevronDownIcon, ChevronUpIcon } from '@/public/icons'
 import classNames from 'classnames/bind'
 
-import styles from './dropdown.module.scss'
 import { useDropdown } from './hooks/use-dropdown'
 import { useDropdownContext } from './hooks/use-dropdown-context'
 import RangeOption from './option/range-option'
+import styles from './styles.module.scss'
 
 const cx = classNames.bind(styles)
 
