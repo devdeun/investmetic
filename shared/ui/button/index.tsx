@@ -36,12 +36,12 @@ const _Button = ({
   </button>
 )
 
-interface ButtonGruopProps {
+interface ButtonGroupProps {
   gap?: string
   children: ReactNode
 }
 
-const ButtonGroup = ({ gap = '8px', children }: ButtonGruopProps) => {
+const ButtonGroup = ({ gap = '8px', children }: ButtonGroupProps) => {
   return <div style={{ display: 'flex', gap }}>{children}</div>
 }
 
