@@ -1,7 +1,7 @@
 import classNames from 'classnames/bind'
 
 import AverageMetricsChart, { AverageMetricsChartDataModel } from './average-metrics-chart'
-import styles from './style.module.scss'
+import styles from './styles.module.scss'
 
 const cx = classNames.bind(styles)
 
