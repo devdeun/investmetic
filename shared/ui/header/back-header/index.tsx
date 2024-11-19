@@ -17,20 +17,24 @@ const headerStyles = {
   backdropFilter: 'blur(60px)',
 }
 
-const BackHeader = () => {
-  return <Header Left={<Left />} styles={headerStyles} />
+interface Props {
+  label: string
 }
 
-const Left = () => {
+const BackHeader = ({ label }: Props) => {
+  return <Header Left={<Left label={label} />} styles={headerStyles} />
+}
+
+const Left = ({ label }: Props) => {
   const router = useRouter()
-  const onButtonClick = () => {
-    router?.back()
+  const onClick = () => {
+    router.back()
   }
 
   return (
-    <button onClick={onButtonClick} className={cx('container')}>
+    <button onClick={onClick} className={cx('container')}>
       <ChevronLeftIcon />
-      <span>목록으로 돌아가기</span>
+      <span>{label}</span>
     </button>
   )
 }
