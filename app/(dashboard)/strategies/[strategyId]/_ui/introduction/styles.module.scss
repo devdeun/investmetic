@@ -31,14 +31,13 @@
     justify-content: flex-end;
     margin-top: 10px;
     button {
-      padding: 2px;
+      @include typo-c1;
+      display: flex;
+      align-items: center;
       color: $color-gray-500;
       background-color: transparent;
       svg {
-        margin-left: 10px;
-      }
-      span {
-        @include typo-c1;
+        margin: -3px 0 0 7px;
       }
     }
   }

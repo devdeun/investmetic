@@ -38,15 +38,15 @@ const StrategyIntroduction = ({ content }: Props) => {
         <div className={cx('button-wrapper')}>
           <button onClick={() => setShouldShowMore(!shouldShowMore)}>
             {shouldShowMore ? (
-              <span>
+              <>
                 접기
                 <CloseIcon />
-              </span>
+              </>
             ) : (
-              <span>
+              <>
                 더보기
                 <OpenIcon />
-              </span>
+              </>
             )}
           </button>
         </div>
