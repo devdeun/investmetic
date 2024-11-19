@@ -1,4 +1,4 @@
-import StarRating from '@/app/(dashboard)/strategies/_ui/star-rating'
+import StarRating from '@/app/(dashboard)/strategies/[strategyId]/_ui/star-rating'
 import type { Meta, StoryFn } from '@storybook/react'
 
 const meta: Meta = {
