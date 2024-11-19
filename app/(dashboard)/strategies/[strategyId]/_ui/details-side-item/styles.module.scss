@@ -1,0 +1,40 @@
+.side-item {
+  width: 276px;
+  height: 100px;
+  background-color: $color-white;
+  padding: 20px 20px 0;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+
+  &.gap {
+    height: 120px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    padding: 20px;
+  }
+
+  .title {
+    font-weight: $text-bold;
+    font-size: $text-b2;
+    color: $color-gray-500;
+    border-bottom: 0.75px solid $color-gray-500;
+    padding-bottom: 12px;
+  }
+
+  .data {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 12px;
+    .avatar {
+      display: flex;
+      align-items: center;
+      p {
+        margin-left: 11px;
+      }
+    }
+    p {
+      @include typo-b1;
+    }
+  }
+}
