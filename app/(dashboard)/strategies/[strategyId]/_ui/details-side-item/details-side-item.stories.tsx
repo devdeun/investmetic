@@ -6,16 +6,6 @@ const meta: Meta<typeof DetailsSideItem> = {
   title: 'components/DetailsSideItem',
   component: DetailsSideItem,
   tags: ['autodocs'],
-  argTypes: {
-    information: {
-      title: {
-        control: 'object',
-      },
-      data: {
-        control: 'text',
-      },
-    },
-  },
 }
 
 const sideItems: StoryFn<{ information: InformationModel | InformationModel[] }> = (args) => (
