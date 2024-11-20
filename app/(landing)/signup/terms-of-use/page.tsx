@@ -1,9 +1,6 @@
 'use client'
 
-import { useState } from 'react'
-
-import { useRouter } from 'next/navigation'
-
+import { useTermsCheck } from '@/app/(landing)/signup/terms-of-use/_hooks/use-terms-check'
 import classNames from 'classnames/bind'
 
 import { PATH } from '@/shared/constants/path'
@@ -11,7 +8,7 @@ import { Button } from '@/shared/ui/button'
 import Checkbox from '@/shared/ui/check-box'
 import { LinkButton } from '@/shared/ui/link-button'
 
-import { getIsAgreedTermsCookie, getUserTypeCookie, setIsAgreedTermsCookie } from '../_lib/cookies'
+import { getUserTypeCookie } from '../_lib/cookies'
 import Step from '../_ui/step'
 import TermsContainer from './_ui/terms-container'
 import InvestorTerms from './_ui/terms/investor-terms'
@@ -22,34 +19,16 @@ import styles from './page.module.scss'
 const cx = classNames.bind(styles)
 
 const TermsOfUsePage = () => {
-  const router = useRouter()
   const userType = getUserTypeCookie()
-  const isAgreedTerm = getIsAgreedTermsCookie()
-
-  const [isUserTermChecked, setIsUserTermChecked] = useState(isAgreedTerm)
-  const [isPrivacyTermChecked, setIsPrivacyTermChecked] = useState(isAgreedTerm)
-  const [isAllChecked, setIsAllChecked] = useState(isAgreedTerm)
-
-  const handleAllCheck = () => {
-    setIsAllChecked(!isAllChecked)
-    setIsUserTermChecked(!isAllChecked)
-    setIsPrivacyTermChecked(!isAllChecked)
-  }
-
-  const handleUserTermCheck = () => {
-    setIsUserTermChecked(!isUserTermChecked)
-    setIsAllChecked(!isUserTermChecked && isPrivacyTermChecked)
-  }
-
-  const handlePrivacyTermCheck = () => {
-    setIsPrivacyTermChecked(!isPrivacyTermChecked)
-    setIsAllChecked(!isPrivacyTermChecked && isUserTermChecked)
-  }
-
-  const handleNextClick = () => {
-    setIsAgreedTermsCookie(isAllChecked)
-    router.push(PATH.SIGN_UP_INFORMATION)
-  }
+  const {
+    isAllChecked,
+    isUserTermChecked,
+    isPrivacyTermChecked,
+    handleAllCheck,
+    handleUserTermCheck,
+    handlePrivacyTermCheck,
+    handleNextClick,
+  } = useTermsCheck()
 
   return (
     <>
