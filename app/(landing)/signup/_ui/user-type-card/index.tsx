@@ -2,7 +2,7 @@
 
 import { useRouter } from 'next/navigation'
 
-import useSignupStore from '@/app/(landing)/signup/_stores/use-signup-store'
+import { setUserTypeCookie } from '@/app/(landing)/signup/_lib/cookies'
 import classNames from 'classnames/bind'
 
 import { PATH } from '@/shared/constants/path'
@@ -20,10 +20,9 @@ interface Props {
 
 const UserTypeCard = ({ userType, title, highlight }: Props) => {
   const router = useRouter()
-  const { setUserType } = useSignupStore((state) => state.actions)
 
   const handleTypeSelect = () => {
-    setUserType(userType)
+    setUserTypeCookie(userType)
     router.push(PATH.SIGN_UP_TERMS_OF_USE)
   }
 

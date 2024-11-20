@@ -1,12 +1,9 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import { useRouter } from 'next/navigation'
 
-import useSignupStore from '@/app/(landing)/signup/_stores/use-signup-store'
-import Step from '@/app/(landing)/signup/_ui/step'
-import TermsContainer from '@/app/(landing)/signup/terms-of-use/_ui/terms-container'
 import classNames from 'classnames/bind'
 
 import { PATH } from '@/shared/constants/path'
@@ -14,6 +11,9 @@ import { Button } from '@/shared/ui/button'
 import Checkbox from '@/shared/ui/check-box'
 import { LinkButton } from '@/shared/ui/link-button'
 
+import { getIsAgreedTermsCookie, getUserTypeCookie, setIsAgreedTermsCookie } from '../_lib/cookies'
+import Step from '../_ui/step'
+import TermsContainer from './_ui/terms-container'
 import InvestorTerms from './_ui/terms/investor-terms'
 import PrivacyTerms from './_ui/terms/privacy-terms'
 import TraderTerms from './_ui/terms/trader-terms'
@@ -23,19 +23,12 @@ const cx = classNames.bind(styles)
 
 const TermsOfUsePage = () => {
   const router = useRouter()
-  const userType = useSignupStore((state) => state.userType)
-  const isAgreedTerm = useSignupStore((state) => state.isAgreedTerm)
-  const { setIsAgreedTerm } = useSignupStore((state) => state.actions)
+  const userType = getUserTypeCookie()
+  const isAgreedTerm = getIsAgreedTermsCookie()
 
   const [isUserTermChecked, setIsUserTermChecked] = useState(isAgreedTerm)
   const [isPrivacyTermChecked, setIsPrivacyTermChecked] = useState(isAgreedTerm)
   const [isAllChecked, setIsAllChecked] = useState(isAgreedTerm)
-
-  useEffect(() => {
-    if (!userType) {
-      router.push(PATH.SIGN_UP_USER_TYPE)
-    }
-  }, [userType, router])
 
   const handleAllCheck = () => {
     setIsAllChecked(!isAllChecked)
@@ -54,7 +47,7 @@ const TermsOfUsePage = () => {
   }
 
   const handleNextClick = () => {
-    setIsAgreedTerm(isAllChecked)
+    setIsAgreedTermsCookie(isAllChecked)
     router.push(PATH.SIGN_UP_INFORMATION)
   }
 
