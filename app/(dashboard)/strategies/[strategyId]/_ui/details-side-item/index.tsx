@@ -1,8 +1,5 @@
+import SideItem from '@/app/(dashboard)/strategies/[strategyId]/_ui/details-side-item/side-item'
 import classNames from 'classnames/bind'
-
-import { PATH } from '@/shared/constants/path'
-import Avatar from '@/shared/ui/avatar'
-import { LinkButton } from '@/shared/ui/link-button'
 
 import styles from './styles.module.scss'
 
@@ -17,33 +14,35 @@ export type TitleType =
   | '최종손익입력일자'
   | '등록일'
 
-interface Props {
+export interface InformationModel {
   title: TitleType
   data: string | number
-  profileImage?: string
-  hasGap?: boolean
 }
 
-const DetailsSideItem = ({ title, data, profileImage, hasGap = true }: Props) => {
+interface Props {
+  information: InformationModel | InformationModel[]
+  profileImage?: string
+}
+
+const DetailsSideItem = ({ information, profileImage }: Props) => {
+  const isArray = Array.isArray(information)
   return (
-    <div className={cx('side-item', hasGap && 'gap')}>
-      <div className={cx('title')}>{title}</div>
-      <div className={cx('data')}>
-        {title === '트레이더' ? (
-          <>
-            <div className={cx('avatar')}>
-              <Avatar src={profileImage} />
-              <p>{data}</p>
+    <>
+      {isArray ? (
+        <div className={cx('side-items')}>
+          {information.map((item) => (
+            <div key={item.title}>
+              <div className={cx('title')}>{item.title}</div>
+              <div className={cx('data')}>
+                <p>{item.data}</p>
+              </div>
             </div>
-            <LinkButton href={PATH.MY_QUESTIONS} size="small" style={{ height: '30px' }}>
-              문의하기
-            </LinkButton>
-          </>
-        ) : (
-          <p>{data}</p>
-        )}
-      </div>
-    </div>
+          ))}
+        </div>
+      ) : (
+        <SideItem title={information.title} data={information.data} profileImage={profileImage} />
+      )}
+    </>
   )
 }
 
