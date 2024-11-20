@@ -20,11 +20,11 @@ export type TitleType =
 interface Props {
   title: TitleType
   data: string | number
-  imageUrl?: string
+  profileImage?: string
   hasGap?: boolean
 }
 
-const DetailsSideItem = ({ title, data, imageUrl, hasGap = true }: Props) => {
+const DetailsSideItem = ({ title, data, profileImage, hasGap = true }: Props) => {
   return (
     <div className={cx('side-item', hasGap && 'gap')}>
       <div className={cx('title')}>{title}</div>
@@ -32,7 +32,7 @@ const DetailsSideItem = ({ title, data, imageUrl, hasGap = true }: Props) => {
         {title === '트레이더' ? (
           <>
             <div className={cx('avatar')}>
-              <Avatar src={imageUrl} />
+              <Avatar src={profileImage} />
               <p>{data}</p>
             </div>
             <LinkButton href={PATH.MY_QUESTIONS} size="small" style={{ height: '30px' }}>
