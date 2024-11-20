@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import StorybookMockContents from '@/shared/utils/storybook-mock-contents'
+
 import BackHeader from '.'
 
 const meta = {
@@ -15,13 +17,7 @@ const meta = {
         }}
       >
         <Story />
-        <div style={{ marginTop: '80px' }}>
-          {Array.from({ length: 5 }, (_, idx) => (
-            <div key={idx} style={{ height: '100px', marginBottom: '10px', background: '#f4f4f4' }}>
-              Scrollable Content {idx + 1}
-            </div>
-          ))}
-        </div>
+        <StorybookMockContents />
       </div>
     ),
   ],
