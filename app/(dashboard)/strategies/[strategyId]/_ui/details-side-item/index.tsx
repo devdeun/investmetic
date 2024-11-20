@@ -1,6 +1,6 @@
-import SideItem from '@/app/(dashboard)/strategies/[strategyId]/_ui/details-side-item/side-item'
 import classNames from 'classnames/bind'
 
+import SideItem from './side-item'
 import styles from './styles.module.scss'
 
 const cx = classNames.bind(styles)

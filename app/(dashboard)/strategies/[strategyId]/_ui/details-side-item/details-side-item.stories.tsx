@@ -1,7 +1,6 @@
-import DetailsSideItem, {
-  InformationModel,
-} from '@/app/(dashboard)/strategies/[strategyId]/_ui/details-side-item'
 import type { Meta, StoryFn } from '@storybook/react'
+
+import DetailsSideItem, { InformationModel } from './index'
 
 const meta: Meta<typeof DetailsSideItem> = {
   title: 'components/DetailsSideItem',
@@ -10,16 +9,7 @@ const meta: Meta<typeof DetailsSideItem> = {
   argTypes: {
     information: {
       title: {
-        control: 'select',
-        options: [
-          '트레이더',
-          '최소 투자 금액',
-          '투자 원금',
-          'KP Ratio',
-          'SM SCORE',
-          '최종손익입력일자',
-          '등록일',
-        ],
+        control: 'object',
       },
       data: {
         control: 'text',
