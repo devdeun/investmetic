@@ -1,13 +1,13 @@
 'use client'
 
-import { getNicknameCookie, getUserTypeCookie } from '@/app/(landing)/signup/_lib/cookies'
-import SignupCompleteMessage from '@/app/(landing)/signup/_ui/signup-complete-message'
-import Step from '@/app/(landing)/signup/_ui/step'
 import classNames from 'classnames/bind'
 
 import { PATH } from '@/shared/constants/path'
 import { LinkButton } from '@/shared/ui/link-button'
 
+import { getNicknameCookie, getUserTypeCookie } from '../_lib/cookies'
+import SignupCompleteMessage from '../_ui/signup-complete-message'
+import Step from '../_ui/step'
 import styles from './page.module.scss'
 
 const cx = classNames.bind(styles)

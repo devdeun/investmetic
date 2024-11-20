@@ -1,6 +1,5 @@
 'use client'
 
-import { useTermsCheck } from '@/app/(landing)/signup/terms-of-use/_hooks/use-terms-check'
 import classNames from 'classnames/bind'
 
 import { PATH } from '@/shared/constants/path'
@@ -10,6 +9,7 @@ import { LinkButton } from '@/shared/ui/link-button'
 
 import { getUserTypeCookie } from '../_lib/cookies'
 import Step from '../_ui/step'
+import { useTermsCheck } from './_hooks/use-terms-check'
 import TermsContainer from './_ui/terms-container'
 import InvestorTerms from './_ui/terms/investor-terms'
 import PrivacyTerms from './_ui/terms/privacy-terms'
