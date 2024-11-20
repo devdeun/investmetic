@@ -10,11 +10,7 @@
 
   .content {
     width: 100%;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    line-clamp: 4;
-    -webkit-line-clamp: 4;
+    @include ellipsis(4);
     &.expand {
       display: contents;
     }
