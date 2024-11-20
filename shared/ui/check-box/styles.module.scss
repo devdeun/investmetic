@@ -26,7 +26,17 @@
 }
 
 .label {
-  @include typo-c1;
+  &.c1 {
+    @include typo-c1;
+  }
+
+  &.b2 {
+    @include typo-b2;
+  }
+
+  &.b3 {
+    @include typo-b3;
+  }
 
   &.gray500 {
     color: $color-gray-500;
