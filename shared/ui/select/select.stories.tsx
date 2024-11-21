@@ -51,19 +51,19 @@ const ControlledSelect = (args: SelectType) => {
 export const Default: StoryType = {
   render: (args) => <ControlledSelect {...args} />,
   args: {
+    size: 'small',
     placeholder: '수익률',
-    isRounded: false,
     isMultiple: false,
     hasCheck: false,
     options,
   },
 }
 
-export const Rounded: StoryType = {
+export const Large: StoryType = {
   render: (args) => <ControlledSelect {...args} />,
   args: {
     ...Default.args,
-    isRounded: true,
+    size: 'large',
   },
 }
 
