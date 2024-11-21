@@ -4,11 +4,13 @@
   gap: 12px;
 
   svg {
+    width: 40px;
     flex-shrink: 0;
   }
 }
 
 .text {
+  width: 142px;
   color: $color-gray-500;
   line-height: normal;
 }

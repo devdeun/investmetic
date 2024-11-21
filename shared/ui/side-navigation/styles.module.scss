@@ -29,7 +29,12 @@
   padding: 24px 0 0 24px;
 
   svg {
+    width: 40px;
     flex-shrink: 0;
+  }
+
+  .text {
+    width: 142px;
   }
 }
 

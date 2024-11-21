@@ -42,7 +42,14 @@ const nextConfig = {
     config.module.rules.push({
       test: /\.svg$/,
       issuer: /\.[jt]sx?$/,
-      use: ['@svgr/webpack'],
+      use: [
+        {
+          loader: '@svgr/webpack',
+          options: {
+            dimensions: false,
+          },
+        },
+      ],
     })
 
     return config
