@@ -1,5 +1,11 @@
+import HeroSection from './_ui/hero-section'
+
 const HomePage = () => {
-  return <>Home</>
+  return (
+    <>
+      <HeroSection />
+    </>
+  )
 }
 
 export default HomePage
