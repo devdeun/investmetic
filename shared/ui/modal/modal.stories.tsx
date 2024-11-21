@@ -1,7 +1,12 @@
 import React from 'react'
 
 import { Meta, StoryObj } from '@storybook/react'
-import { ModalAlertIcon, ModalCheckIcon, ModalSubscribeIcon } from 'public/icons/index'
+import {
+  ModalAlertIcon,
+  ModalCheckIcon,
+  ModalSubscribeIcon,
+  RegisterIcon,
+} from 'public/icons/index'
 
 import { Button } from '@/shared/ui/button'
 
@@ -51,4 +56,8 @@ export const SubscribeIcon: StoryType = {
   render: () => (
     <ModalStory contents="이것은 구독아이콘 모달입니다." icon={<ModalSubscribeIcon />} />
   ),
+}
+
+export const PlusIcon: StoryType = {
+  render: () => <ModalStory contents="이것은 등록아이콘 모달입니다." icon={<RegisterIcon />} />,
 }
