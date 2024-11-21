@@ -19,14 +19,12 @@ export type SelectType = Pick<
     placeholder?: string
     value: DropdownValueType
     onChange: (value: DropdownValueType) => void
-    isRounded?: boolean
     titleStyle?: CSSProperties
     options: DropdownOptionModel[]
   }
 
 const Select = ({
   size,
-  isRounded = false,
   isMultiple = false,
   hasCheck = false,
   containerStyle,
@@ -40,9 +38,6 @@ const Select = ({
 
   if (!options.length) return null
 
-  const roundStyle = { borderRadius: '40px', overflow: 'hidden' }
-  const placeholderStyle = isRounded ? { ...roundStyle, ...titleStyle } : titleStyle
-
   return (
     <Dropdown
       size={size}
@@ -51,7 +46,7 @@ const Select = ({
       value={value}
       onChange={onChange}
       containerStyle={containerStyle}
-      labelStyle={placeholderStyle}
+      labelStyle={titleStyle}
     >
       {options.map(({ value: itemValue, label }) => (
         <Dropdown.Item
