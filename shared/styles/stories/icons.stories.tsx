@@ -23,6 +23,7 @@ import {
   PencilIcon,
   ProfileIcon,
   QuestionIcon,
+  RegisterIcon,
   SearchIcon,
   SignOutIcon,
   StarIcon,
@@ -69,6 +70,7 @@ const icons = [
   { name: 'ModalAlertIcon', icon: ModalAlertIcon },
   { name: 'ModalSubscribeIcon', icon: ModalSubscribeIcon },
   { name: 'ModalCheckIcon', icon: ModalCheckIcon },
+  { name: 'RegisterIcon', icon: RegisterIcon },
 ]
 
 export const Icons: Story = {
