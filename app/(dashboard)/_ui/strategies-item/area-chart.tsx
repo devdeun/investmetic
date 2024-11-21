@@ -2,13 +2,19 @@
 
 import dynamic from 'next/dynamic'
 
+import classNames from 'classnames/bind'
 import Highcharts from 'highcharts'
 
 import { ProfitRateChartDataModel } from '@/shared/types/strategy-details-data'
 
+import styles from './styles.module.scss'
+
+const cx = classNames.bind(styles)
+
 const HighchartsReact = dynamic(() => import('highcharts-react-official'), {
   ssr: false,
 })
+
 interface Props {
   profitRateChartData: ProfitRateChartDataModel[]
 }
@@ -19,7 +25,6 @@ const AreaChart = ({ profitRateChartData }: Props) => {
     chart: {
       type: 'areaspline',
       height: 100,
-      width: 180,
       backgroundColor: 'transparent',
       margin: [0, 0, 0, 0],
     },
@@ -67,9 +72,27 @@ const AreaChart = ({ profitRateChartData }: Props) => {
     ],
     credits: { enabled: false },
     tooltip: { enabled: false },
+    responsive: {
+      rules: [
+        {
+          condition: {
+            maxWidth: 200,
+          },
+          chartOptions: {
+            chart: {
+              width: null,
+            },
+          },
+        },
+      ],
+    },
   }
 
-  return <HighchartsReact highcharts={Highcharts} options={chartOptions} />
+  return (
+    <div className={cx('chart')}>
+      <HighchartsReact highcharts={Highcharts} options={chartOptions} />
+    </div>
+  )
 }
 
 export default AreaChart
