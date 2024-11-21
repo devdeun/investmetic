@@ -1,9 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   transpilePackages: ['msw'],
-  experimental: {
-    appDir: true,
-  },
   sassOptions: {
     includePaths: ['./shared/styles'],
     prependData: `
