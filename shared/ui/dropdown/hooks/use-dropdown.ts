@@ -8,7 +8,7 @@ interface UseDropdownProps extends DropdownStateModel {
 
 export const useDropdown = ({ isMultiple = false, value, onChange }: UseDropdownProps) => {
   if (isMultiple && typeof value === 'string') {
-    throw new Error('multiple 옵션은 객체 value와 사용해야합니다.')
+    value = [value]
   }
 
   const [isOpen, setIsOpen] = useState(false)
