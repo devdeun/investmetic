@@ -8,32 +8,40 @@ import styles from './styles.module.scss'
 const cx = classNames.bind(styles)
 
 interface Props {
-  name: string
+  nickname: string
   profileImage?: string
-  strategy: number
-  subscribe: number
+  strategyCount: number
+  subscriberCount: number
   traderId: string
 }
 
-const TradersListCard = ({ name, profileImage, strategy, subscribe }: Props) => {
+const TradersListCard = ({
+  nickname,
+  profileImage,
+  strategyCount,
+  subscriberCount,
+  traderId,
+}: Props) => {
   return (
     <div className={cx('traders-list-card')}>
       <div className={cx('contents')}>
-        <div className={cx('profile-name')}>{name}</div>
+        <div className={cx('trader-info')}>
+          <div className={cx('trader-nickname')}>{nickname}</div>
+          <div className={cx('count-info')}>
+            <div>전략 {strategyCount}개</div>
+            <div>구독 {subscriberCount}개</div>
+          </div>
+        </div>
         <div className={cx('avatar')}>
           <Avatar src={profileImage} size="large" />
-        </div>
-        <div className={cx('information')}>
-          <div>전략 {strategy}개</div>
-          <div>구독 {subscribe}개</div>
         </div>
       </div>
       <div className="link-button-wrapper">
         <LinkButton
           href={'${PATH.TRADERS}/${traderId}'}
           size="medium"
+          variant="filled"
           className={cx('link-button')}
-          style={{ color: '#ff5f33' }}
         >
           전략 목록 상세보기
         </LinkButton>

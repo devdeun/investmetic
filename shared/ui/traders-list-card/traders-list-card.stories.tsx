@@ -25,10 +25,10 @@ type StoryType = StoryObj<typeof meta>
 
 export const Default: StoryType = {
   args: {
-    name: '고양이',
+    nickname: '고양이는야옹하고울지',
     profileImage: 'https://lh3.googleusercontent.com/a/your-image-id',
-    strategy: 10,
-    subscribe: 10,
+    strategyCount: 10,
+    subscriberCount: 10,
     traderId: '1234',
   },
 }
