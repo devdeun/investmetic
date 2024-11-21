@@ -5,7 +5,7 @@
 // TODO: 스타일 추가되면 바꿔야함
 import { useRouter } from 'next/navigation'
 
-import { ChevronLeftIcon } from '@/public/icons'
+import { BackIcon } from '@/public/icons'
 import classNames from 'classnames/bind'
 
 import Header from '..'
@@ -34,7 +34,7 @@ const Left = ({ label }: Props) => {
 
   return (
     <button onClick={onClick} className={cx('container')}>
-      <ChevronLeftIcon />
+      <BackIcon />
       <span>{label}</span>
     </button>
   )
