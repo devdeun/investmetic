@@ -12,15 +12,15 @@ const cx = classNames.bind(styles)
 
 const StrategiesPage = () => {
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <div className={cx('container')}>
-        <Title label={'전략 랭킹 모음'} />
+    <div className={cx('container')}>
+      <Title label={'전략 랭킹 모음'} />
+      <Suspense fallback={<div>Loading...</div>}>
         <StrategyList />
-        <SideContainer>
-          <p className={cx('search-bar')}>Search-Bar</p>
-        </SideContainer>
-      </div>
-    </Suspense>
+      </Suspense>
+      <SideContainer>
+        <p className={cx('search-bar')}>Search-Bar</p>
+      </SideContainer>
+    </div>
   )
 }
 
