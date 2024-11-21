@@ -2,16 +2,22 @@ import type { Meta, StoryObj } from '@storybook/react'
 
 import StorybookMockContents from '@/shared/utils/storybook-mock-contents'
 
-import CommonTitle from '.'
+import Title from '.'
 import BackHeader from '../header/back-header'
 
 const meta = {
-  title: 'Components/CommonTItle',
-  component: CommonTitle,
+  title: 'Components/Title',
+  component: Title,
+  argTypes: {
+    marginLeft: {
+      control: 'select',
+      options: ['0px', '40px', '80px'],
+    },
+  },
   tags: ['autodocs'],
-} satisfies Meta<typeof CommonTitle>
+} satisfies Meta<typeof Title>
 export default meta
-type StoryType = StoryObj<typeof CommonTitle>
+type StoryType = StoryObj<typeof Title>
 
 export const Default: StoryType = {
   args: {

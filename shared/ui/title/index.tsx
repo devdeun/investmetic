@@ -13,7 +13,7 @@ interface Props {
   style?: CSSProperties
 }
 
-const CommonTitle = ({ label, subtitle, marginLeft, style }: Props) => {
+const Title = ({ label, subtitle, marginLeft, style }: Props) => {
   return (
     <div className={cx('container')} style={{ ...style, marginLeft }}>
       <h1 className={cx('title')}>{label}</h1>
@@ -22,4 +22,4 @@ const CommonTitle = ({ label, subtitle, marginLeft, style }: Props) => {
   )
 }
 
-export default CommonTitle
+export default Title
