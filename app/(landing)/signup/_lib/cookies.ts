@@ -4,11 +4,17 @@ import { UserType } from '@/shared/types/user'
 
 import { SIGN_UP_COOKIE, SignUpCookieValueType } from '../_constants/cookies'
 
+const COOKIE_EXPIRATION_MINUTES = 30
+
 const isBrowser = typeof window !== 'undefined'
 
 const setSignupCookie = (key: SignUpCookieValueType, value: string) => {
   if (!isBrowser) return
-  document.cookie = `${key}=${value}; path=/signup; sameSite=strict`
+
+  const expirationDate = new Date()
+  expirationDate.setMinutes(expirationDate.getMinutes() + COOKIE_EXPIRATION_MINUTES)
+
+  document.cookie = `${key}=${value}; path=/signup; sameSite=strict; expires=${expirationDate.toUTCString()}`
 }
 
 const getSignupCookie = (key: SignUpCookieValueType) => {
