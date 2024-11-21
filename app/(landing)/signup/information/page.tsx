@@ -1,3 +1,5 @@
+'use client'
+
 import { PATH } from '@/shared/constants/path'
 import { LinkButton } from '@/shared/ui/link-button'
 

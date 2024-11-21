@@ -17,5 +17,5 @@ export const middleware = (request: NextRequest) => {
 }
 
 export const config = {
-  matcher: [`${PATH.SIGN_UP}/:path*`],
+  matcher: ['/signup/:path*'],
 }

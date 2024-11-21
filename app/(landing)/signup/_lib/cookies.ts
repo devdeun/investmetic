@@ -1,12 +1,18 @@
+'use client'
+
 import { UserType } from '@/shared/types/user'
 
 import { SIGN_UP_COOKIE, SignUpCookieValueType } from '../_constants/cookies'
 
+const isBrowser = typeof window !== 'undefined'
+
 const setSignupCookie = (key: SignUpCookieValueType, value: string) => {
+  if (!isBrowser) return
   document.cookie = `${key}=${value}; path=/signup; sameSite=strict`
 }
 
 const getSignupCookie = (key: SignUpCookieValueType) => {
+  if (!isBrowser) return
   const value = `; ${document.cookie}`
   const parts = value.split(`; ${key}=`)
 
@@ -14,6 +20,8 @@ const getSignupCookie = (key: SignUpCookieValueType) => {
 }
 
 export const removeAllSignupCookies = () => {
+  if (!isBrowser) return false
+
   try {
     const signupCookies = Object.values(SIGN_UP_COOKIE)
     const expireDate = 'Thu, 01 Jan 1970 00:00:00 GMT'
