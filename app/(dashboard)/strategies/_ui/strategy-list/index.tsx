@@ -2,14 +2,14 @@
 
 import { useRouter, useSearchParams } from 'next/navigation'
 
-import StrategiesItem from '@/app/(dashboard)/_ui/strategies-item'
-import useGetStrategiesData from '@/app/(dashboard)/strategies/_hooks/_query/use-get-strategies-data'
-import ListHeader from '@/app/(dashboard)/strategies/_ui/list-header'
 import classNames from 'classnames/bind'
 
 import { useMSWStore } from '@/shared/stores/msw'
 import Pagination from '@/shared/ui/pagination'
 
+import StrategiesItem from '../../../../(dashboard)/_ui/strategies-item'
+import useGetStrategiesData from '../../_hooks/query/use-get-strategies-data'
+import ListHeader from '../list-header'
 import styles from './styles.module.scss'
 
 const cx = classNames.bind(styles)
@@ -28,9 +28,7 @@ const StrategyList = () => {
   const totalCount = data?.totalCount || 0
 
   const handlePageChange = (page: number) => {
-    if (typeof window !== 'undefined') {
-      router.push(`/strategies?page=${page}&size=${COUNT_PER_PAGE}`)
-    }
+    router.push(`/strategies?page=${page}&size=${COUNT_PER_PAGE}`)
   }
   return (
     <>

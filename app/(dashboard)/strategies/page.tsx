@@ -1,11 +1,11 @@
 import { Suspense } from 'react'
 
-import SideContainer from '@/app/(dashboard)/strategies/_ui/side-container'
-import StrategyList from '@/app/(dashboard)/strategies/_ui/strategy-list'
 import classNames from 'classnames/bind'
 
 import Title from '@/shared/ui/title'
 
+import SideContainer from './_ui/side-container'
+import StrategyList from './_ui/strategy-list'
 import styles from './page.module.scss'
 
 const cx = classNames.bind(styles)
