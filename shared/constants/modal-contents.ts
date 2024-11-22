@@ -8,4 +8,5 @@ export const MODAL_CONTENTS = {
   TRADE_CREATE: '매매유형 등록',
   ITEM_UPDATE: '종목 수정',
   ITEM_CREATE: '종목 등록',
+  INQUIRY: '문의가 등록되었습니다.\n 문의 등록 내용 및 답변은\n 문의 페이지에서 확인 가능합니다.',
 }
