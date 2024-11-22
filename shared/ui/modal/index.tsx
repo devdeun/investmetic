@@ -11,12 +11,12 @@ const cx = classNames.bind(styles)
 
 interface Props {
   icon?: ReactNode
-  contents?: string
+  message?: string
   children?: React.ReactNode
   isOpen: boolean
 }
 
-const Modal = ({ icon, contents, children, isOpen = false }: Props) => {
+const Modal = ({ icon, message, children, isOpen = false }: Props) => {
   if (!isOpen) return null
 
   const modalRoot = document.getElementById('modal-root')
@@ -28,7 +28,7 @@ const Modal = ({ icon, contents, children, isOpen = false }: Props) => {
       <div className={cx('overlay')}></div>
       <div className={cx('modal')}>
         <div className={cx('icon')}>{icon}</div>
-        <p className={cx('contents')}>{contents}</p>
+        <p className={cx('contents')}>{message}</p>
         {children}
       </div>
     </>,

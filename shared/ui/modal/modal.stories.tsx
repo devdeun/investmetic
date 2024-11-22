@@ -21,7 +21,7 @@ export default meta
 
 type StoryType = StoryObj<typeof Modal>
 
-const ModalStory = ({ contents, icon }: { contents?: string; icon?: React.ReactNode }) => {
+const ModalStory = ({ message, icon }: { message?: string; icon?: React.ReactNode }) => {
   const [isOpen, setIsOpen] = React.useState(true)
 
   React.useEffect(() => {
@@ -35,29 +35,29 @@ const ModalStory = ({ contents, icon }: { contents?: string; icon?: React.ReactN
   return (
     <div style={{ padding: '20px' }}>
       <Button onClick={() => setIsOpen(true)}>모달 열기</Button>
-      <Modal contents={contents} icon={icon} isOpen={isOpen} />
+      <Modal message={message} icon={icon} isOpen={isOpen} />
     </div>
   )
 }
 
 export const Default: StoryType = {
-  render: () => <ModalStory contents="기본모달" icon={<ModalAlertIcon />} />,
+  render: () => <ModalStory message="기본모달" icon={<ModalAlertIcon />} />,
 }
 
 export const AlertIcon: StoryType = {
-  render: () => <ModalStory contents="이것은 알림아이콘 모달입니다." icon={<ModalAlertIcon />} />,
+  render: () => <ModalStory message="이것은 알림아이콘 모달입니다." icon={<ModalAlertIcon />} />,
 }
 
 export const CheckIcon: StoryType = {
-  render: () => <ModalStory contents="이것은 체크아이콘 모달입니다." icon={<ModalCheckIcon />} />,
+  render: () => <ModalStory message="이것은 체크아이콘 모달입니다." icon={<ModalCheckIcon />} />,
 }
 
 export const SubscribeIcon: StoryType = {
   render: () => (
-    <ModalStory contents="이것은 구독아이콘 모달입니다." icon={<ModalSubscribeIcon />} />
+    <ModalStory message="이것은 구독아이콘 모달입니다." icon={<ModalSubscribeIcon />} />
   ),
 }
 
 export const PlusIcon: StoryType = {
-  render: () => <ModalStory contents="이것은 등록아이콘 모달입니다." icon={<RegisterIcon />} />,
+  render: () => <ModalStory message="이것은 등록아이콘 모달입니다." icon={<RegisterIcon />} />,
 }
