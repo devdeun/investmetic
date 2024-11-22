@@ -20,8 +20,8 @@ export interface MonthlyAnalysisModel {
 }
 
 export interface ProfitRateChartDataModel {
-  date: string
-  profitRate: number
+  xAxis: string[]
+  yAxis: number[]
 }
 
 export interface StrategiesModel {
@@ -30,8 +30,10 @@ export interface StrategiesModel {
   nickname: string
   traderImage?: string
   stockTypeIconUrl: string[]
-  profitRateChartData: ProfitRateChartDataModel[]
+  stockTypeNames: string[]
+  profitRateChartData: ProfitRateChartDataModel
   tradeTypeIconUrl: string
+  tradeTypeName: string
   mdd: string
   smScore: number
   cumulativeProfitLossRate: number

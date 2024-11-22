@@ -16,11 +16,10 @@ const HighchartsReact = dynamic(() => import('highcharts-react-official'), {
 })
 
 interface Props {
-  profitRateChartData: ProfitRateChartDataModel[]
+  profitRateChartData: ProfitRateChartDataModel
 }
 
-const AreaChart = ({ profitRateChartData }: Props) => {
-  const profit = profitRateChartData.map((data) => data.profitRate)
+const AreaChart = ({ profitRateChartData: data }: Props) => {
   const chartOptions: Highcharts.Options = {
     chart: {
       type: 'areaspline',
@@ -34,8 +33,8 @@ const AreaChart = ({ profitRateChartData }: Props) => {
     },
     yAxis: {
       visible: false,
-      min: Math.min(...profit),
-      max: Math.max(...profit),
+      min: Math.min(...data.yAxis),
+      max: Math.max(...data.yAxis),
     },
     legend: { enabled: false },
     plotOptions: {
@@ -57,9 +56,9 @@ const AreaChart = ({ profitRateChartData }: Props) => {
     series: [
       {
         type: 'areaspline',
-        data: profitRateChartData.map((data) => ({
-          x: new Date(data.date).getTime(),
-          y: data.profitRate,
+        data: data.xAxis.map((x, idx) => ({
+          x: new Date(x).getTime(),
+          y: data.yAxis[idx],
         })),
         color: {
           linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
