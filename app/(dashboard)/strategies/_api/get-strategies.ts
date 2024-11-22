@@ -11,7 +11,10 @@ const getStrategiesData = async (
 
   try {
     const response = await axios.get(`/api/strategies?page=${page}&size=${size}`)
-
+    if (!response.data) {
+      console.error('전략 목록 데이터 가져오기 실패')
+      return { strategiesData: [], totalCount: 0 }
+    }
     const {
       strategiesData,
       totalCount,

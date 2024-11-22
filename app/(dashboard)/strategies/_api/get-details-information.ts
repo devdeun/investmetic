@@ -6,7 +6,10 @@ const getDetailsInformation = async (isReady: boolean, strategyId: string) => {
 
   try {
     const response = await axios.get(`/api/strategies/${strategyId}`)
-
+    if (!response.data) {
+      console.error('전략 상세 데이터 가져오기 실패')
+      return
+    }
     const data = await response.data
     const newDetailsData: InformationType[] = [
       { title: '트레이더', data: data.nickname },
