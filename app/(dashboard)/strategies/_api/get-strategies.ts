@@ -8,19 +8,18 @@ const getStrategiesData = async (
   size: number
 ): Promise<{ strategiesData: StrategiesModel[]; totalCount: number } | undefined> => {
   if (!isReady) return { strategiesData: [], totalCount: 0 }
+
   try {
     const response = await axios.get(`/api/strategies?page=${page}&size=${size}`)
 
-    if (response) {
-      const {
-        strategiesData,
-        totalCount,
-      }: { strategiesData: StrategiesModel[]; totalCount: number } = await response.data
+    const {
+      strategiesData,
+      totalCount,
+    }: { strategiesData: StrategiesModel[]; totalCount: number } = await response.data
 
-      return { strategiesData, totalCount }
-    }
-  } catch (error) {
-    console.error(error)
+    return { strategiesData, totalCount }
+  } catch (err) {
+    console.error(err)
   }
 }
 
