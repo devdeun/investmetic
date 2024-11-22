@@ -1,7 +1,9 @@
-import Step from '@/app/(landing)/signup/_ui/step'
-import UserTypeCard from '@/app/(landing)/signup/_ui/user-type-card'
+'use client'
+
 import classNames from 'classnames/bind'
 
+import Step from '../_ui/step'
+import UserTypeCard from '../_ui/user-type-card'
 import styles from './page.module.scss'
 
 const cx = classNames.bind(styles)

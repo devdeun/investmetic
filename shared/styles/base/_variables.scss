@@ -50,6 +50,7 @@ $text-c2: 10px;
 $text-bold: 700;
 $text-semibold: 600;
 $text-medium: 500;
+$text-normal: 400;
 
 /* Breakpoints */
 $breakpoint-sm: 576px;
@@ -69,3 +70,6 @@ $z-index: (
 /* Width */
 $max-width: 1440px;
 $navigation-width: 90px;
+
+// height
+$header-height: 80px;

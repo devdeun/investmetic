@@ -56,6 +56,7 @@ const icons = [
   { name: 'MonthlyGraphIcon', icon: MonthlyGraphIcon },
   { name: 'NoticeIcon', icon: NoticeIcon },
   { name: 'OpenIcon', icon: OpenIcon },
+  { name: 'CloseIcon', icon: CloseIcon },
   { name: 'PencilIcon', icon: PencilIcon },
   { name: 'ProfileIcon', icon: ProfileIcon },
   { name: 'QuestionIcon', icon: QuestionIcon },

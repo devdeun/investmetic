@@ -1,7 +1,9 @@
-import Step from '@/app/(landing)/signup/_ui/step'
+'use client'
 
 import { PATH } from '@/shared/constants/path'
 import { LinkButton } from '@/shared/ui/link-button'
+
+import Step from '../_ui/step'
 
 const InformationPage = () => {
   return (

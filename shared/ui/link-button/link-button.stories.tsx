@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react'
 
+import { Button } from '../button'
 import { LinkButton } from './index'
 
 const meta = {
@@ -76,13 +77,13 @@ export const Filled: StoryType = {
 
 export const GroupExample: StoryType = {
   render: () => (
-    <div style={{ display: 'flex', gap: '8px' }}>
+    <Button.ButtonGroup>
       <LinkButton size="medium" variant="outline" href="/cancel">
         로그인
       </LinkButton>
       <LinkButton size="medium" variant="filled" href="/confirm">
         회원가입
       </LinkButton>
-    </div>
+    </Button.ButtonGroup>
   ),
 }
