@@ -76,6 +76,11 @@
       background-color: $color-orange-200;
     }
 
+    &.fix {
+      background-color: $color-orange-200;
+      color: $color-white;
+    }
+
     &.current {
       position: relative;
 

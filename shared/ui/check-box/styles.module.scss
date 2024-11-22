@@ -1,0 +1,42 @@
+.checkboxContainer {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  position: relative;
+
+  &.checkedgray500 svg circle {
+    fill: $color-gray-500;
+  }
+
+  &.checkedgray600 svg circle {
+    fill: $color-gray-600;
+  }
+
+  &.checkedgray800 svg circle {
+    fill: $color-gray-800;
+  }
+}
+
+.label {
+  @include typo-c1;
+
+  &.gray500 {
+    color: $color-gray-500;
+  }
+
+  &.gray600 {
+    color: $color-gray-600;
+  }
+
+  &.gray800 {
+    color: $color-gray-800;
+  }
+}
