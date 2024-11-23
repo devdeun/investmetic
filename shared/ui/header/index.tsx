@@ -1,4 +1,4 @@
-import { CSSProperties, ReactNode } from 'react'
+import { CSSProperties, ElementType, ReactNode } from 'react'
 
 import classNames from 'classnames/bind'
 
@@ -9,15 +9,16 @@ const cx = classNames.bind(styles)
 interface Props {
   Left?: ReactNode
   Right?: ReactNode
+  as?: ElementType
   styles?: CSSProperties
 }
 
-const Header = ({ Left, Right, styles }: Props) => {
+const Header = ({ Left, Right, as: Component = 'header', styles }: Props) => {
   return (
-    <header className={cx('container')} style={styles}>
+    <Component className={cx('container')} style={styles}>
       {Left}
       {Right}
-    </header>
+    </Component>
   )
 }
 
