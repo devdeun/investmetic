@@ -1,12 +1,12 @@
 import classNames from 'classnames/bind'
 
+import HomeSubtitle from '../home-subtitle'
 import AverageMetricsChart, { AverageMetricsChartDataModel } from './average-metrics-chart'
 import styles from './styles.module.scss'
 
 const cx = classNames.bind(styles)
 
-const AverageMetricsContainer = () => {
-  // 임시 데이터
+const AverageMetricsSection = () => {
   const chartData: AverageMetricsChartDataModel = {
     dates: [
       'Jan 1, 2023',
@@ -31,7 +31,9 @@ const AverageMetricsContainer = () => {
   const endDate = chartData.dates.at(-1)
 
   return (
-    <>
+    <section>
+      <HomeSubtitle>대표 전략 통합 평균 지표</HomeSubtitle>
+
       <div className={cx('container')}>
         <div className={cx('contents-wrapper')}>
           <div className={cx('date-wrapper')}>
@@ -41,8 +43,8 @@ const AverageMetricsContainer = () => {
           <AverageMetricsChart data={chartData} />
         </div>
       </div>
-    </>
+    </section>
   )
 }
 
-export default AverageMetricsContainer
+export default AverageMetricsSection
