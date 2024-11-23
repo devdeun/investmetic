@@ -63,7 +63,3 @@ export const SubscribeIcon: StoryType = {
 export const PlusIcon: StoryType = {
   render: () => <ModalStory message="이것은 등록아이콘 모달입니다." icon={<RegisterIcon />} />,
 }
-
-export const CloseButton: StoryType = {
-  render: () => <ModalStory message="이것은 등록아이콘 모달입니다." icon={<RegisterIcon />} />,
-}
