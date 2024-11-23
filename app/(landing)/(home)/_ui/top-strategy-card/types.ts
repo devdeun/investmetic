@@ -20,3 +20,11 @@ export interface TopCardContentDetailsProps {
   averageRating: number
   reviewCount: number
 }
+
+export interface TopStrategyCardCommonProps {
+  ranking: number
+  nickname: string
+  title: string
+  chartData: number[]
+  percentageChange: number
+}
