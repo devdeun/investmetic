@@ -1,6 +1,6 @@
 'use client'
 
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 
 import Link from 'next/link'
 import { useRouter, useSearchParams } from 'next/navigation'
@@ -23,6 +23,7 @@ import styles from './styles.module.scss'
 const cx = classNames.bind(styles)
 
 const SignInPage = () => {
+  const [isMounted, setIsMounted] = useState(false)
   const router = useRouter()
   const searchParams = useSearchParams()
   const loginMutation = useLogin()
@@ -36,6 +37,10 @@ const SignInPage = () => {
   })
   const [errors, setErrors] = useState<string | null>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
+
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
 
   const validateForm = useCallback(() => {
     const emailError = validate('EMAIL', formData.email)
@@ -112,6 +117,10 @@ const SignInPage = () => {
   )
 
   const isFormDisabled = isSubmitting || loginMutation.isPending
+
+  if (!isMounted) {
+    return null
+  }
 
   return (
     <div className={styles.container}>
