@@ -12,10 +12,16 @@ interface Props extends ComponentProps<'textarea'> {
   rows?: number
 }
 
-export const Textarea = ({ rows = 5, className, ...props }: Props) => {
+export const Textarea = ({ rows = 5, className, value, onChange, ...props }: Props) => {
   return (
     <div>
-      <textarea rows={rows} className={cx('textarea', className)} {...props} />
+      <textarea
+        value={value}
+        onChange={onChange}
+        rows={rows}
+        className={cx('textarea', className)}
+        {...props}
+      />
     </div>
   )
 }
