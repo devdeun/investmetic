@@ -1,5 +1,3 @@
-'use client'
-
 import { StarIcon } from '@/public/icons'
 import classNames from 'classnames/bind'
 
