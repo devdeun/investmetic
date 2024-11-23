@@ -1,8 +1,15 @@
+import dynamic from 'next/dynamic'
+
 import classNames from 'classnames/bind'
 
 import HomeSubtitle from '../home-subtitle'
-import AverageMetricsChart, { AverageMetricsChartDataModel } from './average-metrics-chart'
+import { AverageMetricsChartDataModel } from './average-metrics-chart'
 import styles from './styles.module.scss'
+
+const AverageMetricsChart = dynamic(() => import('./average-metrics-chart'), {
+  ssr: false,
+  loading: () => <div>Loading...</div>,
+})
 
 const cx = classNames.bind(styles)
 
