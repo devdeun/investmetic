@@ -1,5 +1,6 @@
 import classNames from 'classnames/bind'
 
+import { PATH } from '@/shared/constants/path'
 import Avatar from '@/shared/ui/avatar'
 import { LinkButton } from '@/shared/ui/link-button'
 
@@ -13,7 +14,7 @@ interface Props {
   strategyCount: number
   subscriberCount: number
   traderId: string
-  hasLinkButton?: boolean
+  hasButton?: boolean
 }
 
 const TradersListCard = ({
@@ -22,7 +23,7 @@ const TradersListCard = ({
   strategyCount,
   subscriberCount,
   traderId,
-  hasLinkButton = true,
+  hasButton = true,
 }: Props) => {
   return (
     <div className={cx('traders-list-card')}>
@@ -38,10 +39,10 @@ const TradersListCard = ({
           <Avatar src={profileImage} size="large" />
         </div>
       </div>
-      {hasLinkButton && (
+      {hasButton && (
         <div className="link-button-wrapper">
           <LinkButton
-            href={'${PATH.TRADERS}/${traderId}'}
+            href={`${PATH.TRADERS}/${traderId}`}
             size="medium"
             variant="filled"
             className={cx('link-button')}

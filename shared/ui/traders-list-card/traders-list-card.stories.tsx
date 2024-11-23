@@ -40,6 +40,6 @@ export const WithoutButton: StoryType = {
     strategyCount: 10,
     subscriberCount: 10,
     traderId: '1234',
-    hasLinkButton: false,
+    hasButton: false,
   },
 }
