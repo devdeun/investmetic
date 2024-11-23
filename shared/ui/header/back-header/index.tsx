@@ -2,6 +2,7 @@
 
 // NOTE: 이름 공모전 개최
 // TODO: 아이콘 바꿔야함
+// TODO: 스타일 추가되면 바꿔야함
 import { useRouter } from 'next/navigation'
 
 import { ChevronLeftIcon } from '@/public/icons'

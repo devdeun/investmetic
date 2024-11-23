@@ -13,6 +13,7 @@ interface Props {
   onChange: (checked: boolean) => void
   className?: string
   textColor?: 'gray500' | 'gray600' | 'gray800'
+  textSize?: 'c1' | 'b3' | 'b2'
 }
 
 const Checkbox = ({
@@ -21,6 +22,7 @@ const Checkbox = ({
   onChange,
   className = '',
   textColor = 'gray500',
+  textSize = 'c1',
 }: Props) => {
   const handleClick = () => {
     onChange(!isChecked)
@@ -36,7 +38,7 @@ const Checkbox = ({
       >
         {isChecked ? <CheckedCircleIcon /> : <CircleIcon />}
       </div>
-      {label && <span className={cx('label', textColor)}>{label}</span>}
+      {label && <span className={cx('label', textColor, textSize)}>{label}</span>}
     </div>
   )
 }

@@ -1,27 +1,23 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
-
-import useSignupStore from '@/app/(landing)/signup/_stores/use-signup-store'
-import SignupCompleteMessage from '@/app/(landing)/signup/_ui/signup-complete-message'
-import Step from '@/app/(landing)/signup/_ui/step'
 import classNames from 'classnames/bind'
 
 import { PATH } from '@/shared/constants/path'
 import { LinkButton } from '@/shared/ui/link-button'
 
+import { getNicknameCookie, getUserTypeCookie } from '../_lib/cookies'
+import SignupCompleteMessage from '../_ui/signup-complete-message'
+import Step from '../_ui/step'
 import styles from './page.module.scss'
 
 const cx = classNames.bind(styles)
 
 const CompletePage = () => {
-  const router = useRouter()
-  const nickname = useSignupStore((state) => state.nickname)
-  const userType = useSignupStore((state) => state.userType)
+  const userType = getUserTypeCookie()
+  const nickname = getNicknameCookie()
 
-  if (!nickname || !userType) {
-    router.push(PATH.SIGN_UP_USER_TYPE)
-    return
+  if (!userType || !nickname) {
+    return null
   }
 
   return (

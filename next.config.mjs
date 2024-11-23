@@ -1,9 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   transpilePackages: ['msw'],
-  experimental: {
-    appDir: true,
-  },
   sassOptions: {
     includePaths: ['./shared/styles'],
     prependData: `
@@ -42,7 +39,14 @@ const nextConfig = {
     config.module.rules.push({
       test: /\.svg$/,
       issuer: /\.[jt]sx?$/,
-      use: ['@svgr/webpack'],
+      use: [
+        {
+          loader: '@svgr/webpack',
+          options: {
+            dimensions: false,
+          },
+        },
+      ],
     })
 
     return config
