@@ -1,7 +1,5 @@
 import { ERROR_MESSAGES } from '@/shared/constants/error-messages'
 
-import { ErrorMessageType } from '../types/error-message'
-
 const PATTERNS = {
   EMAIL: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
   PASSWORD: /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/,
@@ -26,13 +24,13 @@ const validators = {
   PHONE: isValidPhone,
 } as const
 
-export const validate = (name: keyof typeof validators, value: string): ErrorMessageType | null => {
+export const validate = (name: keyof typeof validators, value: string): string | null => {
   if (!value.trim()) {
-    return ERROR_MESSAGES.REQUIRED
+    return ERROR_MESSAGES.FORM.REQUIRED_FIELDS
   }
 
   if (!validators[name](value)) {
-    return ERROR_MESSAGES[name]
+    return ERROR_MESSAGES.FORM[name]
   }
 
   return null

@@ -1,10 +1,11 @@
 'use client'
 
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 
 import { ChangeIcon, ProfileIcon, SignOutIcon } from '@/public/icons'
 import classNames from 'classnames/bind'
 
+import { logout } from '@/shared/api/auth'
 import { fetchUser } from '@/shared/api/user'
 import { PATH } from '@/shared/constants/path'
 import NavButtonItem from '@/shared/ui/side-navigation/nav-button-item'
@@ -16,10 +17,20 @@ const cx = classNames.bind(styles)
 
 const UserNavigation = () => {
   const path = usePathname()
+  const router = useRouter()
   const isAdminPage = path.startsWith(PATH.ADMIN)
 
   const user = fetchUser()
   const isAdmin = user.role.includes('admin')
+
+  const handleLogout = async () => {
+    try {
+      logout()
+      router.replace(PATH.SIGN_IN)
+    } catch (error) {
+      console.error('로그아웃 실패:', error)
+    }
+  }
 
   return (
     <nav className={cx('user-navigation')} aria-label="사용자 메뉴">
@@ -35,7 +46,7 @@ const UserNavigation = () => {
           </NavLinkItem>
         )}
 
-        <NavButtonItem icon={SignOutIcon} onClick={() => {}}>
+        <NavButtonItem icon={SignOutIcon} onClick={handleLogout}>
           로그아웃
         </NavButtonItem>
       </ul>

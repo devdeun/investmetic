@@ -4,8 +4,6 @@ import { ComponentProps } from 'react'
 
 import classNames from 'classnames/bind'
 
-import { ErrorMessageType } from '@/shared/types/error-message'
-
 import styles from './styles.module.scss'
 
 const cx = classNames.bind(styles)
@@ -14,7 +12,7 @@ export type InputSizeType = 'small' | 'medium' | 'large' | 'full'
 
 interface Props extends ComponentProps<'input'> {
   inputSize?: InputSizeType
-  errorMessage?: ErrorMessageType | null
+  errorMessage?: string | null
 }
 
 export const Input = ({ inputSize = 'medium', errorMessage, className, ...props }: Props) => {

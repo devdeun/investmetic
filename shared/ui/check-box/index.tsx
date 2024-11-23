@@ -9,13 +9,19 @@ const cx = classNames.bind(styles)
 
 interface Props {
   label?: string
-  isChecked: boolean
+  isChecked?: boolean
   onChange: (checked: boolean) => void
   className?: string
   textColor?: 'gray500' | 'gray600' | 'gray800'
 }
 
-const Checkbox = ({ label, isChecked, onChange, className = '', textColor = 'gray500' }: Props) => {
+const Checkbox = ({
+  label,
+  isChecked = false,
+  onChange,
+  className = '',
+  textColor = 'gray500',
+}: Props) => {
   const handleClick = () => {
     onChange(!isChecked)
   }
