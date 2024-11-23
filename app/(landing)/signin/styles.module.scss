@@ -1,0 +1,99 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loginBox {
+  max-width: 400px;
+}
+
+.title {
+  @include typo-h2;
+  margin-bottom: 70px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+
+  label {
+    @include typo-b2;
+  }
+}
+
+.input {
+  border-radius: 2px;
+  @include typo-b3;
+  &::placeholder {
+    color: $color-gray-400;
+  }
+
+  &:required {
+    border-color: $color-gray-500;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.error-container {
+  min-height: 24px;
+  margin-top: -18px;
+
+  .error-message {
+    @include typo-c1;
+    color: $color-orange-700;
+
+    &.visible {
+      opacity: 1;
+    }
+
+    &.hidden {
+      opacity: 0;
+    }
+  }
+}
+
+.options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  margin-top: -25px;
+}
+
+.remember {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  gap: 8px;
+}
+
+.links {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  a {
+    color: $color-gray-600;
+    @include typo-c1;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.divider {
+  color: #ddd;
+}
