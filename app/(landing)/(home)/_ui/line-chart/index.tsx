@@ -17,7 +17,7 @@ interface Props {
 }
 
 const getChartDimensions = (size: CardSizeType) => ({
-  height: size === 'small' ? 55 : 165,
+  height: size === 'small' ? 55 : 120,
   width: size === 'small' ? 90 : 185,
 })
 
