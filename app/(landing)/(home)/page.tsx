@@ -1,4 +1,5 @@
 import HeroSection from './_ui/hero-section'
+import TopFavoriteSection from './_ui/top-favorite-section'
 import UserMetricsSection from './_ui/user-metrics-section'
 
 const HomePage = () => {
@@ -6,6 +7,7 @@ const HomePage = () => {
     <>
       <HeroSection />
       <UserMetricsSection />
+      <TopFavoriteSection />
     </>
   )
 }
