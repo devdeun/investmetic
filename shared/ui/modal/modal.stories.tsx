@@ -35,7 +35,9 @@ const ModalStory = ({ message, icon }: { message?: string; icon?: React.ReactNod
   return (
     <div style={{ padding: '20px' }}>
       <Button onClick={() => setIsOpen(true)}>모달 열기</Button>
-      <Modal message={message} icon={icon} isOpen={isOpen} />
+      <Modal message={message} icon={icon} isOpen={isOpen}>
+        <Button onClick={() => setIsOpen(false)}>닫기</Button>
+      </Modal>
     </div>
   )
 }
@@ -59,5 +61,9 @@ export const SubscribeIcon: StoryType = {
 }
 
 export const PlusIcon: StoryType = {
+  render: () => <ModalStory message="이것은 등록아이콘 모달입니다." icon={<RegisterIcon />} />,
+}
+
+export const CloseButton: StoryType = {
   render: () => <ModalStory message="이것은 등록아이콘 모달입니다." icon={<RegisterIcon />} />,
 }
