@@ -14,10 +14,22 @@ interface Props extends ComponentProps<'input'> {
   handleSearchIconClick?: () => void
 }
 
-export const SearchInput = ({ placeholder = '', handleSearchIconClick, ...props }: Props) => {
+export const SearchInput = ({
+  placeholder = '',
+  handleSearchIconClick,
+  value,
+  onChange,
+  ...props
+}: Props) => {
   return (
     <div className={cx('search-input-container')}>
-      <input placeholder={placeholder} className={cx('search-input')} {...props} />
+      <input
+        value={value}
+        onChange={onChange}
+        placeholder={placeholder}
+        className={cx('search-input')}
+        {...props}
+      />
       <SearchIcon className={cx('search-icon')} onClick={handleSearchIconClick} />
     </div>
   )
