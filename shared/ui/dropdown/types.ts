@@ -14,7 +14,7 @@ export interface DropdownProps {
   Trigger: ReactNode
   value: DropdownValueType
   onChange: (value: DropdownValueType) => void
-  isMultiple: boolean
+  isMultiple?: boolean
   containerStyle?: CSSProperties
   labelStyle?: CSSProperties
   children?: ReactNode
