@@ -1,5 +1,15 @@
-import { postHandlers, userHandlers } from './handlers/'
+import {
+  postHandlers,
+  strategiesHandlers,
+  strategyDetailsHandlers,
+  userHandlers,
+} from './handlers/'
 
-const handlers = [...userHandlers, ...postHandlers]
+const handlers = [
+  ...userHandlers,
+  ...postHandlers,
+  ...strategyDetailsHandlers,
+  ...strategiesHandlers,
+]
 
 export { handlers }

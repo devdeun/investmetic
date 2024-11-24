@@ -1,4 +1,5 @@
 import {
+  BackIcon,
   BarsIcon,
   BookmarkIcon,
   BookmarkOutlineIcon,
@@ -63,6 +64,7 @@ const icons = [
   { name: 'StrategyIcon', icon: StrategyIcon },
   { name: 'TradersIcon', icon: TradersIcon },
   { name: 'StarIcon', icon: StarIcon },
+  { name: 'BackIcon', icon: BackIcon },
 ]
 
 export const Icons: Story = {
