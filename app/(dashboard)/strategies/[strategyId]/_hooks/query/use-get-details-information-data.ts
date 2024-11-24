@@ -1,5 +1,6 @@
-import getDetailsInformation from '@/app/(dashboard)/strategies/_api/get-details-information'
 import { useQuery } from '@tanstack/react-query'
+
+import getDetailsInformation from '../../_api/get-details-information'
 
 interface Props {
   isReady: boolean

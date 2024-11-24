@@ -1,5 +1,6 @@
-import { InformationType } from '@/app/(dashboard)/strategies/[strategyId]/page'
 import axios from 'axios'
+
+import { InformationType } from '../page'
 
 const getDetailsInformation = async (isReady: boolean, strategyId: string) => {
   if (!isReady || !strategyId) return
