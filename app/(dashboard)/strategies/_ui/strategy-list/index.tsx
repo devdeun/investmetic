@@ -2,12 +2,12 @@
 
 import { useRouter, useSearchParams } from 'next/navigation'
 
+import StrategiesItem from '@/app/(dashboard)/_ui/strategies-item'
 import classNames from 'classnames/bind'
 
 import { useMSWStore } from '@/shared/stores/msw'
 import Pagination from '@/shared/ui/pagination'
 
-import StrategiesItem from '../../../../(dashboard)/_ui/strategies-item'
 import useGetStrategiesData from '../../_hooks/query/use-get-strategies-data'
 import ListHeader from '../list-header'
 import styles from './styles.module.scss'
