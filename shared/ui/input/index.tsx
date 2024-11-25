@@ -2,6 +2,7 @@
 
 import { ComponentProps } from 'react'
 
+import { SignupErrorMessageType } from '@/app/(landing)/signup/information/types'
 import classNames from 'classnames/bind'
 
 import styles from './styles.module.scss'
