@@ -1,14 +1,84 @@
 import { useEffect } from 'react'
 
-import { useLogoutMutation } from '@/shared/hooks/query/auth-queries'
-import { getAccessToken, getRefreshToken } from '@/shared/lib/auth-tokens'
+import { useRouter } from 'next/navigation'
+
+import { AUTH_TIME } from '@/shared/constants/auth'
+import { PATH } from '@/shared/constants/path'
+import {
+  getAccessToken,
+  getRefreshToken,
+  removeAccessToken,
+  removeRefreshToken,
+} from '@/shared/lib/auth-tokens'
 import { useAuthStore } from '@/shared/stores/use-auth-store'
-import { getUserFromToken, isTokenExpired } from '@/shared/utils/token-utils'
+import { TokenStatusModel, isAdmin } from '@/shared/types/auth'
+import { getTimeUntilExpiry, getUserFromToken, isTokenExpired } from '@/shared/utils/token-utils'
 
 export const useAuth = () => {
-  const { user, isAuthenticated, isKeepLoggedIn } = useAuthStore()
-  const logout = useLogoutMutation()
-  // const { data: tokenStatus } = useTokenStatusQuery(logout)
+  const router = useRouter()
+  const { user, isKeepLoggedIn } = useAuthStore()
+
+  const logout = () => {
+    try {
+      removeAccessToken()
+      removeRefreshToken()
+      sessionStorage.removeItem('sessionToken')
+
+      useAuthStore.getState().setAuthState({
+        isAuthenticated: false,
+        user: null,
+        isKeepLoggedIn: false,
+        isLoggedOut: true,
+      })
+
+      router.replace(PATH.SIGN_IN)
+    } catch (error) {
+      console.error('로그아웃 실패:', error)
+    }
+  }
+
+  const checkTokenStatus = (): TokenStatusModel | null => {
+    const accessToken = getAccessToken()
+    const refreshToken = getRefreshToken()
+
+    if (!accessToken || !refreshToken) {
+      logout()
+      return null
+    }
+
+    const tokenUser = getUserFromToken(accessToken)
+    if (!tokenUser) {
+      logout()
+      return null
+    }
+
+    const isExpired = isTokenExpired(accessToken)
+    const timeUntilExpiry = getTimeUntilExpiry(accessToken)
+
+    if (isAdmin(tokenUser)) {
+      if (isExpired) {
+        logout()
+        return null
+      }
+      return {
+        isValid: !isExpired,
+        timeUntilExpiry,
+        isNearExpiry: timeUntilExpiry < AUTH_TIME.ADMIN_EXPIRY_WARNING,
+      }
+    }
+
+    const sessionToken = sessionStorage.getItem('sessionToken')
+    if (!isKeepLoggedIn && !sessionToken) {
+      logout()
+      return null
+    }
+
+    return {
+      isValid: !isExpired,
+      timeUntilExpiry,
+      isNearExpiry: false,
+    }
+  }
 
   useEffect(() => {
     const initializeAuth = () => {
@@ -20,12 +90,12 @@ export const useAuth = () => {
       const tokenUser = getUserFromToken(accessToken)
       if (!tokenUser) return
 
-      if (tokenUser.role === 'admin' && isTokenExpired(accessToken)) {
+      if (isAdmin(tokenUser) && isTokenExpired(accessToken)) {
         logout()
         return
       }
 
-      if (tokenUser.role === 'user') {
+      if (!isAdmin(tokenUser)) {
         const sessionToken = sessionStorage.getItem('sessionToken')
         if (!isKeepLoggedIn && !sessionToken) {
           logout()
@@ -43,14 +113,13 @@ export const useAuth = () => {
     }
 
     // initializeAuth()
-  }, [])
+
+    // const interval = setInterval(checkTokenStatus, AUTH_TIME.TOKEN_CHECK_INTERVAL)
+    // return () => clearInterval(interval)
+  }, [isKeepLoggedIn, router, user])
 
   return {
-    user,
-    isAuthenticated,
-    isKeepLoggedIn,
-    // tokenStatus,
-    // isAdminNearExpiry: tokenStatus?.isNearExpiry,
     logout,
+    checkTokenStatus,
   }
 }

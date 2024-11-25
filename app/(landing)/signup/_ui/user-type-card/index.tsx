@@ -10,7 +10,7 @@ import {
 import classNames from 'classnames/bind'
 
 import { PATH } from '@/shared/constants/path'
-import { UserType } from '@/shared/types/user'
+import { UserType } from '@/shared/types/auth'
 
 import styles from './styles.module.scss'
 

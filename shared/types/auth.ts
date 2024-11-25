@@ -1,11 +1,15 @@
-export type UserRoleType = 'admin' | 'user'
+export type UserType = 'trader' | 'investor'
+
+export type RoleType = UserType | `${UserType}_admin`
 
 export interface UserModel {
   id: string
   email: string
   name: string
-  role: UserRoleType
+  nickname: string
+  role: RoleType
   createdAt?: string
+  imageUrl: string
 }
 
 export interface LoginFormDataModel {
@@ -47,10 +51,12 @@ export interface TokenStatusModel {
   isNearExpiry: boolean
 }
 
-export const isAdmin = (user: UserModel | null): user is UserModel & { role: 'admin' } => {
-  return user?.role === 'admin'
+export const isAdmin = (user: UserModel | null): boolean => {
+  if (!user) return false
+  return user.role.includes('admin')
 }
 
-export const isUser = (user: UserModel | null): user is UserModel & { role: 'user' } => {
-  return user?.role === 'user'
+export const isTrader = (user: UserModel | null): boolean => {
+  if (!user) return false
+  return user.role.includes('trader')
 }

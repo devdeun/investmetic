@@ -1,30 +1,39 @@
-import { jwtDecode } from 'jwt-decode'
 import { HttpResponse, http } from 'msw'
 
 import { ERROR_MESSAGES } from '@/shared/constants/error-messages'
-import { LoginFormDataModel, TokenPayloadModel, UserModel } from '@/shared/types/auth'
+import { LoginFormDataModel, TokenPayloadModel, UserModel, isAdmin } from '@/shared/types/auth'
 
 const MOCK_USERS: Record<string, UserModel> = {
   'test@example.com': {
     id: '1',
     email: 'test@example.com',
-    name: 'user1',
-    role: 'user',
+    name: '김다은',
+    nickname: 'devdeun',
+    role: 'trader',
     createdAt: '2024-01-01T00:00:00Z',
+    imageUrl: 'https://randomuser.me/api',
   },
   'admin@example.com': {
     id: '2',
     email: 'admin@example.com',
-    name: 'user2',
-    role: 'admin',
+    name: '권혁준',
+    nickname: 'redhero',
+    role: 'trader_admin',
     createdAt: '2024-01-01T00:00:00Z',
+    imageUrl: 'https://randomuser.me/api',
   },
 }
 
 const createToken = (user: UserModel, isAdmin: boolean) => {
   const now = Math.floor(Date.now() / 1000)
   const exp = now + (isAdmin ? 1800 : 7 * 24 * 60 * 60)
-  return `mock_${btoa(JSON.stringify({ user, exp, iat: now }))}`
+  const payload = { user, exp, iat: now }
+  return `mock_${btoa(encodeURIComponent(JSON.stringify(payload)))}`
+}
+
+const decodeToken = (token: string) => {
+  const payload = token.replace('mock_', '')
+  return JSON.parse(decodeURIComponent(atob(payload))) as TokenPayloadModel
 }
 
 export const authHandlers = [
@@ -33,9 +42,8 @@ export const authHandlers = [
     const user = MOCK_USERS[email]
 
     if (user && password === 'password123') {
-      const isAdmin = user.role === 'admin'
-      const accessToken = createToken(user, isAdmin)
-      const refreshToken = createToken(user, isAdmin)
+      const accessToken = createToken(user, isAdmin(user))
+      const refreshToken = createToken(user, isAdmin(user))
 
       return HttpResponse.json({
         isSuccess: true,
@@ -66,11 +74,10 @@ export const authHandlers = [
     }
 
     try {
-      const decoded = jwtDecode<TokenPayloadModel>(refreshToken)
-      const isAdmin = decoded.user.role === 'admin'
+      const decoded = decodeToken(refreshToken)
 
-      const accessToken = createToken(decoded.user, isAdmin)
-      const newRefreshToken = createToken(decoded.user, isAdmin)
+      const accessToken = createToken(decoded.user, isAdmin(decoded.user))
+      const newRefreshToken = createToken(decoded.user, isAdmin(decoded.user))
 
       return HttpResponse.json({
         isSuccess: true,

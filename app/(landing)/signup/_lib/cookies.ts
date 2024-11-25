@@ -1,6 +1,6 @@
 'use client'
 
-import { UserType } from '@/shared/types/user'
+import { UserType } from '@/shared/types/auth'
 
 import { SIGN_UP_COOKIE, SignUpCookieValueType } from '../_constants/cookies'
 

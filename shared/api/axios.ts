@@ -5,6 +5,8 @@ import { getAccessToken } from '@/shared/lib/auth-tokens'
 import { useAuthStore } from '@/shared/stores/use-auth-store'
 import { getUserFromToken, isTokenExpired, refreshToken } from '@/shared/utils/token-utils'
 
+import { isAdmin } from '../types/auth'
+
 export const createAxiosInstance = (options: { withInterceptors?: boolean } = {}) => {
   const instance = axios.create()
 
@@ -20,9 +22,8 @@ export const createAxiosInstance = (options: { withInterceptors?: boolean } = {}
 
         try {
           const user = getUserFromToken(accessToken)
-          const isAdmin = user?.role === 'admin'
 
-          if (isAdmin && isTokenExpired(accessToken)) {
+          if (isAdmin(user) && isTokenExpired(accessToken)) {
             useAuthStore.getState().setAuthState({
               isAuthenticated: false,
               user: null,

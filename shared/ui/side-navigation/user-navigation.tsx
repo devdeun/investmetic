@@ -7,6 +7,7 @@ import classNames from 'classnames/bind'
 
 import { PATH } from '@/shared/constants/path'
 import { useAuth } from '@/shared/hooks/custom/use-auth'
+import { useAuthStore } from '@/shared/stores/use-auth-store'
 import { isAdmin } from '@/shared/types/auth'
 import NavButtonItem from '@/shared/ui/side-navigation/nav-button-item'
 import NavLinkItem from '@/shared/ui/side-navigation/nav-link-item'
@@ -17,7 +18,8 @@ const cx = classNames.bind(styles)
 
 const UserNavigation = () => {
   const path = usePathname()
-  const { user, logout } = useAuth()
+  const { user } = useAuthStore()
+  const { logout } = useAuth()
   const isAdminPage = path.startsWith(PATH.ADMIN)
 
   if (!user) return null
@@ -26,7 +28,7 @@ const UserNavigation = () => {
     <nav className={cx('user-navigation')} aria-label="사용자 메뉴">
       <ul>
         <NavLinkItem href={PATH.PROFILE} icon={ProfileIcon} textClassName="user">
-          <span className={cx('nickname')}>{user.name}</span>
+          <span className={cx('nickname')}>{user.nickname}</span>
           <span className={cx('email')}>{user.email}</span>
         </NavLinkItem>
 
