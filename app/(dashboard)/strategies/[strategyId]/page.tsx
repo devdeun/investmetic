@@ -1,5 +1,7 @@
 'use client'
 
+import DetailsInformation from '@/app/(dashboard)/strategies/[strategyId]/_ui/datails-information'
+
 import { useMSWStore } from '@/shared/stores/msw'
 import BackHeader from '@/shared/ui/header/back-header'
 import Title from '@/shared/ui/title'
@@ -13,10 +15,12 @@ export type InformationType = { title: TitleType; data: string | number } | Info
 
 const StrategyDetailPage = ({ params }: { params: { strategyId: string } }) => {
   const isReady = useMSWStore((state) => state.isReady)
-  const { data: detailsSideData } = useGetDetailsInformationData({
+  const { data } = useGetDetailsInformationData({
     isReady,
     strategyId: params.strategyId,
   })
+
+  const { detailsSideData, detailsInformationData } = data || {}
 
   const hasDetailsSideData = detailsSideData?.map((data) => {
     if (!Array.isArray(data)) return data.data !== undefined
@@ -26,6 +30,7 @@ const StrategyDetailPage = ({ params }: { params: { strategyId: string } }) => {
     <div>
       <BackHeader label={'목록으로 돌아가기'} />
       <Title label={'전략 상세보기'} />
+      {detailsInformationData && <DetailsInformation information={detailsInformationData} />}
       <ReviewContainer strategyId={params.strategyId} />
       <SideContainer>
         {hasDetailsSideData?.[0] &&
