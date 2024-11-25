@@ -2,6 +2,7 @@
 
 import { usePathname } from 'next/navigation'
 
+import Footer from '@/shared/ui/footer'
 import LogoHeader from '@/shared/ui/header/logo-header'
 
 interface Props {
@@ -11,15 +12,13 @@ interface Props {
 const LandingLayout = ({ children }: Props) => {
   const pathname = usePathname()
 
-  const getHeaderType = () => {
-    if (pathname.includes('/signin') || pathname.includes('/signup')) return false
-    return true
-  }
+  const hasFooter = !pathname.includes('/signin') && !pathname.includes('/signup')
 
   return (
     <>
-      <LogoHeader hasText={true} hasLinks={getHeaderType()} />
+      <LogoHeader hasText={true} hasLinks={true} />
       <main className="landing-main">{children}</main>
+      {hasFooter && <Footer />}
     </>
   )
 }

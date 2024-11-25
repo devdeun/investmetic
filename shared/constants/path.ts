@@ -11,6 +11,9 @@ export const PATH = {
   HOME: '/',
   STRATEGIES: '/strategies',
   TRADERS: '/traders',
+  NOTICES: '/notices',
+  TERMS_OF_USE: '/terms-of-use',
+  PRIVACY_TERMS: '/privacy-terms',
 
   // My
   PROFILE: '/my/profile',
