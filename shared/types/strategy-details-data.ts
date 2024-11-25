@@ -43,3 +43,22 @@ export interface StrategiesModel {
   averageRating: number
   totalReview: number
 }
+
+export interface StrategyDetailsInformationModel {
+  strategyId: string
+  strategyName: string
+  stockTypeIconURLs: string[]
+  tradeTypeIconURL: string
+  stockTypeNames: string[]
+  tradeTypeName: string
+  operationCycle: string
+  strategyDescription: string
+  cumulativeProfitRate: number
+  maxDrawdownRate: number
+  averageProfitLossRate: number
+  profitFactor: number
+  winRate: number
+  subscriptionCount: number
+  traderImgUrl: string
+  subscribed: boolean
+}

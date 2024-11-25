@@ -6,6 +6,7 @@ import Title from '@/shared/ui/title'
 
 import SideContainer from '../_ui/side-container'
 import useGetDetailsInformationData from './_hooks/query/use-get-details-information-data'
+import DetailsInformation from './_ui/datails-information'
 import DetailsSideItem, { InformationModel, TitleType } from './_ui/details-side-item'
 import ReviewContainer from './_ui/review-container'
 
@@ -13,10 +14,12 @@ export type InformationType = { title: TitleType; data: string | number } | Info
 
 const StrategyDetailPage = ({ params }: { params: { strategyId: string } }) => {
   const isReady = useMSWStore((state) => state.isReady)
-  const { data: detailsSideData } = useGetDetailsInformationData({
+  const { data } = useGetDetailsInformationData({
     isReady,
     strategyId: params.strategyId,
   })
+
+  const { detailsSideData, detailsInformationData } = data || {}
 
   const hasDetailsSideData = detailsSideData?.map((data) => {
     if (!Array.isArray(data)) return data.data !== undefined
@@ -26,6 +29,7 @@ const StrategyDetailPage = ({ params }: { params: { strategyId: string } }) => {
     <div>
       <BackHeader label={'목록으로 돌아가기'} />
       <Title label={'전략 상세보기'} />
+      {detailsInformationData && <DetailsInformation information={detailsInformationData} />}
       <ReviewContainer strategyId={params.strategyId} />
       <SideContainer>
         {hasDetailsSideData?.[0] &&

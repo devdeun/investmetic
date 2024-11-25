@@ -12,7 +12,7 @@ const getDetailsInformation = async (isReady: boolean, strategyId: string) => {
       return
     }
     const data = await response.data
-    const newDetailsData: InformationType[] = [
+    const detailsSideData: InformationType[] = [
       { title: '트레이더', data: data.nickname },
       { title: '최소 투자 금액', data: data.minimumInvestmentAmount },
       { title: '투자 원금', data: data.initialInvestment },
@@ -27,7 +27,25 @@ const getDetailsInformation = async (isReady: boolean, strategyId: string) => {
         { title: '등록일', data: data.createdAt },
       ],
     ]
-    return newDetailsData
+    const detailsInformationData = {
+      strategyId: data.strategyId,
+      strategyName: data.strategyName,
+      stockTypeIconURLs: data.stockTypeIconURLs,
+      tradeTypeIconURL: data.tradeTypeIconURL,
+      stockTypeNames: data.stockTypeNames,
+      tradeTypeName: data.tradeTypeName,
+      operationCycle: data.operationCycle,
+      strategyDescription: data.strategyDescription,
+      cumulativeProfitRate: data.cumulativeProfitRate,
+      maxDrawdownRate: data.maxDrawdownRate,
+      averageProfitLossRate: data.averageProfitLossRate,
+      profitFactor: data.profitFactor,
+      winRate: data.winRate,
+      subscriptionCount: data.subscriptionCount,
+      traderImgUrl: data.traderImgUrl,
+      subscribed: data.subscribed,
+    }
+    return { detailsSideData, detailsInformationData }
   } catch (err) {
     console.error(err)
   }
