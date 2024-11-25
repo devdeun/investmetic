@@ -3,7 +3,7 @@
 import Logo from '@/public/images/logo.svg'
 import classNames from 'classnames/bind'
 
-import { UserType } from '@/shared/types/user'
+import { UserType } from '@/shared/types/auth'
 
 import styles from './styles.module.scss'
 

@@ -11,6 +11,8 @@
   justify-content: center;
   flex-shrink: 0;
   position: relative;
+  width: 20px;
+  height: 20px;
 
   &.checkedgray500 svg circle {
     fill: $color-gray-500;
