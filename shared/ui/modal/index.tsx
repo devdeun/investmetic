@@ -20,7 +20,7 @@ const Modal = ({ icon, message, children, isOpen = false, className }: Props) =>
 
   const modalRoot = document.getElementById('modal-root')
 
-  if (!modalRoot) return null
+  if (!isOpen || !modalRoot) return null
 
   return createPortal(
     <>

@@ -1,13 +1,13 @@
 import Link from 'next/link'
 
-import AreaChart from '@/app/(dashboard)/_ui/strategies-item/area-chart'
-import StrategiesSummary from '@/app/(dashboard)/_ui/strategies-item/strategies-summary'
-import Subscribe from '@/app/(dashboard)/_ui/strategies-item/subscribe'
 import classNames from 'classnames/bind'
 
 import { StrategiesModel } from '@/shared/types/strategy-details-data'
 
+import AreaChart from './area-chart'
+import StrategiesSummary from './strategies-summary'
 import styles from './styles.module.scss'
+import Subscribe from './subscribe'
 
 const cx = classNames.bind(styles)
 

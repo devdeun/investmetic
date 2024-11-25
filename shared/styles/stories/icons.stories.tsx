@@ -1,4 +1,5 @@
 import {
+  BackIcon,
   BarsIcon,
   BookmarkIcon,
   BookmarkOutlineIcon,
@@ -67,6 +68,7 @@ const icons = [
   { name: 'StrategyIcon', icon: StrategyIcon },
   { name: 'TradersIcon', icon: TradersIcon },
   { name: 'StarIcon', icon: StarIcon },
+  { name: 'BackIcon', icon: BackIcon },
   { name: 'ModalAlertIcon', icon: ModalAlertIcon },
   { name: 'ModalSubscribeIcon', icon: ModalSubscribeIcon },
   { name: 'ModalCheckIcon', icon: ModalCheckIcon },
