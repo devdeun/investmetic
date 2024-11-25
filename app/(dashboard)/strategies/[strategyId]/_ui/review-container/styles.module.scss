@@ -13,6 +13,14 @@
       margin-right: 4px;
     }
   }
+  .no-review {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    color: $color-gray-600;
+    margin: 40px 0;
+    @include typo-b2;
+  }
 }
 
 .add-review-wrapper {

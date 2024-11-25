@@ -10,12 +10,17 @@ export type SizeType = 'small' | 'medium'
 export type TextColorType = 'black' | 'gray'
 
 interface Props {
-  averageRating: number
-  totalElements: number
+  averageRating?: number
+  totalElements?: number
   size?: SizeType
   textColor?: TextColorType
 }
-const TotalStar = ({ averageRating, totalElements, size = 'small', textColor = 'gray' }: Props) => {
+const TotalStar = ({
+  averageRating = 0,
+  totalElements = 0,
+  size = 'small',
+  textColor = 'gray',
+}: Props) => {
   return (
     <div className={cx('container', size, textColor)}>
       <div className={cx('icon')}>

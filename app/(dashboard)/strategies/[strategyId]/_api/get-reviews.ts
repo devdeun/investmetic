@@ -3,8 +3,8 @@ import axios from 'axios'
 import { COUNT_PER_PAGE } from '../_ui/review-container/review-list'
 
 const getReviews = async (strategyId: string, page: number | undefined) => {
-  if (!page) return
-  console.log(page)
+  if (!strategyId && !page) return
+
   try {
     const response = await axios.get(
       `/api/strategies/${strategyId}/reviews?page=${page}&size=${COUNT_PER_PAGE}`

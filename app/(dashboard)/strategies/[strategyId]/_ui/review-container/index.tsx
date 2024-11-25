@@ -24,27 +24,27 @@ const ReviewContainer = ({ strategyId }: Props) => {
   const { data: reviewData } = useGetReviewsData({ isReady, strategyId, page: currentPage })
 
   return (
-    <>
-      {reviewData && (
-        <div className={cx('container')}>
-          <div className={cx('title-wrapper')}>
-            <p className={cx('review-title')}>리뷰</p>
-            <TotalStar
-              size="medium"
-              averageRating={reviewData.averageRating}
-              totalElements={reviewData.reviews.totalElements}
-            />
-          </div>
-          <AddReview />
-          <ReviewList
-            reviews={reviewData.reviews.content}
-            totalReview={reviewData.reviews.totalElements}
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
-          />
-        </div>
+    <div className={cx('container')}>
+      <div className={cx('title-wrapper')}>
+        <p className={cx('review-title')}>리뷰</p>
+        <TotalStar
+          size="medium"
+          averageRating={reviewData?.averageRating}
+          totalElements={reviewData?.reviews.totalElements}
+        />
+      </div>
+      <AddReview />
+      {reviewData ? (
+        <ReviewList
+          reviews={reviewData.reviews.content}
+          totalReview={reviewData.reviews.totalElements}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+        />
+      ) : (
+        <div className={cx('no-review')}>등록된 리뷰가 없습니다.</div>
       )}
-    </>
+    </div>
   )
 }
 
