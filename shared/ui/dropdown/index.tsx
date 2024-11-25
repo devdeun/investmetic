@@ -53,7 +53,7 @@ const Dropdown = ({
           style={labelStyle}
         >
           {Trigger}
-          {isOpen ? <OpenIcon /> : <CloseIcon />}
+          {isOpen ? <CloseIcon /> : <OpenIcon />}
         </button>
         {isOpen && <ul className={cx('options', size)}>{children}</ul>}
       </div>
