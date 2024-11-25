@@ -1,7 +1,5 @@
 'use client'
 
-import { useState } from 'react'
-
 import classNames from 'classnames/bind'
 
 import Star from '@/shared/ui/total-star/star-icon'
@@ -12,11 +10,11 @@ const cx = classNames.bind(styles)
 
 interface Props {
   starRating?: number
+  starRatingValue?: number
+  onRatingChange?: (value: number) => void
 }
 
-const StarRating = ({ starRating }: Props) => {
-  const [clickedIdx, setClickedIdx] = useState(0)
-
+const StarRating = ({ starRating, starRatingValue, onRatingChange }: Props) => {
   return (
     <div className={cx('container')}>
       {starRating
@@ -24,8 +22,8 @@ const StarRating = ({ starRating }: Props) => {
         : [...Array(5)].map((_, idx) => (
             <button
               key={idx}
-              className={cx('click-star', idx < clickedIdx && 'onColor')}
-              onClick={() => setClickedIdx(idx + 1)}
+              className={cx('click-star', idx < (starRatingValue || 0) && 'onColor')}
+              onClick={() => onRatingChange && onRatingChange(idx)}
             >
               <Star size="large" />
             </button>
