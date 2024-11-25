@@ -52,13 +52,10 @@
   .error-message {
     @include typo-c1;
     color: $color-orange-700;
+    opacity: 0;
 
     &.visible {
       opacity: 1;
-    }
-
-    &.hidden {
-      opacity: 0;
     }
   }
 }

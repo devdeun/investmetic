@@ -9,9 +9,9 @@ import { useRouter, useSearchParams } from 'next/navigation'
 import { AxiosError } from 'axios'
 import classNames from 'classnames/bind'
 
-import { useLogin } from '@/shared/api/auth'
 import { ERROR_MESSAGES } from '@/shared/constants/error-messages'
 import { PATH } from '@/shared/constants/path'
+import { useLoginMutation } from '@/shared/hooks/query/auth-queries'
 import { useAuthStore } from '@/shared/stores/use-auth-store'
 import type { LoginFormDataModel } from '@/shared/types/auth'
 import { Button } from '@/shared/ui/button'
@@ -26,7 +26,7 @@ const cx = classNames.bind(styles)
 const SignInPage = () => {
   const router = useRouter()
   const searchParams = useSearchParams()
-  const loginMutation = useLogin()
+  const loginMutation = useLoginMutation()
 
   const setKeepLoggedIn = useAuthStore((state) => state.setKeepLoggedIn)
   const isKeepLoggedIn = useAuthStore((state) => state.isKeepLoggedIn)
@@ -38,7 +38,7 @@ const SignInPage = () => {
   const [errors, setErrors] = useState<string | null>(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
 
-  const validateForm = useCallback(() => {
+  const validateForm = () => {
     const emailError = validate('EMAIL', formData.email)
     if (emailError) {
       setErrors(emailError)
@@ -52,7 +52,7 @@ const SignInPage = () => {
     }
 
     return true
-  }, [formData.email, formData.password])
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -155,7 +155,6 @@ const SignInPage = () => {
             <p
               className={cx('error-message', {
                 visible: errors,
-                hidden: !errors,
               })}
               role="alert"
             >

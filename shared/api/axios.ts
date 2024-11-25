@@ -5,8 +5,6 @@ import { getAccessToken } from '@/shared/lib/auth-tokens'
 import { useAuthStore } from '@/shared/stores/use-auth-store'
 import { getUserFromToken, isTokenExpired, refreshToken } from '@/shared/utils/token-utils'
 
-import { logout } from './auth'
-
 export const createAxiosInstance = (options: { withInterceptors?: boolean } = {}) => {
   const instance = axios.create()
 
@@ -25,14 +23,24 @@ export const createAxiosInstance = (options: { withInterceptors?: boolean } = {}
           const isAdmin = user?.role === 'admin'
 
           if (isAdmin && isTokenExpired(accessToken)) {
-            handleLogout()
+            useAuthStore.getState().setAuthState({
+              isAuthenticated: false,
+              user: null,
+              isKeepLoggedIn: false,
+              isLoggedOut: true,
+            })
             return config
           }
 
           config.headers.Authorization = `Bearer ${accessToken}`
         } catch (error) {
           console.error('토큰 디코딩 실패:', error)
-          handleLogout()
+          useAuthStore.getState().setAuthState({
+            isAuthenticated: false,
+            user: null,
+            isKeepLoggedIn: false,
+            isLoggedOut: true,
+          })
         }
 
         return config
@@ -63,7 +71,12 @@ export const createAxiosInstance = (options: { withInterceptors?: boolean } = {}
             console.error('Token refresh failed:', refreshError)
           }
 
-          handleLogout()
+          useAuthStore.getState().setAuthState({
+            isAuthenticated: false,
+            user: null,
+            isKeepLoggedIn: false,
+            isLoggedOut: true,
+          })
         }
 
         return Promise.reject(error)
@@ -72,13 +85,6 @@ export const createAxiosInstance = (options: { withInterceptors?: boolean } = {}
   }
 
   return instance
-}
-
-const handleLogout = () => {
-  if (typeof window !== 'undefined') {
-    sessionStorage.removeItem('sessionToken')
-    logout()
-  }
 }
 
 const axiosInstance = createAxiosInstance({ withInterceptors: true })

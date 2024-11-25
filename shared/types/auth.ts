@@ -28,7 +28,7 @@ export interface AuthResponseModel {
 export interface ApiResponseModel<T> {
   isSuccess: boolean
   message: string
-  data?: T
+  data: T
   code?: string
 }
 
@@ -39,6 +39,12 @@ export interface TokenPayloadModel {
   user: UserModel
   exp: number
   iat: number
+}
+
+export interface TokenStatusModel {
+  isValid: boolean
+  timeUntilExpiry: number
+  isNearExpiry: boolean
 }
 
 export const isAdmin = (user: UserModel | null): user is UserModel & { role: 'admin' } => {

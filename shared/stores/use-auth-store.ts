@@ -7,16 +7,34 @@ interface AuthStateModel {
   user: UserModel | null
   isKeepLoggedIn: boolean
   isLoggedOut: boolean
+}
+
+interface AuthActionsModel {
   setKeepLoggedIn: (value: boolean) => void
   setAuthState: (state: Partial<AuthStateModel>) => void
 }
 
-export const useAuthStore = create<AuthStateModel>((set) => ({
+type AuthStoreType = AuthStateModel & AuthActionsModel
+
+const initialState: AuthStateModel = {
   isAuthenticated: false,
   user: null,
   isKeepLoggedIn: false,
   isLoggedOut: false,
+}
 
-  setKeepLoggedIn: (value) => set({ isKeepLoggedIn: value }),
-  setAuthState: (state) => set(state),
+export const useAuthStore = create<AuthStoreType>((set) => ({
+  ...initialState,
+
+  setKeepLoggedIn: (value) =>
+    set((state) => ({
+      ...state,
+      isKeepLoggedIn: value,
+    })),
+
+  setAuthState: (newState) =>
+    set((state) => ({
+      ...state,
+      ...newState,
+    })),
 }))
