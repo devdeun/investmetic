@@ -123,7 +123,7 @@ const TradersPage = () => {
               },
             ]}
           ></Select>
-          <SearchInput></SearchInput>
+          <SearchInput />
         </div>
         <div className={cx('traders-list-wrapper')}>
           {tradersData.map((trader) => (
