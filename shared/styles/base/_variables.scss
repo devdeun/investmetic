@@ -62,13 +62,16 @@ $breakpoint-xl: 1200px;
 $z-index: (
   modal: 1000,
   header: 100,
+  select: 10,
   base: 1,
   hidden: -1,
+  overlay: 900,
 );
 
 /* Width */
 $max-width: 1440px;
 $navigation-width: 90px;
+$strategy-sidebar-width: 280px;
 
 // height
 $header-height: 80px;

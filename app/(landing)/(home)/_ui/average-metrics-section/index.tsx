@@ -1,12 +1,19 @@
+import dynamic from 'next/dynamic'
+
 import classNames from 'classnames/bind'
 
-import AverageMetricsChart, { AverageMetricsChartDataModel } from './average-metrics-chart'
+import HomeSubtitle from '../home-subtitle'
+import { AverageMetricsChartDataModel } from './average-metrics-chart'
 import styles from './styles.module.scss'
+
+const AverageMetricsChart = dynamic(() => import('./average-metrics-chart'), {
+  ssr: false,
+  loading: () => <div>Loading...</div>,
+})
 
 const cx = classNames.bind(styles)
 
-const AverageMetricsContainer = () => {
-  // 임시 데이터
+const AverageMetricsSection = () => {
   const chartData: AverageMetricsChartDataModel = {
     dates: [
       'Jan 1, 2023',
@@ -31,7 +38,9 @@ const AverageMetricsContainer = () => {
   const endDate = chartData.dates.at(-1)
 
   return (
-    <>
+    <section>
+      <HomeSubtitle>대표 전략 통합 평균 지표</HomeSubtitle>
+
       <div className={cx('container')}>
         <div className={cx('contents-wrapper')}>
           <div className={cx('date-wrapper')}>
@@ -41,8 +50,8 @@ const AverageMetricsContainer = () => {
           <AverageMetricsChart data={chartData} />
         </div>
       </div>
-    </>
+    </section>
   )
 }
 
-export default AverageMetricsContainer
+export default AverageMetricsSection

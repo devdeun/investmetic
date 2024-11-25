@@ -1,7 +1,8 @@
-import StrategiesItem from '@/app/(dashboard)/_ui/strategies-item'
 import type { Meta, StoryFn } from '@storybook/react'
 
 import { StrategiesModel } from '@/shared/types/strategy-details-data'
+
+import StrategiesItem from './index'
 
 const meta: Meta<typeof StrategiesItem> = {
   title: 'components/StrategiesItem',
@@ -25,15 +26,23 @@ Primary.args = {
       strategyName: '리치테크 FuturesDay',
       nickname: 'MACS',
       stockTypeIconUrl: [],
-      profitRateChartData: [
-        { date: '2024-01-01', profitRate: 5.2 },
-        { date: '2024-02-01', profitRate: 6.4 },
-        { date: '2024-03-01', profitRate: 12.8 },
-        { date: '2024-04-01', profitRate: 8.2 },
-        { date: '2024-05-01', profitRate: 9.4 },
-        { date: '2024-06-01', profitRate: 15.8 },
-      ],
+      stockTypeNames: [],
+      profitRateChartData: {
+        xAxis: [
+          '2023-01-01',
+          '2023-01-02',
+          '2023-01-03',
+          '2023-01-04',
+          '2023-01-05',
+          '2023-01-06',
+          '2023-01-07',
+          '2023-01-08',
+          '2023-01-09',
+        ],
+        yAxis: [7.2, 5.2, 25, 12.8, 17.2, 11.4, 20, 16, 18],
+      },
       tradeTypeIconUrl: '',
+      tradeTypeName: '',
       mdd: '-20,580,856',
       smScore: 60.6,
       cumulativeProfitLossRate: 120.1,
@@ -48,18 +57,23 @@ Primary.args = {
       strategyName: 'ETF 레버리지/인버',
       nickname: '수밍',
       stockTypeIconUrl: [],
-      profitRateChartData: [
-        { date: '2023-12-01', profitRate: 7.2 },
-        { date: '2024-01-01', profitRate: 5.2 },
-        { date: '2024-02-01', profitRate: 25 },
-        { date: '2024-03-01', profitRate: 12.8 },
-        { date: '2024-04-01', profitRate: 17.2 },
-        { date: '2024-05-01', profitRate: 11.4 },
-        { date: '2024-06-01', profitRate: 20 },
-        { date: '2024-07-01', profitRate: 16 },
-        { date: '2024-08-01', profitRate: 18 },
-      ],
+      stockTypeNames: [],
+      profitRateChartData: {
+        xAxis: [
+          '2023-01-01',
+          '2023-01-02',
+          '2023-01-03',
+          '2023-01-04',
+          '2023-01-05',
+          '2023-01-06',
+          '2023-01-07',
+          '2023-01-08',
+          '2023-01-09',
+        ],
+        yAxis: [7.2, 5.2, 25, 12.8, 17.2, 11.4, 20, 16, 18],
+      },
       tradeTypeIconUrl: '',
+      tradeTypeName: '',
       mdd: '-20,580,856',
       smScore: 60.6,
       cumulativeProfitLossRate: 120.1,

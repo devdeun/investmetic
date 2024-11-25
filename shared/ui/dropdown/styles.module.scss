@@ -6,6 +6,10 @@ $large-height: 40px;
 $color-selected-text: #171717;
 
 .dropdown {
+  position: relative;
+}
+
+.dropdown {
   &-small {
     width: $small-width;
     height: fit-content;
@@ -29,6 +33,7 @@ $color-selected-text: #171717;
   svg {
     color: $color-gray-200;
     margin-left: auto;
+    width: 24px;
   }
 }
 
@@ -66,10 +71,13 @@ $color-selected-text: #171717;
 }
 
 .options {
+  position: absolute;
+  bottom: 0;
+  transform: translateY(calc(100% + 4px));
+  z-index: zIndex(select);
   list-style: none;
   height: fit-content;
   margin: 0;
-  margin-top: 4px;
   padding: 0;
   border-radius: 4px;
   background-color: $color-white;

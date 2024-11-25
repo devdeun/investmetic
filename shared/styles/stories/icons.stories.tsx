@@ -1,4 +1,5 @@
 import {
+  BackIcon,
   BarsIcon,
   BookmarkIcon,
   BookmarkOutlineIcon,
@@ -13,6 +14,9 @@ import {
   CloseIcon,
   DailyGraphIcon,
   FileIcon,
+  ModalAlertIcon,
+  ModalCheckIcon,
+  ModalSubscribeIcon,
   MoneyIcon,
   MonthlyGraphIcon,
   NoticeIcon,
@@ -20,6 +24,7 @@ import {
   PencilIcon,
   ProfileIcon,
   QuestionIcon,
+  RegisterIcon,
   SearchIcon,
   SignOutIcon,
   StarIcon,
@@ -63,6 +68,11 @@ const icons = [
   { name: 'StrategyIcon', icon: StrategyIcon },
   { name: 'TradersIcon', icon: TradersIcon },
   { name: 'StarIcon', icon: StarIcon },
+  { name: 'BackIcon', icon: BackIcon },
+  { name: 'ModalAlertIcon', icon: ModalAlertIcon },
+  { name: 'ModalSubscribeIcon', icon: ModalSubscribeIcon },
+  { name: 'ModalCheckIcon', icon: ModalCheckIcon },
+  { name: 'RegisterIcon', icon: RegisterIcon },
 ]
 
 export const Icons: Story = {
