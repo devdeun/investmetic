@@ -15,7 +15,7 @@ import TradersListCard from '@/shared/ui/traders-list-card'
 const cx = classNames.bind(styles)
 
 // 임시데이터
-const TradersData = [
+const tradersData = [
   {
     nickname: '김트레이더',
     strategyCount: 12,
@@ -99,7 +99,7 @@ const TradersPage = () => {
         <div className={cx('title')}>
           <Title label={'트레이더 목록'} marginLeft={'13px'}></Title>
         </div>
-        <div className={cx('search-container')}>
+        <div className={cx('search-wrapper')}>
           <Select
             size="small"
             value={value}
@@ -125,8 +125,8 @@ const TradersPage = () => {
           ></Select>
           <SearchInput></SearchInput>
         </div>
-        <div className={cx('traders-list-container')}>
-          {TradersData.map((trader) => (
+        <div className={cx('traders-list-wrapper')}>
+          {tradersData.map((trader) => (
             <TradersListCard
               key={trader.traderId}
               nickname={trader.nickname}
@@ -136,7 +136,7 @@ const TradersPage = () => {
             />
           ))}
         </div>
-        <div className={cx('pagination-container')}>
+        <div className={cx('pagination-wrapper')}>
           <Pagination currentPage={1} maxPage={10} onPageChange={(page: number) => {}}></Pagination>
         </div>
       </div>

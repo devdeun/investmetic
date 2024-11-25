@@ -5,7 +5,7 @@
 .title {
   margin-top: 80px;
 }
-.search-container {
+.search-wrapper {
   display: flex;
   justify-content: flex-end;
   align-items: center;
@@ -15,13 +15,13 @@
   margin-bottom: 31px;
 }
 
-.traders-list-container {
+.traders-list-wrapper {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 24px 32px;
   margin-bottom: 30px;
 }
 
-.pagination-container {
+.pagination-wrapper {
   margin-bottom: 64px;
 }
