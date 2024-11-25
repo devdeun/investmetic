@@ -6,10 +6,9 @@
 .footer-wrapper {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: flex-end;
   max-width: $max-width;
-  height: 220px;
-  padding: 0 40px;
+  padding: 40px;
   margin: 0 auto;
 
   strong {

@@ -37,7 +37,7 @@ const Footer = () => {
       </div>
       <div className={cx('copyright-container')}>
         <div className={cx('copyright-wrapper')}>
-          <p className={cx('copyright')}>COPYRIGHT INVESTMETIC ALL RIGHTS RESERVED</p>
+          <p className={cx('copyright')}>Copyright 2024 Investmetic Co. All Rights Reserved.</p>
 
           <ul className={cx('links')}>
             <li>

@@ -10,8 +10,8 @@ const cx = classNames.bind(styles)
 const FooterLogo = () => {
   return (
     <div className={cx('logo-container')}>
-      <ImageLogo width={108} />
-      <TextLogo width={178} className={cx('text')} />
+      <ImageLogo width={100} />
+      <TextLogo width={177} className={cx('text')} />
     </div>
   )
 }
