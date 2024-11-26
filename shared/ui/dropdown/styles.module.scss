@@ -39,7 +39,7 @@ $color-selected-text: #171717;
 
 .trigger {
   color: $color-gray-800;
-  background-color: transparent;
+  background-color: $color-gray-100;
 
   svg {
     path {

@@ -104,10 +104,7 @@ const TradersPage = () => {
             size="small"
             value={value}
             placeholder="구독순"
-            isMultiple={false}
-            hasCheck={false}
             onChange={(newValue) => setValue(newValue)}
-            titleStyle={{ borderRadius: '40px' }}
             options={[
               {
                 value: '1+',
@@ -136,6 +133,7 @@ const TradersPage = () => {
             />
           ))}
         </div>
+        {/* TODO: 실제 데이터로 변경 */}
         <div className={cx('pagination-wrapper')}>
           <Pagination currentPage={1} maxPage={10} onPageChange={(page: number) => {}}></Pagination>
         </div>
