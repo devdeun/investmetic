@@ -1,3 +1,4 @@
+import { RoleType } from '@/shared/types/auth'
 import { DropdownValueType } from '@/shared/ui/dropdown/types'
 
 import { SIGNUP_ERROR_MESSAGES } from '../_constants/signup'
@@ -5,7 +6,7 @@ import { SIGNUP_ERROR_MESSAGES } from '../_constants/signup'
 export type SignupErrorMessageType =
   (typeof SIGNUP_ERROR_MESSAGES)[keyof typeof SIGNUP_ERROR_MESSAGES]
 
-export interface SignupFormDataModel {
+export interface SignupFormModel {
   name: string
   nickname: string
   email: string
@@ -39,6 +40,20 @@ export interface SignupFormStateModel {
   isNicknameVerified: boolean
   isEmailSent: boolean
   isPhoneVerified: boolean
+}
+
+export interface SignupFormDataModel {
+  name: string
+  nickname: string
+  phone: string
+  birthYear: string
+  birthMonth: string
+  birthDay: string
+  password: string
+  email: string
+  emailDomain: string
+  role: RoleType
+  infoAgreement: boolean
 }
 
 export type SelectChangeHandlerType = (value: DropdownValueType) => void

@@ -1,15 +1,15 @@
 import { Dispatch, SetStateAction, useState } from 'react'
 
 import {
-  SignupFormDataModel,
   SignupFormErrorsModel,
+  SignupFormModel,
   SignupFormStateModel,
 } from './../../information/types'
 
 interface Props {
   errors: SignupFormErrorsModel
   isValidated: boolean
-  setForm: Dispatch<SetStateAction<SignupFormDataModel>>
+  setForm: Dispatch<SetStateAction<SignupFormModel>>
   setErrors: Dispatch<SetStateAction<SignupFormErrorsModel>>
   setFormState: Dispatch<SetStateAction<SignupFormStateModel>>
 }

@@ -5,13 +5,13 @@ import { useRouter } from 'next/navigation'
 import { PATH } from '@/shared/constants/path'
 
 import {
-  SignupFormDataModel,
   SignupFormErrorsModel,
+  SignupFormModel,
   SignupFormStateModel,
 } from './../../information/types'
 import { validateSignupForm } from './../../information/utils'
 
-const initialForm: SignupFormDataModel = {
+const initialForm: SignupFormModel = {
   name: '',
   nickname: '',
   email: '',
@@ -35,14 +35,14 @@ const initialFormState: SignupFormStateModel = {
 
 const useSignupForm = () => {
   const router = useRouter()
-  const [form, setForm] = useState<SignupFormDataModel>(initialForm)
+  const [form, setForm] = useState<SignupFormModel>(initialForm)
   const [errors, setErrors] = useState<SignupFormErrorsModel>({})
   const [formState, setFormState] = useState<SignupFormStateModel>(initialFormState)
   const [isValidated, setIsValidated] = useState(false)
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
-    setForm((prev: SignupFormDataModel) => ({ ...prev, [name]: value }))
+    setForm((prev) => ({ ...prev, [name]: value }))
 
     if (isValidated) {
       setErrors((prev) => ({
@@ -60,7 +60,7 @@ const useSignupForm = () => {
   }
 
   const handleMarketingAgree = (checked: boolean) => {
-    setForm((prev: SignupFormDataModel) => ({ ...prev, isMarketingAgreed: checked }))
+    setForm((prev) => ({ ...prev, isMarketingAgreed: checked }))
   }
 
   const handleNicknameCheck = async () => {

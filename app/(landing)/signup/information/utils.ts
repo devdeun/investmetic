@@ -7,7 +7,7 @@ import {
 } from '@/shared/utils/validation'
 
 import { SIGNUP_ERROR_MESSAGES } from '../_constants/signup'
-import { SignupErrorMessageType, SignupFormDataModel } from './types'
+import { SignupErrorMessageType, SignupFormModel } from './types'
 
 type ValidationFieldType = keyof typeof SIGNUP_ERROR_MESSAGES
 
@@ -50,7 +50,7 @@ export const validatePasswordMatch = (
 }
 
 export const validateSignupForm = (
-  form: SignupFormDataModel,
+  form: SignupFormModel,
   isEmailVerified: boolean,
   isNicknameVerified: boolean
 ): Record<string, SignupErrorMessageType> => {
