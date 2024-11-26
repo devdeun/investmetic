@@ -2,7 +2,7 @@ import classNames from 'classnames/bind'
 
 import { StrategyDetailsInformationModel } from '@/shared/types/strategy-details-data'
 
-import StrategyIntroduction from '../introduction/index'
+import StrategyIntroduction from '../introduction'
 import InvestInformation from './invest-information'
 import Percentage from './percentage'
 import StrategyNameBox from './strategy-name-box'

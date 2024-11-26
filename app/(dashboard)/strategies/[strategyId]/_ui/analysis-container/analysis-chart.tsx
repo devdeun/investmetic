@@ -17,8 +17,8 @@ const cx = classNames.bind(styles)
 type YAxisType = keyof typeof YAXIS_OPTIONS
 
 interface AnalysisChartDataModel {
-  xAxis: string[]
-  yAxis: {
+  dates: string[]
+  data: {
     [key in YAxisType]?: number[]
   }
 }
@@ -29,7 +29,7 @@ interface Props {
 
 const AnalysisChart = ({ analysisChartData: data }: Props) => {
   const getOptionName = (sequence: number) => {
-    const key = Object.keys(data.yAxis)[sequence] as YAxisType | undefined
+    const key = Object.keys(data.data)[sequence] as YAxisType | undefined
     return key ? YAXIS_OPTIONS[key] : ''
   }
 
@@ -43,7 +43,9 @@ const AnalysisChart = ({ analysisChartData: data }: Props) => {
     title: { text: undefined },
     xAxis: {
       visible: false,
-      categories: data.xAxis,
+      categories: data.dates,
+      startOnTick: true,
+      endOnTick: true,
     },
     yAxis: [{ visible: false }, { visible: false }],
     legend: {
@@ -86,7 +88,7 @@ const AnalysisChart = ({ analysisChartData: data }: Props) => {
         fillColor: {
           linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
           stops: [
-            [0, '#FF4F1F'],
+            [0, '#ffbfad'],
             [1, '#FFFFFF'],
           ],
         },
@@ -102,18 +104,18 @@ const AnalysisChart = ({ analysisChartData: data }: Props) => {
       {
         type: 'areaspline',
         name: getOptionName(0),
-        data: Object.values(data.yAxis)[0],
-        color: '#FF4F1F',
+        data: Object.values(data.data)[0],
+        color: '#ff5f33',
         yAxis: 0,
         stickyTracking: false,
         pointPlacement: 'on',
       },
-      ...(Object.values(data.yAxis)[1]
+      ...(Object.values(data.data)[1]
         ? [
             {
               type: 'spline',
               name: getOptionName(1),
-              data: Object.values(data.yAxis)[1],
+              data: Object.values(data.data)[1],
               color: '#6877FF',
               yAxis: 1,
               stickyTracking: false,

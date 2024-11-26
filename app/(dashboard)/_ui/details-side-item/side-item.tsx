@@ -1,10 +1,10 @@
-import { TitleType } from '@/app/(dashboard)/strategies/[strategyId]/_ui/details-side-item'
 import classNames from 'classnames/bind'
 
 import { PATH } from '@/shared/constants/path'
 import Avatar from '@/shared/ui/avatar'
 import { LinkButton } from '@/shared/ui/link-button'
 
+import { TitleType } from '.'
 import styles from './styles.module.scss'
 
 const cx = classNames.bind(styles)

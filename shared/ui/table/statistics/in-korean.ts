@@ -29,4 +29,8 @@ export const inKoreanData = {
   maxConsecutiveProfitDays: '최대 연속 이익 일수',
   maxConsecutiveLossDays: '최대 연속 손실 일수',
   winRate: '승률',
-}
+  assetManagement: '자산 및 운영 정보',
+  profitLoss: '손익률 관련 정보',
+  ddMddInfo: 'DD&MDD 정보',
+  tradingInfo: '거래 관련 정보',
+} as const
