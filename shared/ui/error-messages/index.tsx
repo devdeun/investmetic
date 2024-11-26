@@ -5,8 +5,9 @@ import styles from './styles.module.scss'
 const cx = classNames.bind(styles)
 
 interface Props {
-  errorMessages?: string | null
+  errorMessages: string | null
+  isErr?: boolean
 }
-export const ErrorMessages = ({ errorMessages }: Props) => {
-  return <div>{errorMessages && <p className={cx('error-messages')}>{errorMessages}</p>}</div>
+export const ErrorMessages = ({ errorMessages, isErr = true }: Props) => {
+  return <>{isErr && <p className={cx('error-messages')}>{errorMessages}</p>}</>
 }
