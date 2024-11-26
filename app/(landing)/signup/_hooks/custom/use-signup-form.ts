@@ -30,6 +30,7 @@ const initialFormState: SignupFormStateModel = {
   isEmailVerified: false,
   isNicknameVerified: false,
   isEmailSent: false,
+  isPhoneVerified: false,
 }
 
 const useSignupForm = () => {
@@ -75,6 +76,19 @@ const useSignupForm = () => {
     }
   }
 
+  const handlePhoneCheck = async () => {
+    try {
+      // TODO: 휴대폰 번호 중복 확인 API 호출
+      setFormState((prev) => ({ ...prev, isPhoneVerified: true }))
+
+      if (errors.phone) {
+        setErrors((prev) => ({ ...prev, phone: null }))
+      }
+    } catch (error) {
+      console.error('휴대폰 번호 중복 확인 실패:', error)
+    }
+  }
+
   const handleFormSubmit = () => {
     const formErrors = validateSignupForm(
       form,
@@ -105,6 +119,7 @@ const useSignupForm = () => {
     handleMarketingAgree,
     handleFormSubmit,
     handleNicknameCheck,
+    handlePhoneCheck,
   }
 }
 

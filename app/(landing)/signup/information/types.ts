@@ -38,6 +38,7 @@ export interface SignupFormStateModel {
   isEmailVerified: boolean
   isNicknameVerified: boolean
   isEmailSent: boolean
+  isPhoneVerified: boolean
 }
 
 export type SelectChangeHandlerType = (value: DropdownValueType) => void

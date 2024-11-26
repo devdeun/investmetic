@@ -48,6 +48,7 @@ const InformationPage = () => {
     handleMarketingAgree,
     handleFormSubmit,
     handleNicknameCheck,
+    handlePhoneCheck,
   } = useSignupForm()
 
   const {
@@ -122,7 +123,7 @@ const InformationPage = () => {
                   name="email"
                   value={form.email}
                   onChange={handleChange}
-                  placeholder="이메일 주소를 입력하세요"
+                  placeholder="이메일을 입력하세요"
                   className={cx('input')}
                   errorMessage={errors.email}
                 />
@@ -210,15 +211,23 @@ const InformationPage = () => {
 
         <div className={cx('input-group')}>
           <label htmlFor="phone">휴대전화</label>
-          <Input
-            id="phone"
-            name="phone"
-            value={form.phone}
-            onChange={handleInputChange}
-            placeholder="전화번호를 입력하세요."
-            className={cx('input')}
-            errorMessage={errors.phone}
-          />
+          <div>
+            <div className={cx('wrapper')}>
+              <Input
+                id="phone"
+                name="phone"
+                value={form.phone}
+                onChange={handleInputChange}
+                placeholder="번호를 입력하세요."
+                className={cx('input')}
+                errorMessage={errors.phone}
+              />
+              <Button onClick={handlePhoneCheck} type="button" className={cx('button')}>
+                중복확인
+              </Button>
+            </div>
+            <small>* (-) 없이 숫자만 입력해주세요.</small>
+          </div>
         </div>
 
         <div className={cx('select-group')}>
