@@ -6,6 +6,7 @@ import Title from '@/shared/ui/title'
 
 import SideContainer from '../_ui/side-container'
 import useGetDetailsInformationData from './_hooks/query/use-get-details-information-data'
+import AnalysisContainer from './_ui/analysis-container'
 import DetailsInformation from './_ui/datails-information'
 import DetailsSideItem, { InformationModel, TitleType } from './_ui/details-side-item'
 import ReviewContainer from './_ui/review-container'
@@ -30,6 +31,7 @@ const StrategyDetailPage = ({ params }: { params: { strategyId: string } }) => {
       <BackHeader label={'목록으로 돌아가기'} />
       <Title label={'전략 상세보기'} />
       {detailsInformationData && <DetailsInformation information={detailsInformationData} />}
+      <AnalysisContainer />
       <ReviewContainer strategyId={params.strategyId} />
       <SideContainer>
         {hasDetailsSideData?.[0] &&

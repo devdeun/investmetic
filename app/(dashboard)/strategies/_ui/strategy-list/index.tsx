@@ -25,7 +25,7 @@ const StrategyList = () => {
   const { data } = useGetStrategiesData({ isReady, page, size: COUNT_PER_PAGE })
 
   const strategiesData = data?.strategiesData || []
-  const totalCount = data?.totalCount || 0
+  const totalCount = data?.totalCount || null
 
   const handlePageChange = (page: number) => {
     router.push(`/strategies?page=${page}&size=${COUNT_PER_PAGE}`)
