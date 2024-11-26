@@ -9,7 +9,7 @@ export const PATH = {
 
   // Main
   HOME: '/',
-  STRATEGIES: '/strategies?page=1&size=8',
+  STRATEGIES: '/strategies',
   TRADERS: '/traders',
   NOTICES: '/notices',
   TERMS_OF_USE: '/terms-of-use',
