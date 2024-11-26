@@ -8,15 +8,16 @@ import styles from './styles.module.scss'
 const cx = classNames.bind(styles)
 
 interface Props {
-  iconUrl: string[]
+  iconUrls?: string[]
+  iconNames?: string[]
   name: string
   hasButton?: boolean
 }
 
-const StrategyNameBox = ({ iconUrl, name, hasButton = true }: Props) => {
+const StrategyNameBox = ({ iconUrls, iconNames, name, hasButton = true }: Props) => {
   return (
     <div className={cx('name-container')}>
-      <StrategiesIcon icon={iconUrl} />
+      <StrategiesIcon iconUrls={iconUrls} iconNames={iconNames} />
       <p className={cx('name')}>{name}</p>
       {hasButton && <button>제안서 다운로드</button>}
     </div>

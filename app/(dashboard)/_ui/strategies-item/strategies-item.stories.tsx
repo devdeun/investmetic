@@ -25,7 +25,7 @@ Primary.args = {
       strategyId: '123',
       strategyName: '리치테크 FuturesDay',
       nickname: 'MACS',
-      stockTypeIconUrl: [],
+      stockTypeIconUrls: [],
       stockTypeNames: [],
       profitRateChartData: {
         xAxis: [
@@ -56,7 +56,7 @@ Primary.args = {
       strategyId: '12345',
       strategyName: 'ETF 레버리지/인버',
       nickname: '수밍',
-      stockTypeIconUrl: [],
+      stockTypeIconUrls: [],
       stockTypeNames: [],
       profitRateChartData: {
         xAxis: [
