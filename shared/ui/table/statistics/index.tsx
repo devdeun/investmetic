@@ -16,7 +16,7 @@ interface Props {
 const StatisticsTable = ({ title, statisticsData }: Props) => {
   const inKoreanDataToArray: string[][] = Object.entries(inKoreanData)
   const mappedDataInKorean: { [key: string]: string | number } = {}
-  let titleInKorean = ''
+  let titleInKorean = null
 
   for (const [key, value] of inKoreanDataToArray) {
     if (statisticsData[key] !== undefined) {
@@ -42,7 +42,7 @@ const StatisticsTable = ({ title, statisticsData }: Props) => {
 
   return (
     <div className={cx('container')}>
-      <p>{titleInKorean !== '' ? titleInKorean : title}</p>
+      <p>{titleInKorean ?? title}</p>
       <table>
         <tbody>
           {groupedData.map((row, idx) => (

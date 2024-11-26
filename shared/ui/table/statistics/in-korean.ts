@@ -33,4 +33,4 @@ export const inKoreanData = {
   profitLoss: '손익률 관련 정보',
   ddMddInfo: 'DD&MDD 정보',
   tradingInfo: '거래 관련 정보',
-}
+} as const
