@@ -9,6 +9,7 @@ import useGetDetailsInformationData from './_hooks/query/use-get-details-informa
 import DetailsInformation from './_ui/datails-information'
 import DetailsSideItem, { InformationModel, TitleType } from './_ui/details-side-item'
 import ReviewContainer from './_ui/review-container'
+import SubscriberItem from './_ui/subscriber-item'
 
 export type InformationType = { title: TitleType; data: string | number } | InformationModel[]
 
@@ -32,6 +33,7 @@ const StrategyDetailPage = ({ params }: { params: { strategyId: string } }) => {
       {detailsInformationData && <DetailsInformation information={detailsInformationData} />}
       <ReviewContainer strategyId={params.strategyId} />
       <SideContainer>
+        <SubscriberItem subscribers={99} />
         {hasDetailsSideData?.[0] &&
           detailsSideData?.map((data, idx) => (
             <div key={`${data}_${idx}`}>
