@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind'
 
-import { inKoreanData } from './inKorean'
+import { inKoreanData } from './in-korean'
 import styles from './styles.module.scss'
 
 const cx = classNames.bind(styles)
@@ -16,9 +16,13 @@ interface Props {
 const StatisticsTable = ({ title, statisticsData }: Props) => {
   const inKoreanDataToArray: string[][] = Object.entries(inKoreanData)
   const mappedDataInKorean: { [key: string]: string | number } = {}
+  let titleInKorean = ''
+
   for (const [key, value] of inKoreanDataToArray) {
     if (statisticsData[key] !== undefined) {
       mappedDataInKorean[value] = statisticsData[key]
+    } else if (title === key) {
+      titleInKorean = value
     }
   }
 
@@ -38,7 +42,7 @@ const StatisticsTable = ({ title, statisticsData }: Props) => {
 
   return (
     <div className={cx('container')}>
-      <p>{title}</p>
+      <p>{titleInKorean !== '' ? titleInKorean : title}</p>
       <table>
         <tbody>
           {groupedData.map((row, idx) => (
