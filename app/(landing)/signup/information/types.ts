@@ -7,25 +7,37 @@ export type SignupErrorMessageType =
 
 export interface SignupFormDataModel {
   name: string
-  password: string
-  emailId: string
+  nickname: string
+  email: string
   emailDomain: string
+  verificationCode: string
+  password: string
+  passwordConfirm: string
   phone: string
   birthYear: string
   birthMonth: string
   birthDay: string
+  isMarketingAgreed: boolean
 }
 
 export interface SignupFormErrorsModel {
-  name?: SignupErrorMessageType
-  password?: SignupErrorMessageType
-  emailId?: SignupErrorMessageType
-  phone?: SignupErrorMessageType
+  name?: SignupErrorMessageType | null
+  nickname?: SignupErrorMessageType | null
+  email?: SignupErrorMessageType | null
+  password?: SignupErrorMessageType | null
+  passwordConfirm?: SignupErrorMessageType | null
+  phone?: SignupErrorMessageType | null
 }
 
 export interface SelectOptionModel {
   value: string
   label: string
+}
+
+export interface SignupFormStateModel {
+  isEmailVerified: boolean
+  isNicknameVerified: boolean
+  isEmailSent: boolean
 }
 
 export type SelectChangeHandlerType = (value: DropdownValueType) => void
