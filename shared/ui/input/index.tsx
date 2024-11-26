@@ -1,6 +1,6 @@
 'use client'
 
-import { ComponentProps } from 'react'
+import { ComponentPropsWithoutRef, forwardRef } from 'react'
 
 import classNames from 'classnames/bind'
 
@@ -10,30 +10,25 @@ const cx = classNames.bind(styles)
 
 export type InputSizeType = 'small' | 'medium' | 'large' | 'full'
 
-interface Props extends ComponentProps<'input'> {
+interface Props extends ComponentPropsWithoutRef<'input'> {
   inputSize?: InputSizeType
-  errorMessage?: string | null
+  error?: boolean
 }
 
-export const Input = ({
-  inputSize = 'medium',
-  errorMessage,
-  className,
-  value,
-  onChange,
-  ...props
-}: Props) => {
-  return (
-    <div>
-      <input
-        value={value}
-        onChange={onChange}
-        className={cx('input', inputSize, className, {
-          error: !!errorMessage,
-        })}
-        {...props}
-      />
-      {errorMessage && <p className={cx('error-message')}>{errorMessage}</p>}
-    </div>
-  )
-}
+export const Input = forwardRef<HTMLInputElement, Props>(
+  ({ inputSize = 'medium', className, value, error = false, onChange, ...props }, ref) => {
+    return (
+      <div>
+        <input
+          ref={ref}
+          value={value}
+          onChange={onChange}
+          className={cx('input', inputSize, { error }, className)}
+          {...props}
+        />
+      </div>
+    )
+  }
+)
+
+Input.displayName = 'Input'
