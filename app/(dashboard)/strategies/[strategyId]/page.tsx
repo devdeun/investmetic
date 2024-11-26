@@ -4,11 +4,11 @@ import { useMSWStore } from '@/shared/stores/msw'
 import BackHeader from '@/shared/ui/header/back-header'
 import Title from '@/shared/ui/title'
 
+import DetailsInformation from '../../_ui/details-information'
+import DetailsSideItem, { InformationModel, TitleType } from '../../_ui/details-side-item'
 import SideContainer from '../_ui/side-container'
 import useGetDetailsInformationData from './_hooks/query/use-get-details-information-data'
 import AnalysisContainer from './_ui/analysis-container'
-import DetailsInformation from './_ui/datails-information'
-import DetailsSideItem, { InformationModel, TitleType } from './_ui/details-side-item'
 import ReviewContainer from './_ui/review-container'
 
 export type InformationType = { title: TitleType; data: string | number } | InformationModel[]
