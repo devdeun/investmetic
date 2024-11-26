@@ -19,11 +19,11 @@ const SubscriberItem = ({ isMyStrategy = false, subscribers, onClick }: Props) =
     <div className={cx('container')}>
       <div className={cx('wrapper')}>
         <div className={cx('contents')}>구독 | {subscribers}</div>
-        {!isMyStrategy ? (
+        {!isMyStrategy && (
           <Button size="small" variant="filled" onClick={onClick}>
             구독하기{' '}
           </Button>
-        ) : null}
+        )}
       </div>
     </div>
   )
