@@ -6,37 +6,15 @@ import React from 'react'
 import { DailyGraphIcon, MoneyIcon, MonthlyGraphIcon, StatisticsIcon } from '@/public/icons'
 import classNames from 'classnames/bind'
 
-import { Button } from '@/shared/ui/button'
-import Pagination from '@/shared/ui/pagination'
-import StatisticsTable from '@/shared/ui/table/statistics'
-import VerticalTable from '@/shared/ui/table/vertical'
 import Tabs from '@/shared/ui/tabs'
 
-import AccountImages from './account-images'
+import AccountContent from './account-content'
+import AnalysisContent from './analysis-content'
 import { statisticsData, tableBody } from './example'
+import StatisticsContent from './statistics-content'
 import styles from './styles.module.scss'
 
 const cx = classNames.bind(styles)
-
-const DAILY_TABLE_HEADER = [
-  '날짜',
-  '원금',
-  '입출금',
-  '일 손익',
-  '일 손익률',
-  '누적 손익',
-  '누적 수익률',
-]
-
-const MONTHLY_TABLE_HEADER = [
-  '날짜',
-  '원금',
-  '입출금',
-  '월 손익',
-  '월 손익률',
-  '누적 손익',
-  '누적 수익률',
-]
 
 const TabsWithTable = () => {
   const [activeTab, setActiveTab] = useState('statistics')
@@ -48,46 +26,24 @@ const TabsWithTable = () => {
 
   const handlePageChange = (page: number) => setCurrentPage(page)
 
-  const statisticsDataToArray = Object.entries(statisticsData)
-
   const TABS = [
     {
       id: 'statistics',
       label: '통계',
       icon: StatisticsIcon,
-      content: (
-        <div className={cx('table-wrapper')}>
-          {statisticsDataToArray.map((statistics) => (
-            <StatisticsTable
-              key={statistics[0]}
-              title={statistics[0]}
-              statisticsData={statistics[1]}
-            />
-          ))}
-        </div>
-      ),
+      content: <StatisticsContent statisticsData={statisticsData} />,
     },
     {
       id: 'daily-analysis',
       label: '일간분석',
       icon: DailyGraphIcon,
       content: (
-        <div className={cx('table-wrapper', 'analysis')}>
-          <Button size="small" className={cx('excel-button')} variant="filled">
-            엑셀 다운받기
-          </Button>
-          <VerticalTable
-            tableHead={DAILY_TABLE_HEADER}
-            tableBody={tableBody}
-            currentPage={currentPage}
-            countPerPage={5}
-          />
-          <Pagination
-            currentPage={currentPage}
-            maxPage={Math.ceil(tableBody.length / 5)}
-            onPageChange={handlePageChange}
-          />
-        </div>
+        <AnalysisContent
+          type="daily"
+          analysisData={tableBody}
+          currentPage={currentPage}
+          onPageChange={handlePageChange}
+        />
       ),
     },
     {
@@ -95,22 +51,12 @@ const TabsWithTable = () => {
       label: '월간분석',
       icon: MonthlyGraphIcon,
       content: (
-        <div className={cx('table-wrapper', 'analysis')}>
-          <Button size="small" className={cx('excel-button')} variant="filled">
-            엑셀 다운받기
-          </Button>
-          <VerticalTable
-            tableHead={MONTHLY_TABLE_HEADER}
-            tableBody={tableBody}
-            currentPage={currentPage}
-            countPerPage={5}
-          />
-          <Pagination
-            currentPage={currentPage}
-            maxPage={Math.ceil(tableBody.length / 5)}
-            onPageChange={handlePageChange}
-          />
-        </div>
+        <AnalysisContent
+          type="monthly"
+          analysisData={tableBody}
+          currentPage={currentPage}
+          onPageChange={handlePageChange}
+        />
       ),
     },
     {
@@ -119,7 +65,11 @@ const TabsWithTable = () => {
       icon: MoneyIcon,
       content: (
         <div className={cx('table-wrapper')}>
-          <AccountImages imagesData={[]} currentPage={currentPage} />
+          <AccountContent
+            imagesData={[]}
+            currentPage={currentPage}
+            onPageChange={handlePageChange}
+          />
         </div>
       ),
     },
