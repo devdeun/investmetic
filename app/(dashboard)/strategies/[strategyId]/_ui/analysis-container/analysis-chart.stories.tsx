@@ -22,8 +22,8 @@ export const Default: StoryType = {
   ],
   args: {
     analysisChartData: {
-      xAxis: ['2023-01-01', '2023-01-02', '2023-01-03', '2023-01-04', '2023-01-05', '2023-01-06'],
-      yAxis: {
+      dates: ['2023-01-01', '2023-01-02', '2023-01-03', '2023-01-04', '2023-01-05', '2023-01-06'],
+      data: {
         CURRENT_DRAWDOWN: [2000, 5660, 4000, 9000, 7000, 10000],
         PRINCIPAL: [50000, 60000, 80000, 80000, 80000, 80000],
       },
@@ -43,8 +43,8 @@ export const SameOption: StoryType = {
   ],
   args: {
     analysisChartData: {
-      xAxis: [...Default.args.analysisChartData.xAxis],
-      yAxis: {
+      dates: [...Default.args.analysisChartData.dates],
+      data: {
         CURRENT_DRAWDOWN: [2000, 5660, 4000, 9000, 7000, 10000],
       },
     },

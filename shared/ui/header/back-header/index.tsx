@@ -16,6 +16,7 @@ const cx = classNames.bind(styles)
 const headerStyles = {
   background: 'rgba(251, 251, 251, 0.5)',
   backdropFilter: 'blur(60px)',
+  padding: '0',
 }
 
 interface Props {

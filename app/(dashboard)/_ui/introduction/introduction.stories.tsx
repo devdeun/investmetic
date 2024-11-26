@@ -1,5 +1,6 @@
-import StrategyIntroduction from '@/app/(dashboard)/strategies/[strategyId]/_ui/introduction'
 import { Meta, StoryFn } from '@storybook/react'
+
+import StrategyIntroduction from '.'
 
 const meta: Meta = {
   title: 'components/StrategyIntroduction',
