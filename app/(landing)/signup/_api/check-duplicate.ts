@@ -2,7 +2,7 @@ import axios from 'axios'
 
 export const checkNicknameDuplicate = async (nickname: string) => {
   try {
-    const response = await axios.post(`/api/users/check/nickname?nickname=${nickname}`)
+    const response = await axios.get(`/api/users/check/nickname?nickname=${nickname}`)
     return response.data
   } catch (err) {
     console.error(err)
@@ -12,7 +12,7 @@ export const checkNicknameDuplicate = async (nickname: string) => {
 
 export const checkPhoneDuplicate = async (phone: string) => {
   try {
-    const response = await axios.post(`/api/users/check/phone?phone=${phone}`)
+    const response = await axios.get(`/api/users/check/phone?phone=${phone}`)
     return response.data
   } catch (err) {
     console.error(err)
