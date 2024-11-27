@@ -45,8 +45,8 @@ export const refreshToken = async (): Promise<string | null> => {
     }
 
     return null
-  } catch (error) {
-    console.error('Token refresh failed:', error)
+  } catch (err) {
+    console.error('Token refresh failed:', err)
     return null
   } finally {
     isRefreshing = false

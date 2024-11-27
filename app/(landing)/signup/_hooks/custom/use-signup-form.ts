@@ -135,8 +135,8 @@ const useSignupForm = () => {
       await signup(formData)
       setNicknameCookie(form.nickname)
       router.push(PATH.SIGN_UP_COMPLETE)
-    } catch (error) {
-      console.error('회원가입 실패:', error)
+    } catch (err) {
+      console.error('회원가입 실패:', err)
       setErrors((prev) => ({ ...prev, submitError: '회원가입에 실패했습니다.' }))
     }
   }

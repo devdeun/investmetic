@@ -65,8 +65,8 @@ const useSignupEmail = ({ form, errors, isValidated, setForm, setErrors, setForm
       if (errors.email) {
         setErrors((prev) => ({ ...prev, email: null }))
       }
-    } catch (error) {
-      console.error('이메일 인증 발송 실패:', error)
+    } catch (err) {
+      console.error('이메일 인증 발송 실패:', err)
       setErrors((prev) => ({ ...prev, email: SIGNUP_ERROR_MESSAGES.EMAIL_SEND_FAILED }))
     }
   }
@@ -87,8 +87,8 @@ const useSignupEmail = ({ form, errors, isValidated, setForm, setErrors, setForm
       } else {
         setErrors((prev) => ({ ...prev, email: SIGNUP_ERROR_MESSAGES.VERIFICATION_CODE_MISMATCH }))
       }
-    } catch (error) {
-      console.error('인증번호 확인 실패:', error)
+    } catch (err) {
+      console.error('인증번호 확인 실패:', err)
       setErrors((prev) => ({
         ...prev,
         email: SIGNUP_ERROR_MESSAGES.VERIFICATION_CODE_CHECK_FAILED,
