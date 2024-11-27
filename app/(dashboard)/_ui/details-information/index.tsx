@@ -27,7 +27,8 @@ const DetailsInformation = ({ information }: Props) => {
     <>
       <div className={cx('information-top')}>
         <StrategyNameBox
-          iconUrl={[information.tradeTypeIconURL, ...information.stockTypeIconURLs]}
+          iconUrls={[information.tradeTypeIconUrl, ...information.stockTypeIconUrls]}
+          iconNames={[information.tradeTypeName, ...information.stockTypeNames]}
           name={information.strategyName}
         />
         <InvestInformation

@@ -30,8 +30,8 @@ const getDetailsInformation = async (isReady: boolean, strategyId: string) => {
     const detailsInformationData = {
       strategyId: data.strategyId,
       strategyName: data.strategyName,
-      stockTypeIconURLs: data.stockTypeIconURLs,
-      tradeTypeIconURL: data.tradeTypeIconURL,
+      stockTypeIconUrls: data.stockTypeIconUrls,
+      tradeTypeIconUrl: data.tradeTypeIconUrl,
       stockTypeNames: data.stockTypeNames,
       tradeTypeName: data.tradeTypeName,
       operationCycle: data.operationCycle,

@@ -29,7 +29,7 @@ export interface StrategiesModel {
   strategyName: string
   nickname: string
   traderImage?: string
-  stockTypeIconUrl: string[]
+  stockTypeIconUrls: string[]
   stockTypeNames: string[]
   profitRateChartData: ProfitRateChartDataModel
   tradeTypeIconUrl: string
@@ -47,8 +47,8 @@ export interface StrategiesModel {
 export interface StrategyDetailsInformationModel {
   strategyId: string
   strategyName: string
-  stockTypeIconURLs: string[]
-  tradeTypeIconURL: string
+  stockTypeIconUrls: string[]
+  tradeTypeIconUrl: string
   stockTypeNames: string[]
   tradeTypeName: string
   operationCycle: string
