@@ -1,6 +1,5 @@
 'use client'
 
-import styles from '@/app/(dashboard)/traders/[traderId]/page.module.scss'
 import classNames from 'classnames/bind'
 
 import BackHeader from '@/shared/ui/header/back-header'
@@ -9,6 +8,7 @@ import TradersListCard from '@/shared/ui/traders-list-card'
 
 import ListHeader from '../../_ui/list-header'
 import StrategiesItem from '../../_ui/strategies-item'
+import styles from './page.module.scss'
 
 const cx = classNames.bind(styles)
 
@@ -67,9 +67,10 @@ const TraderDetailPage = () => {
             strategyCount={traderData.strategyCount}
             subscriberCount={traderData.subscriberCount}
             traderId={traderData.traderId}
+            hasButton={false}
           />
         </div>
-        <ListHeader></ListHeader>
+        <ListHeader />
         {Array(3)
           .fill(strategiesModel)
           .map((item, index) => (
