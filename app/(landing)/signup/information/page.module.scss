@@ -48,6 +48,22 @@
     }
   }
 
+  .select-group {
+    flex-direction: column;
+
+    .select-wrapper {
+      display: flex;
+      gap: 12px;
+      margin-left: 160px;
+      margin-top: -50px;
+    }
+
+    .select-error {
+      margin-left: 160px;
+      margin-top: 8px;
+    }
+  }
+
   .terms-wrapper {
     display: flex;
     flex-direction: column;
@@ -74,9 +90,4 @@
   justify-content: center;
   gap: 48px;
   margin-bottom: 70px;
-}
-
-.select-wrapper {
-  display: flex;
-  gap: 12px;
 }
