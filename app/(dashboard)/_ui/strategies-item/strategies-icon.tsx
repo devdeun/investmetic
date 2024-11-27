@@ -9,6 +9,8 @@ import { Tooltip } from 'react-tooltip'
 
 import styles from './styles.module.scss'
 
+/* eslint-disable react-hooks/exhaustive-deps */
+
 const cx = classNames.bind(styles)
 
 interface ImageSizeModel {
@@ -29,6 +31,7 @@ const StrategiesIcon = ({ iconUrls, iconNames }: Props) => {
       const image = new window.Image()
       image.src = url
       image.onload = () => handleImageLoad(url, image)
+      image.onerror = () => handleImageLoadErr(url)
     })
   }, [iconUrls])
 
@@ -39,22 +42,32 @@ const StrategiesIcon = ({ iconUrls, iconNames }: Props) => {
     }))
   }
 
+  const handleImageLoadErr = (url: string) => {
+    setImageSizes((prev) => ({
+      ...prev,
+      [url]: getImageSize(url),
+    }))
+  }
+
+  const getImageSize = (url: string) => imageSizes[url] || { width: 20, height: 20 }
+
   if (iconUrls?.length === 0 || iconNames?.length === 0) return null
+  if (iconUrls?.length !== iconNames?.length) return null
 
   return (
     <div className={cx('icon-container')}>
       {iconUrls?.map((url, idx) => {
         const name = iconNames?.[idx]
-
         if (!url || !name) return null
-        const size = imageSizes[url] || { width: 20, height: 20 }
+        const { width, height } = getImageSize(url)
+
         return (
           <div key={url} className={cx('icon-wrapper')}>
             <div
               className={cx('icon')}
               style={{
-                width: `${size.width}px`,
-                height: `${size.height}px`,
+                width: `${width}px`,
+                height: `${height}px`,
               }}
               data-tooltip-id={name}
               data-tooltip-content={name}
