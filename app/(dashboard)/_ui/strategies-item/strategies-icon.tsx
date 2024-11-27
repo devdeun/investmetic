@@ -27,12 +27,22 @@ const StrategiesIcon = ({ iconUrls, iconNames }: Props) => {
   const [imageSizes, setImageSizes] = useState<{ [key: string]: ImageSizeModel }>({})
 
   useEffect(() => {
+    const images: HTMLImageElement[] = []
+
     iconUrls?.forEach((url) => {
       const image = new window.Image()
       image.src = url
       image.onload = () => handleImageLoad(url, image)
       image.onerror = () => handleImageLoadErr(url)
+      images.push(image)
     })
+
+    return () => {
+      images.forEach((image) => {
+        image.onload = null
+        image.onerror = null
+      })
+    }
   }, [iconUrls])
 
   const handleImageLoad = (url: string, image: HTMLImageElement) => {
