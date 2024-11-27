@@ -22,8 +22,8 @@ export const signup = async (formData: SignupFormDataModel) => {
   try {
     const response = await axios.post('/api/users/signup', data)
     return response.data
-  } catch (error) {
-    console.error('회원가입 실패:', error)
+  } catch (err) {
+    console.error('회원가입 실패:', err)
     throw new Error('회원가입에 실패했습니다.')
   }
 }

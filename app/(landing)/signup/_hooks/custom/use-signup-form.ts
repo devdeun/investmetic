@@ -71,8 +71,8 @@ const useSignupForm = () => {
       if (errors.nickname) {
         setErrors((prev) => ({ ...prev, nickname: null }))
       }
-    } catch (error) {
-      console.error('닉네임 중복 확인 실패:', error)
+    } catch (err) {
+      console.error('닉네임 중복 확인 실패:', err)
     }
   }
 
@@ -84,8 +84,8 @@ const useSignupForm = () => {
       if (errors.phone) {
         setErrors((prev) => ({ ...prev, phone: null }))
       }
-    } catch (error) {
-      console.error('휴대폰 번호 중복 확인 실패:', error)
+    } catch (err) {
+      console.error('휴대폰 번호 중복 확인 실패:', err)
     }
   }
 
