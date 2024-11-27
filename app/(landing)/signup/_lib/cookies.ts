@@ -39,8 +39,8 @@ export const removeAllSignupCookies = () => {
     })
 
     return true
-  } catch (error) {
-    console.error('회원가입 쿠키 삭제 실패:', error)
+  } catch (err) {
+    console.error('회원가입 쿠키 삭제 실패:', err)
     return false
   }
 }

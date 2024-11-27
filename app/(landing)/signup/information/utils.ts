@@ -76,6 +76,10 @@ export const validateSignupForm = (
   const phoneError = validateField('PHONE', form.phone)
   if (phoneError) errors.phone = phoneError
 
+  if (!form.birthYear || !form.birthMonth || !form.birthDay) {
+    errors.select = SIGNUP_ERROR_MESSAGES.SELECT_REQUIRED
+  }
+
   return errors
 }
 

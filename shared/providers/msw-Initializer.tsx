@@ -19,8 +19,8 @@ export const MSWInitializer = () => {
         const { default: init } = await import('@/mocks')
         await init()
         setReady(true)
-      } catch (error) {
-        console.error('MSW initialization failed:', error)
+      } catch (err) {
+        console.error('MSW initialization failed:', err)
       }
     }
 

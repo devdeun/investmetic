@@ -1,4 +1,4 @@
-import { RoleType } from '@/shared/types/auth'
+import { UserType } from '@/shared/types/auth'
 import { DropdownValueType } from '@/shared/ui/dropdown/types'
 
 import { SIGNUP_ERROR_MESSAGES } from '../_constants/signup'
@@ -28,6 +28,7 @@ export interface SignupFormErrorsModel {
   password?: SignupErrorMessageType | null
   passwordConfirm?: SignupErrorMessageType | null
   phone?: SignupErrorMessageType | null
+  select?: SignupErrorMessageType | null
 }
 
 export interface SelectOptionModel {
@@ -52,7 +53,7 @@ export interface SignupFormDataModel {
   password: string
   email: string
   emailDomain: string
-  role: RoleType
+  role: UserType
   infoAgreement: boolean
 }
 

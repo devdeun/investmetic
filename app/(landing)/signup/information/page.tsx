@@ -7,6 +7,7 @@ import classNames from 'classnames/bind'
 import { PATH } from '@/shared/constants/path'
 import { Button } from '@/shared/ui/button'
 import Checkbox from '@/shared/ui/check-box'
+import { ErrorMessage } from '@/shared/ui/error-message'
 import { Input } from '@/shared/ui/input'
 import { LinkButton } from '@/shared/ui/link-button'
 import Select from '@/shared/ui/select'
@@ -63,6 +64,7 @@ const InformationPage = () => {
     setForm,
     setErrors,
     setFormState,
+    form,
   })
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -258,6 +260,11 @@ const InformationPage = () => {
               titleStyle={selectStyle}
             />
           </div>
+          {errors.select && (
+            <div className={cx('select-error')}>
+              <ErrorMessage errorMessage={errors.select} />
+            </div>
+          )}
         </div>
 
         <div className={cx('terms-wrapper')}>

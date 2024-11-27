@@ -32,8 +32,8 @@ export const useAuth = () => {
       })
 
       router.replace(PATH.SIGN_IN)
-    } catch (error) {
-      console.error('로그아웃 실패:', error)
+    } catch (err) {
+      console.error('로그아웃 실패:', err)
     }
   }
 

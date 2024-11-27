@@ -34,8 +34,8 @@ export const createAxiosInstance = (options: { withInterceptors?: boolean } = {}
           }
 
           config.headers.Authorization = `Bearer ${accessToken}`
-        } catch (error) {
-          console.error('토큰 디코딩 실패:', error)
+        } catch (err) {
+          console.error('토큰 디코딩 실패:', err)
           useAuthStore.getState().setAuthState({
             isAuthenticated: false,
             user: null,
@@ -46,22 +46,22 @@ export const createAxiosInstance = (options: { withInterceptors?: boolean } = {}
 
         return config
       },
-      (error) => Promise.reject(error)
+      (err) => Promise.reject(err)
     )
 
     instance.interceptors.response.use(
       (response) => response,
-      async (error: AxiosError) => {
-        if (!error.config) return Promise.reject(error)
+      async (err: AxiosError) => {
+        if (!err.config) return Promise.reject(err)
 
-        const originalRequest = error.config
+        const originalRequest = err.config
         const { isLoggedOut } = useAuthStore.getState()
 
         if (isLoggedOut) {
-          return Promise.reject(error)
+          return Promise.reject(err)
         }
 
-        if (error.response?.status === 401) {
+        if (err.response?.status === 401) {
           try {
             const newToken = await refreshToken()
             if (newToken) {
@@ -80,7 +80,7 @@ export const createAxiosInstance = (options: { withInterceptors?: boolean } = {}
           })
         }
 
-        return Promise.reject(error)
+        return Promise.reject(err)
       }
     )
   }
