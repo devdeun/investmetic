@@ -1,15 +1,15 @@
 import { Meta, StoryObj } from '@storybook/react'
 
-import { ErrorMessages } from './index'
+import { ErrorMessage } from './index'
 
-const meta: Meta<typeof ErrorMessages> = {
+const meta: Meta<typeof ErrorMessage> = {
   title: 'Components/ErrorMessages',
-  component: ErrorMessages,
+  component: ErrorMessage,
   args: {
-    errorMessages: '에러메세지를 입력하세요.',
+    errorMessage: '에러메세지를 입력하세요.',
   },
   argTypes: {
-    errorMessages: {
+    errorMessage: {
       control: 'text',
       description: 'The error message to display.',
       table: {
@@ -22,12 +22,12 @@ const meta: Meta<typeof ErrorMessages> = {
 
 export default meta
 
-type StoryType = StoryObj<typeof ErrorMessages>
+type StoryType = StoryObj<typeof ErrorMessage>
 
 export const Default: StoryType = {}
 
 export const EmptyMessage: StoryType = {
   args: {
-    errorMessages: null,
+    errorMessage: null,
   },
 }
