@@ -1,6 +1,6 @@
-export type UserType = 'trader' | 'investor'
+export type UserType = 'TRADER' | 'INVESTOR'
 
-export type RoleType = UserType | `${UserType}_admin`
+export type RoleType = UserType | `${UserType}_ADMIN`
 
 export interface UserModel {
   id: string

@@ -51,6 +51,7 @@ const Dropdown = ({
           onClick={toggleOpen}
           className={cx('container', 'trigger', size, { open: isOpen })}
           style={labelStyle}
+          type="button"
         >
           {Trigger}
           {isOpen ? <CloseIcon /> : <OpenIcon />}

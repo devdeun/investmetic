@@ -56,7 +56,7 @@ const TermsOfUsePage = () => {
           isChecked={isUserTermChecked}
           onChange={handleUserTermCheck}
         >
-          {userType === 'trader' ? <TraderTerms /> : <InvestorTerms />}
+          {userType === 'TRADER' ? <TraderTerms /> : <InvestorTerms />}
         </TermsContainer>
 
         <div className={cx('button-wrapper')}>
