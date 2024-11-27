@@ -1,5 +1,8 @@
 import { Dispatch, SetStateAction, useState } from 'react'
 
+import { checkEmailDuplicate } from '../../_api/check-duplicate'
+import { getEmailAuthenticationResult, requestEmailAuthentication } from '../../_api/email-auth'
+import { SIGNUP_ERROR_MESSAGES } from '../../_constants/signup'
 import {
   SignupFormErrorsModel,
   SignupFormModel,
@@ -7,6 +10,7 @@ import {
 } from './../../information/types'
 
 interface Props {
+  form: SignupFormModel
   errors: SignupFormErrorsModel
   isValidated: boolean
   setForm: Dispatch<SetStateAction<SignupFormModel>>
@@ -14,7 +18,7 @@ interface Props {
   setFormState: Dispatch<SetStateAction<SignupFormStateModel>>
 }
 
-const useSignupEmail = ({ errors, isValidated, setForm, setErrors, setFormState }: Props) => {
+const useSignupEmail = ({ form, errors, isValidated, setForm, setErrors, setFormState }: Props) => {
   const [selectedDomain, setSelectedDomain] = useState<string>('')
 
   const handleEmailChange = (name: string) => {
@@ -48,23 +52,47 @@ const useSignupEmail = ({ errors, isValidated, setForm, setErrors, setFormState 
 
   const handleEmailVerification = async () => {
     try {
-      // TODO: 이메일 인증 API 호출
-      setFormState((prev) => ({ ...prev, isEmailSent: true }))
-    } catch (error) {
-      console.error('이메일 인증 발송 실패:', error)
-    }
-  }
+      const response = await checkEmailDuplicate(form.email, form.emailDomain)
 
-  const handleVerificationCodeCheck = async () => {
-    try {
-      // TODO: 인증번호 확인 API 호출
-      setFormState((prev) => ({ ...prev, isEmailVerified: true }))
+      if (!response.result.isAvailable) {
+        setErrors((prev) => ({ ...prev, email: SIGNUP_ERROR_MESSAGES.EMAIL_DUPLICATED }))
+        return
+      }
+
+      await requestEmailAuthentication(form.email, form.emailDomain)
+      setFormState((prev) => ({ ...prev, isEmailSent: true }))
 
       if (errors.email) {
         setErrors((prev) => ({ ...prev, email: null }))
       }
     } catch (error) {
+      console.error('이메일 인증 발송 실패:', error)
+      setErrors((prev) => ({ ...prev, email: SIGNUP_ERROR_MESSAGES.EMAIL_SEND_FAILED }))
+    }
+  }
+
+  const handleVerificationCodeCheck = async () => {
+    try {
+      const response = await getEmailAuthenticationResult(
+        form.email,
+        form.emailDomain,
+        form.verificationCode
+      )
+
+      if (response.result.isVerified) {
+        setFormState((prev) => ({ ...prev, isEmailVerified: true }))
+        if (errors.email) {
+          setErrors((prev) => ({ ...prev, email: null }))
+        }
+      } else {
+        setErrors((prev) => ({ ...prev, email: SIGNUP_ERROR_MESSAGES.VERIFICATION_CODE_MISMATCH }))
+      }
+    } catch (error) {
       console.error('인증번호 확인 실패:', error)
+      setErrors((prev) => ({
+        ...prev,
+        email: SIGNUP_ERROR_MESSAGES.VERIFICATION_CODE_CHECK_FAILED,
+      }))
     }
   }
 

@@ -4,7 +4,12 @@ import { useRouter } from 'next/navigation'
 
 import { PATH } from '@/shared/constants/path'
 
+import { checkNicknameDuplicate, checkPhoneDuplicate } from '../../_api/check-duplicate'
+import { signup } from '../../_api/signup'
+import { SIGNUP_ERROR_MESSAGES } from '../../_constants/signup'
+import { getUserTypeCookie, setNicknameCookie } from '../../_lib/cookies'
 import {
+  SignupFormDataModel,
   SignupFormErrorsModel,
   SignupFormModel,
   SignupFormStateModel,
@@ -65,31 +70,40 @@ const useSignupForm = () => {
 
   const handleNicknameCheck = async () => {
     try {
-      // TODO: 닉네임 중복 확인 API 호출
-      setFormState((prev) => ({ ...prev, isNicknameVerified: true }))
-
-      if (errors.nickname) {
-        setErrors((prev) => ({ ...prev, nickname: null }))
+      const response = await checkNicknameDuplicate(form.nickname)
+      if (response.result.isAvailable) {
+        setFormState((prev) => ({ ...prev, isNicknameVerified: true }))
+        if (errors.nickname) {
+          setErrors((prev) => ({ ...prev, nickname: null }))
+        }
+      } else {
+        setErrors((prev) => ({ ...prev, nickname: SIGNUP_ERROR_MESSAGES.NICKNAME_DUPLICATED }))
       }
     } catch (err) {
       console.error('닉네임 중복 확인 실패:', err)
+      setErrors((prev) => ({ ...prev, nickname: SIGNUP_ERROR_MESSAGES.NICKNAME_CHECK_FAILED }))
     }
   }
 
   const handlePhoneCheck = async () => {
     try {
-      // TODO: 휴대폰 번호 중복 확인 API 호출
-      setFormState((prev) => ({ ...prev, isPhoneVerified: true }))
+      const response = await checkPhoneDuplicate(form.phone)
 
-      if (errors.phone) {
-        setErrors((prev) => ({ ...prev, phone: null }))
+      if (response.result.isAvailable) {
+        setFormState((prev) => ({ ...prev, isPhoneVerified: true }))
+        if (errors.phone) {
+          setErrors((prev) => ({ ...prev, phone: null }))
+        }
+      } else {
+        setErrors((prev) => ({ ...prev, phone: SIGNUP_ERROR_MESSAGES.PHONE_DUPLICATED }))
       }
     } catch (err) {
       console.error('휴대폰 번호 중복 확인 실패:', err)
+      setErrors((prev) => ({ ...prev, phone: SIGNUP_ERROR_MESSAGES.PHONE_CHECK_FAILED }))
     }
   }
 
-  const handleFormSubmit = () => {
+  const handleFormSubmit = async () => {
     const formErrors = validateSignupForm(
       form,
       formState.isEmailVerified,
@@ -101,10 +115,30 @@ const useSignupForm = () => {
       setErrors(formErrors)
       return
     }
+    const role = getUserTypeCookie()
 
-    // TODO: 회원가입 API 호출
-    console.log('폼 제출', form)
-    router.push(PATH.SIGN_UP_COMPLETE)
+    try {
+      const formData: SignupFormDataModel = {
+        name: form.name,
+        nickname: form.nickname,
+        phone: form.phone,
+        password: form.password,
+        email: form.email,
+        role: role || 'INVESTOR',
+        infoAgreement: form.isMarketingAgreed,
+        birthYear: form.birthYear,
+        birthMonth: form.birthMonth,
+        birthDay: form.birthDay,
+        emailDomain: form.emailDomain,
+      }
+
+      await signup(formData)
+      setNicknameCookie(form.nickname)
+      router.push(PATH.SIGN_UP_COMPLETE)
+    } catch (error) {
+      console.error('회원가입 실패:', error)
+      setErrors((prev) => ({ ...prev, submitError: '회원가입에 실패했습니다.' }))
+    }
   }
 
   return {
