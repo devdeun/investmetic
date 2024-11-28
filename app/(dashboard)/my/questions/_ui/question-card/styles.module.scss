@@ -1,7 +1,7 @@
+@import './card-mixins.scss';
+
 .card-container {
-  padding: 24px 40px 16px;
-  border-radius: 8px;
-  background-color: $color-white;
+  @include card-base;
 }
 
 .top-wrapper {
@@ -10,19 +10,16 @@
   justify-content: space-between;
 
   .strategy-name {
-    @include typo-b2;
-    color: $color-orange-600;
+    @include card-subtitle;
   }
 
   .created-at {
-    @include typo-b3;
-    color: $color-gray-400;
+    @include card-created-at;
   }
 }
 
 .title {
-  margin: 12px 0 8px;
-  @include typo-h4;
+  @include card-title;
 }
 
 .contents {
@@ -33,15 +30,9 @@
 }
 
 .bottom-wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  @include card-bottom;
 }
 
 .avatar-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  color: $color-gray-600;
-  @include typo-b3;
+  @include avatar-group;
 }
