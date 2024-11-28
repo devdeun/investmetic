@@ -10,17 +10,27 @@ const nextConfig = {
   `,
   },
   async rewrites() {
-    if (process.env.NODE_ENV === 'development') {
-      return []
-    }
     return [
       {
-        source: '/api/:path*',
-        destination: `${process.env.API_HOST}/api/:path*`,
+        source: '/api/users/reissue/refreshtoken',
+        destination: '/api/users/reissue/refreshtoken',
       },
+      {
+        source: '/api/users/login',
+        destination: '/api/users/login',
+      },
+      {
+        source: '/api/:path*',
+        destination: 'http://15.164.90.102:8081/api/:path*',
+        has: [
+          {
+            type: 'header',
+            key: 'host'
+          }
+        ]
+      }
     ]
   },
-
   webpack: (config, { isServer }) => {
     if (isServer) {
       if (Array.isArray(config.resolve.alias)) {
