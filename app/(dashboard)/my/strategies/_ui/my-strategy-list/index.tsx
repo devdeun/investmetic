@@ -3,8 +3,9 @@
 import { useCallback, useRef } from 'react'
 
 import StrategiesItem from '@/app/(dashboard)/_ui/strategies-item'
-import { useIntersectionObserver } from '@/app/(dashboard)/my/_hooks/custom/use-intersection-observer'
 import { useGetMyStrategyList } from '@/app/(dashboard)/my/_hooks/query/use-get-my-strategy-list'
+
+import { useIntersectionObserver } from '@/shared/hooks/custom/use-intersection-observer'
 
 const MyStrategyList = () => {
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useGetMyStrategyList()
