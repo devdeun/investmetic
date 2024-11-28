@@ -35,7 +35,7 @@ const StrategyList = () => {
   }, [searchParams])
 
   const strategiesData = data?.strategiesData || []
-  const totalCount = data?.totalCount || null
+  const totalPages = data?.totalPages || null
 
   const handlePageChange = (page: number) => {
     router.push(`/strategies?page=${page}&size=${COUNT_PER_PAGE}`)
@@ -47,12 +47,8 @@ const StrategyList = () => {
         <StrategiesItem key={strategy.strategyId} strategiesData={strategy} />
       ))}
       <div className={cx('pagination')}>
-        {totalCount && (
-          <Pagination
-            currentPage={page}
-            maxPage={Math.ceil(totalCount / COUNT_PER_PAGE)}
-            onPageChange={handlePageChange}
-          />
+        {totalPages && (
+          <Pagination currentPage={page} maxPage={totalPages} onPageChange={handlePageChange} />
         )}
       </div>
     </>
