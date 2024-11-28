@@ -65,7 +65,7 @@ const useSearchingItemStore = create<StateModel & ActionsModel>((set, get) => ({
         },
       })),
 
-    resetState: () => set(() => ({ searchTerms: { ...initialState } })),
+    resetState: () => set(() => ({ searchTerms: { ...initialState }, errOptions: [] })),
 
     validateRangeValues: () => {
       const { searchTerms } = get()
