@@ -54,7 +54,7 @@ const AnalysisChart = ({ analysisChartData: data }: Props) => {
       verticalAlign: 'top',
       layout: 'vertical',
       x: 10,
-      y: 10,
+      y: 0,
       itemStyle: {
         color: '#4D4D4D',
         fontSize: '12px',
