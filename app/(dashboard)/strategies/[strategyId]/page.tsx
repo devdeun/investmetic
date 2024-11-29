@@ -14,7 +14,7 @@ import SubscriberItem from './_ui/subscriber-item'
 
 export type InformationType = { title: TitleType; data: string | number } | InformationModel[]
 
-const StrategyDetailPage = ({ params }: { params: { strategyId: string } }) => {
+const StrategyDetailPage = ({ params }: { params: { strategyId: number } }) => {
   const isReady = useMSWStore((state) => state.isReady)
   const { data } = useGetDetailsInformationData({
     isReady,

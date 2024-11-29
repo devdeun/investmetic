@@ -22,7 +22,7 @@ const cx = classNames.bind(styles)
 
 export type InformationType = { title: TitleType; data: string | number } | InformationModel[]
 
-const StrategyManagePage = ({ params }: { params: { strategyId: string } }) => {
+const StrategyManagePage = ({ params }: { params: { strategyId: number } }) => {
   const isReady = useMSWStore((state) => state.isReady)
   const { data } = useGetDetailsInformationData({
     isReady,
