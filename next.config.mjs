@@ -22,13 +22,7 @@ const nextConfig = {
       {
         source: '/api/:path*',
         destination: 'http://15.164.90.102:8081/api/:path*',
-        has: [
-          {
-            type: 'header',
-            key: 'host'
-          }
-        ]
-      }
+      },
     ]
   },
   webpack: (config, { isServer }) => {
