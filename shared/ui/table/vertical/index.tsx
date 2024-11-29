@@ -4,8 +4,8 @@ import { ReactNode } from 'react'
 import classNames from 'classnames/bind'
 
 import { DailyAnalysisModel, MonthlyAnalysisModel } from '@/shared/types/strategy-details-data'
+import sliceArray from '@/shared/utils/slice-array'
 
-import useVerticalTable from './hooks/use-vertical-table'
 import styles from './styles.module.scss'
 
 const cx = classNames.bind(styles)
@@ -23,7 +23,8 @@ export interface VerticalTableProps {
 }
 
 const VerticalTable = ({ tableHead, tableBody, countPerPage, currentPage }: VerticalTableProps) => {
-  const { hasData, croppedTableBody } = useVerticalTable({ tableBody, countPerPage, currentPage })
+  const hasData = tableBody.length > 0
+  const slicedTableBody = sliceArray(tableBody, countPerPage, currentPage)
 
   return (
     <div className={cx('container')}>
@@ -37,7 +38,7 @@ const VerticalTable = ({ tableHead, tableBody, countPerPage, currentPage }: Vert
         </thead>
         {hasData && (
           <tbody>
-            {croppedTableBody.map((row) => (
+            {slicedTableBody.map((row) => (
               <tr key={Object.values(row)[0]}>
                 {Object.values(row).map((data, idx) => (
                   <td key={data + idx}>{data}</td>
