@@ -9,13 +9,16 @@ import styles from './styles.module.scss'
 
 const cx = classNames.bind(styles)
 
-interface Props {
-  strategyName: string
-  title: string
+export interface QuestionCardProps {
   contents: string
   nickname: string
   profileImage?: string
   createdAt: string
+}
+
+interface Props extends QuestionCardProps {
+  strategyName: string
+  title: string
   status: QuestionStatusType
 }
 
