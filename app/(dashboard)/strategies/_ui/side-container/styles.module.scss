@@ -1,6 +1,9 @@
 .side-bar {
   width: $strategy-sidebar-width;
-  position: fixed;
-  right: 28px;
+  position: absolute;
+  right: 0px;
   top: 130px;
+  &.fixed {
+    position: fixed;
+  }
 }
