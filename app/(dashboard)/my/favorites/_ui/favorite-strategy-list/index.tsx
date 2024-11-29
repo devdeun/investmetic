@@ -6,23 +6,22 @@ import classNames from 'classnames/bind'
 
 import { PATH } from '@/shared/constants/path'
 import { usePagination } from '@/shared/hooks/custom/use-pagination'
-import { useMSWStore } from '@/shared/stores/msw'
 import Pagination from '@/shared/ui/pagination'
 
-import useGetStrategiesData from '../../_hooks/query/use-get-strategies-data'
+import useGetFavoriteStrategyList from '../../../_hooks/query/use-get-favorite-strategy-list'
 import styles from './styles.module.scss'
 
 const cx = classNames.bind(styles)
 
-const COUNT_PER_PAGE = 8
+const COUNT_PER_PAGE = 6
 
-const StrategyList = () => {
-  const isReady = useMSWStore((state) => state.isReady)
+const FavoriteStrategyList = () => {
   const { page, handlePageChange } = usePagination({
-    basePath: PATH.STRATEGIES,
+    basePath: PATH.FAVORITES,
     pageSize: COUNT_PER_PAGE,
   })
-  const { data } = useGetStrategiesData({ isReady, page, size: COUNT_PER_PAGE })
+
+  const { data } = useGetFavoriteStrategyList({ page, size: COUNT_PER_PAGE })
 
   const strategiesData = data?.strategiesData || []
   const totalPages = data?.totalPages || null
@@ -30,10 +29,10 @@ const StrategyList = () => {
   return (
     <>
       <ListHeader />
-      {strategiesData?.map((strategy) => (
-        <StrategiesItem key={strategy.strategyId} strategiesData={strategy} />
-      ))}
       <div className={cx('pagination')}>
+        {strategiesData?.map((strategy) => (
+          <StrategiesItem key={strategy.strategyId} strategiesData={strategy} />
+        ))}
         {totalPages && (
           <Pagination currentPage={page} maxPage={totalPages} onPageChange={handlePageChange} />
         )}
@@ -42,4 +41,4 @@ const StrategyList = () => {
   )
 }
 
-export default StrategyList
+export default FavoriteStrategyList
