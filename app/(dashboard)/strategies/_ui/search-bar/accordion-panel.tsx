@@ -1,3 +1,5 @@
+'use client'
+
 import { useContext, useEffect, useState } from 'react'
 
 import { CheckedCircleIcon } from '@/public/icons'
@@ -8,6 +10,8 @@ import { SearchTermsModel } from './_type/search'
 import { AccordionContext } from './accordion-container'
 import RangeContainer from './range-container'
 import styles from './styles.module.scss'
+
+/* eslint-disable react-hooks/exhaustive-deps */
 
 const cx = classNames.bind(styles)
 

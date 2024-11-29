@@ -11,7 +11,7 @@ import useSearchingItemStore from './_store/use-searching-item-store'
 import { SearchTermsModel } from './_type/search'
 import AccordionContainer from './accordion-container'
 import AlgorithmItem from './algorithm-item'
-import SearchBarTap from './search-bar-tap'
+import SearchBarTab from './search-bar-tab'
 import styles from './styles.module.scss'
 
 const cx = classNames.bind(styles)
@@ -54,7 +54,7 @@ const SearchBarContainer = () => {
         <SearchInput placeholder="전략명을 검색하세요." />
       </div>
       <div className={cx('searchInput-wrapper')}>
-        <SearchBarTap isMainTab={isMainTab} onChangeTab={setIsMainTab} />
+        <SearchBarTab isMainTab={isMainTab} onChangeTab={setIsMainTab} />
         {isMainTab
           ? ACCORDION_MENU.map((menu) => (
               <AccordionContainer

@@ -22,11 +22,12 @@ const AccordionButton = ({ optionId, title, size }: Props) => {
   const { openIds, handleButtonIds } = useContext(AccordionContext)
   const searchTerms = useSearchingItemStore((state) => state.searchTerms)
 
+  const hasOpenId = openIds?.[optionId]
   const clickedValue = searchTerms[optionId]
 
   return (
-    <div className={cx('accordion-button', { active: openIds?.[optionId] })}>
-      <button onClick={() => handleButtonIds(optionId, !openIds?.[optionId])}>
+    <div className={cx('accordion-button', { active: hasOpenId })}>
+      <button onClick={() => handleButtonIds(optionId, !hasOpenId)}>
         <p>
           {title}
           {Array.isArray(clickedValue) &&
@@ -39,7 +40,7 @@ const AccordionButton = ({ optionId, title, size }: Props) => {
               <span>(All)</span>
             ))}
         </p>
-        {openIds?.[optionId] ? <CloseIcon /> : <OpenIcon />}
+        {hasOpenId ? <CloseIcon /> : <OpenIcon />}
       </button>
     </div>
   )

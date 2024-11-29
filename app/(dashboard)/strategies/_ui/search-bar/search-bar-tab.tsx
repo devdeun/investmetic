@@ -11,7 +11,7 @@ interface Props {
   onChangeTab: (isMainTab: boolean) => void
 }
 
-const SearchBarTap = ({ isMainTab, onChangeTab }: Props) => {
+const SearchBarTab = ({ isMainTab, onChangeTab }: Props) => {
   return (
     <div className={cx('tab-container')}>
       <Button
@@ -30,4 +30,4 @@ const SearchBarTap = ({ isMainTab, onChangeTab }: Props) => {
   )
 }
 
-export default SearchBarTap
+export default SearchBarTab
