@@ -46,14 +46,15 @@ const Dropdown = ({
 
   return (
     <DropdownContext.Provider value={{ isOpen, toggleOpen, handleSelect }}>
-      <div className={cx(`dropdown-${size}`)} style={containerStyle} ref={dropdownRef}>
+      <div className={cx('dropdown', `dropdown-${size}`)} style={containerStyle} ref={dropdownRef}>
         <button
           onClick={toggleOpen}
           className={cx('container', 'trigger', size, { open: isOpen })}
           style={labelStyle}
+          type="button"
         >
           {Trigger}
-          {isOpen ? <OpenIcon /> : <CloseIcon />}
+          {isOpen ? <CloseIcon /> : <OpenIcon />}
         </button>
         {isOpen && <ul className={cx('options', size)}>{children}</ul>}
       </div>

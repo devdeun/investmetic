@@ -20,26 +20,47 @@ export interface MonthlyAnalysisModel {
 }
 
 export interface ProfitRateChartDataModel {
-  xAxis: string[]
-  yAxis: number[]
+  dates: string[]
+  profitRates: number[]
 }
 
 export interface StrategiesModel {
-  strategyId: string
+  strategyId: number
   strategyName: string
+  traderImgUrl?: string
   nickname: string
-  traderImage?: string
-  stockTypeIconUrl: string[]
-  stockTypeNames: string[]
-  profitRateChartData: ProfitRateChartDataModel
+  stockTypeInfo: {
+    stockTypeIconUrls: string[]
+    stockTypeNames: string[]
+  }
   tradeTypeIconUrl: string
   tradeTypeName: string
-  mdd: string
+  profitRateChartData: ProfitRateChartDataModel
+  mdd: number
   smScore: number
-  cumulativeProfitLossRate: number
+  cumulativeProfitRate: number
   recentYearProfitLossRate?: number
-  subscriptionCnt: number
-  isSubscribed: boolean
+  subscriptionCount: number
   averageRating: number
-  totalReview: number
+  totalReviews: number
+  isSubscribed: boolean
+}
+
+export interface StrategyDetailsInformationModel {
+  strategyId: string
+  strategyName: string
+  stockTypeIconUrls: string[]
+  tradeTypeIconUrl: string
+  stockTypeNames: string[]
+  tradeTypeName: string
+  operationCycle: string
+  strategyDescription: string
+  cumulativeProfitRate: number
+  maxDrawdownRate: number
+  averageProfitLossRate: number
+  profitFactor: number
+  winRate: number
+  subscriptionCount: number
+  traderImgUrl: string
+  subscribed: boolean
 }

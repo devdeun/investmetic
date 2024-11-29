@@ -22,8 +22,8 @@ const Sub = () => {
           const data = await res.json()
           setUser(data)
         }
-      } catch (error) {
-        console.error('Fetch error:', error)
+      } catch (err) {
+        console.error('Fetch error:', err)
       }
     }
 

@@ -3,15 +3,15 @@
 import Logo from '@/public/images/logo.svg'
 import classNames from 'classnames/bind'
 
-import { UserType } from '@/shared/types/user'
+import { UserType } from '@/shared/types/auth'
 
 import styles from './styles.module.scss'
 
 const cx = classNames.bind(styles)
 
 const COMPLETE_MESSAGE = {
-  investor: '다양한 투자 전략들을 찾아보세요!',
-  trader: '나만의 투자 전략들을 공유해보세요!',
+  INVESTOR: '다양한 투자 전략들을 찾아보세요!',
+  TRADER: '나만의 투자 전략들을 공유해보세요!',
 }
 
 interface Props {

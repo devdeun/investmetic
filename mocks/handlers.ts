@@ -1,4 +1,5 @@
 import {
+  authHandlers,
   postHandlers,
   strategiesHandlers,
   strategyDetailsHandlers,
@@ -8,6 +9,7 @@ import {
 const handlers = [
   ...userHandlers,
   ...postHandlers,
+  ...authHandlers,
   ...strategyDetailsHandlers,
   ...strategiesHandlers,
 ]

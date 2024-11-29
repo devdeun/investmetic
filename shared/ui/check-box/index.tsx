@@ -9,7 +9,7 @@ const cx = classNames.bind(styles)
 
 interface Props {
   label?: string
-  isChecked: boolean
+  isChecked?: boolean
   onChange: (checked: boolean) => void
   className?: string
   textColor?: 'gray500' | 'gray600' | 'gray800'
@@ -18,7 +18,7 @@ interface Props {
 
 const Checkbox = ({
   label,
-  isChecked,
+  isChecked = false,
   onChange,
   className = '',
   textColor = 'gray500',

@@ -19,15 +19,16 @@ const StrategiesItem = ({ strategiesData: data }: Props) => {
   return (
     <Link className={cx('container')} href={`/strategies/${data.strategyId}`}>
       <StrategiesSummary
-        icon={[...data.stockTypeIconUrl, data.tradeTypeIconUrl]}
+        iconUrls={[data.tradeTypeIconUrl, ...data.stockTypeInfo.stockTypeIconUrls]}
+        iconNames={[data.tradeTypeName, ...data.stockTypeInfo.stockTypeNames]}
         title={data.strategyName}
         profile={{
-          traderImage: data.traderImage,
+          traderImage: data.traderImgUrl,
           nickname: data.nickname,
         }}
-        subscriptionCount={data.subscriptionCnt}
+        subscriptionCount={data.subscriptionCount}
         averageRating={data.averageRating}
-        totalReview={data.totalReview}
+        totalReview={data.totalReviews}
       />
       <AreaChart profitRateChartData={data.profitRateChartData} />
       <div className={cx('mdd')}>
@@ -38,7 +39,7 @@ const StrategiesItem = ({ strategiesData: data }: Props) => {
       </div>
       <div className={cx('profit')}>
         <span>누적 수익률</span>
-        <p>{data.cumulativeProfitLossRate}%</p>
+        <p>{data.cumulativeProfitRate}%</p>
         <span>최근 1년 수익률</span>
         <p>{data.recentYearProfitLossRate ? data.recentYearProfitLossRate + '%' : '-'}</p>
       </div>

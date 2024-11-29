@@ -1,5 +1,6 @@
-import getStrategiesData from '@/app/(dashboard)/strategies/_api/get-strategies'
 import { useQuery } from '@tanstack/react-query'
+
+import getStrategiesData from '../../_api/get-strategies'
 
 interface Props {
   isReady: boolean

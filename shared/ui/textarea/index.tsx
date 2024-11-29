@@ -1,6 +1,6 @@
 'use client'
 
-import { ComponentProps } from 'react'
+import { ComponentProps, forwardRef } from 'react'
 
 import classNames from 'classnames/bind'
 
@@ -12,16 +12,19 @@ interface Props extends ComponentProps<'textarea'> {
   rows?: number
 }
 
-export const Textarea = ({ rows = 5, className, value, onChange, ...props }: Props) => {
-  return (
-    <div>
+export const Textarea = forwardRef<HTMLTextAreaElement, Props>(
+  ({ rows = 5, className, value, onChange, ...props }, ref) => {
+    return (
       <textarea
+        ref={ref}
         value={value}
         onChange={onChange}
         rows={rows}
         className={cx('textarea', className)}
         {...props}
       />
-    </div>
-  )
-}
+    )
+  }
+)
+
+Textarea.displayName = 'Textarea'

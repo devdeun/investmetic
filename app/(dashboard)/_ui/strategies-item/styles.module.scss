@@ -60,10 +60,34 @@
 .subscribe-icon {
   button {
     background: transparent;
+    svg {
+      width: 36px;
+    }
   }
 }
 
 .chart {
   width: 100%;
   overflow: hidden;
+}
+
+.icon-container {
+  display: flex;
+  gap: 4px;
+  .icon-wrapper {
+    .icon {
+      position: relative;
+    }
+    .tooltip {
+      background-color: $color-gray-700;
+      border-radius: 20px;
+      padding: 8px 20px 6px;
+      @include typo-c1;
+      .arrow {
+        width: 14px;
+        height: 14px;
+        z-index: zIndex(hidden);
+      }
+    }
+  }
 }
