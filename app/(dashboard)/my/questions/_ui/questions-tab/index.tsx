@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { Suspense, useState } from 'react'
 
 import Tabs from '@/shared/ui/tabs'
 
@@ -13,17 +13,29 @@ const QuestionsTab = () => {
     {
       id: 'all',
       label: '모든 질문',
-      content: <QuestionsTabContent options="all" />,
+      content: (
+        <Suspense>
+          <QuestionsTabContent options="all" />
+        </Suspense>
+      ),
     },
     {
       id: 'waiting',
       label: '답변 대기',
-      content: <QuestionsTabContent options="waiting" />,
+      content: (
+        <Suspense>
+          <QuestionsTabContent options="waiting" />
+        </Suspense>
+      ),
     },
     {
       id: 'complete',
       label: '답변 완료',
-      content: <QuestionsTabContent options="complete" />,
+      content: (
+        <Suspense>
+          <QuestionsTabContent options="complete" />
+        </Suspense>
+      ),
     },
   ]
 
