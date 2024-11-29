@@ -5,11 +5,12 @@ import styles from './styles.module.scss'
 const cx = classNames.bind(styles)
 
 interface Props {
+  isFixed?: boolean
   children: React.ReactNode
 }
 
-const SideContainer = ({ children }: Props) => {
-  return <aside className={cx('side-bar')}>{children}</aside>
+const SideContainer = ({ isFixed = false, children }: Props) => {
+  return <aside className={cx('side-bar', { fixed: isFixed })}>{children}</aside>
 }
 
 export default SideContainer
