@@ -13,9 +13,7 @@ const getStrategiesData = async (
   try {
     const response = await axios.get(`/api/strategies?page=${page}&size=${size}`)
     if (!response.data) {
-      // 임시 목데이터
       console.error('전략 목록 데이터 가져오기 실패')
-      return { strategiesData: strategiesMockData, totalPages: 2 }
     }
     const {
       content: strategiesData,
@@ -25,6 +23,8 @@ const getStrategiesData = async (
     return { strategiesData, totalPages }
   } catch (err) {
     console.error(err)
+    // 임시 목데이터
+    return { strategiesData: strategiesMockData, totalPages: 2 }
   }
 }
 
