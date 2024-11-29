@@ -1,25 +1,30 @@
+// import { TABLE_DATA } from '@/app/admin/notices/tabledata'
+import { ReactNode } from 'react'
+
 import classNames from 'classnames/bind'
 
 import { DailyAnalysisModel, MonthlyAnalysisModel } from '@/shared/types/strategy-details-data'
+import sliceArray from '@/shared/utils/slice-array'
 
 import styles from './styles.module.scss'
 
 const cx = classNames.bind(styles)
 
-type TableBodyDataType = DailyAnalysisModel | MonthlyAnalysisModel
+type TableBodyDataType =
+  | DailyAnalysisModel
+  | MonthlyAnalysisModel
+  | Array<ReactNode | string | number>
 
-interface Props {
+export interface VerticalTableProps {
   tableHead: string[]
   tableBody: TableBodyDataType[]
   countPerPage: number
   currentPage: number
 }
 
-const VerticalTable = ({ tableHead, tableBody, countPerPage, currentPage }: Props) => {
-  const croppedTableBody = tableBody.slice(
-    countPerPage * (currentPage - 1),
-    countPerPage * (currentPage - 1) + countPerPage
-  )
+const VerticalTable = ({ tableHead, tableBody, countPerPage, currentPage }: VerticalTableProps) => {
+  const hasData = tableBody.length > 0
+  const slicedTableBody = sliceArray(tableBody, countPerPage, currentPage)
 
   return (
     <div className={cx('container')}>
@@ -31,16 +36,23 @@ const VerticalTable = ({ tableHead, tableBody, countPerPage, currentPage }: Prop
             ))}
           </tr>
         </thead>
-        <tbody>
-          {croppedTableBody.map((row) => (
-            <tr key={Object.values(row)[0]}>
-              {Object.entries(row).map((rowData, idx) => (
-                <td key={idx}>{rowData[1]}</td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
+        {hasData && (
+          <tbody>
+            {slicedTableBody.map((row) => (
+              <tr key={Object.values(row)[0]}>
+                {Object.values(row).map((data, idx) => (
+                  <td key={data + idx}>{data}</td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        )}
       </table>
+      {!hasData && (
+        <div className={cx('no-data')} style={{ height: `calc(40px * ${countPerPage}` }}>
+          데이터가 존재하지 않습니다.
+        </div>
+      )}
     </div>
   )
 }
