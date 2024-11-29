@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind'
 
-import { DailyAnalysisModel, MonthlyAnalysisModel } from '@/shared/types/strategy-details-data'
+import { DailyAnalysisModel, MonthlyAnalysisModel } from '@/shared/types/strategy-data'
 import { Button } from '@/shared/ui/button'
 import Pagination from '@/shared/ui/pagination'
 import VerticalTable from '@/shared/ui/table/vertical'

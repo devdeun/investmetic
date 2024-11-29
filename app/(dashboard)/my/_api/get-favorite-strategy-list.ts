@@ -1,7 +1,7 @@
 import { strategiesMockData } from '@/mocks/handlers/strategies'
 
 import axiosInstance from '@/shared/api/axios'
-import { StrategiesModel } from '@/shared/types/strategy-details-data'
+import { StrategiesModel } from '@/shared/types/strategy-data'
 
 interface Props {
   page: number

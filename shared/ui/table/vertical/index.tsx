@@ -3,7 +3,7 @@ import { ReactNode } from 'react'
 
 import classNames from 'classnames/bind'
 
-import { DailyAnalysisModel, MonthlyAnalysisModel } from '@/shared/types/strategy-details-data'
+import { DailyAnalysisModel, MonthlyAnalysisModel } from '@/shared/types/strategy-data'
 import { Button } from '@/shared/ui/button'
 import sliceArray from '@/shared/utils/slice-array'
 
@@ -77,4 +77,3 @@ const VerticalTable = ({
 }
 
 export default VerticalTable
-
