@@ -13,7 +13,7 @@ interface StrategiesResponseModel {
 
 export const getMyStrategyList = async ({ page = 1, size = 4 }: { page: number; size: number }) => {
   const response = await axiosInstance.get<StrategiesResponseModel>(
-    `/api/my-strategies/page=${page}&size=${size}`
+    `/api/my-strategies?page=${page}&size=${size}`
   )
   return response.data.result
 }

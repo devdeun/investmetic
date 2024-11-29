@@ -12,9 +12,10 @@ const cx = classNames.bind(styles)
 
 interface Props {
   information: StrategyDetailsInformationModel
+  type?: 'default' | 'my'
 }
 
-const DetailsInformation = ({ information }: Props) => {
+const DetailsInformation = ({ information, type = 'default' }: Props) => {
   const percentageToArray = [
     { percent: information.cumulativeProfitRate, label: '누적 수익률' },
     { percent: information.maxDrawdownRate, label: '최대 자본 인하율' },
@@ -38,11 +39,13 @@ const DetailsInformation = ({ information }: Props) => {
         />
       </div>
       <StrategyIntroduction content={information.strategyDescription} />
-      <div className={cx('percentage-container')}>
-        {percentageToArray.map((data) => (
-          <Percentage key={data.label} percent={data.percent} label={data.label} />
-        ))}
-      </div>
+      {type === 'default' && (
+        <div className={cx('percentage-container')}>
+          {percentageToArray.map((data) => (
+            <Percentage key={data.label} percent={data.percent} label={data.label} />
+          ))}
+        </div>
+      )}
     </>
   )
 }

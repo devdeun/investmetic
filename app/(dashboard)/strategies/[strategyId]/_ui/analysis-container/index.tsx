@@ -16,7 +16,11 @@ const cx = classNames.bind(styles)
 
 type OptionsType = (typeof YAXIS_OPTIONS)[keyof typeof YAXIS_OPTIONS]
 
-const AnalysisContainer = () => {
+interface Props {
+  type?: 'default' | 'my'
+}
+
+const AnalysisContainer = ({ type = 'default' }: Props) => {
   const [firstValue, setFirstValue] = useState<OptionsType>('잔고')
   const [secondValue, setSecondValue] = useState<OptionsType>('잔고')
 
@@ -30,27 +34,30 @@ const AnalysisContainer = () => {
   return (
     <div className={cx('container')}>
       <div className={cx('analysis-header')}>
-        <p>분석</p>
-        <div>
-          <Select
-            size="large"
-            options={options}
-            value={firstValue}
-            onChange={(newValue) => setFirstValue(newValue as OptionsType)}
-          />
-          <Select
-            size="large"
-            options={options}
-            value={secondValue}
-            onChange={(newValue) => setSecondValue(newValue as OptionsType)}
-          />
+        <p className={cx({ my: type === 'my' })}>분석</p>
+        {type === 'default' && (
+          <div>
+            <Select
+              size="large"
+              options={options}
+              value={firstValue}
+              onChange={(newValue) => setFirstValue(newValue as OptionsType)}
+            />
+            <Select
+              size="large"
+              options={options}
+              value={secondValue}
+              onChange={(newValue) => setSecondValue(newValue as OptionsType)}
+            />
+          </div>
+        )}
+      </div>
+      {type === 'default' && (
+        <div className={cx('chart-wrapper')}>
+          <AnalysisChart analysisChartData={analysisChartData} />
         </div>
-      </div>
-      <div className={cx('chart-wrapper')}>
-        <AnalysisChart analysisChartData={analysisChartData} />
-      </div>
-
-      <TabsWithTable />
+      )}
+      <TabsWithTable isEditable={type === 'my' ? true : false} />
     </div>
   )
 }

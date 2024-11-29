@@ -4,6 +4,7 @@ import { ReactNode } from 'react'
 import classNames from 'classnames/bind'
 
 import { DailyAnalysisModel, MonthlyAnalysisModel } from '@/shared/types/strategy-details-data'
+import { Button } from '@/shared/ui/button'
 import sliceArray from '@/shared/utils/slice-array'
 
 import styles from './styles.module.scss'
@@ -20,9 +21,16 @@ export interface VerticalTableProps {
   tableBody: TableBodyDataType[]
   countPerPage: number
   currentPage: number
+  isEditable?: boolean
 }
 
-const VerticalTable = ({ tableHead, tableBody, countPerPage, currentPage }: VerticalTableProps) => {
+const VerticalTable = ({
+  tableHead,
+  tableBody,
+  countPerPage,
+  currentPage,
+  isEditable = false,
+}: VerticalTableProps) => {
   const hasData = tableBody.length > 0
   const slicedTableBody = sliceArray(tableBody, countPerPage, currentPage)
 
@@ -34,6 +42,7 @@ const VerticalTable = ({ tableHead, tableBody, countPerPage, currentPage }: Vert
             {tableHead.map((head) => (
               <td key={head}>{head}</td>
             ))}
+            {isEditable && <td></td>}
           </tr>
         </thead>
         {hasData && (
@@ -43,6 +52,16 @@ const VerticalTable = ({ tableHead, tableBody, countPerPage, currentPage }: Vert
                 {Object.values(row).map((data, idx) => (
                   <td key={data + idx}>{data}</td>
                 ))}
+                {isEditable && (
+                  <td className={cx('button-container')}>
+                    <Button size="small" variant="outline" className={cx('edit-button')}>
+                      수정
+                    </Button>
+                    <Button size="small" variant="filled" className={cx('delete-button')}>
+                      삭제
+                    </Button>
+                  </td>
+                )}
               </tr>
             ))}
           </tbody>
@@ -58,3 +77,4 @@ const VerticalTable = ({ tableHead, tableBody, countPerPage, currentPage }: Vert
 }
 
 export default VerticalTable
+
