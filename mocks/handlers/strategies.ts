@@ -1,6 +1,6 @@
 import { HttpResponse, http } from 'msw'
 
-import { StrategiesModel } from '@/shared/types/strategy-details-data'
+import { StrategiesModel } from '@/shared/types/strategy-data'
 
 export const strategiesMockData: StrategiesModel[] = [
   {

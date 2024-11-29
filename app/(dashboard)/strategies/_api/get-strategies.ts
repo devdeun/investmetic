@@ -1,7 +1,7 @@
 import { strategiesMockData } from '@/mocks/handlers/strategies'
 import axios from 'axios'
 
-import { StrategiesModel } from '@/shared/types/strategy-details-data'
+import { StrategiesModel } from '@/shared/types/strategy-data'
 
 const getStrategiesData = async (
   isReady: boolean,

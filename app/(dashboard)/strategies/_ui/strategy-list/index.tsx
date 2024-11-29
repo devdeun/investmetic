@@ -18,11 +18,11 @@ const COUNT_PER_PAGE = 8
 
 const StrategyList = () => {
   const isReady = useMSWStore((state) => state.isReady)
-  const { page, handlePageChange } = usePagination({
+  const { size, page, handlePageChange } = usePagination({
     basePath: PATH.STRATEGIES,
     pageSize: COUNT_PER_PAGE,
   })
-  const { data } = useGetStrategiesData({ isReady, page, size: COUNT_PER_PAGE })
+  const { data } = useGetStrategiesData({ isReady, page, size })
 
   const strategiesData = data?.strategiesData || []
   const totalPages = data?.totalPages || null

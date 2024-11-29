@@ -1,5 +1,5 @@
 import axiosInstance from '@/shared/api/axios'
-import { StrategiesModel } from '@/shared/types/strategy-details-data'
+import { StrategiesModel } from '@/shared/types/strategy-data'
 
 // 실제 api 나오면 수정 필요함
 // totalElements 사용해서 hasmore값 계산해야될 것 같음
