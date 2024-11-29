@@ -36,3 +36,11 @@
     }
   }
 }
+
+.no-data {
+  display: flex;
+  justify-content: center;
+  margin-top: 80px;
+  color: $color-gray-600;
+  @include typo-b1;
+}

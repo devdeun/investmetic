@@ -1,15 +1,22 @@
+// import { TABLE_DATA } from '@/app/admin/notices/tabledata'
+import { ReactNode } from 'react'
+
 import classNames from 'classnames/bind'
 
 import { DailyAnalysisModel, MonthlyAnalysisModel } from '@/shared/types/strategy-details-data'
 import { Button } from '@/shared/ui/button'
+import sliceArray from '@/shared/utils/slice-array'
 
 import styles from './styles.module.scss'
 
 const cx = classNames.bind(styles)
 
-type TableBodyDataType = DailyAnalysisModel | MonthlyAnalysisModel
+type TableBodyDataType =
+  | DailyAnalysisModel
+  | MonthlyAnalysisModel
+  | Array<ReactNode | string | number>
 
-interface Props {
+export interface VerticalTableProps {
   tableHead: string[]
   tableBody: TableBodyDataType[]
   countPerPage: number
@@ -23,11 +30,9 @@ const VerticalTable = ({
   countPerPage,
   currentPage,
   isEditable = false,
-}: Props) => {
-  const croppedTableBody = tableBody.slice(
-    countPerPage * (currentPage - 1),
-    countPerPage * (currentPage - 1) + countPerPage
-  )
+}: VerticalTableProps) => {
+  const hasData = tableBody.length > 0
+  const slicedTableBody = sliceArray(tableBody, countPerPage, currentPage)
 
   return (
     <div className={cx('container')}>
@@ -40,28 +45,36 @@ const VerticalTable = ({
             {isEditable && <td></td>}
           </tr>
         </thead>
-        <tbody>
-          {croppedTableBody.map((row) => (
-            <tr key={Object.values(row)[0]}>
-              {Object.entries(row).map((rowData, idx) => (
-                <td key={idx}>{rowData[1]}</td>
-              ))}
-              {isEditable && (
-                <td className={cx('button-container')}>
-                  <Button size="small" variant="outline" className={cx('edit-button')}>
-                    수정
-                  </Button>
-                  <Button size="small" variant="filled" className={cx('delete-button')}>
-                    삭제
-                  </Button>
-                </td>
-              )}
-            </tr>
-          ))}
-        </tbody>
+        {hasData && (
+          <tbody>
+            {slicedTableBody.map((row) => (
+              <tr key={Object.values(row)[0]}>
+                {Object.values(row).map((data, idx) => (
+                  <td key={data + idx}>{data}</td>
+                ))}
+                {isEditable && (
+                  <td className={cx('button-container')}>
+                    <Button size="small" variant="outline" className={cx('edit-button')}>
+                      수정
+                    </Button>
+                    <Button size="small" variant="filled" className={cx('delete-button')}>
+                      삭제
+                    </Button>
+                  </td>
+                )}
+              </tr>
+            ))}
+          </tbody>
+        )}
       </table>
+      {!hasData && (
+        <div className={cx('no-data')} style={{ height: `calc(40px * ${countPerPage}` }}>
+          데이터가 존재하지 않습니다.
+        </div>
+      )}
     </div>
   )
 }
 
 export default VerticalTable
+
