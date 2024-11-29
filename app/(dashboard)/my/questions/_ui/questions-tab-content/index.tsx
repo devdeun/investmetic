@@ -1,3 +1,5 @@
+import { Suspense } from 'react'
+
 import classNames from 'classnames/bind'
 
 import { PATH } from '@/shared/constants/path'
@@ -99,23 +101,25 @@ const QuestionsTabContent = ({ options }: Props) => {
 
   return (
     <>
-      <ul className={cx('question-list')}>
-        {questionsData &&
-          questionsData.length &&
-          questionsData.map((question) => (
-            <li key={question.qnaId}>
-              <QuestionCard
-                qnaId={question.qnaId}
-                strategyName={question.strategyName}
-                title={question.title}
-                status={question.status}
-                contents={question.questionContent}
-                nickname={question.nickname}
-                createdAt={question.createdAt}
-              />
-            </li>
-          ))}
-      </ul>
+      <Suspense>
+        <ul className={cx('question-list')}>
+          {questionsData &&
+            questionsData.length &&
+            questionsData.map((question) => (
+              <li key={question.qnaId}>
+                <QuestionCard
+                  qnaId={question.qnaId}
+                  strategyName={question.strategyName}
+                  title={question.title}
+                  status={question.status}
+                  contents={question.questionContent}
+                  nickname={question.nickname}
+                  createdAt={question.createdAt}
+                />
+              </li>
+            ))}
+        </ul>
+      </Suspense>
       {!questionsData ||
         (!questionsData.length && <p className={cx('empty-message')}>문의 내역이 없습니다.</p>)}
       <div className={cx('pagination-wrapper')}>
