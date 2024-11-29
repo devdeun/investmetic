@@ -32,7 +32,7 @@ const AnalysisChart = ({ analysisChartData: data }: Props) => {
     const key = Object.keys(data.data)[sequence] as YAxisType | undefined
     return key ? YAXIS_OPTIONS[key] : ''
   }
-
+  if (!data) return null
   const chartOptions: Highcharts.Options = {
     chart: {
       type: 'areaspline',
