@@ -8,7 +8,17 @@ import { getUserFromToken, isTokenExpired, refreshToken } from '@/shared/utils/t
 import { isAdmin } from '../types/auth'
 
 export const createAxiosInstance = (options: { withInterceptors?: boolean } = {}) => {
-  const instance = axios.create()
+  const instance = axios.create({ baseURL: 'http://15.164.90.102:8081' })
+
+  instance.interceptors.request.use((config) => {
+    if (
+      config.url?.includes('/api/users/login') ||
+      config.url?.includes('/api/users/reissue/refreshtoken')
+    ) {
+      config.baseURL = ''
+    }
+    return config
+  })
 
   if (options.withInterceptors && typeof window !== 'undefined') {
     instance.interceptors.request.use(
