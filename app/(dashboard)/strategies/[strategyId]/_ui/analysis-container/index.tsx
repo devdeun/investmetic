@@ -14,7 +14,7 @@ import { YAXIS_OPTIONS } from './yaxis-options'
 
 const cx = classNames.bind(styles)
 
-export type OptionsType = keyof typeof YAXIS_OPTIONS
+export type AnalysisChartOptionsType = keyof typeof YAXIS_OPTIONS
 
 interface Props {
   strategyId: number
@@ -22,8 +22,9 @@ interface Props {
 }
 
 const AnalysisContainer = ({ strategyId, type = 'default' }: Props) => {
-  const [firstOption, setFirstOption] = useState<OptionsType>('PRINCIPAL')
-  const [secondOption, setSecondOption] = useState<OptionsType>('CUMULATIVE_PROFIT_LOSS')
+  const [firstOption, setFirstOption] = useState<AnalysisChartOptionsType>('PRINCIPAL')
+  const [secondOption, setSecondOption] =
+    useState<AnalysisChartOptionsType>('CUMULATIVE_PROFIT_LOSS')
   const { data: chartData } = useGetAnalysisChart({ strategyId, firstOption, secondOption })
   const optionsToArray = Object.entries(YAXIS_OPTIONS)
   const options: { value: string; label: string }[] = []
@@ -42,13 +43,13 @@ const AnalysisContainer = ({ strategyId, type = 'default' }: Props) => {
               size="large"
               options={options}
               value={firstOption}
-              onChange={(newValue) => setFirstOption(newValue as OptionsType)}
+              onChange={(newValue) => setFirstOption(newValue as AnalysisChartOptionsType)}
             />
             <Select
               size="large"
               options={options}
               value={secondOption}
-              onChange={(newValue) => setSecondOption(newValue as OptionsType)}
+              onChange={(newValue) => setSecondOption(newValue as AnalysisChartOptionsType)}
             />
           </div>
         )}

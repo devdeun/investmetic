@@ -1,11 +1,11 @@
 import axios from 'axios'
 
-import { OptionsType } from '../_ui/analysis-container'
+import { AnalysisChartOptionsType } from '../_ui/analysis-container'
 
 const getAnalysisChart = async (
   strategyId: number,
-  firstOption: OptionsType,
-  secondOption: OptionsType
+  firstOption: AnalysisChartOptionsType,
+  secondOption: AnalysisChartOptionsType
 ) => {
   try {
     const response = await axios.get(

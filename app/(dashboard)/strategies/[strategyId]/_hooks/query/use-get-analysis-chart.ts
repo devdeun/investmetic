@@ -1,12 +1,12 @@
 import { useQuery } from '@tanstack/react-query'
 
 import getAnalysisChart from '../../_api/get-analysis-chart'
-import { OptionsType } from '../../_ui/analysis-container'
+import { AnalysisChartOptionsType } from '../../_ui/analysis-container'
 
 interface Props {
   strategyId: number
-  firstOption: OptionsType
-  secondOption: OptionsType
+  firstOption: AnalysisChartOptionsType
+  secondOption: AnalysisChartOptionsType
 }
 
 const useGetAnalysisChart = ({ strategyId, firstOption, secondOption }: Props) => {
