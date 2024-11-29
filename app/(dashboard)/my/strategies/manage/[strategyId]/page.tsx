@@ -12,6 +12,7 @@ import SideContainer from '@/app/(dashboard)/strategies/_ui/side-container'
 import classNames from 'classnames/bind'
 
 import { useMSWStore } from '@/shared/stores/msw'
+import { Button } from '@/shared/ui/button'
 import BackHeader from '@/shared/ui/header/back-header'
 import Title from '@/shared/ui/title'
 
@@ -35,15 +36,20 @@ const StrategyManagePage = ({ params }: { params: { strategyId: string } }) => {
   })
 
   return (
-    <>
+    <div className={cx('container')}>
       <BackHeader label={'나의 전략으로 돌아가기'} />
-      <Title label={'나의 전략 관리'} />
-      <div className={cx('container')}>
+      <div className={cx('header')}>
+        <Title label={'나의 전략 관리'} />
+        <Button size="small" variant="filled" className={cx('edit-button')}>
+          정보 수정하기
+        </Button>
+      </div>
+      <div className={cx('strategy-container')}>
         {detailsInformationData && (
           <DetailsInformation information={detailsInformationData} type="my" />
         )}
         <AnalysisContainer type="my" />
-        <SideContainer hasButton={true} isFixed={true}>
+        <SideContainer hasButton={true}>
           <SubscriberItem subscribers={99} />
           {hasDetailsSideData?.[0] &&
             detailsSideData?.map((data, idx) => (
@@ -53,7 +59,7 @@ const StrategyManagePage = ({ params }: { params: { strategyId: string } }) => {
             ))}
         </SideContainer>
       </div>
-    </>
+    </div>
   )
 }
 export default StrategyManagePage

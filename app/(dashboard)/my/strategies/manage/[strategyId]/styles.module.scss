@@ -1,17 +1,20 @@
 .container {
+  position: relative;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+
+  .edit-button {
+    width: $strategy-sidebar-width;
+    height: 40px;
+  }
+}
+
+.strategy-container {
   width: calc(100% - $strategy-sidebar-width);
   max-width: $max-width;
   padding-right: 10px;
-  padding-top: 10px;
-}
-
-.wrapper {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: -5px;
-  button {
-    width: $strategy-sidebar-width;
-    height: 35px;
-  }
+  margin-top: -10px;
 }
