@@ -63,3 +63,16 @@ export interface StrategyDetailsInformationModel extends BaseStrategyModel {
   finalProfitLossDate: string
   createdAt: string
 }
+
+export interface StrategyCardModel {
+  strategyId: number
+  strategyName: string
+  TraderImgUrl: string
+  nickname: string
+  profitRateChartData: number[]
+  smScore: number
+  cumulativeProfitRate: number
+  subscriptionCount: number
+  averageRating: number
+  totalReviews: number
+}
