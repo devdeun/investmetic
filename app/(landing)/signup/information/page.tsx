@@ -111,6 +111,9 @@ const InformationPage = () => {
                 중복확인
               </Button>
             </div>
+            {formState.isNicknameVerified && (
+              <small className={cx('nickname-verified')}>사용할 수 있는 닉네임입니다.</small>
+            )}
             <small>* 사이트 이용 시 사용할 닉네임을 입력해주세요.</small>
           </div>
         </div>

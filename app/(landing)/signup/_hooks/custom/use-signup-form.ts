@@ -69,6 +69,8 @@ const useSignupForm = () => {
   }
 
   const handleNicknameCheck = async () => {
+    setFormState((prev) => ({ ...prev, isNicknameVerified: false }))
+
     try {
       const response = await checkNicknameDuplicate(form.nickname)
       if (response.result.isAvailable) {
