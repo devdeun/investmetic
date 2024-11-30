@@ -1,5 +1,8 @@
 'use client'
 
+import AnalysisContainer from '@/app/(dashboard)/_ui/analysis-container'
+import SubscriberItem from '@/app/(dashboard)/_ui/subscriber-item'
+
 import { useMSWStore } from '@/shared/stores/msw'
 import { useAuthStore } from '@/shared/stores/use-auth-store'
 import BackHeader from '@/shared/ui/header/back-header'
@@ -9,9 +12,7 @@ import DetailsInformation from '../../_ui/details-information'
 import DetailsSideItem, { InformationModel, TitleType } from '../../_ui/details-side-item'
 import SideContainer from '../_ui/side-container'
 import useGetDetailsInformationData from './_hooks/query/use-get-details-information-data'
-import AnalysisContainer from './_ui/analysis-container'
 import ReviewContainer from './_ui/review-container'
-import SubscriberItem from './_ui/subscriber-item'
 
 export type InformationType = { title: TitleType; data: string | number } | InformationModel[]
 
