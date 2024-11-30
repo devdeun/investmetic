@@ -9,22 +9,22 @@ const nextConfig = {
     @import "@/shared/styles/base/functions";
   `,
   },
-  // async rewrites() {
-  //   return [
-  //     {
-  //       source: '/api/users/reissue/refreshtoken',
-  //       destination: '/api/users/reissue/refreshtoken',
-  //     },
-  //     {
-  //       source: '/api/users/login',
-  //       destination: '/api/users/login',
-  //     },
-  //     {
-  //       source: '/api/:path*',
-  //       destination: 'http://15.164.90.102:8081/api/:path*',
-  //     },
-  //   ]
-  // },
+  async rewrites() {
+    return [
+      // {
+      //   source: '/api/users/reissue/refreshtoken',
+      //   destination: '/api/users/reissue/refreshtoken',
+      // },
+      // {
+      //   source: '/api/users/login',
+      //   destination: '/api/users/login',
+      // },
+      {
+        source: '/api/strategies/:path*',
+        destination: 'http://15.164.90.102:8081/api/strategies/:path*',
+      },
+    ]
+  },
   webpack: (config, { isServer }) => {
     if (isServer) {
       if (Array.isArray(config.resolve.alias)) {

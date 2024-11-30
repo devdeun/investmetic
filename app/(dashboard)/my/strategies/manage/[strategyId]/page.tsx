@@ -48,7 +48,7 @@ const StrategyManagePage = ({ params }: { params: { strategyId: number } }) => {
         {detailsInformationData && (
           <DetailsInformation information={detailsInformationData} type="my" />
         )}
-        <AnalysisContainer type="my" />
+        <AnalysisContainer type="my" strategyId={params.strategyId} />
         <SideContainer hasButton={true}>
           <SubscriberItem subscribers={99} />
           {hasDetailsSideData?.[0] &&
