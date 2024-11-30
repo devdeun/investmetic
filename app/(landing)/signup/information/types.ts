@@ -54,6 +54,7 @@ export interface SignupFormDataModel {
   email: string
   emailDomain: string
   role: UserType
+  code: string
   infoAgreement: boolean
 }
 

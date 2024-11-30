@@ -129,6 +129,7 @@ const useSignupForm = () => {
         birthYear: form.birthYear,
         birthMonth: form.birthMonth,
         birthDay: form.birthDay,
+        code: form.verificationCode,
         emailDomain: form.emailDomain,
       }
 
