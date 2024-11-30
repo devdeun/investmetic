@@ -50,17 +50,21 @@ const StrategiesItem = ({ strategiesData: data, type = 'default' }: Props) => {
           <Subscribe subscriptionStatus={data.isSubscribed} />
         </div>
       )}
-      <div className={cx('public')}>
-        <p>{data.isPublic === 'PUBLIC' ? '공개' : '비공개'}</p>
-      </div>
-      <div className={cx('manage-buttons')}>
-        <Button size="small" variant="filled">
-          관리
-        </Button>
-        <Button size="small" variant="outline">
-          삭제
-        </Button>
-      </div>
+      {type === 'my' && (
+        <>
+          <div className={cx('public')}>
+            <p>{data.isPublic === 'PUBLIC' ? '공개' : '비공개'}</p>
+          </div>
+          <div className={cx('manage-buttons')}>
+            <Button size="small" variant="filled">
+              관리
+            </Button>
+            <Button size="small" variant="outline">
+              삭제
+            </Button>
+          </div>
+        </>
+      )}
     </Link>
   )
 }
