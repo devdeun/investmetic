@@ -47,6 +47,7 @@ export interface StrategiesModel extends BaseStrategyModel {
   recentYearProfitLossRate?: number
   averageRating: number
   totalReviews: number
+  isPublic?: string
 }
 
 export interface StrategyDetailsInformationModel extends BaseStrategyModel {
