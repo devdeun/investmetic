@@ -11,6 +11,7 @@ interface Props {
 
 interface UsePaginationReturnModel {
   page: number
+  size: number
   handlePageChange: (page: number) => void
 }
 
@@ -18,6 +19,7 @@ export const usePagination = ({ basePath, pageSize }: Props): UsePaginationRetur
   const searchParams = useSearchParams()
   const router = useRouter()
   const page = parseInt(searchParams?.get('page') || '1')
+  const size = parseInt(searchParams?.get('size') || '1')
 
   useEffect(() => {
     if (!searchParams.size) {
@@ -31,6 +33,7 @@ export const usePagination = ({ basePath, pageSize }: Props): UsePaginationRetur
 
   return {
     page,
+    size,
     handlePageChange,
   }
 }

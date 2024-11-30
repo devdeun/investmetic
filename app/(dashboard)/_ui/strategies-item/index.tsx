@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 import classNames from 'classnames/bind'
 
-import { StrategiesModel } from '@/shared/types/strategy-details-data'
+import { StrategiesModel } from '@/shared/types/strategy-data'
 import { Button } from '@/shared/ui/button'
 
 import AreaChart from './area-chart'

@@ -24,10 +24,9 @@ export interface ProfitRateChartDataModel {
   profitRates: number[]
 }
 
-export interface StrategiesModel {
+interface BaseStrategyModel {
   strategyId: number
   strategyName: string
-  traderImgUrl?: string
   nickname: string
   stockTypeInfo: {
     stockTypeIconUrls: string[]
@@ -35,33 +34,32 @@ export interface StrategiesModel {
   }
   tradeTypeIconUrl: string
   tradeTypeName: string
+  cumulativeProfitRate: number
+  smScore: number
+  subscriptionCount: number
+  isSubscribed: boolean
+  traderImgUrl?: string
+}
+
+export interface StrategiesModel extends BaseStrategyModel {
   profitRateChartData: ProfitRateChartDataModel
   mdd: number
-  smScore: number
-  cumulativeProfitRate: number
   recentYearProfitLossRate?: number
-  subscriptionCount: number
   averageRating: number
   totalReviews: number
-  isSubscribed: boolean
   isPublic?: string
 }
 
-export interface StrategyDetailsInformationModel {
-  strategyId: string
-  strategyName: string
-  stockTypeIconUrls: string[]
-  tradeTypeIconUrl: string
-  stockTypeNames: string[]
-  tradeTypeName: string
+export interface StrategyDetailsInformationModel extends BaseStrategyModel {
   operationCycle: string
   strategyDescription: string
-  cumulativeProfitRate: number
   maxDrawdownRate: number
   averageProfitLossRate: number
   profitFactor: number
   winRate: number
-  subscriptionCount: number
-  traderImgUrl: string
-  subscribed: boolean
+  minimumInvestmentAmount: string
+  initialInvestment: number | string
+  kpRatio: number
+  finalProfitLossDate: string
+  createdAt: string
 }

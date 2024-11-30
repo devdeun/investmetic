@@ -1,5 +1,5 @@
 import axiosInstance from '@/shared/api/axios'
-import { StrategiesModel } from '@/shared/types/strategy-details-data'
+import { StrategiesModel } from '@/shared/types/strategy-data'
 
 interface StrategiesResponseModel {
   isSuccess: boolean
