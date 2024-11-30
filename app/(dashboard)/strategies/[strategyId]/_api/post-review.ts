@@ -1,0 +1,16 @@
+import axios from 'axios'
+
+const postReview = async (
+  strategyId: number,
+  content: { content: string; starRating: number }
+): Promise<boolean | null> => {
+  try {
+    const response = await axios.post(`/api/strategies/${strategyId}/reviews?userId=1`, content)
+    return response.data.isSuccess
+  } catch (err) {
+    console.error(err, '리뷰 등록 실패')
+    return null
+  }
+}
+
+export default postReview
