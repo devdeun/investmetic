@@ -36,7 +36,6 @@ export const strategiesMockData: StrategiesModel[] = [
     averageRating: 4.9,
     totalReviews: 34,
     isSubscribed: true,
-    isPublic: '',
   },
   {
     strategyId: 2,
@@ -71,7 +70,6 @@ export const strategiesMockData: StrategiesModel[] = [
     averageRating: 4.6,
     totalReviews: 19,
     isSubscribed: false,
-    isPublic: '',
   },
   {
     strategyId: 3,
@@ -106,7 +104,6 @@ export const strategiesMockData: StrategiesModel[] = [
     averageRating: 4.7,
     totalReviews: 45,
     isSubscribed: true,
-    isPublic: '',
   },
   {
     strategyId: 4,
@@ -141,7 +138,6 @@ export const strategiesMockData: StrategiesModel[] = [
     averageRating: 4.5,
     totalReviews: 29,
     isSubscribed: false,
-    isPublic: '',
   },
   {
     strategyId: 5,
@@ -176,7 +172,6 @@ export const strategiesMockData: StrategiesModel[] = [
     averageRating: 4.8,
     totalReviews: 22,
     isSubscribed: true,
-    isPublic: '',
   },
   {
     strategyId: 6,
@@ -211,7 +206,6 @@ export const strategiesMockData: StrategiesModel[] = [
     averageRating: 4.9,
     totalReviews: 52,
     isSubscribed: true,
-    isPublic: '',
   },
   {
     strategyId: 7,
@@ -246,7 +240,6 @@ export const strategiesMockData: StrategiesModel[] = [
     averageRating: 4.4,
     totalReviews: 18,
     isSubscribed: false,
-    isPublic: '',
   },
   {
     strategyId: 8,
@@ -281,7 +274,6 @@ export const strategiesMockData: StrategiesModel[] = [
     averageRating: 4.7,
     totalReviews: 37,
     isSubscribed: true,
-    isPublic: '',
   },
   {
     strategyId: 9,
@@ -316,7 +308,6 @@ export const strategiesMockData: StrategiesModel[] = [
     averageRating: 4.3,
     totalReviews: 11,
     isSubscribed: false,
-    isPublic: '',
   },
   {
     strategyId: 10,
@@ -351,7 +342,6 @@ export const strategiesMockData: StrategiesModel[] = [
     averageRating: 4.9,
     totalReviews: 48,
     isSubscribed: true,
-    isPublic: '',
   },
   {
     strategyId: 11,
@@ -386,7 +376,6 @@ export const strategiesMockData: StrategiesModel[] = [
     averageRating: 4.6,
     totalReviews: 26,
     isSubscribed: false,
-    isPublic: '',
   },
   {
     strategyId: 12,
@@ -421,7 +410,6 @@ export const strategiesMockData: StrategiesModel[] = [
     averageRating: 4.5,
     totalReviews: 21,
     isSubscribed: true,
-    isPublic: '',
   },
 ]
 

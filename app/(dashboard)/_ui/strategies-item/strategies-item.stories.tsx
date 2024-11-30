@@ -54,7 +54,6 @@ Primary.args = {
       averageRating: 4.9,
       totalReviews: 34,
       isSubscribed: true,
-      isPublic: '',
     },
     {
       strategyId: 2,
@@ -89,7 +88,6 @@ Primary.args = {
       averageRating: 4.6,
       totalReviews: 19,
       isSubscribed: false,
-      isPublic: '',
     },
   ],
 }
