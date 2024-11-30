@@ -77,4 +77,3 @@ const VerticalTable = ({
 }
 
 export default VerticalTable
-
