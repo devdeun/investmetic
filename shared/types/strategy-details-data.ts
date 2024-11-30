@@ -44,7 +44,7 @@ export interface StrategiesModel {
   averageRating: number
   totalReviews: number
   isSubscribed: boolean
-  isPublic: string
+  isPublic?: string
 }
 
 export interface StrategyDetailsInformationModel {
