@@ -62,6 +62,13 @@ const useSignupForm = () => {
         isNicknameVerified: false,
       }))
     }
+
+    if (name === 'phone') {
+      setFormState((prev) => ({
+        ...prev,
+        isPhoneVerified: false,
+      }))
+    }
   }
 
   const handleMarketingAgree = (checked: boolean) => {
@@ -109,7 +116,8 @@ const useSignupForm = () => {
     const formErrors = validateSignupForm(
       form,
       formState.isEmailVerified,
-      formState.isNicknameVerified
+      formState.isNicknameVerified,
+      formState.isPhoneVerified
     )
     setIsValidated(true)
 
@@ -117,6 +125,7 @@ const useSignupForm = () => {
       setErrors(formErrors)
       return
     }
+
     const role = getUserTypeCookie()
 
     try {

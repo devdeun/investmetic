@@ -162,23 +162,29 @@ const InformationPage = () => {
               <small>* 사이트 이용 시 아이디로 사용됩니다.</small>
             </div>
             {formState.isEmailSent && (
-              <div className={cx('wrapper', 'verification')}>
-                <Input
-                  id="verificationCode"
-                  name="verificationCode"
-                  value={form.verificationCode}
-                  onChange={handleInputChange}
-                  placeholder="인증번호"
-                  className={cx('input')}
-                />
-                <Button
-                  onClick={handleVerificationCodeCheck}
-                  type="button"
-                  className={cx('button')}
-                >
-                  인증번호 확인
-                </Button>
-              </div>
+              <>
+                <div className={cx('wrapper', 'verification')}>
+                  <Input
+                    id="verificationCode"
+                    name="verificationCode"
+                    value={form.verificationCode}
+                    onChange={handleInputChange}
+                    placeholder="인증번호"
+                    className={cx('input')}
+                    errorMessage={errors.emailConfirm}
+                  />
+                  <Button
+                    onClick={handleVerificationCodeCheck}
+                    type="button"
+                    className={cx('button')}
+                  >
+                    인증번호 확인
+                  </Button>
+                </div>
+                {formState.isEmailVerified && (
+                  <small className={cx('nickname-verified')}>이메일 인증에 성공했습니다.</small>
+                )}
+              </>
             )}
           </div>
         </div>
@@ -231,6 +237,9 @@ const InformationPage = () => {
                 중복확인
               </Button>
             </div>
+            {formState.isPhoneVerified && (
+              <small className={cx('nickname-verified')}>사용할 수 있는 휴대전화 번호입니다.</small>
+            )}
             <small>* (-) 없이 숫자만 입력해주세요.</small>
           </div>
         </div>

@@ -27,6 +27,10 @@ const nextConfig = {
         source: '/api/main/:path*',
         destination: 'http://15.164.90.102:8081/api/main/:path*',
       },
+      {
+        source: '/api/users/:path*',
+        destination: 'http://15.164.90.102:8081/api/users/:path*',
+      },
     ]
   },
   webpack: (config, { isServer }) => {
