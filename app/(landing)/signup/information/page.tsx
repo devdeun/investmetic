@@ -2,6 +2,7 @@
 
 import { ChangeEvent } from 'react'
 
+import { ModalAlertIcon } from '@/public/icons'
 import classNames from 'classnames/bind'
 
 import { PATH } from '@/shared/constants/path'
@@ -10,6 +11,7 @@ import Checkbox from '@/shared/ui/check-box'
 import { ErrorMessage } from '@/shared/ui/error-message'
 import { Input } from '@/shared/ui/input'
 import { LinkButton } from '@/shared/ui/link-button'
+import Modal from '@/shared/ui/modal'
 import Select from '@/shared/ui/select'
 
 import useSignupEmail from '../_hooks/custom/use-signup-email'
@@ -50,6 +52,8 @@ const InformationPage = () => {
     handleFormSubmit,
     handleNicknameCheck,
     handlePhoneCheck,
+    isModalOpen,
+    setIsModalOpen,
   } = useSignupForm()
 
   const {
@@ -299,6 +303,9 @@ const InformationPage = () => {
           다음
         </Button>
       </div>
+      <Modal message="회원가입에 실패했습니다." icon={<ModalAlertIcon />} isOpen={isModalOpen}>
+        <Button onClick={() => setIsModalOpen(false)}>닫기</Button>
+      </Modal>
     </>
   )
 }

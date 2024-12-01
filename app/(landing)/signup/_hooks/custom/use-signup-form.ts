@@ -44,6 +44,7 @@ const useSignupForm = () => {
   const [errors, setErrors] = useState<SignupFormErrorsModel>({})
   const [formState, setFormState] = useState<SignupFormStateModel>(initialFormState)
   const [isValidated, setIsValidated] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
@@ -150,6 +151,7 @@ const useSignupForm = () => {
     } catch (err) {
       console.error('회원가입 실패:', err)
       setErrors((prev) => ({ ...prev, submitError: '회원가입에 실패했습니다.' }))
+      setIsModalOpen(true)
     }
   }
 
@@ -166,6 +168,8 @@ const useSignupForm = () => {
     handleFormSubmit,
     handleNicknameCheck,
     handlePhoneCheck,
+    isModalOpen,
+    setIsModalOpen,
   }
 }
 
