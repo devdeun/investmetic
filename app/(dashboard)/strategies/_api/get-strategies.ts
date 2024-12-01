@@ -1,4 +1,3 @@
-import { strategiesMockData } from '@/mocks/handlers/strategies'
 import axios from 'axios'
 
 import { StrategiesModel } from '@/shared/types/strategy-data'
@@ -23,8 +22,6 @@ const getStrategiesData = async (
     return { strategiesData, totalPages }
   } catch (err) {
     console.error(err)
-    // 임시 목데이터
-    return { strategiesData: strategiesMockData, totalPages: 2 }
   }
 }
 
