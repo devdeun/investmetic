@@ -1,6 +1,5 @@
+import { AnalysisChartOptionsType } from '@/app/(dashboard)/_ui/analysis-container'
 import axios from 'axios'
-
-import { AnalysisChartOptionsType } from '../_ui/analysis-container'
 
 const getAnalysisChart = async (
   strategyId: number,

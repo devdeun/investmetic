@@ -6,7 +6,7 @@ import classNames from 'classnames/bind'
 
 import Select from '@/shared/ui/select'
 
-import useGetAnalysisChart from '../../_hooks/query/use-get-analysis-chart'
+import useGetAnalysisChart from '../../strategies/[strategyId]/_hooks/query/use-get-analysis-chart'
 import AnalysisChart from './analysis-chart'
 import styles from './styles.module.scss'
 import TabsWithTable from './tabs-width-table'
@@ -26,6 +26,7 @@ const AnalysisContainer = ({ strategyId, type = 'default' }: Props) => {
   const [secondOption, setSecondOption] =
     useState<AnalysisChartOptionsType>('CUMULATIVE_PROFIT_LOSS')
   const { data: chartData } = useGetAnalysisChart({ strategyId, firstOption, secondOption })
+
   const optionsToArray = Object.entries(YAXIS_OPTIONS)
   const options: { value: string; label: string }[] = []
 
@@ -59,7 +60,7 @@ const AnalysisContainer = ({ strategyId, type = 'default' }: Props) => {
           <AnalysisChart analysisChartData={chartData} />
         </div>
       )}
-      <TabsWithTable isEditable={type === 'my' ? true : false} />
+      <TabsWithTable strategyId={strategyId} isEditable={type === 'my' ? true : false} />
     </div>
   )
 }

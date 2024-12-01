@@ -1,13 +1,13 @@
 'use client'
 
+import AnalysisContainer from '@/app/(dashboard)/_ui/analysis-container'
 import DetailsInformation from '@/app/(dashboard)/_ui/details-information'
 import DetailsSideItem, {
   InformationModel,
   TitleType,
 } from '@/app/(dashboard)/_ui/details-side-item'
+import SubscriberItem from '@/app/(dashboard)/_ui/subscriber-item'
 import useGetDetailsInformationData from '@/app/(dashboard)/strategies/[strategyId]/_hooks/query/use-get-details-information-data'
-import AnalysisContainer from '@/app/(dashboard)/strategies/[strategyId]/_ui/analysis-container'
-import SubscriberItem from '@/app/(dashboard)/strategies/[strategyId]/_ui/subscriber-item'
 import SideContainer from '@/app/(dashboard)/strategies/_ui/side-container'
 import classNames from 'classnames/bind'
 
