@@ -1,13 +1,13 @@
 import classNames from 'classnames/bind'
 
+import { REVIEW_PAGE_COUNT } from '@/shared/constants/count-per-page'
+import { useAuthStore } from '@/shared/stores/use-auth-store'
 import Pagination from '@/shared/ui/pagination'
 
 import ReviewItem from './review-item'
 import styles from './styles.module.scss'
 
 const cx = classNames.bind(styles)
-
-export const COUNT_PER_PAGE = 4
 
 interface ReviewContentModel {
   reviewId: number
@@ -27,6 +27,7 @@ interface Props {
 
 const ReviewList = ({ reviews, totalReview, currentPage, setCurrentPage }: Props) => {
   const handlePageChange = (page: number) => setCurrentPage(page)
+  const user = useAuthStore((state) => state.user)
 
   return (
     <>
@@ -39,13 +40,14 @@ const ReviewList = ({ reviews, totalReview, currentPage, setCurrentPage }: Props
             createdAt={review.createdAt}
             starRating={review.starRating}
             content={review.content}
-            isReviewer={'' === review.nickname}
+            isReviewer={user?.nickname === review.nickname}
+            isAdmin={user?.role.includes('admin') ?? false}
           />
         ))}
       </ul>
       <Pagination
         currentPage={currentPage}
-        maxPage={Math.ceil(totalReview / COUNT_PER_PAGE)}
+        maxPage={Math.ceil(totalReview / REVIEW_PAGE_COUNT)}
         onPageChange={handlePageChange}
       />
     </>

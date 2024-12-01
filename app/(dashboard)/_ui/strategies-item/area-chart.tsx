@@ -5,7 +5,7 @@ import dynamic from 'next/dynamic'
 import classNames from 'classnames/bind'
 import Highcharts from 'highcharts'
 
-import { ProfitRateChartDataModel } from '@/shared/types/strategy-details-data'
+import { ProfitRateChartDataModel } from '@/shared/types/strategy-data'
 
 import styles from './styles.module.scss'
 

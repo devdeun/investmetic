@@ -4,6 +4,7 @@ import ListHeader from '@/app/(dashboard)/_ui/list-header'
 import StrategiesItem from '@/app/(dashboard)/_ui/strategies-item'
 import classNames from 'classnames/bind'
 
+import { STRATEGIES_PAGE_COUNT } from '@/shared/constants/count-per-page'
 import { PATH } from '@/shared/constants/path'
 import { usePagination } from '@/shared/hooks/custom/use-pagination'
 import { useMSWStore } from '@/shared/stores/msw'
@@ -14,15 +15,13 @@ import styles from './styles.module.scss'
 
 const cx = classNames.bind(styles)
 
-const COUNT_PER_PAGE = 8
-
 const StrategyList = () => {
   const isReady = useMSWStore((state) => state.isReady)
-  const { page, handlePageChange } = usePagination({
+  const { size, page, handlePageChange } = usePagination({
     basePath: PATH.STRATEGIES,
-    pageSize: COUNT_PER_PAGE,
+    pageSize: STRATEGIES_PAGE_COUNT,
   })
-  const { data } = useGetStrategiesData({ isReady, page, size: COUNT_PER_PAGE })
+  const { data } = useGetStrategiesData({ isReady, page, size })
 
   const strategiesData = data?.strategiesData || []
   const totalPages = data?.totalPages || null

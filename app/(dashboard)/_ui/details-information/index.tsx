@@ -1,6 +1,6 @@
 import classNames from 'classnames/bind'
 
-import { StrategyDetailsInformationModel } from '@/shared/types/strategy-details-data'
+import { StrategyDetailsInformationModel } from '@/shared/types/strategy-data'
 
 import StrategyIntroduction from '../introduction'
 import InvestInformation from './invest-information'
@@ -28,12 +28,12 @@ const DetailsInformation = ({ information, type = 'default' }: Props) => {
     <>
       <div className={cx('information-top')}>
         <StrategyNameBox
-          iconUrls={[information.tradeTypeIconUrl, ...information.stockTypeIconUrls]}
-          iconNames={[information.tradeTypeName, ...information.stockTypeNames]}
+          iconUrls={[information.tradeTypeIconUrl, ...information.stockTypeInfo.stockTypeIconUrls]}
+          iconNames={[information.tradeTypeName, ...information.stockTypeInfo.stockTypeNames]}
           name={information.strategyName}
         />
         <InvestInformation
-          stock={information.stockTypeNames}
+          stock={information.stockTypeInfo.stockTypeNames}
           trade={information.tradeTypeName}
           cycle={information.operationCycle}
         />

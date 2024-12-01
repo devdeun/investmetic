@@ -8,7 +8,9 @@ import { getUserFromToken, isTokenExpired, refreshToken } from '@/shared/utils/t
 import { isAdmin } from '../types/auth'
 
 export const createAxiosInstance = (options: { withInterceptors?: boolean } = {}) => {
-  const instance = axios.create({ baseURL: 'http://15.164.90.102:8081' })
+  const instance = axios.create({
+    baseURL: process.env.NEXT_PUBLIC_API_HOST,
+  })
 
   instance.interceptors.request.use((config) => {
     if (

@@ -32,29 +32,62 @@ const AnalysisChart = ({ analysisChartData: data }: Props) => {
     const key = Object.keys(data.data)[sequence] as YAxisType | undefined
     return key ? YAXIS_OPTIONS[key] : ''
   }
-
+  if (!data) return <p>등록된 데이터가 없습니다.</p>
   const chartOptions: Highcharts.Options = {
     chart: {
       type: 'areaspline',
       height: 367,
       backgroundColor: 'transparent',
-      margin: [0, 0, 0, 0],
-    },
+      margin: [10, 50, 10, 50],
+      zoomType: 'x',
+    } as Highcharts.ChartOptions,
     title: { text: undefined },
     xAxis: {
       visible: false,
       categories: data.dates,
-      startOnTick: true,
-      endOnTick: true,
+      min: data.dates.length > 30 ? data.dates.length - 30 : 0,
+      max: data.dates.length - 1,
     },
-    yAxis: [{ visible: false }, { visible: false }],
+    yAxis: [
+      {
+        title: {
+          text: getOptionName(0),
+          style: {
+            color: '#797979',
+            fontSize: '10px',
+          },
+        },
+        labels: {
+          style: {
+            color: '#797979',
+            fontSize: '10px',
+          },
+        },
+      },
+      {
+        title: {
+          text: getOptionName(1),
+          style: {
+            color: '#797979',
+            fontSize: '10px',
+          },
+        },
+        opposite: true,
+        labels: {
+          style: {
+            color: '#797979',
+            fontSize: '10px',
+          },
+        },
+      },
+    ],
     legend: {
       enabled: true,
       align: 'left',
       verticalAlign: 'top',
       layout: 'vertical',
-      x: 10,
-      y: 10,
+      x: 40,
+      y: -10,
       itemStyle: {
         color: '#4D4D4D',
         fontSize: '12px',
@@ -81,7 +114,7 @@ const AnalysisChart = ({ analysisChartData: data }: Props) => {
     plotOptions: {
       areaspline: {
         fillOpacity: 0.5,
-        lineWidth: 2,
+        lineWidth: 1,
         marker: {
           enabled: false,
         },
@@ -94,7 +127,7 @@ const AnalysisChart = ({ analysisChartData: data }: Props) => {
         },
       },
       spline: {
-        lineWidth: 2,
+        lineWidth: 1,
         marker: {
           enabled: false,
         },
