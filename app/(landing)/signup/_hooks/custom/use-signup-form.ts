@@ -72,6 +72,11 @@ const useSignupForm = () => {
     }
   }
 
+  const handleBirthdayChange = (value: string, field: 'birthYear' | 'birthMonth' | 'birthDay') => {
+    setErrors((prev) => ({ ...prev, select: null }))
+    setForm((prev) => ({ ...prev, [field]: String(value) }))
+  }
+
   const handleMarketingAgree = (checked: boolean) => {
     setForm((prev) => ({ ...prev, isMarketingAgreed: checked }))
   }
@@ -164,6 +169,7 @@ const useSignupForm = () => {
     setFormState,
     isValidated,
     handleInputChange,
+    handleBirthdayChange,
     handleMarketingAgree,
     handleFormSubmit,
     handleNicknameCheck,

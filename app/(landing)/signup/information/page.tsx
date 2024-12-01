@@ -48,6 +48,7 @@ const InformationPage = () => {
     setFormState,
     isValidated,
     handleInputChange,
+    handleBirthdayChange,
     handleMarketingAgree,
     handleFormSubmit,
     handleNicknameCheck,
@@ -254,7 +255,7 @@ const InformationPage = () => {
             <Select
               options={yearOptions}
               value={form.birthYear}
-              onChange={(value) => setForm((prev) => ({ ...prev, birthYear: String(value) }))}
+              onChange={(value) => handleBirthdayChange(String(value), 'birthYear')}
               size="small"
               placeholder="년"
               titleStyle={selectStyle}
@@ -262,7 +263,7 @@ const InformationPage = () => {
             <Select
               options={monthOptions}
               value={form.birthMonth}
-              onChange={(value) => setForm((prev) => ({ ...prev, birthMonth: String(value) }))}
+              onChange={(value) => handleBirthdayChange(String(value), 'birthMonth')}
               size="small"
               placeholder="월"
               titleStyle={selectStyle}
@@ -270,7 +271,7 @@ const InformationPage = () => {
             <Select
               options={dayOptions}
               value={form.birthDay}
-              onChange={(value) => setForm((prev) => ({ ...prev, birthDay: String(value) }))}
+              onChange={(value) => handleBirthdayChange(String(value), 'birthDay')}
               size="small"
               placeholder="일"
               titleStyle={selectStyle}
