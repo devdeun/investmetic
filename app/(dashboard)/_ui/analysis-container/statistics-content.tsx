@@ -18,6 +18,8 @@ interface Props {
 }
 
 const StatisticsContent = ({ statisticsData }: Props) => {
+  if (statisticsData === null || statisticsData === undefined) return null
+
   const statisticsDataToArray = Object.entries(statisticsData)
 
   return (

@@ -4,14 +4,13 @@ import Image from 'next/image'
 
 import classNames from 'classnames/bind'
 
+import { ACCOUNT_PAGE_COUNT } from '@/shared/constants/count-per-page'
 import { Button } from '@/shared/ui/button'
 import Pagination from '@/shared/ui/pagination'
 
 import styles from './styles.module.scss'
 
 const cx = classNames.bind(styles)
-
-const COUNT_PER_PAGE = 10
 
 interface ImageDataModel {
   imageUrl: string
@@ -27,8 +26,8 @@ interface Props {
 
 const AccountContent = ({ imagesData, currentPage, onPageChange, isEditable = false }: Props) => {
   const croppedImagesData = imagesData?.slice(
-    COUNT_PER_PAGE * (currentPage - 1),
-    COUNT_PER_PAGE * (currentPage - 1) + COUNT_PER_PAGE
+    ACCOUNT_PAGE_COUNT * (currentPage - 1),
+    ACCOUNT_PAGE_COUNT * (currentPage - 1) + ACCOUNT_PAGE_COUNT
   )
 
   const isTwoLines = croppedImagesData?.length || 0 >= 5

@@ -8,21 +8,24 @@ import classNames from 'classnames/bind'
 
 import Tabs from '@/shared/ui/tabs'
 
+import useGetStatistics from '../../strategies/[strategyId]/_hooks/query/use-get-statistics'
 import AccountContent from './account-content'
 import AnalysisContent from './analysis-content'
-import { statisticsData, tableBody } from './example'
 import StatisticsContent from './statistics-content'
 import styles from './styles.module.scss'
 
 const cx = classNames.bind(styles)
 
+export type AnalysisTabType = 'statistics' | 'daily' | 'monthly' | 'account-images'
 interface Props {
+  strategyId: number
   isEditable?: boolean
 }
 
-const TabsWithTable = ({ isEditable = false }: Props) => {
-  const [activeTab, setActiveTab] = useState('statistics')
+const TabsWithTable = ({ strategyId, isEditable = false }: Props) => {
+  const [activeTab, setActiveTab] = useState<AnalysisTabType>('statistics')
   const [currentPage, setCurrentPage] = useState(1)
+  const { data: statisticsData } = useGetStatistics(strategyId)
 
   useEffect(() => {
     setCurrentPage(1)
@@ -38,13 +41,13 @@ const TabsWithTable = ({ isEditable = false }: Props) => {
       content: <StatisticsContent statisticsData={statisticsData} />,
     },
     {
-      id: 'daily-analysis',
+      id: 'daily',
       label: '일간분석',
       icon: DailyGraphIcon,
       content: (
         <AnalysisContent
           type="daily"
-          analysisData={tableBody}
+          strategyId={strategyId}
           currentPage={currentPage}
           onPageChange={handlePageChange}
           isEditable={isEditable}
@@ -52,13 +55,13 @@ const TabsWithTable = ({ isEditable = false }: Props) => {
       ),
     },
     {
-      id: 'monthly-analysis',
+      id: 'monthly',
       label: '월간분석',
       icon: MonthlyGraphIcon,
       content: (
         <AnalysisContent
           type="monthly"
-          analysisData={tableBody}
+          strategyId={strategyId}
           currentPage={currentPage}
           onPageChange={handlePageChange}
         />
@@ -81,7 +84,13 @@ const TabsWithTable = ({ isEditable = false }: Props) => {
     },
   ]
 
-  return <Tabs tabs={TABS} activeTab={activeTab} onTabChange={(id) => setActiveTab(id)} />
+  return (
+    <Tabs
+      tabs={TABS}
+      activeTab={activeTab}
+      onTabChange={(id) => setActiveTab(id as AnalysisTabType)}
+    />
+  )
 }
 
 export default TabsWithTable

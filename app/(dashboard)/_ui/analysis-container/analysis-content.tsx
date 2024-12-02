@@ -1,10 +1,11 @@
 import classNames from 'classnames/bind'
 
-import { DailyAnalysisModel, MonthlyAnalysisModel } from '@/shared/types/strategy-data'
+import { ANALYSIS_PAGE_COUNT } from '@/shared/constants/count-per-page'
 import { Button } from '@/shared/ui/button'
 import Pagination from '@/shared/ui/pagination'
 import VerticalTable from '@/shared/ui/table/vertical'
 
+import useGetAnalysis from '../../strategies/[strategyId]/_hooks/query/use-get-analysis'
 import styles from './styles.module.scss'
 
 const cx = classNames.bind(styles)
@@ -29,11 +30,9 @@ const MONTHLY_TABLE_HEADER = [
   '누적 수익률',
 ]
 
-const COUNT_PER_PAGE = 5
-
-interface AnalysisContentProps {
+interface Props {
   type: 'daily' | 'monthly'
-  analysisData: DailyAnalysisModel[] | MonthlyAnalysisModel[]
+  strategyId: number
   currentPage: number
   onPageChange: (page: number) => void
   isEditable?: boolean
@@ -41,12 +40,16 @@ interface AnalysisContentProps {
 
 const AnalysisContent = ({
   type,
-  analysisData,
+  strategyId,
   currentPage,
   onPageChange,
   isEditable = false,
-}: AnalysisContentProps) => {
+}: Props) => {
+  const { data: analysisData } = useGetAnalysis(strategyId, type, currentPage, ANALYSIS_PAGE_COUNT)
+
   const tableHeader = type === 'daily' ? DAILY_TABLE_HEADER : MONTHLY_TABLE_HEADER
+
+  if (analysisData?.content === null || analysisData?.content === undefined) return null
 
   return (
     <div className={cx('table-wrapper', 'analysis')}>
@@ -73,14 +76,14 @@ const AnalysisContent = ({
 
       <VerticalTable
         tableHead={tableHeader}
-        tableBody={analysisData}
+        tableBody={analysisData?.content}
         currentPage={currentPage}
-        countPerPage={COUNT_PER_PAGE}
+        countPerPage={ANALYSIS_PAGE_COUNT}
         isEditable={isEditable}
       />
       <Pagination
         currentPage={currentPage}
-        maxPage={Math.ceil(analysisData.length / 5)}
+        maxPage={analysisData?.totalPages}
         onPageChange={onPageChange}
       />
     </div>
