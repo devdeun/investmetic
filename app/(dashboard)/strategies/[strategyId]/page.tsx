@@ -3,7 +3,6 @@
 import AnalysisContainer from '@/app/(dashboard)/_ui/analysis-container'
 import SubscriberItem from '@/app/(dashboard)/_ui/subscriber-item'
 
-import { useMSWStore } from '@/shared/stores/msw'
 import { useAuthStore } from '@/shared/stores/use-auth-store'
 import BackHeader from '@/shared/ui/header/back-header'
 import Title from '@/shared/ui/title'
@@ -17,10 +16,8 @@ import ReviewContainer from './_ui/review-container'
 export type InformationType = { title: TitleType; data: string | number } | InformationModel[]
 
 const StrategyDetailPage = ({ params }: { params: { strategyId: number } }) => {
-  const isReady = useMSWStore((state) => state.isReady)
   const user = useAuthStore((state) => state.user)
   const { data } = useGetDetailsInformationData({
-    isReady,
     strategyId: params.strategyId,
   })
 
