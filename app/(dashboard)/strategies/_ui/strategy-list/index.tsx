@@ -24,7 +24,7 @@ const StrategyList = () => {
   const searchTerms = useSearchingItemStore((state) => state.searchTerms)
   const { data } = usePostStrategies({ page, size, searchTerms })
   const strategiesData = data?.content as StrategiesModel[]
-  const totalPages = data?.totalPages as number
+  const totalPages = (data?.totalPages as number) || null
 
   return (
     <>

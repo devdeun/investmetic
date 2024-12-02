@@ -304,7 +304,7 @@ const InformationPage = () => {
           다음
         </Button>
       </div>
-      <Modal message="회원가입에 실패했습니다." icon={<ModalAlertIcon />} isOpen={isModalOpen}>
+      <Modal message="회원가입에 실패했습니다." icon={ModalAlertIcon} isOpen={isModalOpen}>
         <Button onClick={() => setIsModalOpen(false)}>닫기</Button>
       </Modal>
     </>
