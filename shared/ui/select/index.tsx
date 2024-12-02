@@ -55,7 +55,7 @@ const Select = ({
           isSelected={isSelected(value, itemValue)}
           isMultiple={isMultiple}
           hasCheck={hasCheck}
-          key={placeholder}
+          key={label}
         />
       ))}
     </Dropdown>

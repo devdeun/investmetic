@@ -3,14 +3,14 @@
   align-items: center;
   gap: 12px;
 
-  svg {
-    width: 40px;
+  & > svg:first-child {
+    width: 62px;
     flex-shrink: 0;
   }
 }
 
 .text {
   width: 142px;
-  color: $color-gray-500;
+  color: $color-gray-800;
   line-height: normal;
 }

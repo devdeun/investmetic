@@ -6,14 +6,14 @@ import { PATH } from '@/shared/constants/path'
 import { Button } from '@/shared/ui/button'
 import Checkbox from '@/shared/ui/check-box'
 import { LinkButton } from '@/shared/ui/link-button'
+import InvestorTerms from '@/shared/ui/terms/investor-terms'
+import PrivacyTerms from '@/shared/ui/terms/privacy-terms'
+import TraderTerms from '@/shared/ui/terms/trader-terms'
 
 import { getUserTypeCookie } from '../_lib/cookies'
 import Step from '../_ui/step'
 import { useTermsCheck } from './_hooks/use-terms-check'
 import TermsContainer from './_ui/terms-container'
-import InvestorTerms from './_ui/terms/investor-terms'
-import PrivacyTerms from './_ui/terms/privacy-terms'
-import TraderTerms from './_ui/terms/trader-terms'
 import styles from './page.module.scss'
 
 const cx = classNames.bind(styles)
@@ -56,7 +56,7 @@ const TermsOfUsePage = () => {
           isChecked={isUserTermChecked}
           onChange={handleUserTermCheck}
         >
-          {userType === 'trader' ? <TraderTerms /> : <InvestorTerms />}
+          {userType === 'TRADER' ? <TraderTerms /> : <InvestorTerms />}
         </TermsContainer>
 
         <div className={cx('button-wrapper')}>

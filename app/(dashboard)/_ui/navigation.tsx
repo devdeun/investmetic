@@ -8,14 +8,14 @@ import {
   TradersIcon,
 } from '@/public/icons'
 
-import { fetchUser } from '@/shared/api/user'
 import { PATH } from '@/shared/constants/path'
+import { useAuthStore } from '@/shared/stores/use-auth-store'
+import { isTrader } from '@/shared/types/auth'
 import SideNavigation from '@/shared/ui/side-navigation'
 import NavLinkItem from '@/shared/ui/side-navigation/nav-link-item'
 
 const DashboardNavigation = () => {
-  const user = fetchUser()
-  const isTrader = user.role.includes('trader')
+  const { user } = useAuthStore()
 
   return (
     <SideNavigation>
@@ -25,7 +25,7 @@ const DashboardNavigation = () => {
       <NavLinkItem href={PATH.TRADERS} icon={TradersIcon}>
         트레이더 목록
       </NavLinkItem>
-      {isTrader && (
+      {isTrader(user) && (
         <NavLinkItem href={PATH.MY_STRATEGIES} icon={StrategyIcon}>
           나의 전략
         </NavLinkItem>

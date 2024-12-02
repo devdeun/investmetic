@@ -1,5 +1,8 @@
-import StarRating from '@/app/(dashboard)/strategies/[strategyId]/_ui/star-rating'
+import { useState } from 'react'
+
 import type { Meta, StoryFn } from '@storybook/react'
+
+import StarRating from './index'
 
 const meta: Meta = {
   title: 'components/StarRating',
@@ -7,9 +10,17 @@ const meta: Meta = {
   tags: ['autodocs'],
 }
 
-const starRating: StoryFn<{ starRating: number | undefined }> = ({ starRating }) => (
-  <StarRating starRating={starRating} />
-)
+const starRating: StoryFn<{ starRating: number | undefined }> = ({ starRating }) => {
+  const [starRatingValue, setStarRatingValue] = useState(0)
+  const handleStarRating = (idx: number) => setStarRatingValue(idx + 1)
+  return (
+    <StarRating
+      starRating={starRating}
+      starRatingValue={starRatingValue}
+      onRatingChange={handleStarRating}
+    />
+  )
+}
 
 export const Rated = starRating.bind({})
 Rated.args = {

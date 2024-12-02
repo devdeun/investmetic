@@ -1,0 +1,13 @@
+.title {
+  margin: 16px 0;
+  @include typo-h3;
+  font-weight: $text-bold;
+}
+
+.section-container {
+  margin-bottom: 80px;
+
+  h3 {
+    @include typo-b1;
+  }
+}

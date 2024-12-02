@@ -14,7 +14,8 @@ interface ProfileModel {
 }
 
 interface Props {
-  icon: string[]
+  iconUrls?: string[]
+  iconNames?: string[]
   title: string
   profile: ProfileModel
   subscriptionCount: number
@@ -23,7 +24,8 @@ interface Props {
 }
 
 const StrategiesSummary = ({
-  icon,
+  iconUrls,
+  iconNames,
   title,
   profile,
   subscriptionCount,
@@ -32,7 +34,7 @@ const StrategiesSummary = ({
 }: Props) => {
   return (
     <div className={cx('summary')}>
-      <StrategiesIcon icon={icon} />
+      <StrategiesIcon iconUrls={iconUrls} iconNames={iconNames} />
       <p className={cx('title')}>{title}</p>
       <div className={cx('trader-profile')}>
         <Avatar size={'medium'} src={profile.traderImage} />

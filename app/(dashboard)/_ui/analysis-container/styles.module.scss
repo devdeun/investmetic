@@ -1,0 +1,101 @@
+.container {
+  padding: 20px;
+  border-radius: 5px;
+  background-color: $color-white;
+  .analysis-header {
+    display: flex;
+    justify-content: space-between;
+    p {
+      @include typo-h4;
+      color: $color-gray-600;
+      &.my {
+        margin-bottom: 40px;
+      }
+    }
+    div {
+      display: flex;
+      gap: 20px;
+    }
+  }
+}
+
+.chart {
+  width: 100%;
+  border-radius: 5px;
+  overflow: hidden;
+  margin: 20px 0 40px;
+}
+
+.table-wrapper {
+  margin-top: 20px;
+  position: relative;
+  .edit-button-container {
+    display: flex;
+    justify-content: space-between;
+
+    .edit-button,
+    .delete-button {
+      padding: 7px 18px;
+    }
+  }
+  &.analysis {
+    margin-top: 40px;
+  }
+  .excel-button {
+    height: 30px;
+    position: absolute;
+    right: 0;
+    top: -30px;
+  }
+}
+
+.account-images-container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(1, 1fr);
+  column-gap: 20px;
+  &.line {
+    grid-template-rows: repeat(2, 1fr);
+    row-gap: 10px;
+  }
+  .image-data {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .image {
+      position: relative;
+      max-width: 165px;
+      min-width: 100px;
+      height: 100px;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    span {
+      text-align: center;
+      @include typo-c1;
+    }
+  }
+}
+
+.no-data {
+  display: flex;
+  justify-content: center;
+  margin: 60px 0 40px;
+  color: $color-gray-600;
+  @include typo-b2;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+  height: 30px;
+  margin-top: -20px;
+  margin-bottom: 10px;
+
+  button.upload-button {
+    height: 100%;
+    padding: 7px 18px;
+    margin-right: 10px;
+  }
+}
