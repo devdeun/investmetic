@@ -113,3 +113,14 @@
     overflow: hidden;
   }
 }
+
+// skeleton
+@mixin skeleton {
+  border-radius: 6px;
+  background-color: $color-gray-200;
+
+  div {
+    border-radius: 6px;
+    background-color: $color-gray-300;
+  }
+}
