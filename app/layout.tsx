@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 
 import { QueryProvider } from '@/shared/providers'
+import { AuthProvider } from '@/shared/providers/auth-provider'
 import '@/shared/styles/global.scss'
 
 import { pretendard } from './fonts'
@@ -15,7 +16,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
     <html lang="ko" className={pretendard.variable}>
       <body>
         <QueryProvider>
-          {children}
+          <AuthProvider>{children}</AuthProvider>
           <div id="modal-root"></div>
         </QueryProvider>
       </body>
