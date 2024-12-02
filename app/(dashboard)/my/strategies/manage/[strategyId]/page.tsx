@@ -11,7 +11,6 @@ import useGetDetailsInformationData from '@/app/(dashboard)/strategies/[strategy
 import SideContainer from '@/app/(dashboard)/strategies/_ui/side-container'
 import classNames from 'classnames/bind'
 
-import { useMSWStore } from '@/shared/stores/msw'
 import { Button } from '@/shared/ui/button'
 import BackHeader from '@/shared/ui/header/back-header'
 import Title from '@/shared/ui/title'
@@ -23,9 +22,7 @@ const cx = classNames.bind(styles)
 export type InformationType = { title: TitleType; data: string | number } | InformationModel[]
 
 const StrategyManagePage = ({ params }: { params: { strategyId: number } }) => {
-  const isReady = useMSWStore((state) => state.isReady)
   const { data } = useGetDetailsInformationData({
-    isReady,
     strategyId: params.strategyId,
   })
 
