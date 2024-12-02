@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 
-import { MSWInitializer, QueryProvider } from '@/shared/providers'
+import { QueryProvider } from '@/shared/providers'
 import '@/shared/styles/global.scss'
 
 import { pretendard } from './fonts'
@@ -15,7 +15,6 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
     <html lang="ko" className={pretendard.variable}>
       <body>
         <QueryProvider>
-          <MSWInitializer />
           {children}
           <div id="modal-root"></div>
         </QueryProvider>
