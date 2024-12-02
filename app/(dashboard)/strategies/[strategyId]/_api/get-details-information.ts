@@ -2,15 +2,11 @@ import axios from 'axios'
 
 import { InformationType } from '../page'
 
-const getDetailsInformation = async (isReady: boolean, strategyId: number) => {
-  if (!isReady || !strategyId) return
+const getDetailsInformation = async (strategyId: number) => {
+  if (!strategyId) return
 
   try {
-    const response = await axios.get(`/api/strategies/${strategyId}`)
-    if (!response.data) {
-      console.error('전략 상세 데이터 가져오기 실패')
-      return
-    }
+    const response = await axios.get(`/api/strategies/${strategyId}/detail`)
     const data = await response.data
     const detailsSideData: InformationType[] = [
       { title: '트레이더', data: data.nickname },

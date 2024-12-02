@@ -65,7 +65,6 @@ const useStrategyIconPost = (domain: DomainType) => {
   }
 
   return {
-    ImageData,
     typeName,
     resetFormData,
     imagePreview,

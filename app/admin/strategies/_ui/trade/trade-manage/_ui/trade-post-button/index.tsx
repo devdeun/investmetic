@@ -23,14 +23,8 @@ const TradePostButton = () => {
 
   const queryClient = useQueryClient()
 
-  const {
-    typeName,
-    onSubmit,
-    imagePreview,
-    onImageInputChange,
-    onTypeNameInputChange,
-    isSubmitable,
-  } = useStrategyIconPost('trade')
+  const { onSubmit, imagePreview, onImageInputChange, onTypeNameInputChange, isSubmitable } =
+    useStrategyIconPost('trade')
 
   const onFormSubmit = async (e: FormEvent) => {
     try {
@@ -52,7 +46,7 @@ const TradePostButton = () => {
       >
         매매 유형 등록하기
       </Button>
-      <Modal icon={<RegisterIcon />} message="매매유형 등록" isOpen={isModalOpen}>
+      <Modal icon={RegisterIcon} message="매매유형 등록" isOpen={isModalOpen}>
         <form onSubmit={onFormSubmit} className={cx('form')}>
           <div className={cx('input-container')}>
             <div className={cx('input-field')}>

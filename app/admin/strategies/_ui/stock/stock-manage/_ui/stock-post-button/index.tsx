@@ -51,7 +51,7 @@ const StockPostButton = () => {
       >
         종목 등록하기
       </Button>
-      <Modal icon={<RegisterIcon />} message="종목 등록" isOpen={isModalOpen}>
+      <Modal icon={RegisterIcon} message="종목 등록" isOpen={isModalOpen}>
         <form onSubmit={onFormSubmit} className={cx('form')}>
           <div className={cx('input-container')}>
             <div className={cx('input-field')}>
