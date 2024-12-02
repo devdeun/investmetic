@@ -50,7 +50,7 @@ const QuestionContainer = () => {
             createdAt="2024-11-03T15:00:00"
           />
         ) : (
-          <>{!isTrader && <p className={cx('empty-message')}>아직 답변이 없습니다</p>}</>
+          <>{!isActiveAnswer && <p className={cx('empty-message')}>아직 답변이 없습니다</p>}</>
         )}
 
         {isActiveAnswer ? (
