@@ -21,4 +21,9 @@ export const arrayFormatNumbers = (arrayData: number[]): (string | number)[] | n
   return null
 }
 
-export const formatNumber = (data: number): string | number => data.toLocaleString()
+export const formatNumber = (data: number | string): string | number => {
+  if (typeof data === 'number') {
+    return data.toLocaleString()
+  }
+  return data
+}

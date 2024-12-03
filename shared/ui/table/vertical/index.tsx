@@ -51,7 +51,7 @@ const VerticalTable = ({
             {slicedTableBody.map((row) => (
               <tr key={Object.values(row)[0]}>
                 {Object.values(row).map((data, idx) => (
-                  <td key={data + idx}>{typeof data === 'number' ? formatNumber(data) : data}</td>
+                  <td key={data + idx}>{formatNumber(data)}</td>
                 ))}
                 {isEditable && (
                   <td className={cx('button-container')}>

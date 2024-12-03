@@ -35,7 +35,7 @@ const SideItem = ({ title, data, profileImage, isMyStrategy = false }: Props) =>
             )}
           </>
         ) : (
-          <p>{typeof data === 'number' ? formatNumber(data) : data}</p>
+          <p>{formatNumber(data)}</p>
         )}
       </div>
     </div>

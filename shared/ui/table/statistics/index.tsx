@@ -50,11 +50,11 @@ const StatisticsTable = ({ title, statisticsData }: Props) => {
           {groupedData.map((row, idx) => (
             <tr key={idx}>
               <td>{row[0]}</td>
-              <td>{typeof row[1] === 'number' ? formatNumber(row[1]) : row[1]}</td>
+              <td>{formatNumber(row[1])}</td>
               {row[2] && (
                 <>
                   <td>{row[2]}</td>
-                  <td>{typeof row[3] === 'number' ? formatNumber(row[3]) : row[3]}</td>
+                  <td>{formatNumber(row[3])}</td>
                 </>
               )}
             </tr>
