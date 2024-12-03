@@ -4,9 +4,11 @@ interface UsersResponseBaseModel<T extends boolean> {
   code: T extends false ? number : null
 }
 
-type RoleType = 'TRADER' | 'TRADER_ADMIN' | 'INVESTOR' | 'INVESTOR'
+export type AdminUserRoleType = 'TRADER' | 'TRADER_ADMIN' | 'INVESTOR' | 'INVESTOR_ADMIN'
 
-interface UserInfoModel {
+export type AdminPatchUserRoleType = 'ADMIN' | 'TRADER' | 'INVESTOR'
+
+export interface AdminUserInfoModel {
   userId: number
   userName: string
   email: string
@@ -14,12 +16,12 @@ interface UserInfoModel {
   nickname: string
   phone: string
   infoAgreement: boolean
-  role: RoleType
+  role: AdminUserRoleType
 }
 
 export interface AdminUsersResponeseModel extends UsersResponseBaseModel<boolean> {
   result: {
-    content: Array<UserInfoModel>
+    content: Array<AdminUserInfoModel>
     page: number
     size: number
     totalElements: number
@@ -28,5 +30,7 @@ export interface AdminUsersResponeseModel extends UsersResponseBaseModel<boolean
     last: boolean
   }
 }
+// eslint-disable-next-line
+export interface PatchUserRoleResponeseModel extends UsersResponseBaseModel<boolean> {}
 
 export type UserRoleType = '모든 회원' | '일반' | '트레이더' | '관리자'

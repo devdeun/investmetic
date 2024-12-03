@@ -4,7 +4,7 @@ import { AdminUsersResponeseModel } from '../types'
 
 interface ArgModel {
   role: string
-  condition: string
+  condition: string | null
   keyword: string | null
   page?: number
   size?: number

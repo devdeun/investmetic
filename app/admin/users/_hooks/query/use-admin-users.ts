@@ -4,7 +4,7 @@ import getAdminUsers from '../../_api/get-admin-users'
 
 interface ArgModel {
   role: string
-  condition: string
+  condition: string | null
   keyword: string | null
   page?: number
   size?: number

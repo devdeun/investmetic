@@ -1,52 +1,44 @@
 'use client'
 
-// TODO: ssr
-import { useState } from 'react'
+import { Suspense } from 'react'
 
 import classNames from 'classnames/bind'
 
-import Avatar from '@/shared/ui/avatar'
 import Pagination from '@/shared/ui/pagination'
 import { SearchInput } from '@/shared/ui/search-input'
 import Select from '@/shared/ui/select'
 import VerticalTable from '@/shared/ui/table/vertical'
-import Tabs, { TabItemModel } from '@/shared/ui/tabs'
+import Tabs from '@/shared/ui/tabs'
 import Title from '@/shared/ui/title'
 
 import AdminContentsHeader from '../_ui/admin-header'
+import setTableBody from './_api/set-table-body'
 import useAdminUsers from './_hooks/query/use-admin-users'
-import useUserSearch from './_hooks/use-user-search'
+import useUserSearch from './_hooks/use-user-search-page'
 import styles from './page.module.scss'
 
 const cx = classNames.bind(styles)
-const tabs: Array<TabItemModel> = [
-  { label: '모든 회원', id: 'ALL' },
-  { label: '일반', id: 'INVESTOR' },
-  { label: '트레이더', id: 'TRADER' },
-  { label: '관리자', id: 'ADMIN' },
-]
 
 const AdminUsersPage = () => {
-  const { searchOptions } = useUserSearch()
-  const [select, setSelect] = useState(searchOptions[0].value)
-  const [activeTab, setActiveTab] = useState(tabs[0].id)
-  const [keyword, setKeyword] = useState('')
-  const { isLoading, data } = useAdminUsers({ role: activeTab, condition: select, keyword })
+  const {
+    searchOptions,
+    tabs,
+    select,
+    setSelect,
+    activeTab,
+    setActiveTab,
+    inputValue,
+    setInputValue,
+    keyword,
+    condition,
+    setConditionAndKeyword,
+  } = useUserSearch()
+
+  const { isLoading, data } = useAdminUsers({ role: activeTab, condition, keyword })
 
   if (isLoading || !data) return null
 
   console.log('data', data)
-
-  const tableBody = data.content.map((data, idx) => [
-    idx + 1,
-    <Avatar src={data?.imageUrl ?? undefined} key={data.userId} />,
-    data.userName,
-    data.nickname,
-    data.email,
-    data.phone,
-    data.role,
-    <button key={data.userId}>123</button>,
-  ])
 
   return (
     <>
@@ -54,7 +46,6 @@ const AdminUsersPage = () => {
       <section className={cx('container')}>
         <Tabs tabs={tabs} activeTab={activeTab} onTabChange={setActiveTab} />
         <AdminContentsHeader
-          // TODO: 실제 개수로 바인딩
           Left={
             <span>
               총 <span className={cx('color-primary-500')}>{data?.totalElements}</span>명
@@ -73,18 +64,32 @@ const AdminUsersPage = () => {
                   setSelect(v as string)
                 }}
               />
-              <SearchInput value={keyword} onChange={(e) => setKeyword(e.target.value)} />
+              <SearchInput
+                value={inputValue}
+                onChange={(e) => setInputValue(e.target.value)}
+                onSearchIconClick={setConditionAndKeyword}
+              />
             </div>
           }
         />
-        <VerticalTable
-          tableHead={['No.', '프로필', '이름', '닉네임', '이메일', '전화번호', '회원분류', '탈퇴']}
-          tableBody={data?.content ? tableBody : []}
-          countPerPage={10}
-          currentPage={1}
-        />
-        {/* TODO: 실제 값으로 추가 */}
-        <Pagination currentPage={1} maxPage={data?.totalPages} onPageChange={() => {}} />
+        <Suspense fallback={<div>loaad...</div>}>
+          <VerticalTable
+            tableHead={[
+              'No.',
+              '프로필',
+              '이름',
+              '닉네임',
+              '이메일',
+              '전화번호',
+              '회원분류',
+              '탈퇴',
+            ]}
+            tableBody={data?.content ? setTableBody(data.content) : []}
+            countPerPage={10}
+            currentPage={1}
+          />
+          <Pagination currentPage={1} maxPage={data?.totalPages} onPageChange={() => {}} />
+        </Suspense>
       </section>
     </>
   )
