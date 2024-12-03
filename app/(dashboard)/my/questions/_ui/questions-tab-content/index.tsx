@@ -26,15 +26,13 @@ const QuestionsTabContent = ({ options }: Props) => {
 
   const user = useAuthStore((state) => state.user)
 
-  if (!user) return
-
   // 임시
   const totalPages = 2
 
   const { data: questionsData } = useGetMyQuestionList({
     page,
     size: COUNT_PER_PAGE,
-    userType: user.role.includes('TRADER') ? 'TRADER' : 'INVESTOR',
+    userType: user?.role.includes('TRADER') ? 'TRADER' : 'INVESTOR',
     options,
   })
 
