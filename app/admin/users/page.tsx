@@ -1,7 +1,5 @@
 'use client'
 
-import { Suspense } from 'react'
-
 import classNames from 'classnames/bind'
 
 import Pagination from '@/shared/ui/pagination'
@@ -72,24 +70,13 @@ const AdminUsersPage = () => {
             </div>
           }
         />
-        <Suspense fallback={<div>loaad...</div>}>
-          <VerticalTable
-            tableHead={[
-              'No.',
-              '프로필',
-              '이름',
-              '닉네임',
-              '이메일',
-              '전화번호',
-              '회원분류',
-              '탈퇴',
-            ]}
-            tableBody={data?.content ? setTableBody(data.content) : []}
-            countPerPage={10}
-            currentPage={1}
-          />
-          <Pagination currentPage={1} maxPage={data?.totalPages} onPageChange={() => {}} />
-        </Suspense>
+        <VerticalTable
+          tableHead={['No.', '프로필', '이름', '닉네임', '이메일', '전화번호', '회원분류', '탈퇴']}
+          tableBody={data?.content ? setTableBody(data.content) : []}
+          countPerPage={10}
+          currentPage={1}
+        />
+        <Pagination currentPage={1} maxPage={data?.totalPages} onPageChange={() => {}} />
       </section>
     </>
   )
