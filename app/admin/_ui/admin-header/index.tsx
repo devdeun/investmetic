@@ -1,7 +1,6 @@
 import { CSSProperties, ReactNode } from 'react'
 
 import Header from '@/shared/ui/header'
-import { SearchInput } from '@/shared/ui/search-input'
 
 interface Props {
   Left?: ReactNode
@@ -24,8 +23,4 @@ const AdminContentsHeader = ({ Left, Right }: Props) => {
   return <Header as="div" Left={Left} Right={Right} styles={headerStyles} />
 }
 
-const Search = () => {
-  return <SearchInput placeholder="제목을 검색하세요." />
-}
-
-export default Object.assign(AdminContentsHeader, { Search })
+export default AdminContentsHeader
