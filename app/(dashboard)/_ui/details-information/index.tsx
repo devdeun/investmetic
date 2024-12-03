@@ -28,10 +28,10 @@ const DetailsInformation = ({ information, type = 'default' }: Props) => {
     <>
       <div className={cx('information-top')}>
         <StrategyNameBox
-          iconUrls={[
-            information.tradeTypeIconUrl,
-            ...(information.stockTypeInfo?.stockTypeIconUrls || []),
-          ]}
+          // iconUrls={[
+          //   information.tradeTypeIconUrl,
+          //   ...(information.stockTypeInfo?.stockTypeIconUrls || []),
+          // ]}
           iconNames={[
             information.tradeTypeName,
             ...(information.stockTypeInfo?.stockTypeNames || []),

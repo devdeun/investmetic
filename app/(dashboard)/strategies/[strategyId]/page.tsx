@@ -30,7 +30,10 @@ const StrategyDetailPage = ({ params }: { params: { strategyId: number } }) => {
 
   const handleSubscribe = () => {
     mutate(params.strategyId, {
-      onSuccess: () => refetch(),
+      onSuccess: () => {
+        closeModal()
+        refetch()
+      },
     })
   }
   const handleUnsubscribe = () => {

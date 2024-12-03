@@ -7,7 +7,7 @@ const getDetailsInformation = async (strategyId: number) => {
 
   try {
     const response = await axiosInstance.get(`/api/strategies/${strategyId}/detail`)
-    const data = await response.data
+    const data = await response.data.result
     const detailsSideData: InformationType[] = [
       { title: '트레이더', data: data.nickname },
       { title: '최소 투자 금액', data: data.minimumInvestmentAmount },
