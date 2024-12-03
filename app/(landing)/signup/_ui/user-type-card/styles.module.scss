@@ -1,13 +1,24 @@
 .card {
+  display: flex;
+  flex-direction: column;
   width: 100%;
   padding: 43px 44px 53px;
+  margin-bottom: 140px;
   text-align: left;
   background-color: $color-white;
   border: 2px solid $color-white;
+  border-radius: 8px;
   transition: 0.2s ease-in-out;
 
   &:hover {
     border: 2px solid $color-orange-400;
+  }
+
+  .image {
+    width: 234px;
+    height: 210px;
+    margin-top: 32px;
+    align-self: flex-end;
   }
 }
 

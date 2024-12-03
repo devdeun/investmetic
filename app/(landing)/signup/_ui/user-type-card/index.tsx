@@ -7,10 +7,11 @@ import {
   setIsAgreedTermsCookie,
   setUserTypeCookie,
 } from '@/app/(landing)/signup/_lib/cookies'
+import { InvestorImg, TraderImg } from '@/public/images'
 import classNames from 'classnames/bind'
 
 import { PATH } from '@/shared/constants/path'
-import { UserType } from '@/shared/types/user'
+import { UserType } from '@/shared/types/auth'
 
 import styles from './styles.module.scss'
 
@@ -43,6 +44,11 @@ const UserTypeCard = ({ userType, title, highlight }: Props) => {
         인베스트메틱을 통해 <br />
         <span className={cx('highlight')}>{highlight}</span>해보세요!
       </p>
+      {userType === 'TRADER' ? (
+        <TraderImg className={cx('image')} />
+      ) : (
+        <InvestorImg className={cx('image')} />
+      )}
     </button>
   )
 }
