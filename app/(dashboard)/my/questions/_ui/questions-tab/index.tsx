@@ -15,7 +15,11 @@ const QuestionsTab = () => {
       label: '모든 질문',
       content: (
         <Suspense>
-          <QuestionsTabContent options="all" />
+          <QuestionsTabContent
+            options={{
+              stateCondition: 'ALL',
+            }}
+          />
         </Suspense>
       ),
     },
@@ -24,16 +28,24 @@ const QuestionsTab = () => {
       label: '답변 대기',
       content: (
         <Suspense>
-          <QuestionsTabContent options="waiting" />
+          <QuestionsTabContent
+            options={{
+              stateCondition: 'WAITING',
+            }}
+          />
         </Suspense>
       ),
     },
     {
-      id: 'complete',
+      id: 'completed',
       label: '답변 완료',
       content: (
         <Suspense>
-          <QuestionsTabContent options="complete" />
+          <QuestionsTabContent
+            options={{
+              stateCondition: 'COMPLETED',
+            }}
+          />
         </Suspense>
       ),
     },
