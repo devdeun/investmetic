@@ -52,7 +52,6 @@ const QuestionContainer = () => {
         ) : (
           <>{!isActiveAnswer && <p className={cx('empty-message')}>아직 답변이 없습니다</p>}</>
         )}
-
         {isActiveAnswer ? (
           <div className={cx('answer-input-wrapper')}>
             <div className={cx('title-wrapper')}>
