@@ -10,11 +10,12 @@ const cx = classNames.bind(styles)
 
 interface Props {
   isMyStrategy?: boolean
+  isSubscribed?: boolean
   subscribers: number
   onClick?: () => void
 }
 
-const SubscriberItem = ({ isMyStrategy = false, subscribers, onClick }: Props) => {
+const SubscriberItem = ({ isSubscribed, isMyStrategy = false, subscribers, onClick }: Props) => {
   return (
     <div className={cx('container')}>
       <div>
@@ -24,7 +25,7 @@ const SubscriberItem = ({ isMyStrategy = false, subscribers, onClick }: Props) =
       </div>
       {!isMyStrategy && (
         <Button size="small" variant="filled" onClick={onClick}>
-          구독하기
+          {isSubscribed ? '구독취소' : '구독하기'}
         </Button>
       )}
     </div>

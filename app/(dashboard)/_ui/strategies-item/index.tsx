@@ -48,7 +48,7 @@ const StrategiesItem = ({ strategiesData: data, type = 'default' }: Props) => {
       </div>
       {type === 'default' && (
         <div className={cx('subscribe')}>
-          <Subscribe subscriptionStatus={data.isSubscribed} />
+          <Subscribe subscriptionStatus={data.isSubscribed} strategyId={data.strategyId} />
         </div>
       )}
       {type === 'my' && (
