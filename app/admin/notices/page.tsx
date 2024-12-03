@@ -3,14 +3,13 @@
 // TODO: ssr
 import classNames from 'classnames/bind'
 
-import { Button } from '@/shared/ui/button'
 import Pagination from '@/shared/ui/pagination'
+import { SearchInput } from '@/shared/ui/search-input'
 import VerticalTable from '@/shared/ui/table/vertical'
 import Title from '@/shared/ui/title'
 
 import AdminContentsHeader from '../_ui/admin-header'
 import styles from './page.module.scss'
-import { TABLE_DATA } from './tabledata'
 
 const cx = classNames.bind(styles)
 
@@ -34,24 +33,27 @@ const AdminNoticesPage = () => {
               총 <span className={cx('color-primary-500')}>30</span>명
             </span>
           }
-          Right={<AdminContentsHeader.Search />}
+          Right={<SearchInput placeholder="제목을 검색하세요." />}
         />
         <VerticalTable
           tableHead={['No.', '제목', '등록일', '작성일', '']}
-          tableBody={TABLE_DATA.map((d) => ({
-            ...d,
-            content: (
-              <Button.ButtonGroup>
-                {/* TODO: onclick 로직 정의 */}
-                <Button size="small" onClick={() => {}}>
-                  수정
-                </Button>
-                <Button size="small" onClick={() => {}} variant="filled">
-                  삭제
-                </Button>
-              </Button.ButtonGroup>
-            ),
-          }))}
+          tableBody={
+            []
+            //   TABLE_DATA.map((d) => ({
+            //   ...d,
+            //   content: (
+            //     <Button.ButtonGroup>
+            //       {/* TODO: onclick 로직 정의 */}
+            //       <Button size="small" onClick={() => {}}>
+            //         수정
+            //       </Button>
+            //       <Button size="small" onClick={() => {}} variant="filled">
+            //         삭제
+            //       </Button>
+            //     </Button.ButtonGroup>
+            //   ),
+            // }))
+          }
           // TODO: 실제 값으로 추가
           countPerPage={10}
           currentPage={1}
