@@ -33,4 +33,7 @@ export interface AdminUsersResponeseModel extends UsersResponseBaseModel<boolean
 // eslint-disable-next-line
 export interface PatchUserRoleResponeseModel extends UsersResponseBaseModel<boolean> {}
 
+// eslint-disable-next-line
+export interface DeleteUserResponeseModel extends UsersResponseBaseModel<boolean> {}
+
 export type UserRoleType = '모든 회원' | '일반' | '트레이더' | '관리자'

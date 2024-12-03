@@ -1,6 +1,7 @@
 import Avatar from '@/shared/ui/avatar'
 
 import RoleSelect from '../_ui/role-select'
+import UserDeleteButton from '../_ui/user-delete-button'
 import { AdminUserInfoModel } from '../types'
 
 const setTableBody = (data: AdminUserInfoModel[]) =>
@@ -13,7 +14,7 @@ const setTableBody = (data: AdminUserInfoModel[]) =>
       data.email,
       data.phone,
       <RoleSelect data={data} key={data.userId} />,
-      <button key={data.userId}>123</button>,
+      <UserDeleteButton userId={data.userId} key={data.userId} />,
     ]
   })
 
