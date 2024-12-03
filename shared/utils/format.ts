@@ -21,9 +21,4 @@ export const arrayFormatNumbers = (arrayData: number[]): (string | number)[] | n
   return null
 }
 
-export const formatNumber = (data: number): string | number => {
-  if (data.toFixed(0).toString().length > 3) {
-    return data.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-  }
-  return data
-}
+export const formatNumber = (data: number): string | number => data.toLocaleString()
