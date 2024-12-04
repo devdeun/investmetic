@@ -33,24 +33,34 @@ const NoticeDetail = ({ title, date, children, hasAttachFile = true }: Props) =>
           </div>
           <div className={cx('file-right-wrapper')}>
             <div className={cx('file-wrapper')}>
-              <div className={cx('file-title')}>{'파일제목1.pdf'}</div>
+              <div className={cx('file-title')} onClick={handleSave}>
+                {'파일제목1.pdf'}
+              </div>
               <DownloadIcon className={cx('file-download')} onClick={handleSave} />
             </div>
 
             <div className={cx('file-wrapper')}>
-              <div className={cx('file-title')}>{'파일제목2.pdf'}</div>
+              <div className={cx('file-title')} onClick={handleSave}>
+                {'파일제목2.pdf'}
+              </div>
               <DownloadIcon className={cx('file-download')} onClick={handleSave} />
             </div>
             <div className={cx('file-wrapper')}>
-              <div className={cx('file-title')}>{'파일제목3.pdf'}</div>
+              <div className={cx('file-title')} onClick={handleSave}>
+                {'파일제목3.pdf'}
+              </div>
               <DownloadIcon className={cx('file-download')} onClick={handleSave} />
             </div>
             <div className={cx('file-wrapper')}>
-              <div className={cx('file-title')}>{'파일제목4.pdf'}</div>
+              <div className={cx('file-title')} onClick={handleSave}>
+                {'파일제목4.pdf'}
+              </div>
               <DownloadIcon className={cx('file-download')} onClick={handleSave} />
             </div>
             <div className={cx('file-wrapper')}>
-              <div className={cx('file-title')}>{'파일제목5.pdf'}</div>
+              <div className={cx('file-title')} onClick={handleSave}>
+                {'파일제목5.pdf'}
+              </div>
               <DownloadIcon className={cx('file-download')} onClick={handleSave} />
             </div>
           </div>
