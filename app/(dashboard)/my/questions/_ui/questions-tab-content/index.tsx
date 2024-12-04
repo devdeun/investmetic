@@ -26,21 +26,24 @@ const QuestionsTabContent = ({ options }: Props) => {
 
   const user = useAuthStore((state) => state.user)
 
-  // 임시
-  const totalPages = 2
-
-  const { data: questionsData } = useGetMyQuestionList({
+  const { data } = useGetMyQuestionList({
     page,
     size: COUNT_PER_PAGE,
     userType: user?.role.includes('TRADER') ? 'TRADER' : 'INVESTOR',
     options,
   })
 
+  if (!data) {
+    return
+  }
+
+  const questionsData = data.content
+
   return (
     <>
       <ul className={cx('question-list')}>
         {questionsData &&
-          questionsData.length &&
+          !!questionsData.length &&
           questionsData.map((question) => (
             <li key={question.questionId}>
               <QuestionCard
@@ -56,10 +59,17 @@ const QuestionsTabContent = ({ options }: Props) => {
           ))}
       </ul>
 
-      {!questionsData ||
-        (!questionsData.length && <p className={cx('empty-message')}>문의 내역이 없습니다.</p>)}
+      {(!questionsData || !questionsData.length) && (
+        <p className={cx('empty-message')}>문의 내역이 없습니다.</p>
+      )}
       <div className={cx('pagination-wrapper')}>
-        <Pagination currentPage={page} maxPage={totalPages} onPageChange={handlePageChange} />
+        {data.totalElements > 0 && (
+          <Pagination
+            currentPage={page}
+            maxPage={data.totalPages}
+            onPageChange={handlePageChange}
+          />
+        )}
       </div>
     </>
   )

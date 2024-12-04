@@ -3,7 +3,6 @@ import { UserType } from '@/shared/types/auth'
 import {
   QuestionModel,
   QuestionSearchConditionType,
-  QuestionSearchOptionsModel,
   QuestionStateTapType,
 } from '@/shared/types/questions'
 
@@ -16,29 +15,29 @@ interface Props {
   stateCondition: QuestionStateTapType
 }
 
+interface QuestionReturnModel {
+  content: QuestionModel[]
+  page: number
+  size: number
+  totalElements: number
+  totalPages: number
+  first: boolean
+  last: boolean
+}
+
 const getMyQuestionList = async ({
   userType,
   page = 1,
   size = 3,
-  keyword,
-  searchCondition,
+  keyword = '',
+  searchCondition = 'CONTENT',
   stateCondition,
-}: Props): Promise<QuestionModel[]> => {
+}: Props): Promise<QuestionReturnModel> => {
   try {
-    const data: QuestionSearchOptionsModel = {
-      keyword: undefined,
-      searchCondition: undefined,
-      stateCondition: stateCondition,
-    }
-    if (keyword) data.keyword = keyword
-    if (searchCondition) data.searchCondition = searchCondition
-
-    const response = await axiosInstance.post(
-      `/api/${userType.toLowerCase()}/questions?page=${page}&size=${size}`,
-      data
+    const response = await axiosInstance.get(
+      `/api/${userType.toLowerCase()}/questions?page=${page}&size=${size}&keyword=${keyword}&searchCondition=${searchCondition}&stateCondition=${stateCondition}`
     )
-
-    return response.data.data
+    return response.data.result
   } catch (err) {
     console.error(err)
     throw new Error('문의 목록 조회에 실패했습니다.')
