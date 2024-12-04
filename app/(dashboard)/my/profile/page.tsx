@@ -1,5 +1,6 @@
 import classNames from 'classnames/bind'
 
+import { PATH } from '@/shared/constants/path'
 import { LinkButton } from '@/shared/ui/link-button'
 
 import UserInfo from './_ui/user-info'
@@ -17,7 +18,7 @@ const MyProfilePage = () => {
         <div className={cx('user-profile')}>
           <UserProfile userType={'트레이더'} name={'고양이'} email={'meow@example.com'} />
           <div className={cx('link-button')}>
-            <LinkButton href={''}>탈퇴하기</LinkButton>
+            <LinkButton href={PATH.PROFILE_WITHDRAW}>탈퇴하기</LinkButton>
           </div>
         </div>
       </div>
