@@ -38,7 +38,7 @@ const ReviewItem = ({
   isReviewer,
   isAdmin,
 }: Props) => {
-  const [isEdit, setIsEdit] = useState(false)
+  const [isEditable, setIsEditable] = useState(false)
   const { isModalOpen, openModal, closeModal } = useModal()
   const { mutate } = useDeleteReview(strategyId)
 
@@ -63,38 +63,36 @@ const ReviewItem = ({
           <p className={cx('nickname')}>{nickname}</p>
           <span>|</span>
           <span>{editedCreatedAt}</span>
-          {!isEdit && <StarRating starRating={starRating} />}
+          {!isEditable && <StarRating starRating={starRating} />}
         </div>
         <div className={cx('button-wrapper')}>
-          {isReviewer && !isEdit && (
+          {isReviewer && !isEditable && (
             <>
-              <button onClick={() => setIsEdit(true)}>수정</button>
+              <button onClick={() => setIsEditable(true)}>수정</button>
               <button onClick={openModal}>삭제</button>
             </>
           )}
           {!isReviewer && isAdmin && <button>삭제</button>}
         </div>
       </div>
-      {isEdit ? (
+      {isEditable ? (
         <AddReview
           strategyId={strategyId}
           reviewId={reviewId}
-          isEdit={isEdit}
+          isEditable={isEditable}
           content={content}
           starRating={starRating}
-          onCancel={() => setIsEdit(false)}
+          onCancel={() => setIsEditable(false)}
         />
       ) : (
         <div className={cx('content')}>{content}</div>
       )}
-      {isModalOpen && (
-        <ReviewGuideModal
-          isModalOpen={isModalOpen}
-          isErr={false}
-          closeModal={closeModal}
-          onChange={handleDelete}
-        />
-      )}
+      <ReviewGuideModal
+        isModalOpen={isModalOpen}
+        isErr={false}
+        closeModal={closeModal}
+        onChange={handleDelete}
+      />
     </li>
   )
 }

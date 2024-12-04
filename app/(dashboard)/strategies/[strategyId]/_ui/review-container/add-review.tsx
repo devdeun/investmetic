@@ -20,7 +20,7 @@ const cx = classNames.bind(styles)
 interface Props {
   strategyId: number
   reviewId?: number
-  isEdit?: boolean
+  isEditable?: boolean
   content?: string
   starRating?: number
   onCancel?: () => void
@@ -29,7 +29,7 @@ interface Props {
 const AddReview = ({
   strategyId,
   reviewId,
-  isEdit = false,
+  isEditable = false,
   content,
   starRating,
   onCancel,
@@ -85,7 +85,7 @@ const AddReview = ({
   const handleStarRating = (idx: number) => setStarRatingValue(idx + 1)
 
   return (
-    <div className={cx('add-review-wrapper', { edit: isEdit })}>
+    <div className={cx('add-review-wrapper', { edit: isEditable })}>
       <div className={cx('textarea-wrapper')}>
         <Textarea
           defaultValue={content && content}
@@ -95,11 +95,11 @@ const AddReview = ({
         />
         {isEmpty && <ErrorMessage errorMessage="리뷰 작성 또는 별점을 선택해주세요." />}
       </div>
-      <div className={cx('add-button-wrapper', { edit: isEdit })}>
-        {!isEdit && <p className={cx('strategy')}>전략이 어땠나요?</p>}
+      <div className={cx('add-button-wrapper', { edit: isEditable })}>
+        {!isEditable && <p className={cx('strategy')}>전략이 어땠나요?</p>}
         <StarRating starRatingValue={starRatingValue} onRatingChange={handleStarRating} />
-        {isEdit ? (
-          <div className={cx('button-wrapper', { edit: isEdit })}>
+        {isEditable ? (
+          <div className={cx('button-wrapper', { edit: isEditable })}>
             <button onClick={() => handleFetchReview('edit')}>저장</button>
             <button onClick={onCancel}>취소</button>
           </div>
@@ -114,9 +114,7 @@ const AddReview = ({
           </Button>
         )}
       </div>
-      {isModalOpen && (
-        <ReviewGuideModal isModalOpen={isModalOpen} isErr={isError} closeModal={closeModal} />
-      )}
+      <ReviewGuideModal isModalOpen={isModalOpen} isErr={isError} closeModal={closeModal} />
     </div>
   )
 }
