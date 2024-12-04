@@ -20,6 +20,7 @@ interface Props {
 }
 
 const AreaChart = ({ profitRateChartData: data }: Props) => {
+  if (!data) return <div></div>
   const chartOptions: Highcharts.Options = {
     chart: {
       type: 'areaspline',
