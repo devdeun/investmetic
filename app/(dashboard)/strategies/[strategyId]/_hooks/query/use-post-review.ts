@@ -2,11 +2,17 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import postReview from '../../_api/post-review'
 
+export interface PostReviewErrModel {
+  isSuccess: boolean
+  message: string
+  code: number
+}
+
 const usePostReview = (strategyId: number) => {
   const queryClient = useQueryClient()
   return useMutation<
-    boolean | null,
-    undefined,
+    boolean | undefined | PostReviewErrModel,
+    PostReviewErrModel,
     { strategyId: number; content: { content: string; starRating: number } }
   >({
     mutationFn: ({
