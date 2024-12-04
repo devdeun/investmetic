@@ -114,7 +114,7 @@ const AddReview = ({
           </Button>
         )}
       </div>
-      <ReviewGuideModal isModalOpen={isModalOpen} isErr={isError} closeModal={closeModal} />
+      <ReviewGuideModal isModalOpen={isModalOpen} isErr={isError} onCloseModal={closeModal} />
     </div>
   )
 }

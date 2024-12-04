@@ -90,7 +90,7 @@ const ReviewItem = ({
       <ReviewGuideModal
         isModalOpen={isModalOpen}
         isErr={false}
-        closeModal={closeModal}
+        onCloseModal={closeModal}
         onChange={handleDelete}
       />
     </li>
