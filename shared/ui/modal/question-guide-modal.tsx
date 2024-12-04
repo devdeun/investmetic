@@ -13,10 +13,10 @@ const cx = classNames.bind(styles)
 
 interface Props {
   isModalOpen: boolean
-  closeModal: () => void
+  onCloseModal: () => void
 }
 
-const QuestionGuideModal = ({ isModalOpen, closeModal }: Props) => {
+const QuestionGuideModal = ({ isModalOpen, onCloseModal }: Props) => {
   return (
     <Modal isOpen={isModalOpen} icon={ModalCheckIcon}>
       <span className={cx('message')}>
@@ -26,7 +26,7 @@ const QuestionGuideModal = ({ isModalOpen, closeModal }: Props) => {
         <br />
         문의 페이지에서 확인 가능합니다.
       </span>
-      <Button onClick={closeModal}>닫기</Button>
+      <Button onClick={onCloseModal}>닫기</Button>
     </Modal>
   )
 }

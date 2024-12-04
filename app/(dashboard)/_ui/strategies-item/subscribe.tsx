@@ -57,7 +57,7 @@ const Subscribe = ({ strategyId, subscriptionStatus }: Props) => {
       {isModalOpen && (
         <SigninCheckModal
           isModalOpen={isModalOpen}
-          closeModal={closeModal}
+          onCloseModal={closeModal}
           onChange={handleRoute}
         />
       )}

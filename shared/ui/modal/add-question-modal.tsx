@@ -22,7 +22,7 @@ interface Props {
   content?: string
   titleRef?: React.RefObject<HTMLInputElement>
   contentRef?: React.RefObject<HTMLTextAreaElement>
-  closeModal: () => void
+  onCloseModal: () => void
   onChange?: () => void
 }
 
@@ -34,7 +34,7 @@ const AddQuestionModal = ({
   content,
   titleRef,
   contentRef,
-  closeModal,
+  onCloseModal,
   onChange,
 }: Props) => {
   return (
@@ -67,7 +67,7 @@ const AddQuestionModal = ({
       </div>
       {isEmpty && <ErrorMessage errorMessage="제목 또는 내용을 모두 입력해주세요." />}
       <div className={cx('two-button', 'question')}>
-        <Button onClick={closeModal}>취소</Button>
+        <Button onClick={onCloseModal}>취소</Button>
         <Button onClick={onChange} variant="filled" className={cx('button')}>
           문의
         </Button>
