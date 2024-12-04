@@ -60,7 +60,7 @@ const UserInfo = ({ isEditable = false }: Props) => {
                 value={'고양이'}
                 inputSize="compact"
                 className={cx('input')}
-                isWhiteDisabled={!isEditable ? true : undefined}
+                isWhiteDisabled={!isEditable}
                 disabled={isEditable}
               />
             </div>
@@ -72,7 +72,7 @@ const UserInfo = ({ isEditable = false }: Props) => {
                   inputSize="compact"
                   value={'hello@example.com'}
                   className={cx('input')}
-                  isWhiteDisabled={!isEditable ? true : undefined}
+                  isWhiteDisabled={!isEditable}
                   disabled={isEditable}
                 />
               </div>
@@ -86,7 +86,7 @@ const UserInfo = ({ isEditable = false }: Props) => {
                     onChange={() => {}}
                     className={cx('input')}
                     inputSize="compact"
-                    isWhiteDisabled={!isEditable ? true : undefined}
+                    isWhiteDisabled={!isEditable}
                   />
 
                   {isEditable && <Button onClick={handlePhoneConfirm}>확인</Button>}
@@ -101,7 +101,7 @@ const UserInfo = ({ isEditable = false }: Props) => {
                   inputSize="compact"
                   value={'2004.05.04'}
                   className={cx('input')}
-                  isWhiteDisabled={!isEditable ? true : undefined}
+                  isWhiteDisabled={!isEditable}
                   disabled={isEditable}
                 />
               </div>
@@ -115,7 +115,7 @@ const UserInfo = ({ isEditable = false }: Props) => {
                     value={'고양이귀여워'}
                     onChange={() => {}}
                     className={cx('input')}
-                    isWhiteDisabled={!isEditable ? true : undefined}
+                    isWhiteDisabled={!isEditable}
                   />
 
                   {isEditable && <Button onClick={handleNicknameConfirm}>확인</Button>}
