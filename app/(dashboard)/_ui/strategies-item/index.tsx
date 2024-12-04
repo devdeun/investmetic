@@ -4,6 +4,7 @@ import classNames from 'classnames/bind'
 
 import { StrategiesModel } from '@/shared/types/strategy-data'
 import { Button } from '@/shared/ui/button'
+import { LinkButton } from '@/shared/ui/link-button'
 import { formatNumber } from '@/shared/utils/format'
 
 import AreaChart from './area-chart'
@@ -57,10 +58,15 @@ const StrategiesItem = ({ strategiesData: data, type = 'default' }: Props) => {
             <p>{data.isPublic === 'PUBLIC' ? '공개' : '비공개'}</p>
           </div>
           <div className={cx('manage-buttons')}>
-            <Button size="small" variant="filled">
+            <LinkButton
+              size="small"
+              variant="filled"
+              href={`/my/strategies/manage/${data.strategyId}`}
+              className={cx('manage-button')}
+            >
               관리
-            </Button>
-            <Button size="small" variant="outline">
+            </LinkButton>
+            <Button size="small" variant="outline" className={cx('manage-button')}>
               삭제
             </Button>
           </div>

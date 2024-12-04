@@ -1,10 +1,16 @@
+import { useState } from 'react'
+
 import classNames from 'classnames/bind'
 
 import { ANALYSIS_PAGE_COUNT } from '@/shared/constants/count-per-page'
+import useModal from '@/shared/hooks/custom/use-modal'
 import { Button } from '@/shared/ui/button'
+import AnalysisUploadModal from '@/shared/ui/modal/analysis-upload-modal'
 import Pagination from '@/shared/ui/pagination'
 import VerticalTable from '@/shared/ui/table/vertical'
 
+import { useAnalysisUploadMutation } from '../../my/_hooks/query/use-analysis-mutation'
+import useGetMyDailyAnalysis from '../../my/_hooks/query/use-get-my-daily-analysis'
 import useGetAnalysis from '../../strategies/[strategyId]/_hooks/query/use-get-analysis'
 import styles from './styles.module.scss'
 
@@ -45,9 +51,57 @@ const AnalysisContent = ({
   onPageChange,
   isEditable = false,
 }: Props) => {
-  const { data: analysisData } = useGetAnalysis(strategyId, type, currentPage, ANALYSIS_PAGE_COUNT)
+  const [uploadType, setUploadType] = useState<'excel' | 'direct' | null>(null)
+  const { isModalOpen, openModal, closeModal } = useModal()
+
+  //TODO 현재 나의 전략 일간분석 조회 권한이 없어서 안보임
+  const { data: myAnalysisData } = useGetMyDailyAnalysis(
+    strategyId,
+    currentPage,
+    ANALYSIS_PAGE_COUNT
+  )
+  const { data: publicAnalysisData } = useGetAnalysis(
+    strategyId,
+    type,
+    currentPage,
+    ANALYSIS_PAGE_COUNT
+  )
+
+  const analysisData = isEditable ? myAnalysisData : publicAnalysisData
+
+  const { deleteAllAnalysis, isLoading } = useAnalysisUploadMutation(
+    strategyId,
+    currentPage,
+    ANALYSIS_PAGE_COUNT
+  )
 
   const tableHeader = type === 'daily' ? DAILY_TABLE_HEADER : MONTHLY_TABLE_HEADER
+
+  const handleExcelUpload = () => {
+    setUploadType('excel')
+    openModal()
+  }
+
+  const handleDirectInput = () => {
+    setUploadType('direct')
+    openModal()
+  }
+
+  const handleCloseModal = () => {
+    closeModal()
+    setUploadType(null)
+  }
+
+  const handleDeleteAll = async () => {
+    if (window.confirm('모든 데이터를 삭제하시겠습니까?')) {
+      try {
+        await deleteAllAnalysis()
+      } catch (error) {
+        console.error('Delete error:', error)
+        alert('데이터 삭제 중 오류가 발생했습니다.')
+      }
+    }
+  }
 
   if (analysisData?.content === null || analysisData?.content === undefined) return null
 
@@ -61,14 +115,24 @@ const AnalysisContent = ({
       {isEditable && (
         <div className={cx('button-container')}>
           <div className={cx('button-wrapper')}>
-            <Button size="small" className={cx('upload-button')} variant="filled">
+            <Button
+              size="small"
+              className={cx('upload-button')}
+              variant="filled"
+              onClick={handleExcelUpload}
+            >
               엑셀 업로드
             </Button>
-            <Button size="small" className={cx('upload-button')} variant="outline">
+            <Button
+              size="small"
+              className={cx('upload-button')}
+              variant="filled"
+              onClick={handleDirectInput}
+            >
               직접 입력
             </Button>
           </div>
-          <Button size="small" variant="filled">
+          <Button size="small" variant="filled" onClick={handleDeleteAll} disabled={isLoading}>
             전체 삭제
           </Button>
         </div>
@@ -86,6 +150,16 @@ const AnalysisContent = ({
         maxPage={analysisData?.totalPages}
         onPageChange={onPageChange}
       />
+
+      {uploadType && (
+        <AnalysisUploadModal
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+          strategyId={strategyId}
+          uploadType={uploadType}
+          message={uploadType === 'excel' ? '엑셀 업로드' : '일간분석 데이터 입력'}
+        />
+      )}
     </div>
   )
 }

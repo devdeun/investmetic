@@ -22,12 +22,14 @@ const cx = classNames.bind(styles)
 export type InformationType = { title: TitleType; data: string | number } | InformationModel[]
 
 const StrategyManagePage = ({ params }: { params: { strategyId: number } }) => {
-  const { data } = useGetDetailsInformationData({
+  const { data: detailsInfoData } = useGetDetailsInformationData({
     strategyId: params.strategyId,
   })
-
-  const { detailsSideData, detailsInformationData } = data || {}
-
+  const { data: subscribeData } = useGetDetailsInformationData({
+    strategyId: params.strategyId,
+  })
+  const { detailsSideData, detailsInformationData } = detailsInfoData || {}
+  const { detailsInformationData: subscribeInfo } = subscribeData || {}
   const hasDetailsSideData = detailsSideData?.map((data) => {
     if (!Array.isArray(data)) return data.data !== undefined
   })
@@ -47,7 +49,9 @@ const StrategyManagePage = ({ params }: { params: { strategyId: number } }) => {
         )}
         <AnalysisContainer type="my" strategyId={params.strategyId} />
         <SideContainer hasButton={true}>
-          <SubscriberItem subscribers={99} />
+          {subscribeInfo && (
+            <SubscriberItem subscribers={subscribeInfo?.subscriptionCount} isMyStrategy={true} />
+          )}
           {hasDetailsSideData?.[0] &&
             detailsSideData?.map((data, idx) => (
               <div key={`${data}_${idx}`}>
