@@ -4,7 +4,6 @@ import classNames from 'classnames/bind'
 
 import { Button } from '@/shared/ui/button'
 import Pagination from '@/shared/ui/pagination'
-import { SearchInput } from '@/shared/ui/search-input'
 import VerticalTable from '@/shared/ui/table/vertical'
 import Title from '@/shared/ui/title'
 
@@ -29,41 +28,37 @@ const AdminNoticesPage = () => {
               총 <span className={cx('colored')}>{TOTAL_NOTICE}</span>개
             </span>
           }
-          Right={<SearchInput placeholder="제목을 입력하세요." />}
           className={cx('header')}
         />
         <VerticalTable
           tableHead={['No.', '제목', '등록일', '작성일', '']}
-          tableBody={
-            // []
-            RES.data.content.map((d, idx) => [
-              idx + 1,
-              d.title,
-              d.publishedAt.slice(0, 10),
-              d.createdAt.slice(0, 10),
-              <Button.ButtonGroup key={d.content}>
-                {/* TODO: onclick 로직 정의 */}
+          tableBody={RES.data.content.map((d, idx) => [
+            idx + 1,
+            d.title,
+            d.publishedAt.slice(0, 10),
+            d.createdAt.slice(0, 10),
+            <Button.ButtonGroup key={d.content}>
+              {/* TODO: onclick 로직 정의 */}
 
-                <Button
-                  onClick={() => {}}
-                  size="small"
-                  className={cx('button')}
-                  style={{ padding: '16px 7px' }}
-                >
-                  수정
-                </Button>
-                <Button
-                  size="small"
-                  onClick={() => {}}
-                  variant="filled"
-                  className={cx('button')}
-                  style={{ padding: '16px 7px' }}
-                >
-                  삭제
-                </Button>
-              </Button.ButtonGroup>,
-            ])
-          }
+              <Button
+                onClick={() => {}}
+                size="small"
+                className={cx('button')}
+                style={{ padding: '16px 7px' }}
+              >
+                수정
+              </Button>
+              <Button
+                size="small"
+                onClick={() => {}}
+                variant="filled"
+                className={cx('button')}
+                style={{ padding: '16px 7px' }}
+              >
+                삭제
+              </Button>
+            </Button.ButtonGroup>,
+          ])}
           // TODO: 실제 값으로 추가
           countPerPage={10}
           currentPage={1}
