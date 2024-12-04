@@ -26,8 +26,8 @@ const TotalStar = ({
       <div className={cx('icon')}>
         <Star size={size} />
       </div>
-      <p>{averageRating}</p>
-      <p>({totalElements})</p>
+      <p className={cx('text')}>{averageRating}</p>
+      <p className={cx('text')}>({totalElements})</p>
     </div>
   )
 }
