@@ -32,8 +32,9 @@ const ReviewContainer = ({ strategyId }: Props) => {
         />
       </div>
       <AddReview strategyId={strategyId} />
-      {reviewData ? (
+      {reviewData && reviewData.reviews.content.length !== 0 ? (
         <ReviewList
+          strategyId={strategyId}
           reviews={reviewData.reviews.content}
           totalReview={reviewData.reviews.totalElements}
           currentPage={currentPage}
