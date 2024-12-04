@@ -5,8 +5,8 @@ import postReview from '../../_api/post-review'
 const usePostReview = (strategyId: number) => {
   const queryClient = useQueryClient()
   return useMutation<
-    boolean | null,
-    undefined,
+    boolean | undefined | { isSuccess: boolean; message: string; code: number },
+    { isSuccess: boolean; message: string; code: number },
     { strategyId: number; content: { content: string; starRating: number } }
   >({
     mutationFn: ({
