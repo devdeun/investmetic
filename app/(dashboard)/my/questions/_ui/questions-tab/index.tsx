@@ -2,11 +2,19 @@
 
 import { Suspense, useState } from 'react'
 
+import { QuestionSearchConditionType } from '@/shared/types/questions'
 import Tabs from '@/shared/ui/tabs'
 
 import QuestionsTabContent from '../questions-tab-content'
 
-const QuestionsTab = () => {
+interface Props {
+  searchOptions: {
+    keyword: string
+    searchCondition: QuestionSearchConditionType
+  }
+}
+
+const QuestionsTab = ({ searchOptions }: Props) => {
   const [activeTab, setActiveTab] = useState('all')
 
   const TABS = [
@@ -15,7 +23,13 @@ const QuestionsTab = () => {
       label: '모든 질문',
       content: (
         <Suspense>
-          <QuestionsTabContent options="all" />
+          <QuestionsTabContent
+            options={{
+              stateCondition: 'ALL',
+              searchCondition: searchOptions.searchCondition,
+              keyword: searchOptions.keyword,
+            }}
+          />
         </Suspense>
       ),
     },
@@ -24,16 +38,28 @@ const QuestionsTab = () => {
       label: '답변 대기',
       content: (
         <Suspense>
-          <QuestionsTabContent options="waiting" />
+          <QuestionsTabContent
+            options={{
+              stateCondition: 'WAITING',
+              searchCondition: searchOptions.searchCondition,
+              keyword: searchOptions.keyword,
+            }}
+          />
         </Suspense>
       ),
     },
     {
-      id: 'complete',
+      id: 'completed',
       label: '답변 완료',
       content: (
         <Suspense>
-          <QuestionsTabContent options="complete" />
+          <QuestionsTabContent
+            options={{
+              stateCondition: 'COMPLETED',
+              searchCondition: searchOptions.searchCondition,
+              keyword: searchOptions.keyword,
+            }}
+          />
         </Suspense>
       ),
     },
