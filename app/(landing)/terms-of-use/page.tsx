@@ -10,8 +10,8 @@ const cx = classNames.bind(styles)
 const TermsOfUsePage = () => {
   return (
     <>
-      <h1 className={cx('title')}>이용약관</h1>
       <section className={cx('section-container')}>
+        <h1 className={cx('title')}>이용약관</h1>
         <InvestorTerms />
       </section>
       <section className={cx('section-container')}>

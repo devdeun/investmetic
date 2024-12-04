@@ -14,36 +14,32 @@ export const createAxiosInstance = (options: { withInterceptors?: boolean } = {}
   if (options.withInterceptors && typeof window !== 'undefined') {
     instance.interceptors.request.use(
       async (config: InternalAxiosRequestConfig) => {
-        const { isLoggedOut } = useAuthStore.getState()
+        const { user, setAuthState } = useAuthStore.getState()
         const accessToken = getAccessToken()
 
-        if (isLoggedOut || !accessToken) {
+        if (!user || !accessToken) {
           return config
         }
 
         try {
           if (isTokenExpired(accessToken)) {
-            useAuthStore.getState().setAuthState({
+            setAuthState({
               isAuthenticated: false,
               user: null,
-              isKeepLoggedIn: false,
-              isLoggedOut: true,
             })
             return config
           }
 
           config.headers['access-token'] = `Bearer ${accessToken}`
+          return config
         } catch (err) {
-          console.error('토큰 검증 실패:', err)
-          useAuthStore.getState().setAuthState({
+          console.error('Token validation failed:', err)
+          setAuthState({
             isAuthenticated: false,
             user: null,
-            isKeepLoggedIn: false,
-            isLoggedOut: true,
           })
+          return config
         }
-
-        return config
       },
       (err) => Promise.reject(err)
     )
@@ -53,12 +49,13 @@ export const createAxiosInstance = (options: { withInterceptors?: boolean } = {}
       async (err: AxiosError) => {
         if (!err.config) return Promise.reject(err)
 
-        const originalRequest = err.config
-        const { isLoggedOut } = useAuthStore.getState()
+        const { user } = useAuthStore.getState()
 
-        if (isLoggedOut) {
+        if (!user) {
           return Promise.reject(err)
         }
+
+        const originalRequest = err.config
 
         if (err.response?.status === 401) {
           try {
@@ -74,8 +71,6 @@ export const createAxiosInstance = (options: { withInterceptors?: boolean } = {}
           useAuthStore.getState().setAuthState({
             isAuthenticated: false,
             user: null,
-            isKeepLoggedIn: false,
-            isLoggedOut: true,
           })
         }
 

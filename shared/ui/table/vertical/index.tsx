@@ -1,6 +1,7 @@
 // import { TABLE_DATA } from '@/app/admin/notices/tabledata'
 import { ReactNode } from 'react'
 
+import { NoticeListContentModel } from '@/app/(landing)/notices/_ui/notice-table'
 import classNames from 'classnames/bind'
 
 import { DailyAnalysisModel, MonthlyAnalysisModel } from '@/shared/types/strategy-data'
@@ -15,6 +16,7 @@ const cx = classNames.bind(styles)
 type TableBodyDataType =
   | DailyAnalysisModel
   | MonthlyAnalysisModel
+  | NoticeListContentModel
   | Array<ReactNode | string | number>
 
 export interface VerticalTableProps {
@@ -23,6 +25,7 @@ export interface VerticalTableProps {
   countPerPage: number
   currentPage: number
   isEditable?: boolean
+  className?: string
 }
 
 const VerticalTable = ({
@@ -31,12 +34,13 @@ const VerticalTable = ({
   countPerPage,
   currentPage,
   isEditable = false,
+  className,
 }: VerticalTableProps) => {
   const hasData = tableBody.length > 0
   const slicedTableBody = sliceArray(tableBody, countPerPage, currentPage)
 
   return (
-    <div className={cx('container')}>
+    <div className={cx('container', className)}>
       <table>
         <thead>
           <tr>

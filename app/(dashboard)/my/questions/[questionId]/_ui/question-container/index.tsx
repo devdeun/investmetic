@@ -2,11 +2,15 @@
 
 import { useState } from 'react'
 
+import { useParams } from 'next/navigation'
+
 import classNames from 'classnames/bind'
 
+import { useAuthStore } from '@/shared/stores/use-auth-store'
 import { Button } from '@/shared/ui/button'
 import { Textarea } from '@/shared/ui/textarea'
 
+import useGetQuestionDetails from '../../../_hooks/query/use-get-question-details'
 import QuestionDetailCard from '../question-detail-card'
 import styles from './styles.module.scss'
 
@@ -14,9 +18,14 @@ const cx = classNames.bind(styles)
 
 const QuestionContainer = () => {
   const [isActiveAnswer, setIsActiveAnswer] = useState(false)
-  // 임시
-  const hasAnswer = false
-  const isTrader = true
+  const { questionId } = useParams()
+
+  const user = useAuthStore((state) => state.user)
+  const isTrader = user?.role.includes('TRADER') || false
+
+  const { data: questionDetails } = useGetQuestionDetails({
+    questionId: parseInt(questionId as string),
+  })
 
   const handleQuestionAdd = () => {}
 
@@ -24,30 +33,29 @@ const QuestionContainer = () => {
     setIsActiveAnswer((prevState) => !prevState)
   }
 
-  // TODO: Trader, Investor에 따라 적절한 UI 표시
-  // Trader이고 답변이 달리지 않았을 때: 답변하기 버튼
-  // Trader이고 답변이 달렸을 때: 답변 삭제하기 버튼
-  // Investor일 때: 추가 질문하기 버튼
+  if (!questionDetails) {
+    return
+  }
 
   return (
     <>
       <div className={cx('container')}>
         <QuestionDetailCard
-          isAuthor={true}
-          strategyName="ETF 레버리지 /인버"
-          title="미국발 경제악화가 한국 증시에 미치는 영향은 무엇인가요?"
-          contents="안녕하세요 주식투자를 해보려고 하는데요 어쩌구... 저쩌구.......... 안녕하세요 주식투자를 해보려고 하는데요 어쩌구... 저쩌구..........안녕하세요 주식투자를 해보려고 하는데요 어쩌구... 저쩌구.......... 안녕하세요 주식투자를 해보려고 하는데요 어쩌구... 저쩌구..........안녕하세요 주식투자를 해보려고 하는데요 어쩌구... 저쩌구.......... 안녕하세요 주식투자를 해보려고 하는데요 어쩌구... 저쩌구..........안녕하세요 주식투자를 해보려고 하는데요 어쩌구... 저쩌구.......... 안녕하세요 주식투자를 해보려고 하는데요 어쩌구... 저쩌구..........안녕하세요 주식투자를 해보려고 하는데요 어쩌구... 저쩌구.......... 안녕하세요 주식투자를 해보려고 하는데요 어쩌구... 저쩌구..........안녕하세요 주식투자를 해보려고 하는데요 어쩌구... 저쩌구.......... 안녕하세요 주식투자를 해보려고 하는데요 어쩌구... 저쩌구..........안녕하세요 주식투자를 해보려고 하는데요 어쩌구... 저쩌구.......... 안녕하세요 주식투자를 해보려고 하는데요 어쩌구... 저쩌구..........안녕하세요 주식투자를 해보려고 하는데요 어쩌구... 저쩌구.......... 안녕하세요 주식투자를 해보려고 하는데요 어쩌구... 저쩌구..........안녕하세요 주식투자를 해보려고 하는데요 어쩌구... 저쩌구.......... 안녕하세요 주식투자를 해보려고 하는데요 어쩌구... 저쩌구..........안녕하세요 주식투자를 해보려고 하는데요 어쩌구... 저쩌구.......... 안녕하세요 주식투자를 해보려고 하는데요 어쩌구... 저쩌구..........안녕하세요 주식투자를 해보려고 하는데요 어쩌구... 저쩌구.......... 안녕하세요 주식투자를 해보려고 하는데요 어쩌구... 저쩌구..........안녕하세요 주식투자를 해보려고 하는데요 어쩌구... 저쩌구.......... 안녕하세요 주식투자를 해보려고 하는데요 어쩌구... 저쩌구.........."
-          nickname="홍길동"
-          createdAt="2024-11-03T15:00:00"
-          status="답변 완료"
+          isAuthor={!isTrader}
+          strategyName={questionDetails.strategyName}
+          title={questionDetails.title}
+          contents={questionDetails.questionContent}
+          nickname={questionDetails.nickname}
+          createdAt={questionDetails.questionCreatedAt}
+          status={questionDetails.state === 'WAITING' ? '답변 대기' : '답변 완료'}
         />
-        {hasAnswer ? (
+        {questionDetails.answer ? (
           <QuestionDetailCard
             type="answer"
-            isAuthor={false}
-            contents="저는 이러쿵저러쿵 생각합니다... 저는 이러쿵저러쿵 생각합니다...저는 이러쿵저러쿵 생각합니다...저는 이러쿵저러쿵 생각합니다... 저는 이러쿵저러쿵 생각합니다...저는 이러쿵저러쿵 생각합니다...저는 이러쿵저러쿵 생각합니다... 저는 이러쿵저러쿵 생각합니다...저는 이러쿵저러쿵 생각합니다...저는 이러쿵저러쿵 생각합니다... 저는 이러쿵저러쿵 생각합니다...저는 이러쿵저러쿵 생각합니다...저는 이러쿵저러쿵 생각합니다... 저는 이러쿵저러쿵 생각합니다...저는 이러쿵저러쿵 생각합니다...저는 이러쿵저러쿵 생각합니다... 저는 이러쿵저러쿵 생각합니다...저는 이러쿵저러쿵 생각합니다..."
-            nickname="전문가"
-            createdAt="2024-11-03T15:00:00"
+            isAuthor={isTrader}
+            contents={questionDetails.answer.content}
+            nickname={questionDetails.answer.nickname}
+            createdAt={questionDetails.answer.createdAt}
           />
         ) : (
           <>{!isActiveAnswer && <p className={cx('empty-message')}>아직 답변이 없습니다</p>}</>

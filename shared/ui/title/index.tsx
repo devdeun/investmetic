@@ -10,12 +10,13 @@ interface Props {
   label: string
   subtitle?: string
   marginLeft?: CSSProperties['marginLeft']
+  className?: string
   style?: CSSProperties
 }
 
-const Title = ({ label, subtitle, marginLeft, style }: Props) => {
+const Title = ({ label, subtitle, marginLeft, className, style }: Props) => {
   return (
-    <div className={cx('container')} style={{ ...style, marginLeft }}>
+    <div className={cx('container', className)} style={{ ...style, marginLeft }}>
       <h1 className={cx('title')}>{label}</h1>
       {subtitle && <p className={cx('sub-title')}>{subtitle}</p>}
     </div>

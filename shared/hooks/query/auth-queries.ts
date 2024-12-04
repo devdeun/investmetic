@@ -2,13 +2,11 @@ import { useRouter } from 'next/navigation'
 
 import { useMutation } from '@tanstack/react-query'
 
-import { login, logout } from '@/shared/api/auth'
+import { login, logout, refreshAccessToken } from '@/shared/api/auth'
 import axiosInstance from '@/shared/api/axios'
-import { STORAGE_KEYS } from '@/shared/constants/auth'
 import { PATH } from '@/shared/constants/path'
-import { setAccessToken } from '@/shared/lib/auth-tokens'
+import { removeAccessToken, setAccessToken } from '@/shared/lib/auth-tokens'
 import { useAuthStore } from '@/shared/stores/use-auth-store'
-import { isAdmin } from '@/shared/types/auth'
 import { getEmailFromToken } from '@/shared/utils/token-utils'
 
 export const useLoginMutation = () => {
@@ -16,33 +14,32 @@ export const useLoginMutation = () => {
     mutationFn: login,
     onSuccess: async (response) => {
       const accessToken = response.headers['access-token']?.replace('Bearer ', '')
-      if (accessToken) {
-        setAccessToken(accessToken)
+      if (!accessToken) {
+        throw new Error('No access token received')
+      }
 
-        try {
-          const userEmail = getEmailFromToken(accessToken)
-          if (!userEmail) throw new Error('Invalid token')
-
-          const userResponse = await axiosInstance.get(
-            `/api/users/mypage/profile?email=${userEmail}`
-          )
-          if (userResponse.data.isSuccess) {
-            localStorage.setItem(STORAGE_KEYS.USER, JSON.stringify(userResponse.data.result))
-
-            if (!isAdmin(userResponse.data.result)) {
-              sessionStorage.setItem(STORAGE_KEYS.SESSION, 'true')
-            }
-
-            useAuthStore.getState().setAuthState({
-              isAuthenticated: true,
-              user: userResponse.data.result,
-              isLoggedOut: false,
-            })
-          }
-        } catch (error) {
-          console.error('Failed to fetch user info:', error)
-          throw error
+      try {
+        const userEmail = getEmailFromToken(accessToken)
+        if (!userEmail) {
+          throw new Error('Invalid token')
         }
+
+        const userResponse = await axiosInstance.get(`/api/users/mypage/profile?email=${userEmail}`)
+        if (!userResponse.data.isSuccess) {
+          throw new Error('Failed to fetch user profile')
+        }
+
+        const user = userResponse.data.result
+        setAccessToken(accessToken, user)
+
+        useAuthStore.getState().setAuthState({
+          isAuthenticated: true,
+          user,
+        })
+      } catch (error) {
+        console.error('Login process failed:', error)
+        removeAccessToken()
+        throw error
       }
     },
   })
@@ -54,30 +51,72 @@ export const useLogoutMutation = () => {
   return useMutation({
     mutationFn: logout,
     onSuccess: () => {
-      localStorage.removeItem(STORAGE_KEYS.ACCESS_TOKEN)
-      localStorage.removeItem(STORAGE_KEYS.USER)
-      sessionStorage.removeItem(STORAGE_KEYS.SESSION)
-
+      removeAccessToken()
       useAuthStore.getState().setAuthState({
         isAuthenticated: false,
         user: null,
-        isLoggedOut: true,
       })
-
       router.replace(PATH.SIGN_IN)
     },
     onError: (error) => {
       console.error('Logout failed:', error)
-      localStorage.removeItem(STORAGE_KEYS.ACCESS_TOKEN)
-      localStorage.removeItem(STORAGE_KEYS.USER)
-      sessionStorage.removeItem(STORAGE_KEYS.SESSION)
-
+      removeAccessToken()
       useAuthStore.getState().setAuthState({
         isAuthenticated: false,
         user: null,
-        isLoggedOut: true,
       })
+      router.replace(PATH.SIGN_IN)
+    },
+  })
+}
 
+export const useRefreshTokenMutation = () => {
+  const router = useRouter()
+
+  return useMutation({
+    mutationFn: refreshAccessToken,
+    onSuccess: async (response) => {
+      const accessToken = response.headers['access-token']?.replace('Bearer ', '')
+      if (!accessToken) {
+        throw new Error('No access token received')
+      }
+
+      try {
+        const userEmail = getEmailFromToken(accessToken)
+        if (!userEmail) {
+          throw new Error('Invalid token after refresh')
+        }
+
+        const userResponse = await axiosInstance.get(`/api/users/mypage/profile?email=${userEmail}`)
+        if (!userResponse.data.isSuccess) {
+          throw new Error('Failed to fetch user profile')
+        }
+
+        const user = userResponse.data.result
+        setAccessToken(accessToken, user)
+
+        useAuthStore.getState().setAuthState({
+          isAuthenticated: true,
+          user,
+        })
+      } catch (error) {
+        console.error('Token refresh process failed:', error)
+        removeAccessToken()
+        useAuthStore.getState().setAuthState({
+          isAuthenticated: false,
+          user: null,
+        })
+        router.replace(PATH.SIGN_IN)
+        throw error
+      }
+    },
+    onError: (error) => {
+      console.error('Token refresh mutation failed:', error)
+      removeAccessToken()
+      useAuthStore.getState().setAuthState({
+        isAuthenticated: false,
+        user: null,
+      })
       router.replace(PATH.SIGN_IN)
     },
   })

@@ -1,13 +1,23 @@
+'use client'
+
+import { useState } from 'react'
+
 import classNames from 'classnames/bind'
 
+import useModal from '@/shared/hooks/custom/use-modal'
 import Avatar from '@/shared/ui/avatar'
 
+import useDeleteReview from '../../_hooks/query/use-delete-review'
 import StarRating from '../star-rating/index'
+import AddReview from './add-review'
+import ReviewGuideModal from './review-guide-modal'
 import styles from './styles.module.scss'
 
 const cx = classNames.bind(styles)
 
 interface Props {
+  reviewId: number
+  strategyId: number
   nickname: string
   content: string
   profileImage?: string
@@ -18,6 +28,8 @@ interface Props {
 }
 
 const ReviewItem = ({
+  reviewId,
+  strategyId,
   nickname,
   profileImage,
   createdAt,
@@ -26,6 +38,21 @@ const ReviewItem = ({
   isReviewer,
   isAdmin,
 }: Props) => {
+  const [isEditable, setIsEditable] = useState(false)
+  const { isModalOpen, openModal, closeModal } = useModal()
+  const { mutate } = useDeleteReview(strategyId)
+
+  const handleDelete = () => {
+    mutate(
+      { strategyId, reviewId },
+      {
+        onSuccess: () => {
+          closeModal()
+        },
+      }
+    )
+  }
+
   const editedCreatedAt = createdAt.slice(0, -3)
 
   return (
@@ -36,19 +63,36 @@ const ReviewItem = ({
           <p className={cx('nickname')}>{nickname}</p>
           <span>|</span>
           <span>{editedCreatedAt}</span>
-          <StarRating starRating={starRating} />
+          {!isEditable && <StarRating starRating={starRating} />}
         </div>
         <div className={cx('button-wrapper')}>
-          {isReviewer && (
+          {isReviewer && !isEditable && (
             <>
-              <button>수정</button>
-              <button>삭제</button>
+              <button onClick={() => setIsEditable(true)}>수정</button>
+              <button onClick={openModal}>삭제</button>
             </>
           )}
           {!isReviewer && isAdmin && <button>삭제</button>}
         </div>
       </div>
-      <div className={cx('content')}>{content}</div>
+      {isEditable ? (
+        <AddReview
+          strategyId={strategyId}
+          reviewId={reviewId}
+          isEditable={isEditable}
+          content={content}
+          starRating={starRating}
+          onCancel={() => setIsEditable(false)}
+        />
+      ) : (
+        <div className={cx('content')}>{content}</div>
+      )}
+      <ReviewGuideModal
+        isModalOpen={isModalOpen}
+        isErr={false}
+        onCloseModal={closeModal}
+        onChange={handleDelete}
+      />
     </li>
   )
 }

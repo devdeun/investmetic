@@ -23,13 +23,13 @@ Default.args = {
   nickname: '투자할래요',
   profileImage: '',
   createdAt: '2024-11-03T15:00:00',
-  status: '답변 대기',
+  questionState: 'WAITING',
 }
 
 export const Answered = Template.bind({})
 Answered.args = {
   ...Default.args,
-  status: '답변 완료',
+  questionState: 'COMPLETED',
 }
 
 export default meta

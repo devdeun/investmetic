@@ -19,13 +19,14 @@ interface ReviewContentModel {
 }
 
 interface Props {
+  strategyId: number
   reviews: ReviewContentModel[]
   totalReview: number
   currentPage: number
   setCurrentPage: (page: number) => void
 }
 
-const ReviewList = ({ reviews, totalReview, currentPage, setCurrentPage }: Props) => {
+const ReviewList = ({ strategyId, reviews, totalReview, currentPage, setCurrentPage }: Props) => {
   const handlePageChange = (page: number) => setCurrentPage(page)
   const user = useAuthStore((state) => state.user)
 
@@ -35,6 +36,8 @@ const ReviewList = ({ reviews, totalReview, currentPage, setCurrentPage }: Props
         {reviews.map((review) => (
           <ReviewItem
             key={review.reviewId}
+            reviewId={review.reviewId}
+            strategyId={strategyId}
             nickname={review.nickname}
             profileImage={review.imageUrl}
             createdAt={review.createdAt}

@@ -23,9 +23,15 @@ interface Props {
   information: InformationModel | InformationModel[]
   profileImage?: string
   isMyStrategy?: boolean
+  strategyName?: string
 }
 
-const DetailsSideItem = ({ information, profileImage, isMyStrategy = true }: Props) => {
+const DetailsSideItem = ({
+  information,
+  profileImage,
+  isMyStrategy = true,
+  strategyName,
+}: Props) => {
   const isArray = Array.isArray(information)
   return (
     <>
@@ -46,6 +52,7 @@ const DetailsSideItem = ({ information, profileImage, isMyStrategy = true }: Pro
           data={information.data}
           profileImage={profileImage}
           isMyStrategy={isMyStrategy}
+          strategyName={strategyName}
         />
       )}
     </>

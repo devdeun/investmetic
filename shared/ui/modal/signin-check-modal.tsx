@@ -13,18 +13,18 @@ const cx = classNames.bind(styles)
 
 interface Props {
   isModalOpen: boolean
-  closeModal: () => void
+  onCloseModal: () => void
   onChange?: () => void
 }
 
-const SigninCheckModal = ({ isModalOpen, closeModal, onChange }: Props) => {
+const SigninCheckModal = ({ isModalOpen, onCloseModal, onChange }: Props) => {
   return (
     <Modal isOpen={isModalOpen} icon={ModalAlertIcon}>
       <span className={cx('message')}>
         로그인이 필요합니다. <br /> 로그인 하시겠습니까?
       </span>
       <div className={cx('two-button')}>
-        <Button onClick={closeModal}>아니오</Button>
+        <Button onClick={onCloseModal}>아니오</Button>
         <Button onClick={onChange} variant="filled" className={cx('button')}>
           예
         </Button>
