@@ -21,6 +21,19 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  &.question {
+    width: 600px;
+    .two-button {
+      gap: 40px;
+    }
+    .message {
+      margin: 30px 0;
+      &.strategy-name {
+        @include typo-h4;
+        margin: 0 0 30px 0;
+      }
+    }
+  }
 
   &.big {
     width: 800px;
@@ -44,4 +57,36 @@
   white-space: pre-line;
   color: $color-gray-800;
   margin-bottom: 30px;
+}
+
+.two-button {
+  display: flex;
+  gap: 10px;
+  & .button {
+    width: 90px;
+  }
+  &.question {
+    margin-top: 20px;
+  }
+}
+
+.question-title,
+.question-content {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 30px;
+  padding: 0 20px;
+  p {
+    width: 30px;
+    margin-right: 20px;
+    @include typo-b3;
+  }
+  div {
+    width: 100%;
+  }
+  & .content {
+    padding: 14px 24px;
+  }
 }

@@ -3,7 +3,7 @@ import Link from 'next/link'
 import classNames from 'classnames/bind'
 
 import { PATH } from '@/shared/constants/path'
-import type { QuestionStatusType } from '@/shared/types/questions'
+import { QuestionStateConditionType } from '@/shared/types/questions'
 import Avatar from '@/shared/ui/avatar'
 import Label from '@/shared/ui/label'
 import { formatDateTime } from '@/shared/utils/format'
@@ -20,25 +20,27 @@ export interface QuestionCardProps {
 }
 
 interface Props extends QuestionCardProps {
-  qnaId: number
+  questionId: number
   strategyName: string
   title: string
-  status: QuestionStatusType
+  questionState: QuestionStateConditionType
 }
 
 const QuestionCard = ({
-  qnaId,
+  questionId,
   strategyName,
   title,
   contents,
   nickname,
   profileImage,
   createdAt,
-  status,
+  questionState,
 }: Props) => {
+  const status = questionState === 'COMPLETED' ? '답변 완료' : '답변 대기'
+
   return (
     <div className={cx('card-container')}>
-      <Link href={`${PATH.MY_QUESTIONS}/${qnaId}`}>
+      <Link href={`${PATH.MY_QUESTIONS}/${questionId}`}>
         <div className={cx('top-wrapper')}>
           <strong className={cx('strategy-name')}>{strategyName}</strong>
           <span className={cx('created-at')}>{formatDateTime(createdAt)}</span>
@@ -50,7 +52,7 @@ const QuestionCard = ({
             <Avatar src={profileImage} size="medium" />
             <span>{nickname}</span>
           </div>
-          <Label color={status === '답변 완료' ? 'indigo' : 'orange'}>{status}</Label>
+          <Label color={questionState === 'COMPLETED' ? 'indigo' : 'orange'}>{status}</Label>
         </div>
       </Link>
     </div>

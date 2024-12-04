@@ -15,11 +15,11 @@ const cx = classNames.bind(styles)
 interface Props {
   isModalOpen: boolean
   isErr: boolean
-  closeModal: () => void
+  onCloseModal: () => void
   onChange?: () => void
 }
 
-const ReviewGuideModal = ({ isModalOpen, isErr, closeModal, onChange }: Props) => {
+const ReviewGuideModal = ({ isModalOpen, isErr, onCloseModal, onChange }: Props) => {
   return (
     <Modal isOpen={isModalOpen} icon={ModalAlertIcon}>
       <span className={cx('message')}>
@@ -32,10 +32,10 @@ const ReviewGuideModal = ({ isModalOpen, isErr, closeModal, onChange }: Props) =
         )}
       </span>
       {isErr && !onChange ? (
-        <Button onClick={closeModal}>닫기</Button>
+        <Button onClick={onCloseModal}>닫기</Button>
       ) : (
         <div className={cx('two-button')}>
-          <Button onClick={closeModal}>아니오</Button>
+          <Button onClick={onCloseModal}>아니오</Button>
           <Button onClick={onChange} variant="filled" className={cx('button')}>
             예
           </Button>

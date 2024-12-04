@@ -32,13 +32,13 @@ const AnalysisChart = ({ analysisChartData: data }: Props) => {
     const key = Object.keys(data.data)[sequence] as YAxisType | undefined
     return key ? YAXIS_OPTIONS[key] : ''
   }
-  if (!data) return <p>등록된 데이터가 없습니다.</p>
+  if (!data) return <div></div>
   const chartOptions: Highcharts.Options = {
     chart: {
       type: 'areaspline',
       height: 367,
       backgroundColor: 'transparent',
-      margin: [10, 50, 10, 50],
+      margin: [10, 60, 10, 60],
       zoomType: 'x',
     } as Highcharts.ChartOptions,
     title: { text: undefined },

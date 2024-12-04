@@ -23,8 +23,8 @@ const StrategiesItem = ({ strategiesData: data, type = 'default' }: Props) => {
   return (
     <Link className={cx('container', type)} href={`/strategies/${data.strategyId}`}>
       <StrategiesSummary
-        // iconUrls={[data.tradeTypeIconUrl, ...data.stockTypeInfo.stockTypeIconUrls]}
-        // iconNames={[data.tradeTypeName, ...data.stockTypeInfo.stockTypeNames]}
+        iconUrls={[data.tradeTypeIconUrl, ...(data.stockTypeInfo?.stockTypeIconUrls ?? [])]}
+        iconNames={[data.tradeTypeName, ...(data.stockTypeInfo?.stockTypeNames ?? [])]}
         title={data.strategyName}
         profile={{
           traderImage: data.traderImgUrl,
