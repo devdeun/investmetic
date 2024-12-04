@@ -14,14 +14,14 @@ const cx = classNames.bind(styles)
 
 interface SessionExtensionModalProps {
   isModalOpen: boolean
-  closeModal: () => void
+  onCloseModal: () => void
   onExtend: () => void
   minutesLeft: number
 }
 
 const SessionExtensionModal = ({
   isModalOpen,
-  closeModal,
+  onCloseModal,
   onExtend,
   minutesLeft,
 }: SessionExtensionModalProps) => {
@@ -42,7 +42,7 @@ const SessionExtensionModal = ({
         로그인을 연장하시겠습니까?
       </span>
       <div className={cx('two-button')}>
-        <Button onClick={closeModal}>아니오</Button>
+        <Button onClick={onCloseModal}>아니오</Button>
         <Button onClick={onExtend} variant="filled" className={cx('button')}>
           예
         </Button>

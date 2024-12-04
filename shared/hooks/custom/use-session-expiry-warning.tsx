@@ -14,7 +14,7 @@ export const useSessionExpiryWarning = () => {
   const { checkTokenStatus } = useAuth()
   const { user } = useAuthStore()
   const { mutate: refreshToken } = useRefreshTokenMutation()
-  const { isModalOpen, openModal, closeModal } = useModalStore()
+  const { isModalOpen, openModal, onCloseModal } = useModalStore()
   const { setWarningShown, setMinutesLeft, minutesLeft } = useSessionStore()
   const warningShownRef = useRef(false)
 
@@ -25,7 +25,7 @@ export const useSessionExpiryWarning = () => {
       setMinutesLeft((prev) => {
         const newMinutes = Math.max(0, prev - 1)
         if (newMinutes === 0) {
-          closeModal()
+          onCloseModal()
           warningShownRef.current = false
           setWarningShown(false)
         }
@@ -34,12 +34,12 @@ export const useSessionExpiryWarning = () => {
     }, 60000)
 
     return () => clearInterval(timer)
-  }, [isModalOpen, closeModal, setMinutesLeft, setWarningShown])
+  }, [isModalOpen, onCloseModal, setMinutesLeft, setWarningShown])
 
   const handleRefreshToken = useCallback(() => {
     refreshToken(undefined, {
       onSuccess: () => {
-        closeModal()
+        onCloseModal()
         warningShownRef.current = false
         setWarningShown(false)
       },
@@ -47,7 +47,7 @@ export const useSessionExpiryWarning = () => {
         console.error('Token refresh failed in session warning:', error)
       },
     })
-  }, [refreshToken, closeModal, setWarningShown])
+  }, [refreshToken, onCloseModal, setWarningShown])
 
   useEffect(() => {
     if (!user || !isAdmin(user)) return
@@ -73,7 +73,7 @@ export const useSessionExpiryWarning = () => {
   return (
     <SessionExtensionModal
       isModalOpen={isModalOpen}
-      closeModal={closeModal}
+      onCloseModal={onCloseModal}
       onExtend={handleRefreshToken}
       minutesLeft={minutesLeft}
     />
