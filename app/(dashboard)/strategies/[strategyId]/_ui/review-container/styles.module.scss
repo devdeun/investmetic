@@ -45,6 +45,12 @@
     .review-button {
       margin: 20px 0 0 4px;
     }
+    &.edit {
+      padding: 20px 0;
+    }
+  }
+  &.edit {
+    margin: 10px 0;
   }
 }
 
@@ -72,19 +78,39 @@
         margin-right: 5px;
       }
     }
-    .button-wrapper {
-      button {
-        font-weight: $text-bold;
-        font-size: $text-c1;
-        color: $color-gray-500;
-        background-color: transparent;
-        margin-left: 20px;
-      }
-    }
   }
   .content {
     margin: 10px 0;
     font-size: 18px;
     font-weight: $text-medium;
+  }
+}
+
+.button-wrapper {
+  button {
+    font-weight: $text-bold;
+    font-size: $text-c1;
+    color: $color-gray-500;
+    background-color: transparent;
+    margin-left: 20px;
+  }
+  &.edit {
+    margin-top: 20px;
+    padding-left: 10px;
+  }
+}
+
+.message {
+  @include typo-b1;
+  text-align: center;
+  color: $color-gray-800;
+  margin-bottom: 30px;
+}
+
+.two-button {
+  display: flex;
+  gap: 10px;
+  & .button {
+    width: 90px;
   }
 }

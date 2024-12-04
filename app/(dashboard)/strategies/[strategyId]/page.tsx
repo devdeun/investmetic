@@ -73,6 +73,7 @@ const StrategyDetailPage = ({ params }: { params: { strategyId: number } }) => {
                 <DetailsSideItem
                   information={data}
                   isMyStrategy={user?.nickname === information.nickname}
+                  strategyName={information.strategyName}
                 />
               </div>
             ))}
@@ -82,7 +83,7 @@ const StrategyDetailPage = ({ params }: { params: { strategyId: number } }) => {
         <SubscribeCheckModal
           isSubscribing={information?.isSubscribed}
           isModalOpen={isModalOpen}
-          closeModal={handleUnsubscribe}
+          onCloseModal={handleUnsubscribe}
           onChange={handleSubscribe}
         />
       )}

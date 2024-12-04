@@ -27,9 +27,9 @@ const SignInPage = () => {
   const router = useRouter()
   const searchParams = useSearchParams()
   const loginMutation = useLoginMutation()
-
   const setKeepLoggedIn = useAuthStore((state) => state.setKeepLoggedIn)
   const isKeepLoggedIn = useAuthStore((state) => state.isKeepLoggedIn)
+
   const [formData, setFormData] = useState<LoginFormDataModel>({
     email: '',
     password: '',
@@ -83,6 +83,7 @@ const SignInPage = () => {
           console.error('Invalid return URL:', err)
         }
       }
+
       router.replace(PATH.STRATEGIES)
     } catch (err) {
       if (err instanceof AxiosError) {

@@ -13,9 +13,11 @@ const HighchartsReact = dynamic(() => import('highcharts-react-official'), {
 
 export interface AverageMetricsChartDataModel {
   dates: string[]
-  averagePrice: number[]
-  topSmScore: number[]
-  topStrategyPrice: number[]
+  data: {
+    avgReferencePrice: number[]
+    highestSmScoreReferencePrice: number[]
+    highestSubscribeScoreReferencePrice: number[]
+  }
 }
 
 interface Props {
@@ -150,7 +152,7 @@ const AverageMetricsChart = ({ data }: Props) => {
       {
         type: 'areaspline',
         name: '평균',
-        data: data.averagePrice,
+        data: data.data.avgReferencePrice,
         color: '#FF4F1F',
         yAxis: 0,
         stickyTracking: false,
@@ -159,7 +161,7 @@ const AverageMetricsChart = ({ data }: Props) => {
       {
         type: 'spline',
         name: 'SM SCORE 1위',
-        data: data.topSmScore,
+        data: data.data.highestSmScoreReferencePrice,
         color: '#6877FF',
         yAxis: 1,
         stickyTracking: false,
@@ -168,7 +170,7 @@ const AverageMetricsChart = ({ data }: Props) => {
       {
         type: 'spline',
         name: '구독 1위',
-        data: data.topStrategyPrice,
+        data: data.data.highestSubscribeScoreReferencePrice,
         color: '#FFE070',
         yAxis: 1,
         stickyTracking: false,

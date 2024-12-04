@@ -25,6 +25,7 @@ interface Props {
 
 const StrategiesIcon = ({ iconUrls, iconNames }: Props) => {
   const [imageSizes, setImageSizes] = useState<{ [key: string]: ImageSizeModel }>({})
+  const [validImages, setValidImages] = useState<{ [key: string]: boolean }>({})
 
   useEffect(() => {
     const images: HTMLImageElement[] = []
@@ -53,6 +54,14 @@ const StrategiesIcon = ({ iconUrls, iconNames }: Props) => {
 
   const getImageSize = (url: string) => imageSizes[url] || { width: 20, height: 20 }
 
+  const handleImageErr = (url: string) => {
+    setValidImages((prev) => ({ ...prev, [url]: false }))
+  }
+
+  const handleImageLoad = (url: string) => {
+    setValidImages((prev) => ({ ...prev, [url]: true }))
+  }
+
   if (iconUrls?.length === 0 || iconNames?.length === 0) return null
   if (iconUrls?.length !== iconNames?.length) return null
 
@@ -60,7 +69,7 @@ const StrategiesIcon = ({ iconUrls, iconNames }: Props) => {
     <div className={cx('icon-container')}>
       {iconUrls?.map((url, idx) => {
         const name = iconNames?.[idx]
-        if (!url || !name) return null
+        if (!url || !name || validImages[url] === false) return null
         const { width, height } = getImageSize(url)
 
         return (
@@ -75,7 +84,13 @@ const StrategiesIcon = ({ iconUrls, iconNames }: Props) => {
               data-tooltip-content={name}
               data-tooltip-class-name="tooltip"
             >
-              <Image src={url} alt={name} fill />
+              <Image
+                src={url}
+                alt={name}
+                fill
+                onLoadingComplete={() => handleImageLoad(url)}
+                onError={() => handleImageErr(url)}
+              />
             </div>
             <Tooltip id={name} className={cx('tooltip')} classNameArrow={cx('arrow')} opacity={1}>
               {name}
