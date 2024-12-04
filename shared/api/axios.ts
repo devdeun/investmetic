@@ -6,7 +6,6 @@ import { useAuthStore } from '@/shared/stores/use-auth-store'
 import { isTokenExpired, refreshToken } from '@/shared/utils/token-utils'
 
 export const createAxiosInstance = (options: { withInterceptors?: boolean } = {}) => {
-  const { user, setAuthState } = useAuthStore.getState()
   const instance = axios.create({
     baseURL: process.env.NEXT_PUBLIC_API_HOST,
     withCredentials: true,
@@ -15,6 +14,7 @@ export const createAxiosInstance = (options: { withInterceptors?: boolean } = {}
   if (options.withInterceptors && typeof window !== 'undefined') {
     instance.interceptors.request.use(
       async (config: InternalAxiosRequestConfig) => {
+        const { user, setAuthState } = useAuthStore.getState()
         const accessToken = getAccessToken()
 
         if (!user || !accessToken) {
@@ -47,7 +47,11 @@ export const createAxiosInstance = (options: { withInterceptors?: boolean } = {}
     instance.interceptors.response.use(
       (response) => response,
       async (err: AxiosError) => {
-        if (!err.config || !user) {
+        if (!err.config) return Promise.reject(err)
+
+        const { user } = useAuthStore.getState()
+
+        if (!user) {
           return Promise.reject(err)
         }
 
@@ -64,7 +68,7 @@ export const createAxiosInstance = (options: { withInterceptors?: boolean } = {}
             console.error('Token refresh failed:', refreshError)
           }
 
-          setAuthState({
+          useAuthStore.getState().setAuthState({
             isAuthenticated: false,
             user: null,
           })
