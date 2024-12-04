@@ -18,7 +18,7 @@ import styles from './styles.module.scss'
 
 const cx = classNames.bind(styles)
 
-interface ImageDataModel {
+export interface ImageDataModel {
   id: number
   imageUrl: string
   title: string
@@ -34,14 +34,14 @@ interface Props {
 const AccountContent = ({ strategyId, currentPage, onPageChange, isEditable = false }: Props) => {
   const [selectedImage, setSelectedImage] = useState<ImageDataModel | null>(null)
   const { isModalOpen, openModal, closeModal } = useModal()
-  const { data } = useGetAccountImages(strategyId)
+  const { data, isLoading } = useGetAccountImages(strategyId)
 
   const handleOpenModal = (image: ImageDataModel) => {
     setSelectedImage(image)
     openModal()
   }
 
-  if (!data || !Array.isArray(data.content)) return <></>
+  if (!data || !Array.isArray(data.content) || isLoading) return null
 
   const imagesData = data.content
   const croppedImagesData: ImageDataModel[] = sliceArray(
