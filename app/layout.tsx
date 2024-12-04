@@ -16,8 +16,10 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
     <html lang="ko" className={pretendard.variable}>
       <body>
         <QueryProvider>
-          <div id="modal-root"></div>
-          <AuthProvider>{children}</AuthProvider>
+          <AuthProvider>
+            {children}
+            <div id="modal-root" />
+          </AuthProvider>
         </QueryProvider>
       </body>
     </html>
