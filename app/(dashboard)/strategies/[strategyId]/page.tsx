@@ -73,6 +73,7 @@ const StrategyDetailPage = ({ params }: { params: { strategyId: number } }) => {
                 <DetailsSideItem
                   information={data}
                   isMyStrategy={user?.nickname === information.nickname}
+                  strategyName={information.strategyName}
                 />
               </div>
             ))}
