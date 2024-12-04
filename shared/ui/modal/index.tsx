@@ -13,9 +13,17 @@ interface Props {
   children?: React.ReactNode
   isOpen: boolean
   className?: string
+  size?: 'default' | 'big'
 }
 
-const Modal = ({ icon: Icon, message, children, isOpen = false, className }: Props) => {
+const Modal = ({
+  icon: Icon,
+  message,
+  children,
+  isOpen = false,
+  size = 'default',
+  className,
+}: Props) => {
   if (!isOpen) return null
 
   const modalRoot = document.getElementById('modal-root')
@@ -25,7 +33,7 @@ const Modal = ({ icon: Icon, message, children, isOpen = false, className }: Pro
   return createPortal(
     <>
       <div className={cx('overlay')}></div>
-      <div className={cx('modal', className)}>
+      <div className={cx('modal', size, className)}>
         <div className={cx('icon')}>{Icon && <Icon className={cx('icon')} />}</div>
         <p className={cx('message')}>{message}</p>
         {children}
