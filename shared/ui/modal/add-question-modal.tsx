@@ -58,7 +58,12 @@ const AddQuestionModal = ({
       </div>
       <div className={cx('question-content')}>
         <p>내용</p>
-        <Textarea ref={contentRef} value={content && content} placeholder="내용을 입력하세요." />
+        <Textarea
+          ref={contentRef}
+          value={content && content}
+          placeholder="내용을 입력하세요."
+          className={cx('content')}
+        />
       </div>
       {isEmpty && <ErrorMessage errorMessage="제목 또는 내용을 모두 입력해주세요." />}
       <div className={cx('two-button', 'question')}>
