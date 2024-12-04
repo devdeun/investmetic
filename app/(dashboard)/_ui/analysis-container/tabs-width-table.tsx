@@ -74,7 +74,7 @@ const TabsWithTable = ({ strategyId, isEditable = false }: Props) => {
       content: (
         <div className={cx('table-wrapper')}>
           <AccountContent
-            imagesData={[]}
+            strategyId={strategyId}
             currentPage={currentPage}
             onPageChange={handlePageChange}
             isEditable={isEditable}
