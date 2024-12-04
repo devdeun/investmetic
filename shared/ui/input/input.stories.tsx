@@ -13,16 +13,21 @@ const meta: Meta<typeof Input> = {
   argTypes: {
     inputSize: {
       control: { type: 'radio' },
-      options: ['small', 'medium', 'large', 'full'],
+      options: ['small', 'compact', 'medium', 'large', 'full'],
     },
     type: {
       control: { type: 'select' },
       options: ['email', 'password', 'tel', 'text'],
     },
+    isWhiteDisabled: {
+      control: { type: 'boolean' },
+      description: 'White disabled input',
+    },
   },
   tags: ['autodocs'],
 }
 
+export default meta
 type StoryType = StoryObj<typeof Input>
 
 export const Default: StoryType = {}
@@ -31,6 +36,13 @@ export const Small: StoryType = {
   args: {
     inputSize: 'small',
     placeholder: 'Small input',
+  },
+}
+
+export const Compact: StoryType = {
+  args: {
+    inputSize: 'compact',
+    placeholder: 'Compact input',
   },
 }
 
@@ -51,8 +63,22 @@ export const Large: StoryType = {
 export const Full: StoryType = {
   args: {
     inputSize: 'full',
-    placeholder: 'full input',
+    placeholder: 'Full input',
   },
 }
 
-export default meta
+export const Disabled: StoryType = {
+  args: {
+    inputSize: 'medium',
+    placeholder: 'Disabled input',
+    disabled: true,
+  },
+}
+
+export const WhiteDisabled: StoryType = {
+  args: {
+    inputSize: 'medium',
+    placeholder: 'White disabled input',
+    isWhiteDisabled: true,
+  },
+}

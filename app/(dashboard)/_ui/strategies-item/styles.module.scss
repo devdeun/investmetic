@@ -46,7 +46,7 @@
 .summary {
   padding-left: 30px;
   overflow: hidden;
-  * {
+  :not(:first-child) {
     margin: 4px 0;
   }
   .title {
@@ -56,7 +56,7 @@
   .trader-profile {
     display: flex;
     align-items: center;
-    p {
+    & p {
       margin-left: 10px;
       @include typo-b2;
     }
@@ -66,9 +66,9 @@
     align-items: center;
     height: 20px;
     gap: 6px;
-    p {
+    padding-top: 10px;
+    & p {
       @include typo-c1;
-      padding-top: 10px;
     }
   }
 }
@@ -89,6 +89,7 @@
 
 .icon-container {
   display: flex;
+  align-items: center;
   gap: 4px;
   .icon-wrapper {
     .icon {

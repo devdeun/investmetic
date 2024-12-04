@@ -1,10 +1,14 @@
 $avatar-small: 24px;
 $avatar-medium: 32px;
 $avatar-large: 72px;
+$avatar-xlarge: 100px;
+$avatar-xxlarge: 148px;
 
 $svg-small: 20px;
 $svg-medium: 24px;
 $svg-large: 54px;
+$svg-xlarge: 75px;
+$svg-xxlarge: 110px;
 
 .avatar {
   position: relative;
@@ -44,6 +48,26 @@ $svg-large: 54px;
       width: $svg-large;
       height: $svg-large;
       margin-bottom: 4px;
+    }
+  }
+
+  &.xlarge {
+    width: $avatar-xlarge;
+    height: $avatar-xlarge;
+
+    svg {
+      width: $svg-xlarge;
+      height: $svg-xlarge;
+    }
+  }
+
+  &.xxlarge {
+    width: $avatar-xxlarge;
+    height: $avatar-xxlarge;
+
+    svg {
+      width: $svg-xxlarge;
+      height: $svg-xxlarge;
     }
   }
 
