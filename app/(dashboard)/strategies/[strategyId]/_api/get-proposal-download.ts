@@ -8,11 +8,6 @@ const getProposalDownload = async (strategyId: number, name: string) => {
       responseType: 'blob',
     })
     const blob = new Blob([response.data], { type: response.headers['content-type'] })
-    const url = window.URL.createObjectURL(blob)
-
-    const link = document.createElement('a')
-    link.href = url
-
     const contentDisposition = response.headers['content-disposition']
 
     downloadFile(blob, contentDisposition, `${name}_제안서`)
