@@ -14,6 +14,7 @@ import {
   ChevronUpIcon,
   CloseIcon,
   DailyGraphIcon,
+  DownloadIcon,
   FileIcon,
   ModalAlertIcon,
   ModalCheckIcon,
@@ -74,6 +75,7 @@ const icons = [
   { name: 'ModalSubscribeIcon', icon: ModalSubscribeIcon },
   { name: 'ModalCheckIcon', icon: ModalCheckIcon },
   { name: 'RegisterIcon', icon: RegisterIcon },
+  { name: 'DownloadIcon', icon: DownloadIcon },
   { name: 'CameraIcon', icon: CameraIcon },
 ]
 
