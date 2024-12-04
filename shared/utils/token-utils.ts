@@ -1,23 +1,24 @@
 import { jwtDecode } from 'jwt-decode'
 
 import { setAccessToken } from '@/shared/lib/auth-tokens'
+import { useAuthStore } from '@/shared/stores/use-auth-store'
 import { TokenPayloadModel } from '@/shared/types/auth'
 
 import { refreshAccessToken } from '../api/auth'
+import { AUTH_TIME } from '../constants/auth'
 
-let isRefreshing = false
-let refreshSubscribers: ((token: string) => void)[] = []
+let isRefreshInProgress = false
+let pendingRefreshRequests: ((token: string) => void)[] = []
 
 export const refreshToken = async (): Promise<string | null> => {
-  if (isRefreshing) {
+  if (isRefreshInProgress) {
     return new Promise((resolve) => {
-      refreshSubscribers.push((token) => resolve(token))
+      pendingRefreshRequests.push((token) => resolve(token))
     })
   }
 
   try {
-    isRefreshing = true
-
+    isRefreshInProgress = true
     const response = await refreshAccessToken()
 
     if (!response.data.isSuccess) {
@@ -25,38 +26,61 @@ export const refreshToken = async (): Promise<string | null> => {
     }
 
     const newAccessToken = response.headers['access-token']?.replace('Bearer ', '')
-
-    if (newAccessToken) {
-      setAccessToken(newAccessToken)
-      refreshSubscribers.forEach((cb) => cb(newAccessToken))
-      return newAccessToken
+    if (!newAccessToken) {
+      return null
     }
 
-    return null
-  } catch (err) {
-    console.error('Token refresh failed:', err)
+    const currentUser = useAuthStore.getState().user
+    if (!currentUser) {
+      return null
+    }
+
+    setAccessToken(newAccessToken, currentUser)
+    pendingRefreshRequests.forEach((callback) => callback(newAccessToken))
+    return newAccessToken
+  } catch (error) {
+    console.error('Token refresh failed:', error)
     return null
   } finally {
-    isRefreshing = false
-    refreshSubscribers = []
+    isRefreshInProgress = false
+    pendingRefreshRequests = []
   }
 }
 
 export const isTokenExpired = (token: string): boolean => {
   try {
     const decoded = jwtDecode<TokenPayloadModel>(token)
-    return decoded.exp * 1000 < Date.now()
-  } catch {
+    const currentTime = Date.now()
+    const expiryTime = decoded.exp * 1000
+
+    return expiryTime - currentTime <= AUTH_TIME.SAFETY_MARGIN
+  } catch (error) {
+    console.error('Token expiry check failed:', error)
+    return true
+  }
+}
+
+export const isNearExpiry = (token: string): boolean => {
+  try {
+    const decoded = jwtDecode<TokenPayloadModel>(token)
+    const currentTime = Date.now()
+    const expiryTime = decoded.exp * 1000
+
+    return expiryTime - currentTime < AUTH_TIME.ADMIN_EXPIRY_WARNING
+  } catch (error) {
+    console.error('Near expiry check failed:', error)
     return true
   }
 }
 
 export const getEmailFromToken = (token: string | null): string | null => {
   if (!token) return null
+
   try {
     const decoded = jwtDecode<TokenPayloadModel>(token)
-    return decoded.email
-  } catch {
+    return decoded.email || null
+  } catch (error) {
+    console.error('Email extraction failed:', error)
     return null
   }
 }
@@ -64,8 +88,12 @@ export const getEmailFromToken = (token: string | null): string | null => {
 export const getTimeUntilExpiry = (token: string): number => {
   try {
     const decoded = jwtDecode<TokenPayloadModel>(token)
-    return decoded.exp * 1000 - Date.now()
-  } catch {
+    const currentTime = Date.now()
+    const expiryTime = decoded.exp * 1000
+
+    return Math.max(0, expiryTime - currentTime)
+  } catch (error) {
+    console.error('Time until expiry calculation failed:', error)
     return 0
   }
 }
