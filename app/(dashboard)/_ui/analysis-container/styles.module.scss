@@ -32,7 +32,7 @@
   .edit-button-container {
     display: flex;
     justify-content: space-between;
-
+    margin-bottom: 30px;
     .edit-button,
     .delete-button {
       padding: 7px 18px;
@@ -74,6 +74,12 @@
       text-align: center;
       @include typo-c1;
     }
+  }
+  .title-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
   }
 }
 
