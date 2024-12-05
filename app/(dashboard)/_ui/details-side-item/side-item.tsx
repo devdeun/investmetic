@@ -1,5 +1,3 @@
-import { useRef, useState } from 'react'
-
 import classNames from 'classnames/bind'
 
 import useModal from '@/shared/hooks/custom/use-modal'
@@ -11,7 +9,6 @@ import QuestionGuideModal from '@/shared/ui/modal/question-guide-modal'
 import { formatNumber } from '@/shared/utils/format'
 
 import { TitleType } from '.'
-import usePostQuestion from '../../strategies/[strategyId]/_hooks/query/use-post-question'
 import styles from './styles.module.scss'
 
 const cx = classNames.bind(styles)
@@ -33,7 +30,6 @@ const SideItem = ({
   isMyStrategy = false,
   strategyName,
 }: Props) => {
-  const [isEmpty, setIsEmpty] = useState(false)
   const {
     isModalOpen: isAddQuestionModalOpen,
     openModal: questionOpenModal,
@@ -45,33 +41,7 @@ const SideItem = ({
     closeModal: guideCloseModal,
   } = useModal()
   const user = useAuthStore((state) => state.user)
-  const titleRef = useRef<HTMLInputElement | null>(null)
-  const contentRef = useRef<HTMLTextAreaElement | null>(null)
-  const { mutate } = usePostQuestion()
 
-  const handleAddQuestion = () => {
-    if (titleRef.current && contentRef.current) {
-      const title = titleRef.current.value.trim()
-      const content = contentRef.current.value.trim()
-      if (title !== '' && content !== '') {
-        const question = {
-          strategyId,
-          title: titleRef.current.value,
-          content: contentRef.current.value,
-        }
-        mutate(question, {
-          onSuccess: (result) => {
-            if (result?.isSuccess) {
-              questionCloseModal()
-              guideOpenModal()
-            }
-          },
-        })
-      } else {
-        setIsEmpty(true)
-      }
-    }
-  }
   const isTrader = user?.role.includes('TRADER')
 
   return (
@@ -96,13 +66,11 @@ const SideItem = ({
       </div>
       {strategyName && (
         <AddQuestionModal
+          strategyId={strategyId}
           strategyName={strategyName}
           isModalOpen={isAddQuestionModalOpen}
-          titleRef={titleRef}
-          contentRef={contentRef}
           onCloseModal={questionCloseModal}
-          onChange={handleAddQuestion}
-          isEmpty={isEmpty}
+          guideOpenModal={guideOpenModal}
         />
       )}
       <QuestionGuideModal isModalOpen={isQuestionGuideModalOpen} onCloseModal={guideCloseModal} />

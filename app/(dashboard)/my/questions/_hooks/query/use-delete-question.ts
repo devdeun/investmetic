@@ -1,12 +1,13 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
-import postAnswer from '../../_api/post-answer'
+import deleteQuestion, { DeleteQuestionProps } from '../../_api/delete-question'
 
-const usePostAnswer = (questionId: number) => {
+const useDeleteQuestion = () => {
   const queryClient = useQueryClient()
   return useMutation({
-    mutationFn: (content: string) => postAnswer(questionId, content),
-    onSuccess: () => {
+    mutationFn: ({ questionId, strategyId }: DeleteQuestionProps) =>
+      deleteQuestion({ questionId, strategyId }),
+    onSuccess: (_, { questionId }) => {
       queryClient.invalidateQueries({
         queryKey: ['questionDetails', questionId],
       })
@@ -18,4 +19,4 @@ const usePostAnswer = (questionId: number) => {
   })
 }
 
-export default usePostAnswer
+export default useDeleteQuestion
