@@ -10,6 +10,10 @@ const usePostAnswer = (questionId: number) => {
       QueryClient.invalidateQueries({
         queryKey: ['questionDetails', questionId],
       })
+
+      QueryClient.invalidateQueries({
+        queryKey: ['questionList'],
+      })
     },
   })
 }
