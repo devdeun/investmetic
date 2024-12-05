@@ -54,7 +54,9 @@ const StrategyDetailPage = ({ params }: { params: { strategyId: number } }) => {
       <div>
         <BackHeader label={'목록으로 돌아가기'} />
         <Title label={'전략 상세보기'} />
-        {information && <DetailsInformation information={information} />}
+        {information && (
+          <DetailsInformation information={information} strategyId={params.strategyId} />
+        )}
         <AnalysisContainer strategyId={params.strategyId} />
         <ReviewContainer strategyId={params.strategyId} />
         <SideContainer>
@@ -71,6 +73,7 @@ const StrategyDetailPage = ({ params }: { params: { strategyId: number } }) => {
             detailsSideData?.map((data, idx) => (
               <div key={`${data}_${idx}`}>
                 <DetailsSideItem
+                  strategyId={params.strategyId}
                   information={data}
                   isMyStrategy={user?.nickname === information.nickname}
                   strategyName={information.strategyName}

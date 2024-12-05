@@ -41,7 +41,7 @@ const AreaChart = ({ profitRateChartData: data }: Props) => {
     plotOptions: {
       areaspline: {
         lineWidth: 1,
-        lineColor: '#4d4d4d',
+        lineColor: '#ff8f70',
         marker: {
           enabled: false,
           symbol: 'circle',
@@ -64,7 +64,7 @@ const AreaChart = ({ profitRateChartData: data }: Props) => {
         color: {
           linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
           stops: [
-            [0, '#4d4d4d'],
+            [0, '#ff8f70'],
             [1, 'rgba(255, 255, 255, 0)'],
           ],
         },

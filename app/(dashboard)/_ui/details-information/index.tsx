@@ -11,11 +11,12 @@ import styles from './styles.module.scss'
 const cx = classNames.bind(styles)
 
 interface Props {
+  strategyId: number
   information: StrategyDetailsInformationModel
   type?: 'default' | 'my'
 }
 
-const DetailsInformation = ({ information, type = 'default' }: Props) => {
+const DetailsInformation = ({ strategyId, information, type = 'default' }: Props) => {
   const percentageToArray = [
     { percent: information.cumulativeProfitRate, label: '누적 수익률' },
     { percent: information.maxDrawdownRate, label: '최대 자본 인하율' },
@@ -37,6 +38,7 @@ const DetailsInformation = ({ information, type = 'default' }: Props) => {
             ...(information.stockTypeInfo?.stockTypeNames ?? []),
           ]}
           name={information.strategyName}
+          strategyId={strategyId}
         />
         <InvestInformation
           stock={information.stockTypeInfo?.stockTypeNames || []}
