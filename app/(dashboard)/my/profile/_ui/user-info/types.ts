@@ -10,7 +10,7 @@ export interface ProfileFormModel {
   password: string
   passwordConfirm: string
   phone: string
-  birthday: string
+  birthDate: string
 }
 
 export interface ProfileFormStateModel {

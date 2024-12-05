@@ -1,19 +1,21 @@
 import axiosInstance from '@/shared/api/axios'
 
+export interface ProfileModel {
+  userId: number
+  userName: string
+  email: string
+  imageUrl: string | null
+  nickname: string
+  phone: string
+  infoAgreement: boolean
+  role: string
+  birthDate: string
+}
+
 interface ProfileResponseModel {
   isSuccess: boolean
   message: string
-  result: {
-    userId: number
-    userName: string
-    email: string
-    imageUrl: string | null
-    nickname: string
-    phone: string
-    infoAgreement: boolean
-    role: string
-    birthday: string
-  }
+  result: ProfileModel
 }
 
 export const getProfile = async (): Promise<ProfileResponseModel['result']> => {

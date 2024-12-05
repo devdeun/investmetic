@@ -14,9 +14,8 @@ import Avatar from '@/shared/ui/avatar'
 import { Button } from '@/shared/ui/button'
 import { Input } from '@/shared/ui/input'
 import { LinkButton } from '@/shared/ui/link-button'
-import Spinner from '@/shared/ui/spinner'
 
-import useGetProfile from '../../../_hooks/query/use-get-profile'
+import { ProfileModel } from '../../../_api/get-profile'
 import styles from './styles.module.scss'
 import { ProfileFormErrorsModel, ProfileFormModel, ProfileFormStateModel } from './types'
 import { validateProfileForm } from './utils'
@@ -30,11 +29,11 @@ const initialFormState = {
 
 interface Props {
   isEditable?: boolean
+  profile: ProfileModel
 }
 
-const UserInfo = ({ isEditable = false }: Props) => {
+const UserInfo = ({ profile, isEditable = false }: Props) => {
   const router = useRouter()
-  const { data: profile, isLoading } = useGetProfile()
 
   const initialForm: ProfileFormModel = {
     name: profile?.userName || '',
@@ -43,7 +42,7 @@ const UserInfo = ({ isEditable = false }: Props) => {
     password: '',
     passwordConfirm: '',
     phone: profile?.phone || '',
-    birthday: profile?.birthday || '',
+    birthDate: profile?.birthDate || '',
   }
 
   const [form, setForm] = useState<ProfileFormModel>(initialForm)
@@ -128,10 +127,6 @@ const UserInfo = ({ isEditable = false }: Props) => {
     }
   }
 
-  if (isLoading) {
-    return <Spinner />
-  }
-
   if (!profile) {
     return null
   }
@@ -206,7 +201,7 @@ const UserInfo = ({ isEditable = false }: Props) => {
                 <p className={cx('title')}>생년월일</p>
                 <Input
                   inputSize="compact"
-                  value={form.birthday}
+                  value={form.birthDate}
                   className={cx('input')}
                   isWhiteDisabled={!isEditable}
                   disabled={isEditable}
