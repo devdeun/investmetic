@@ -1,3 +1,4 @@
+import AdminStrategiesApproveTd from '../_ui/admin-strategies-approve-td'
 import { StrategiesResponseModel } from '../types'
 
 const setAdminStrategiesTableBody = (data: StrategiesResponseModel['result']['content']) =>
@@ -7,9 +8,12 @@ const setAdminStrategiesTableBody = (data: StrategiesResponseModel['result']['co
       data.createAt,
       data.strategyName,
       data.nickname,
-      data.isPublic,
-      data.isApproved,
-      'button',
+      data.isPublic === 'PUBLIC' ? '공개' : '비공개',
+      <AdminStrategiesApproveTd
+        isApproved={data.isApproved}
+        strategyId={data.strategyId}
+        key={data.strategyId}
+      />,
     ]
   })
 

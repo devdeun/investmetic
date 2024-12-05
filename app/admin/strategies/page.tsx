@@ -54,7 +54,7 @@ const AdminStrategyPage = () => {
           className={cx('header')}
         />
         <VerticalTable
-          tableHead={['No.', '날짜', '전략명', '닉네임', '공개여부', '승인여부', '']}
+          tableHead={['No.', '날짜', '전략명', '닉네임', '공개여부', '승인여부']}
           tableBody={setAdminStrategiesTableBody(data.content)}
           countPerPage={10}
           currentPage={1}

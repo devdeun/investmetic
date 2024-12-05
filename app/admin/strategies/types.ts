@@ -1,6 +1,6 @@
 import { APIResponseBaseModel } from '@/shared/types/response'
 
-type StrategiesPublicStateType = 'PUBLIC' | 'PRIVATE'
+export type StrategiesPublicStateType = 'PUBLIC' | 'PRIVATE'
 export type AdminStrategiesTapType = 'ALL' | 'PENDING'
 export type StrategiesApprovalStateType = 'APPROVED' | 'DENY' | 'PENDING'
 
