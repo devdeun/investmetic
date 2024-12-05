@@ -8,6 +8,8 @@ const getStrategies = async () => {
 
     if (!res.data.isSuccess) throw new Error(res.data.message)
 
+    console.log('data', res.data.data)
+
     return res.data.data
   } catch (err) {
     console.log('Error : ' + err)
