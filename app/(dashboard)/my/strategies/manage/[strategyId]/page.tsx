@@ -59,7 +59,7 @@ const StrategyManagePage = ({ params }: { params: { strategyId: number } }) => {
           {hasDetailsSideData?.[0] &&
             detailsSideData?.map((data, idx) => (
               <div key={`${data}_${idx}`}>
-                <DetailsSideItem information={data} />
+                <DetailsSideItem information={data} strategyId={params.strategyId} />
               </div>
             ))}
         </SideContainer>

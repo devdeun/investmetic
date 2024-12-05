@@ -20,6 +20,7 @@ export interface InformationModel {
 }
 
 interface Props {
+  strategyId: number
   information: InformationModel | InformationModel[]
   profileImage?: string
   isMyStrategy?: boolean
@@ -27,6 +28,7 @@ interface Props {
 }
 
 const DetailsSideItem = ({
+  strategyId,
   information,
   profileImage,
   isMyStrategy = true,
@@ -48,6 +50,7 @@ const DetailsSideItem = ({
         </div>
       ) : (
         <SideItem
+          strategyId={strategyId}
           title={information.title}
           data={information.data}
           profileImage={profileImage}
