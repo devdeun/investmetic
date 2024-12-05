@@ -30,6 +30,9 @@ const FavoriteStrategyList = () => {
     <>
       <ListHeader />
       <div className={cx('pagination')}>
+        {!strategiesData.length && (
+          <p className={cx('no-strategy')}>구독한 관심 전략이 없습니다.</p>
+        )}
         {strategiesData?.map((strategy) => (
           <StrategiesItem key={strategy.strategyId} strategiesData={strategy} />
         ))}
