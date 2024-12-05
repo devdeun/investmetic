@@ -11,8 +11,10 @@ import { Button } from '@/shared/ui/button'
 import { ErrorMessage } from '@/shared/ui/error-message'
 import { Textarea } from '@/shared/ui/textarea'
 
+import useDeleteAnswer from '../../../_hooks/query/use-delete-answer'
 import useGetQuestionDetails from '../../../_hooks/query/use-get-question-details'
 import usePostAnswer from '../../../_hooks/query/use-post-answer'
+import AnswerDeleteModal from '../../../_ui/answer-delete-modal'
 import QuestionDetailCard from '../question-detail-card'
 import styles from './styles.module.scss'
 
@@ -20,19 +22,21 @@ const cx = classNames.bind(styles)
 
 const QuestionContainer = () => {
   const [isActiveAnswer, setIsActiveAnswer] = useState(false)
+  const [isAnswerDeleteModalOpen, setIsAnswerDeleteModalOpen] = useState(false)
   const [answerErrorMessage, setAnswerErrorMessage] = useState<string | null>(null)
   const { questionId } = useParams()
 
   const textareaRef = useRef<HTMLTextAreaElement | null>(null)
 
   const { mutate: submitAnswer } = usePostAnswer(parseInt(questionId as string))
+  const { mutate: deleteAnswer } = useDeleteAnswer()
   const { data: questionDetails } = useGetQuestionDetails({
     questionId: parseInt(questionId as string),
   })
 
   const user = useAuthStore((state) => state.user)
 
-  if (!user) {
+  if (!user || !questionDetails) {
     return null
   }
 
@@ -68,6 +72,25 @@ const QuestionContainer = () => {
     })
   }
 
+  const handleDeleteClick = () => {
+    setIsAnswerDeleteModalOpen(true)
+  }
+
+  const handleDeleteAnswer = () => {
+    if (!questionDetails?.answer) return
+    deleteAnswer(
+      {
+        questionId: parseInt(questionId as string),
+        answerId: questionDetails.answer.answerId,
+      },
+      {
+        onSuccess: () => {
+          setIsAnswerDeleteModalOpen(false)
+        },
+      }
+    )
+  }
+
   if (!questionDetails) {
     return
   }
@@ -91,6 +114,7 @@ const QuestionContainer = () => {
             contents={questionDetails.answer.content}
             nickname={questionDetails.answer.nickname}
             createdAt={questionDetails.answer.createdAt}
+            onDelete={handleDeleteClick}
           />
         ) : (
           <>{!isActiveAnswer && <p className={cx('empty-message')}>아직 답변이 없습니다</p>}</>
@@ -118,6 +142,11 @@ const QuestionContainer = () => {
           )
         )}
       </div>
+      <AnswerDeleteModal
+        isModalOpen={isAnswerDeleteModalOpen}
+        onCloseModal={() => setIsAnswerDeleteModalOpen(false)}
+        onDelete={handleDeleteAnswer}
+      />
     </>
   )
 }
