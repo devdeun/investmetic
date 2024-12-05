@@ -8,7 +8,12 @@ import { useGetMyStrategyList } from '@/app/(dashboard)/my/_hooks/query/use-get-
 import { useIntersectionObserver } from '@/shared/hooks/custom/use-intersection-observer'
 
 const MyStrategyList = () => {
-  const { data, fetchNextPage, hasNextPage, isFetchingNextPage } = useGetMyStrategyList()
+  const {
+    data: strategyData,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useGetMyStrategyList()
 
   const loadMoreRef = useRef<HTMLDivElement>(null)
 
@@ -26,7 +31,7 @@ const MyStrategyList = () => {
     onIntersect,
   })
 
-  const strategies = data?.pages.flatMap((page) => page.strategies) || []
+  const strategies = strategyData?.pages.flatMap((page) => page.strategies) || []
   return (
     <>
       {strategies.map((strategy) => (
