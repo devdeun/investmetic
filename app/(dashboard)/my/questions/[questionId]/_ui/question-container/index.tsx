@@ -79,9 +79,9 @@ const QuestionContainer = () => {
           isAuthor={isInvestor}
           strategyName={questionDetails.strategyName}
           title={questionDetails.title}
-          contents={questionDetails.questionContent}
+          contents={questionDetails.content}
           nickname={questionDetails.nickname}
-          createdAt={questionDetails.questionCreatedAt}
+          createdAt={questionDetails.createdAt}
           status={questionDetails.state === 'WAITING' ? '답변 대기' : '답변 완료'}
         />
         {questionDetails.answer ? (

@@ -36,14 +36,12 @@ export interface AnswerModel {
 export interface QuestionDetailsModel {
   questionId: number
   title: string
-  questionContent: string
-  answerContent: string
+  content: string
   strategyName: string
-  nickname: string
-  role: UserType
   profileImageUrl: string
+  nickname: string
   state: QuestionStateConditionType
-  questionCreatedAt: string
+  createdAt: string
   answer: AnswerModel | null
 }
 
