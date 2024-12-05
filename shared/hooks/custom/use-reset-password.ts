@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 
 import axios from 'axios'
 
@@ -20,6 +20,17 @@ export const useResetPassword = ({ onSuccess, onError }: UseResetPasswordProps) 
 
   const { authenticateMutation, resetPasswordMutation } = useFindCredentials()
 
+  const memoizedOnError = useCallback(
+    (message: string) => {
+      onError(message)
+    },
+    [onError]
+  )
+
+  const memoizedOnSuccess = useCallback(() => {
+    onSuccess()
+  }, [onSuccess])
+
   const handleVerifyEmail = async (e?: React.FormEvent) => {
     e?.preventDefault()
     try {
@@ -29,19 +40,19 @@ export const useResetPassword = ({ onSuccess, onError }: UseResetPasswordProps) 
       })
       if (response.isSuccess) {
         setStep(2)
-        onError('')
+        memoizedOnError('')
       } else {
-        onError(response.message || '인증에 실패했습니다.')
+        memoizedOnError(response.message || '인증에 실패했습니다.')
       }
     } catch {
-      onError('인증에 실패했습니다.')
+      memoizedOnError('인증에 실패했습니다.')
     }
   }
 
   const handlePasswordReset = async (e: React.FormEvent) => {
     e.preventDefault()
     if (formData.password !== formData.passwordConfirm) {
-      onError('비밀번호가 일치하지 않습니다.')
+      memoizedOnError('비밀번호가 일치하지 않습니다.')
       return
     }
     try {
@@ -50,46 +61,46 @@ export const useResetPassword = ({ onSuccess, onError }: UseResetPasswordProps) 
         password: formData.password,
       })
       if (response.isSuccess) {
-        onSuccess()
+        memoizedOnSuccess()
       } else {
-        onError(response.message || '비밀번호 재설정에 실패했습니다.')
+        memoizedOnError(response.message || '비밀번호 재설정에 실패했습니다.')
       }
     } catch {
-      onError('비밀번호 재설정에 실패했습니다.')
+      memoizedOnError('비밀번호 재설정에 실패했습니다.')
     }
   }
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     setFormData((prev) => ({
       ...prev,
       [name]: value,
     }))
-  }
+  }, [])
 
-  const handleRequestCode = async () => {
+  const handleRequestCode = useCallback(async () => {
     try {
       const response = await axios.get(`/api/users/authenticate?email=${formData.email}`)
       if (response.data.isSuccess) {
-        onError('')
+        memoizedOnError('')
       } else {
-        onError(response.data.message || '인증코드 발송에 실패했습니다.')
+        memoizedOnError(response.data.message || '인증코드 발송에 실패했습니다.')
       }
     } catch {
-      onError('인증코드 발송에 실패했습니다.')
+      memoizedOnError('인증코드 발송에 실패했습니다.')
     }
-  }
+  }, [formData.email, memoizedOnError])
 
   const isPending = authenticateMutation.isPending || resetPasswordMutation.isPending
 
-  const resetForm = () => {
+  const resetForm = useCallback(() => {
     setFormData({
       email: '',
       code: '',
       password: '',
       passwordConfirm: '',
     })
-  }
+  }, [])
 
   return {
     formData,

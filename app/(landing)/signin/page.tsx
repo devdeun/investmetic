@@ -195,6 +195,7 @@ const SignInPage = () => {
               <button
                 onClick={(e) => handleFindButtonClick(e, handleFindEmailOpen)}
                 className={cx('find-button')}
+                type="button"
               >
                 아이디 찾기
               </button>
@@ -202,6 +203,7 @@ const SignInPage = () => {
               <button
                 onClick={(e) => handleFindButtonClick(e, handleFindPasswordOpen)}
                 className={cx('find-button')}
+                type="button"
               >
                 비밀번호 찾기
               </button>
