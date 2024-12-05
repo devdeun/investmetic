@@ -36,9 +36,6 @@ export const validateProfileForm = (
 
   const passwordError = validateField('PASSWORD', form.password)
   if (passwordError) errors.password = passwordError
-  // 비밀번호 입력할때 빈값이면 아무것도 안되도록 하는 로직 넣어야하는데 어케함...
-  // const handlePasswordChange = () => {
-  // const payload = password.trim() === '' ? null : password;
 
   const passwordMatchError = validatePasswordMatch(form.password, form.passwordConfirm)
   if (passwordMatchError) errors.passwordConfirm = passwordMatchError

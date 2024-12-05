@@ -15,8 +15,6 @@ const cx = classNames.bind(styles)
 const MyProfilePage = () => {
   const { data: profile, isLoading } = useGetProfile()
 
-  console.log(profile)
-
   if (!profile) {
     return null
   }
