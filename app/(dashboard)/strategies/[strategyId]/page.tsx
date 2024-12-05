@@ -83,7 +83,7 @@ const StrategyDetailPage = ({ params }: { params: { strategyId: number } }) => {
         <SubscribeCheckModal
           isSubscribing={information?.isSubscribed}
           isModalOpen={isModalOpen}
-          closeModal={handleUnsubscribe}
+          onCloseModal={handleUnsubscribe}
           onChange={handleSubscribe}
         />
       )}

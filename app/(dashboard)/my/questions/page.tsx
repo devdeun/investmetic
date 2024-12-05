@@ -1,9 +1,10 @@
 'use client'
 
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 
 import classNames from 'classnames/bind'
 
+import { QuestionSearchConditionType } from '@/shared/types/questions'
 import { DropdownValueType } from '@/shared/ui/dropdown/types'
 import { SearchInput } from '@/shared/ui/search-input'
 import Select from '@/shared/ui/select'
@@ -16,25 +17,46 @@ const cx = classNames.bind(styles)
 
 const searchSelectOptions = [
   {
-    value: 'all',
-    label: '전체',
-  },
-  {
-    value: 'trader',
-    label: '트레이더',
-  },
-  {
-    value: 'title',
+    value: 'TITLE',
     label: '제목',
   },
   {
-    value: 'strategy',
+    value: 'CONTENT',
+    label: '내용',
+  },
+  {
+    value: 'TITLE_OR_CONTENT',
+    label: '제목 또는 내용',
+  },
+  {
+    value: 'TRADER_NAME',
+    label: '트레이더명',
+  },
+  {
+    value: 'INVESTOR_NAME',
+    label: '투자자명',
+  },
+  {
+    value: 'STRATEGY_NAME',
     label: '전략명',
   },
 ]
 
 const MyQuestionsPage = () => {
-  const [selectedOption, setSelectedOption] = useState<DropdownValueType>('최신순')
+  const [selectedOption, setSelectedOption] = useState<DropdownValueType>('TITLE')
+  const [searchOptions, setSearchOptions] = useState({
+    keyword: '',
+    searchCondition: selectedOption as QuestionSearchConditionType,
+  })
+
+  const inputRef = useRef<HTMLInputElement | null>(null)
+
+  const handleSearch = () => {
+    setSearchOptions({
+      keyword: inputRef.current?.value || '',
+      searchCondition: selectedOption as QuestionSearchConditionType,
+    })
+  }
 
   return (
     <div className={cx('container')}>
@@ -48,10 +70,14 @@ const MyQuestionsPage = () => {
             onChange={setSelectedOption}
             options={searchSelectOptions}
           />
-          <SearchInput />
+          <SearchInput
+            ref={inputRef}
+            placeholder="검색어를 입력하세요."
+            onSearchIconClick={handleSearch}
+          />
         </div>
       </div>
-      <QuestionsTab />
+      <QuestionsTab searchOptions={searchOptions} />
     </div>
   )
 }

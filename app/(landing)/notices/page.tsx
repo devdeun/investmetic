@@ -1,7 +1,5 @@
 import classNames from 'classnames/bind'
 
-import VerticalTable from '@/shared/ui/table/vertical'
-
 import NoticeTable from './_ui/notice-table'
 import styles from './page.module.scss'
 

@@ -76,3 +76,9 @@ export interface StrategyCardModel {
   averageRating: number
   totalReviews: number
 }
+
+export interface AnalysisDataModel {
+  date: string
+  transaction: number
+  dailyProfitLoss: number
+}

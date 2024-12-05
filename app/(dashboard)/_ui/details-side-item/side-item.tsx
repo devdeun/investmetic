@@ -77,12 +77,12 @@ const SideItem = ({ title, data, profileImage, isMyStrategy = false, strategyNam
           isModalOpen={isAddQuestionModalOpen}
           titleRef={titleRef}
           contentRef={contentRef}
-          closeModal={questionCloseModal}
+          onCloseModal={questionCloseModal}
           onChange={handleAddQuestion}
           isEmpty={isEmpty}
         />
       )}
-      <QuestionGuideModal isModalOpen={isQuestionGuideModalOpen} closeModal={guideCloseModal} />
+      <QuestionGuideModal isModalOpen={isQuestionGuideModalOpen} onCloseModal={guideCloseModal} />
     </div>
   )
 }

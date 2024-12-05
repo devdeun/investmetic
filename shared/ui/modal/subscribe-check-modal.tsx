@@ -14,18 +14,18 @@ const cx = classNames.bind(styles)
 interface Props {
   isModalOpen: boolean
   isSubscribing: boolean
-  closeModal: () => void
+  onCloseModal: () => void
   onChange?: () => void
 }
 
-const SubscribeCheckModal = ({ isModalOpen, isSubscribing, closeModal, onChange }: Props) => {
+const SubscribeCheckModal = ({ isModalOpen, isSubscribing, onCloseModal, onChange }: Props) => {
   return (
     <Modal isOpen={isModalOpen} icon={isSubscribing ? ModalAlertIcon : ModalSubscribeIcon}>
       {isSubscribing ? (
         <>
           <span className={cx('message')}>구독을 취소하시겠습니까?</span>
           <div className={cx('two-button')}>
-            <Button onClick={closeModal}>아니오</Button>
+            <Button onClick={onCloseModal}>아니오</Button>
             <Button onClick={onChange} variant="filled" className={cx('button')}>
               예
             </Button>
@@ -38,7 +38,7 @@ const SubscribeCheckModal = ({ isModalOpen, isSubscribing, closeModal, onChange 
             구독한 전략은 나의 관심전략 <br />
             페이지에서 확인 가능합니다.
           </span>
-          <Button onClick={closeModal}>닫기</Button>
+          <Button onClick={onCloseModal}>닫기</Button>
         </>
       )}
     </Modal>
