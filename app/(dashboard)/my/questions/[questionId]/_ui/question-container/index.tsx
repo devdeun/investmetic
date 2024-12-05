@@ -182,8 +182,8 @@ const QuestionContainer = () => {
         message="문의 내역을 삭제하시겠습니까?"
       />
       <AddQuestionModal
+        strategyId={questionDetails.strategyId}
         isModalOpen={isAddQuestionModalOpen}
-        isEmpty={false}
         strategyName={questionDetails.strategyName}
         onCloseModal={() => setIsAddQuestionModalOpen(false)}
         title={`RE: ${questionDetails.title}`}

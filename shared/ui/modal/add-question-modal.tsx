@@ -43,7 +43,7 @@ const AddQuestionModal = ({
   const handleAddQuestion = () => {
     if (titleRef.current && contentRef.current) {
       const title = titleRef.current.value.trim()
-      const content = contentRef.current.value.trim()
+      const content = contentRef.current.value.trimEnd()
       if (title !== '' && content !== '') {
         const question = {
           strategyId,
