@@ -17,6 +17,7 @@ export const PATH = {
 
   // My
   PROFILE: '/my/profile',
+  PROFILE_WITHDRAW: '/my/profile/withdraw',
   EDIT_PROFILE: '/my/profile/edit',
   FAVORITES: '/my/favorites',
   MY_STRATEGIES: '/my/strategies',

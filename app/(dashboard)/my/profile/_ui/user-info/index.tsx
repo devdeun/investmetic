@@ -31,7 +31,7 @@ const UserInfo = ({ isEditable = false }: Props) => {
   const handleSave = () => {}
   return (
     <div className={cx('container')}>
-      <p className={cx('text')}>개인 정보</p>
+      <p className={cx('title')}>개인 정보</p>
       <div className={cx('line')}></div>
 
       <div className={cx('content')}>

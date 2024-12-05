@@ -7,20 +7,20 @@ import styles from './styles.module.scss'
 const cx = classNames.bind(styles)
 
 interface Props {
-  userType: string
-  name: string
+  role: string
+  nickname: string
   email: string
 }
 
-const UserProfile = ({ userType, name, email }: Props) => {
+const UserProfile = ({ role, nickname, email }: Props) => {
   return (
     <div className={cx('container')}>
-      <p className={cx('profile-info')}>프로필 정보</p>
+      <p className={cx('title')}>프로필 정보</p>
       <div className={cx('line')}></div>
       <div className={cx('content')}>
         <div className={cx('left-wrapper')}>
-          <p className={cx('type')}>{userType}</p>
-          <p className={cx('name')}>{name}</p>
+          <p className={cx('role')}>{role}</p>
+          <p className={cx('nickname')}>{nickname}</p>
           <p className={cx('email')}>{email}</p>
         </div>
         <div className={cx('right-wrapper')}>
