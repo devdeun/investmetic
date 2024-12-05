@@ -1,22 +1,28 @@
 'use client'
 
-import { Button } from '@/shared/ui/button'
+import classNames from 'classnames/bind'
+
+import { QuestionStateConditionType } from '@/shared/types/questions'
+
+import styles from './styles.module.scss'
+
+const cx = classNames.bind(styles)
 
 interface Props {
-  userId: number
+  questionState: QuestionStateConditionType
 }
 
-const AdminQuestionStateBox = () => {
+const AdminQuestionStateBox = ({ questionState }: Props) => {
   return (
-    <Button
-      variant="filled"
-      // onClick={() => mutate()}
-      // disabled={isPending}
-      size="small"
-      style={{ padding: '7px 16px' }}
+    <div
+      className={cx(
+        'container',
+        { waiting: questionState === 'WAITING' },
+        { completed: questionState === 'COMPLETED' }
+      )}
     >
-      강제삭제
-    </Button>
+      {questionState === 'COMPLETED' ? '답변완료' : '답변대기'}
+    </div>
   )
 }
 
