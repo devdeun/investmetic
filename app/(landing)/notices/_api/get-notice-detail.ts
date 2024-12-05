@@ -3,8 +3,8 @@ import axiosInstance from '@/shared/api/axios'
 interface NoticeResponseModel {
   isSuccess: true
   message: string
-  data: {
-    noticeId: string
+  result: {
+    noticeId: number
     user: {
       id: number
       nickname: string
@@ -12,15 +12,16 @@ interface NoticeResponseModel {
     title: string
     content: string
     createdAt: string
+    attachments: { title: string }[]
   }
 }
 
-export const getNoticeDetail = async (noticeId: string): Promise<NoticeResponseModel['data']> => {
+export const getNoticeDetail = async (noticeId: number): Promise<NoticeResponseModel['result']> => {
   try {
     const response = await axiosInstance.get<NoticeResponseModel>(`/api/notices/${noticeId}`)
 
     if (response.data.isSuccess) {
-      return response.data.data
+      return response.data.result
     } else {
       throw new Error(response.data.message || '요청 실패')
     }

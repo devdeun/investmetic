@@ -23,16 +23,6 @@ import { validateProfileForm } from './utils'
 
 const cx = classNames.bind(styles)
 
-const initialForm: ProfileFormModel = {
-  name: '',
-  nickname: '',
-  email: '',
-  password: '',
-  passwordConfirm: '',
-  phone: '',
-  birthday: '',
-}
-
 const initialFormState = {
   isNicknameVerified: false,
   isPhoneVerified: false,
@@ -44,12 +34,22 @@ interface Props {
 
 const UserInfo = ({ isEditable = false }: Props) => {
   const router = useRouter()
+  const { data: profile, isLoading } = useGetProfile()
+
+  const initialForm: ProfileFormModel = {
+    name: profile?.userName || '',
+    nickname: profile?.nickname || '',
+    email: profile?.email || '',
+    password: '',
+    passwordConfirm: '',
+    phone: profile?.phone || '',
+    birthday: profile?.birthday || '',
+  }
+
   const [form, setForm] = useState<ProfileFormModel>(initialForm)
   const [formState, setFormState] = useState<ProfileFormStateModel>(initialFormState)
   const [errors, setErrors] = useState<ProfileFormErrorsModel>({})
   const [isValidated, setIsValidated] = useState(false)
-
-  const { data: profile, isLoading } = useGetProfile()
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target

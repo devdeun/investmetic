@@ -1,5 +1,4 @@
 import axiosInstance from '@/shared/api/axios'
-import { getAccessToken } from '@/shared/lib/auth-tokens'
 
 interface ProfileResponseModel {
   isSuccess: boolean
@@ -13,18 +12,13 @@ interface ProfileResponseModel {
     phone: string
     infoAgreement: boolean
     role: string
+    birthday: string
   }
 }
 
 export const getProfile = async (): Promise<ProfileResponseModel['result']> => {
   try {
-    const token = getAccessToken()
-
-    const response = await axiosInstance.get<ProfileResponseModel>('/api/users/mypage/profile', {
-      headers: {
-        Authorization: token ? `Bearer ${token}` : '',
-      },
-    })
+    const response = await axiosInstance.get<ProfileResponseModel>('/api/users/mypage/profile')
 
     if (response.data.isSuccess) {
       return response.data.result
