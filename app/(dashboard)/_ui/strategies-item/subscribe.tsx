@@ -11,6 +11,7 @@ import { PATH } from '@/shared/constants/path'
 import useModal from '@/shared/hooks/custom/use-modal'
 import { useAuthStore } from '@/shared/stores/use-auth-store'
 import SigninCheckModal from '@/shared/ui/modal/signin-check-modal'
+import SubscribeWarningModal from '@/shared/ui/modal/subscribe-warning-modal'
 
 import useGetSubscribe from '../../strategies/_hooks/query/use-get-subscribe'
 import styles from './styles.module.scss'
@@ -20,13 +21,23 @@ const cx = classNames.bind(styles)
 interface Props {
   strategyId: number
   subscriptionStatus: boolean
+  traderName: string
 }
 
-const Subscribe = ({ strategyId, subscriptionStatus }: Props) => {
+const Subscribe = ({ strategyId, subscriptionStatus, traderName }: Props) => {
   const [isSubscribed, setIsSubscribed] = useState(false)
   const router = useRouter()
   const user = useAuthStore((state) => state.user)
-  const { isModalOpen, openModal, closeModal } = useModal()
+  const {
+    isModalOpen: isSigninCheckModalOpen,
+    openModal: openSigninCheckModal,
+    closeModal: closeSigninCheckModal,
+  } = useModal()
+  const {
+    isModalOpen: isSubscribeWarningModal,
+    openModal: openSubscribeWarningModal,
+    closeModal: closeSubscribeWarningModal,
+  } = useModal()
   const { mutate } = useGetSubscribe()
 
   useEffect(() => {
@@ -38,11 +49,14 @@ const Subscribe = ({ strategyId, subscriptionStatus }: Props) => {
   const handleSubscribe = (e: React.MouseEvent) => {
     e.preventDefault()
     if (!user) {
-      openModal()
+      openSigninCheckModal()
+    } else if (user?.nickname === traderName) {
+      openSubscribeWarningModal()
+    } else {
+      mutate(strategyId, {
+        onSuccess: () => setIsSubscribed(!isSubscribed),
+      })
     }
-    mutate(strategyId, {
-      onSuccess: () => setIsSubscribed(!isSubscribed),
-    })
   }
 
   const handleRoute = () => router.push(PATH.SIGN_IN)
@@ -54,13 +68,16 @@ const Subscribe = ({ strategyId, subscriptionStatus }: Props) => {
           {isSubscribed ? <BookmarkIcon /> : <BookmarkOutlineIcon />}
         </button>
       </div>
-      {isModalOpen && (
-        <SigninCheckModal
-          isModalOpen={isModalOpen}
-          onCloseModal={closeModal}
-          onChange={handleRoute}
-        />
-      )}
+
+      <SigninCheckModal
+        isModalOpen={isSigninCheckModalOpen}
+        onCloseModal={closeSigninCheckModal}
+        onChange={handleRoute}
+      />
+      <SubscribeWarningModal
+        isModalOpen={isSubscribeWarningModal}
+        onCloseModal={closeSubscribeWarningModal}
+      />
     </>
   )
 }

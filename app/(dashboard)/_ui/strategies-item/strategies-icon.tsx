@@ -21,9 +21,10 @@ interface ImageSizeModel {
 interface Props {
   iconUrls?: string[]
   iconNames?: string[]
+  isDetailsPage?: boolean
 }
 
-const StrategiesIcon = ({ iconUrls, iconNames }: Props) => {
+const StrategiesIcon = ({ iconUrls, iconNames, isDetailsPage = false }: Props) => {
   const [imageSizes, setImageSizes] = useState<{ [key: string]: ImageSizeModel }>({})
   const [validImages, setValidImages] = useState<{ [key: string]: boolean }>({})
 
@@ -66,7 +67,7 @@ const StrategiesIcon = ({ iconUrls, iconNames }: Props) => {
   if (iconUrls?.length !== iconNames?.length) return null
 
   return (
-    <div className={cx('icon-container')}>
+    <div className={cx('icon-container', { details: isDetailsPage })}>
       {iconUrls?.map((url, idx) => {
         const name = iconNames?.[idx]
         if (!url || !name || validImages[url] === false) return null
