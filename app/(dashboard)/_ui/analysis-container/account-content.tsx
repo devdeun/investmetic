@@ -15,6 +15,7 @@ import AccountRegisterModal from '@/shared/ui/modal/account-register-modal'
 import Pagination from '@/shared/ui/pagination'
 import sliceArray from '@/shared/utils/slice-array'
 
+import { useDeleteAccountImages } from '../../my/_hooks/query/use-delete-account-images'
 import useGetMyAccountImages from '../../my/_hooks/query/use-get-my-account-image'
 import useGetAccountImages from '../../strategies/[strategyId]/_hooks/query/use-get-account-images'
 import styles from './styles.module.scss'
@@ -51,8 +52,8 @@ const AccountContent = ({ strategyId, currentPage, onPageChange, isEditable = fa
   } = useModal()
 
   const viewImagesQuery = useGetAccountImages(strategyId)
-
   const editImagesQuery = useGetMyAccountImages(strategyId)
+  const deleteImagesMutation = useDeleteAccountImages()
 
   const { data, isLoading } = isEditable ? editImagesQuery : viewImagesQuery
 
@@ -72,8 +73,16 @@ const AccountContent = ({ strategyId, currentPage, onPageChange, isEditable = fa
 
   const handleDeleteSelected = async () => {
     if (selectedImages.length === 0) return
-    // 삭제 로직 구현해야 됨
-    console.log('Deleting images:', selectedImages)
+
+    try {
+      await deleteImagesMutation.mutateAsync({
+        strategyId,
+        imageIds: selectedImages,
+      })
+      setSelectedImages([])
+    } catch (error) {
+      console.error('Failed to delete images:', error)
+    }
   }
 
   if (!data || !Array.isArray(data.content) || isLoading) return null
@@ -86,7 +95,6 @@ const AccountContent = ({ strategyId, currentPage, onPageChange, isEditable = fa
   )
 
   const isTwoLines = (croppedImagesData?.length || 0) > 4
-
   return (
     <div className={cx('table-wrapper')}>
       {isEditable && (
