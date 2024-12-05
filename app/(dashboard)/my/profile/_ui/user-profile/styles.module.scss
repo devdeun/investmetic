@@ -5,7 +5,7 @@
   padding: 44px 40px;
 }
 
-.profile-info {
+.title {
   @include typo-b1;
   color: $color-gray-700;
   margin-bottom: 22px;
@@ -31,12 +31,12 @@
   flex: 1;
   gap: 12px;
 
-  .type {
+  .role {
     @include typo-b2;
     color: $color-orange-500;
   }
 
-  .name {
+  .nickname {
     @include typo-h4;
     font-weight: bold;
     color: $color-gray-800;

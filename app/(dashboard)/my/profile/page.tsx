@@ -16,7 +16,7 @@ const MyProfilePage = () => {
       <div className={cx('wrapper')}>
         <UserInfo />
         <div className={cx('user-profile')}>
-          <UserProfile userType={'트레이더'} name={'고양이'} email={'meow@example.com'} />
+          <UserProfile role={'트레이더'} nickname={'고양이'} email={'meow@example.com'} />
           <div className={cx('link-button')}>
             <LinkButton href={PATH.PROFILE_WITHDRAW}>탈퇴하기</LinkButton>
           </div>
