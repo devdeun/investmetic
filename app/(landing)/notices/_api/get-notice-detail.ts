@@ -2,18 +2,19 @@ import axiosInstance from '@/shared/api/axios'
 
 interface NoticeResponseModel {
   isSuccess: true
-  message: string
+  message: 'string'
   result: {
-    noticeId: number
-    user: {
-      id: number
-      nickname: string
-    }
-    title: string
-    content: string
-    createdAt: string
-    attachments: { title: string }[]
+    title: 'string'
+    content: 'string'
+    createdAt: '2024-12-05T21:49:06.561Z'
+    files: [
+      {
+        fileName: 'string'
+        noticeFileId: 0
+      },
+    ]
   }
+  code: 0
 }
 
 export const getNoticeDetail = async (noticeId: number): Promise<NoticeResponseModel['result']> => {
