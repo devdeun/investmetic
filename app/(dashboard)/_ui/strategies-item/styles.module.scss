@@ -90,7 +90,7 @@
 .icon-container {
   display: flex;
   align-items: center;
-  gap: 4px;
+  column-gap: 4px;
   .icon-wrapper {
     .icon {
       position: relative;
@@ -106,5 +106,10 @@
         z-index: zIndex(hidden);
       }
     }
+  }
+  &.details {
+    flex-wrap: wrap;
+    max-height: 50px;
+    row-gap: 1px;
   }
 }

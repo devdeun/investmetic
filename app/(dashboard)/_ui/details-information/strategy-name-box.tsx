@@ -24,7 +24,7 @@ const StrategyNameBox = ({ strategyId, iconUrls, iconNames, name }: Props) => {
 
   return (
     <div className={cx('name-container')}>
-      <StrategiesIcon iconUrls={iconUrls} iconNames={iconNames} />
+      <StrategiesIcon iconUrls={iconUrls} iconNames={iconNames} isDetailsPage={true} />
       <p className={cx('name')}>{name}</p>
       <button onClick={handleDownload}>제안서 다운로드</button>
     </div>
