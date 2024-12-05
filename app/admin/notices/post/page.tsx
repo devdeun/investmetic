@@ -1,59 +1,74 @@
 'use client'
 
+import classNames from 'classnames/bind'
+
 import { Button } from '@/shared/ui/button'
 import BackHeader from '@/shared/ui/header/back-header'
+import { Input } from '@/shared/ui/input'
+import { Textarea } from '@/shared/ui/textarea'
 import Title from '@/shared/ui/title'
 
-import InputField from './_ui/input-field'
+import InputField from '../../_ui/input-field'
+import useNoticeForm from './_hooks/use-notice-form'
+import usePostNotice from './_hooks/use-notice-post'
+import FileInput from './_ui/file-input'
+import styles from './page.module.scss'
+
+const cx = classNames.bind(styles)
 
 const AdminNoticePostPage = () => {
+  const { formData, onInputChange } = useNoticeForm()
+  const { mutate: postNotice } = usePostNotice(formData)
+
   return (
     <>
       <BackHeader label="공지사항으로 돌아가기" />
-      {/* TODO: inline css 제거 */}
       <Title label="공지사항 등록" style={{ margin: '0 0 26px 12.6px' }} />
-      <div
-        style={{
-          padding: '0 45px 37px',
-          borderRadius: '8px',
-          marginBottom: '42px',
-          backgroundColor: 'aliceblue',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        {/* TODO: 디자인 계속 바뀌는 느낌이라서 일단 가운데 정렬 해둠 */}
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
+      <div className={cx('container')}>
+        <form
+          className={cx('form')}
+          onSubmit={(e) => {
+            e.preventDefault()
+            postNotice()
           }}
         >
-          <div
-            style={{
-              width: '795px',
-              backgroundColor: 'aliceblue',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '30px',
-            }}
-          >
-            <InputField label="제목" inputType="text" placeholder="제목을 입력하세요." />
-            <InputField label="내용" inputType="textArea" placeholder="내용을 입력하세요." />
-            <InputField label="파일첨부" inputType="file" />
+          <div className={cx('input-field')}>
+            <InputField
+              label="제목"
+              Input={
+                <Input
+                  type="text"
+                  inputSize="full"
+                  placeholder="제목을 입력하세요."
+                  value={formData.title}
+                  onChange={(e) => onInputChange('title', e.target.value)}
+                />
+              }
+            />
+            <InputField
+              label="내용"
+              Input={
+                <Textarea
+                  className={cx('textarea')}
+                  placeholder="내용을 입력하세요."
+                  value={formData.content}
+                  onChange={(e) => onInputChange('content', e.target.value)}
+                />
+              }
+            />
+            <InputField
+              label="파일첨부"
+              Input={
+                <FileInput
+                  onChange={(e) => onInputChange('files', Array.from(e.target.files || []))}
+                />
+              }
+            />
           </div>
-          <Button.ButtonGroup>
-            {/* TODO: onclick 로직 정의 */}
-            <Button size="small" onClick={() => {}}>
-              수정
-            </Button>
-            <Button size="small" onClick={() => {}} variant="filled">
-              삭제
-            </Button>
-          </Button.ButtonGroup>
-        </div>
+          <Button size="small" type="submit" variant="filled">
+            공지 등록하기
+          </Button>
+        </form>
       </div>
     </>
   )
