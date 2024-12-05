@@ -2,7 +2,7 @@ import classNames from 'classnames/bind'
 
 import { formatNumber } from '@/shared/utils/format'
 
-import { inKoreanData } from './in-korean'
+import { STATISTICS_DATE, STATISTICS_PERCENT, inKoreanData } from './constant'
 import styles from './styles.module.scss'
 
 const cx = classNames.bind(styles)
@@ -50,11 +50,19 @@ const StatisticsTable = ({ title, statisticsData }: Props) => {
           {groupedData.map((row, idx) => (
             <tr key={idx}>
               <td>{row[0]}</td>
-              <td>{formatNumber(row[1])}</td>
+              <td>
+                {formatNumber(row[1])}
+                {STATISTICS_PERCENT.includes(row[0] as string) && '%'}
+                {STATISTICS_DATE.includes(row[0] as string) && '일'}
+              </td>
               {row[2] && (
                 <>
                   <td>{row[2]}</td>
-                  <td>{formatNumber(row[3])}</td>
+                  <td>
+                    {formatNumber(row[3])}
+                    {STATISTICS_PERCENT.includes(row[2] as string) && '%'}
+                    {STATISTICS_DATE.includes(row[2] as string) && '일'}
+                  </td>
                 </>
               )}
             </tr>

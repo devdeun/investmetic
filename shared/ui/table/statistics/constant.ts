@@ -34,3 +34,24 @@ export const inKoreanData = {
   ddMddInfo: 'DD&MDD 정보',
   tradingInfo: '거래 관련 정보',
 } as const
+
+export const STATISTICS_PERCENT = [
+  '누적 수익률',
+  '최대 누적 수익률',
+  '평균 손익률',
+  '최대 일 수익률',
+  '최대 일 손실률',
+  '현재 자본 인하율',
+  '최대 자본 인하율',
+  '승률',
+]
+
+export const STATISTICS_DATE = [
+  '고점 갱신 후 경과일',
+  '총 거래 일수',
+  '총 이익 일수',
+  '총 손실 일수',
+  '현재 연속 손익 일수',
+  '최대 연속 이익 일수',
+  '최대 연속 손실 일수',
+]
