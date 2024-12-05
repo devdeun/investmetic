@@ -12,12 +12,13 @@ interface Props {
   isModalOpen: boolean
   onCloseModal: () => void
   onDelete: () => void
+  message: string
 }
 
-const AnswerDeleteModal = ({ isModalOpen, onCloseModal, onDelete }: Props) => {
+const QuestionDeleteModal = ({ isModalOpen, onCloseModal, onDelete, message }: Props) => {
   return (
     <Modal isOpen={isModalOpen} icon={ModalAlertIcon}>
-      <p className={cx('message')}>답변을 삭제하시겠습니까?</p>
+      <p className={cx('message')}>{message}</p>
 
       <Button.ButtonGroup>
         <Button onClick={onCloseModal}>취소</Button>
@@ -29,4 +30,4 @@ const AnswerDeleteModal = ({ isModalOpen, onCloseModal, onDelete }: Props) => {
   )
 }
 
-export default AnswerDeleteModal
+export default QuestionDeleteModal

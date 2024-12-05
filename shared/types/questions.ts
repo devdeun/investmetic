@@ -37,6 +37,7 @@ export interface QuestionDetailsModel {
   questionId: number
   title: string
   content: string
+  strategyId: number
   strategyName: string
   profileImageUrl: string
   nickname: string

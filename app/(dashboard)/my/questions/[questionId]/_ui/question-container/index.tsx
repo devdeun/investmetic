@@ -2,19 +2,21 @@
 
 import { useRef, useState } from 'react'
 
-import { useParams } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
 
 import classNames from 'classnames/bind'
 
+import { PATH } from '@/shared/constants/path'
 import { useAuthStore } from '@/shared/stores/use-auth-store'
 import { Button } from '@/shared/ui/button'
 import { ErrorMessage } from '@/shared/ui/error-message'
 import { Textarea } from '@/shared/ui/textarea'
 
 import useDeleteAnswer from '../../../_hooks/query/use-delete-answer'
+import useDeleteQuestion from '../../../_hooks/query/use-delete-question'
 import useGetQuestionDetails from '../../../_hooks/query/use-get-question-details'
 import usePostAnswer from '../../../_hooks/query/use-post-answer'
-import AnswerDeleteModal from '../../../_ui/answer-delete-modal'
+import QuestionDeleteModal from '../../../_ui/modal/question-delete-modal'
 import QuestionDetailCard from '../question-detail-card'
 import styles from './styles.module.scss'
 
@@ -23,13 +25,16 @@ const cx = classNames.bind(styles)
 const QuestionContainer = () => {
   const [isActiveAnswer, setIsActiveAnswer] = useState(false)
   const [isAnswerDeleteModalOpen, setIsAnswerDeleteModalOpen] = useState(false)
+  const [isQuestionDeleteModalOpen, setIsQuestionDeleteModalOpen] = useState(false)
   const [answerErrorMessage, setAnswerErrorMessage] = useState<string | null>(null)
   const { questionId } = useParams()
+  const router = useRouter()
 
   const textareaRef = useRef<HTMLTextAreaElement | null>(null)
 
   const { mutate: submitAnswer } = usePostAnswer(parseInt(questionId as string))
   const { mutate: deleteAnswer } = useDeleteAnswer()
+  const { mutate: deleteQuestion } = useDeleteQuestion()
   const { data: questionDetails } = useGetQuestionDetails({
     questionId: parseInt(questionId as string),
   })
@@ -72,8 +77,12 @@ const QuestionContainer = () => {
     })
   }
 
-  const handleDeleteClick = () => {
+  const handleDeleteAnswerClick = () => {
     setIsAnswerDeleteModalOpen(true)
+  }
+
+  const handleDeleteQuestionClick = () => {
+    setIsQuestionDeleteModalOpen(true)
   }
 
   const handleDeleteAnswer = () => {
@@ -91,8 +100,19 @@ const QuestionContainer = () => {
     )
   }
 
-  if (!questionDetails) {
-    return
+  const handleDeleteQuestion = () => {
+    deleteQuestion(
+      {
+        questionId: parseInt(questionId as string),
+        strategyId: questionDetails.strategyId,
+      },
+      {
+        onSuccess: () => {
+          setIsQuestionDeleteModalOpen(false)
+          router.push(PATH.MY_QUESTIONS)
+        },
+      }
+    )
   }
 
   return (
@@ -106,6 +126,7 @@ const QuestionContainer = () => {
           nickname={questionDetails.nickname}
           createdAt={questionDetails.createdAt}
           status={questionDetails.state === 'WAITING' ? '답변 대기' : '답변 완료'}
+          onDelete={handleDeleteQuestionClick}
         />
         {questionDetails.answer ? (
           <QuestionDetailCard
@@ -114,7 +135,7 @@ const QuestionContainer = () => {
             contents={questionDetails.answer.content}
             nickname={questionDetails.answer.nickname}
             createdAt={questionDetails.answer.createdAt}
-            onDelete={handleDeleteClick}
+            onDelete={handleDeleteAnswerClick}
           />
         ) : (
           <>{!isActiveAnswer && <p className={cx('empty-message')}>아직 답변이 없습니다</p>}</>
@@ -142,10 +163,17 @@ const QuestionContainer = () => {
           )
         )}
       </div>
-      <AnswerDeleteModal
+      <QuestionDeleteModal
         isModalOpen={isAnswerDeleteModalOpen}
         onCloseModal={() => setIsAnswerDeleteModalOpen(false)}
         onDelete={handleDeleteAnswer}
+        message="답변을 삭제하시겠습니까?"
+      />
+      <QuestionDeleteModal
+        isModalOpen={isQuestionDeleteModalOpen}
+        onCloseModal={() => setIsQuestionDeleteModalOpen(false)}
+        onDelete={handleDeleteQuestion}
+        message="문의 내역을 삭제하시겠습니까?"
       />
     </>
   )
