@@ -45,7 +45,11 @@ const StrategyManagePage = ({ params }: { params: { strategyId: number } }) => {
       </div>
       <div className={cx('strategy-container')}>
         {detailsInformationData && (
-          <DetailsInformation information={detailsInformationData} type="my" />
+          <DetailsInformation
+            information={detailsInformationData}
+            strategyId={params.strategyId}
+            type="my"
+          />
         )}
         <AnalysisContainer type="my" strategyId={params.strategyId} />
         <SideContainer hasButton={true}>

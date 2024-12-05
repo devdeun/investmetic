@@ -12,6 +12,7 @@ import VerticalTable from '@/shared/ui/table/vertical'
 import { useAnalysisUploadMutation } from '../../my/_hooks/query/use-analysis-mutation'
 import useGetMyDailyAnalysis from '../../my/_hooks/query/use-get-my-daily-analysis'
 import useGetAnalysis from '../../strategies/[strategyId]/_hooks/query/use-get-analysis'
+import useGetAnalysisDownload from '../../strategies/[strategyId]/_hooks/query/use-get-analysis-download'
 import styles from './styles.module.scss'
 
 const cx = classNames.bind(styles)
@@ -51,6 +52,10 @@ const AnalysisContent = ({
   onPageChange,
   isEditable = false,
 }: Props) => {
+  const { data: analysisData } = useGetAnalysis(strategyId, type, currentPage, ANALYSIS_PAGE_COUNT)
+  const { mutate } = useGetAnalysisDownload()
+
+ 
   const [uploadType, setUploadType] = useState<'excel' | 'direct' | null>(null)
   const { isModalOpen, openModal, closeModal } = useModal()
 
@@ -75,6 +80,10 @@ const AnalysisContent = ({
     ANALYSIS_PAGE_COUNT
   )
 
+  const handleDownload = () => {
+    mutate({ strategyId, type })
+  }
+    
   const tableHeader = type === 'daily' ? DAILY_TABLE_HEADER : MONTHLY_TABLE_HEADER
 
   const handleExcelUpload = () => {
@@ -108,7 +117,12 @@ const AnalysisContent = ({
   return (
     <div className={cx('table-wrapper', 'analysis')}>
       {!isEditable && (
-        <Button size="small" className={cx('excel-button')} variant="filled">
+        <Button
+          onClick={handleDownload}
+          size="small"
+          className={cx('excel-button')}
+          variant="filled"
+        >
           엑셀 다운받기
         </Button>
       )}
