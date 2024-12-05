@@ -1,16 +1,28 @@
-import axios from 'axios'
+import axiosInstance from '@/shared/api/axios'
 
-import { StrategiesResponseModel } from '../types'
+import { StrategiesApprovalStateType, StrategiesResponseModel } from '../types'
 
-const getStrategies = async () => {
+interface ArgModel {
+  searchWord?: string
+  isApproved?: StrategiesApprovalStateType
+  page?: number
+  size?: number
+}
+
+const getStrategies = async ({ searchWord, isApproved, page = 0, size = 10 }: ArgModel) => {
   try {
-    const res = await axios<StrategiesResponseModel>('/api/admin/strategies')
+    const res = await axiosInstance<StrategiesResponseModel>('/api/admin/strategies', {
+      params: {
+        searchWord,
+        isApproved,
+        page,
+        size,
+      },
+    })
 
     if (!res.data.isSuccess) throw new Error(res.data.message)
 
-    console.log('data', res.data.data)
-
-    return res.data.data
+    return res.data.result
   } catch (err) {
     console.log('Error : ' + err)
     throw err
