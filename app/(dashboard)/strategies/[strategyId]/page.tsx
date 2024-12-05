@@ -73,6 +73,7 @@ const StrategyDetailPage = ({ params }: { params: { strategyId: number } }) => {
             detailsSideData?.map((data, idx) => (
               <div key={`${data}_${idx}`}>
                 <DetailsSideItem
+                  strategyId={params.strategyId}
                   information={data}
                   isMyStrategy={user?.nickname === information.nickname}
                   strategyName={information.strategyName}
