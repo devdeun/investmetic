@@ -1,5 +1,10 @@
+'use client'
+
+import { usePathname, useRouter } from 'next/navigation'
+
 import classNames from 'classnames/bind'
 
+import { PATH } from '@/shared/constants/path'
 import useModal from '@/shared/hooks/custom/use-modal'
 import { useAuthStore } from '@/shared/stores/use-auth-store'
 import Avatar from '@/shared/ui/avatar'
@@ -41,6 +46,12 @@ const SideItem = ({
     closeModal: guideCloseModal,
   } = useModal()
   const user = useAuthStore((state) => state.user)
+  const router = useRouter()
+  const path = usePathname()
+
+  const handleRouter = () => {
+    router.push(`${PATH.MY_STRATEGIES}/manage/${strategyId}`)
+  }
 
   const isTrader = user?.role.includes('TRADER')
 
@@ -57,6 +68,11 @@ const SideItem = ({
             {!isMyStrategy && !isTrader && (
               <Button onClick={questionOpenModal} size="small" style={{ height: '30px' }}>
                 문의하기
+              </Button>
+            )}
+            {isMyStrategy && !path.includes('my') && (
+              <Button onClick={handleRouter} size="small" style={{ height: '30px' }}>
+                내 전략 관리하기
               </Button>
             )}
           </>
