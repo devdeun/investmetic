@@ -54,9 +54,11 @@ const VerticalTable = ({
           <tbody>
             {slicedTableBody.map((row) => (
               <tr key={Object.values(row)[0]}>
-                {Object.values(row).map((data, idx) => (
-                  <td key={data + idx}>{formatNumber(data)}</td>
-                ))}
+                {Object.values(row)
+                  .slice(isEditable ? 1 : 0)
+                  .map((data, idx) => (
+                    <td key={data + idx}>{formatNumber(data)}</td>
+                  ))}
                 {isEditable && (
                   <td className={cx('button-container')}>
                     <Button size="small" variant="outline" className={cx('edit-button')}>

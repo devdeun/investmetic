@@ -52,10 +52,8 @@ const AnalysisContent = ({
   onPageChange,
   isEditable = false,
 }: Props) => {
-  const { data: analysisData } = useGetAnalysis(strategyId, type, currentPage, ANALYSIS_PAGE_COUNT)
   const { mutate } = useGetAnalysisDownload()
 
- 
   const [uploadType, setUploadType] = useState<'excel' | 'direct' | null>(null)
   const { isModalOpen, openModal, closeModal } = useModal()
 
@@ -83,7 +81,7 @@ const AnalysisContent = ({
   const handleDownload = () => {
     mutate({ strategyId, type })
   }
-    
+
   const tableHeader = type === 'daily' ? DAILY_TABLE_HEADER : MONTHLY_TABLE_HEADER
 
   const handleExcelUpload = () => {
