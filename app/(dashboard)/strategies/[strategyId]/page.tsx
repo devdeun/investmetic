@@ -35,26 +35,19 @@ const DynamicSideSkeleton = dynamic(() => import('../../_ui/details-side-item/si
 
 export type InformationType = { title: TitleType; data: string | number } | InformationModel[]
 
-const StrategyDetailPage = ({ params }: { params: { strategyId: number } }) => {
+const StrategyDetailPage = ({ params }: { params: { strategyId: string } }) => {
+  const strategyNumber = parseInt(params.strategyId)
   const user = useAuthStore((state) => state.user)
   const { isModalOpen, openModal, closeModal } = useModal()
   const { mutate } = useGetSubscribe()
   const { refetch, data } = useGetDetailsInformationData({
-    strategyId: params.strategyId,
+    strategyId: strategyNumber,
   })
 
   const { detailsSideData, detailsInformationData: information } = data || {}
 
   const handleSubscribe = () => {
-    mutate(params.strategyId, {
-      onSuccess: () => {
-        closeModal()
-        refetch()
-      },
-    })
-  }
-  const handleUnsubscribe = () => {
-    mutate(params.strategyId, {
+    mutate(strategyNumber, {
       onSuccess: () => {
         closeModal()
         refetch()
@@ -73,45 +66,47 @@ const StrategyDetailPage = ({ params }: { params: { strategyId: number } }) => {
       <Suspense fallback={<DynamicSkeleton />}>
         {information && (
           <>
-            <DetailsInformation information={information} strategyId={params.strategyId} />
-            <AnalysisContainer strategyId={params.strategyId} />
-            <ReviewContainer strategyId={params.strategyId} />
+            <DetailsInformation information={information} strategyId={strategyNumber} />
+            <AnalysisContainer strategyId={strategyNumber} />
+            <ReviewContainer strategyId={strategyNumber} />
           </>
         )}
       </Suspense>
       <SideContainer>
         <Suspense fallback={<DynamicSideSkeleton />}>
           {information && (
-            <SubscriberItem
-              isMyStrategy={user?.nickname === information.nickname}
-              isSubscribed={information?.isSubscribed}
-              subscribers={information?.subscriptionCount}
-              onClick={openModal}
-            />
+            <>
+              <SubscriberItem
+                isMyStrategy={user?.nickname === information.nickname}
+                isSubscribed={information?.isSubscribed}
+                subscribers={information?.subscriptionCount}
+                onClick={openModal}
+              />
+              {hasDetailsSideData?.[0] &&
+                detailsSideData?.map((data, idx) => (
+                  <div key={`${data}_${idx}`}>
+                    <DetailsSideItem
+                      strategyId={strategyNumber}
+                      information={data}
+                      isMyStrategy={user?.nickname === information.nickname}
+                      strategyName={information.strategyName}
+                    />
+                  </div>
+                ))}
+            </>
           )}
-          {information &&
-            hasDetailsSideData?.[0] &&
-            detailsSideData?.map((data, idx) => (
-              <div key={`${data}_${idx}`}>
-                <DetailsSideItem
-                  strategyId={params.strategyId}
-                  information={data}
-                  isMyStrategy={user?.nickname === information.nickname}
-                  strategyName={information.strategyName}
-                />
-              </div>
-            ))}
         </Suspense>
       </SideContainer>
-      {isModalOpen && information && (
+      {information && (
         <SubscribeCheckModal
           isSubscribing={information?.isSubscribed}
           isModalOpen={isModalOpen}
-          onCloseModal={handleUnsubscribe}
+          onCloseModal={closeModal}
           onChange={handleSubscribe}
         />
       )}
     </>
   )
 }
+
 export default StrategyDetailPage
