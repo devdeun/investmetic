@@ -8,40 +8,44 @@ import TradersListCard from '@/shared/ui/traders-list-card'
 
 import ListHeader from '../../_ui/list-header'
 import StrategiesItem from '../../_ui/strategies-item'
-import useGetTraders from '../_hooks/use-get-traders'
+import useGetTraderStrategies from '../_hooks/use-get-trader-details'
 import styles from './page.module.scss'
 
 const cx = classNames.bind(styles)
 
 const TraderDetailPage = () => {
-  // const { data, isLoading } = useGetTraders()
+  const traderId = 1 // URL 파라미터나 상태에서 가져와야 합니다
+  const { data: strategiesData, isLoading } = useGetTraderStrategies({
+    traderId,
+  })
 
-  // const traders = data?.content
+  const strategies = strategiesData?.content
+  const firstStrategy = strategies?.[0]
 
-  // if (!traders) {
-  //   return null
-  // }
+  if (!firstStrategy || isLoading) {
+    return null
+  }
 
   return (
     <>
       <div className={cx('page-container')}>
         <BackHeader label={'목록으로 돌아가기'} />
         <div className={cx('title')}>
-          <Title label={'트레이더 상세보기'}></Title>
+          <Title label={'트레이더 상세보기'} />
         </div>
         <div className={cx('card-wrapper')}>
-          {/* <TradersListCard
-            key={trader.userId}
-            imageUrl={trader.imageUrl}
-            nickname={trader.nickname}
-            strategyCount={trader.strategyCount}
-            subscriberCount={trader.totalSubCount}
-            userId={trader.userId}
-          /> */}
+          <TradersListCard
+            imageUrl={firstStrategy.traderImgUrl}
+            nickname={firstStrategy.nickname}
+            strategyCount={strategies.length}
+            subscriberCount={firstStrategy.subscriptionCount}
+            userId={traderId}
+          />
         </div>
         <ListHeader />
-
-        {/* <StrategiesItem key={''} strategiesData={''} /> */}
+        {strategies?.map((strategy) => (
+          <StrategiesItem key={strategy.strategyId} strategiesData={strategy} />
+        ))}
       </div>
     </>
   )

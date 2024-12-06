@@ -8,5 +8,4 @@ const useGetTraders = ({ page, size, keyword, orderBy }: TradersParamsModel) => 
     queryFn: () => getTraders({ page, size, keyword, orderBy }),
   })
 }
-
 export default useGetTraders
