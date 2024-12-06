@@ -6,8 +6,10 @@ import { useRouter } from 'next/navigation'
 
 import { SIGNUP_ERROR_MESSAGES } from '@/app/(landing)/signup/_constants/signup'
 import { CameraIcon } from '@/public/icons'
+import axios from 'axios'
 import classNames from 'classnames/bind'
 
+import axiosInstance from '@/shared/api/axios'
 import { checkNicknameDuplicate, checkPhoneDuplicate } from '@/shared/api/check-duplicate'
 import { PATH } from '@/shared/constants/path'
 import Avatar from '@/shared/ui/avatar'
@@ -32,6 +34,30 @@ interface Props {
   profile: ProfileModel
 }
 
+// const uploadImageToS3 = async (presignedUrl: string, file: File): Promise<void> => {
+//   try {
+//     await axiosInstance.put(presignedUrl, file, {
+//       headers: {
+//         'Content-Type': file.type,
+//       },
+//     })
+//   } catch (error) {
+//     console.error('이미지 업로드 실패:', error)
+//     throw new Error('이미지 업로드에 실패했습니다')
+//   }
+// }
+const uploadImageToS3 = async (presignedUrl: string, file: File): Promise<void> => {
+  try {
+    await axiosInstance.put(presignedUrl, file, {
+      headers: {
+        'Content-Type': file.type,
+      },
+    })
+  } catch (error) {
+    console.error('이미지 업로드 실패:', error)
+    throw new Error('이미지 업로드에 실패했습니다')
+  }
+}
 const UserInfo = ({ profile, isEditable = false }: Props) => {
   const router = useRouter()
 
@@ -49,6 +75,11 @@ const UserInfo = ({ profile, isEditable = false }: Props) => {
   const [formState, setFormState] = useState<ProfileFormStateModel>(initialFormState)
   const [errors, setErrors] = useState<ProfileFormErrorsModel>({})
   const [isValidated, setIsValidated] = useState(false)
+  const [isNicknameModified, setIsNicknameModified] = useState(false)
+  const [isPhoneModified, setIsPhoneModified] = useState(false)
+  const [selectedImage, setSelectedImage] = useState<File | null>(null)
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null)
+  const [isUploading, setIsUploading] = useState(false)
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
@@ -62,57 +93,271 @@ const UserInfo = ({ profile, isEditable = false }: Props) => {
     }
 
     if (name === 'nickname') {
-      setFormState((prev) => ({ ...prev, isNicknameVerified: false }))
+      setIsNicknameModified(true)
       setErrors((prev) => ({ ...prev, nickname: null }))
     }
     if (name === 'phone') {
-      setFormState((prev) => ({ ...prev, isPhoneVerified: false }))
+      setIsPhoneModified(true)
       setErrors((prev) => ({ ...prev, phone: null }))
     }
   }
 
-  const handleNicknameCheck = async () => {
-    setFormState((prev) => ({ ...prev, isNicknameVerified: false }))
+  const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file) return
 
+    // 파일 유효성 검사
+    if (!file.type.startsWith('image/')) {
+      alert('이미지 파일만 업로드가 가능합니다.')
+      return
+    }
+
+    const maxSize = 5 * 1024 * 1024 // 5MB
+    if (file.size > maxSize) {
+      alert('파일 크기는 5MB 이하여야 합니다.')
+      return
+    }
+
+    // 이미지 미리보기 설정
+    const reader = new FileReader()
+    reader.onload = (e) => {
+      setPreviewUrl(e.target?.result as string)
+    }
+    reader.readAsDataURL(file)
+
+    setSelectedImage(file)
+  }
+
+  const handleNicknameCheck = async () => {
     try {
       const response = await checkNicknameDuplicate(form.nickname)
       if (response.result.isAvailable) {
         setFormState((prev) => ({ ...prev, isNicknameVerified: true }))
+        setIsNicknameModified(false)
         if (errors.nickname) {
           setErrors((prev) => ({ ...prev, nickname: null }))
         }
       } else {
         setErrors((prev) => ({ ...prev, nickname: SIGNUP_ERROR_MESSAGES.NICKNAME_DUPLICATED }))
+        setFormState((prev) => ({ ...prev, isNicknameVerified: false }))
       }
     } catch (err) {
       console.error('닉네임 중복 확인 실패:', err)
       setErrors((prev) => ({ ...prev, nickname: SIGNUP_ERROR_MESSAGES.NICKNAME_CHECK_FAILED }))
+      setFormState((prev) => ({ ...prev, isNicknameVerified: false }))
     }
   }
+
   const handlePhoneCheck = async () => {
     try {
       const response = await checkPhoneDuplicate(form.phone)
-
       if (response.result.isAvailable) {
         setFormState((prev) => ({ ...prev, isPhoneVerified: true }))
+        setIsPhoneModified(false)
         if (errors.phone) {
           setErrors((prev) => ({ ...prev, phone: null }))
         }
       } else {
         setErrors((prev) => ({ ...prev, phone: SIGNUP_ERROR_MESSAGES.PHONE_DUPLICATED }))
+        setFormState((prev) => ({ ...prev, isPhoneVerified: false }))
       }
     } catch (err) {
       console.error('휴대폰 번호 중복 확인 실패:', err)
       setErrors((prev) => ({ ...prev, phone: SIGNUP_ERROR_MESSAGES.PHONE_CHECK_FAILED }))
+      setFormState((prev) => ({ ...prev, isPhoneVerified: false }))
     }
   }
 
-  const handleImageChange = () => {}
-  const handleImageDelete = () => {}
+  const handleImageDelete = () => {
+    setSelectedImage(null)
+    setPreviewUrl(null)
+  }
+
   const handleBack = () => {
     router.back()
   }
 
+  // const handleFormSubmit = async () => {
+  //   const formErrors = validateProfileForm(
+  //     form,
+  //     formState.isNicknameVerified,
+  //     formState.isPhoneVerified
+  //   )
+  //   setIsValidated(true)
+
+  //   if (Object.keys(formErrors).length > 0) {
+  //     setErrors(formErrors)
+  //     return
+  //   }
+
+  //   try {
+  //     setIsUploading(true)
+
+  //     // 1. 프로필 정보 업데이트
+  //     const updatedProfileResponse = await axiosInstance.put('/api/user/profile', {
+  //       nickname: form.nickname,
+  //       phone: form.phone,
+  //       password: form.password,
+  //     })
+
+  //     if (!updatedProfileResponse.data.isSuccess) {
+  //       throw new Error(updatedProfileResponse.data.message)
+  //     }
+
+  //     // 2. 이미지가 선택되어 있다면 이미지 업로드
+  //     if (selectedImage) {
+  //       // presigned URL 요청
+  //       const presignedUrlResponse = await axiosInstance.put('/api/user/profile/image')
+
+  //       if (!presignedUrlResponse.data.isSuccess) {
+  //         throw new Error(presignedUrlResponse.data.message)
+  //       }
+
+  //       // S3에 이미지 업로드
+  //       await uploadImageToS3(presignedUrlResponse.data.presignedUrl, selectedImage)
+  //     }
+
+  //     alert('프로필이 성공적으로 업데이트되었습니다.')
+  //     router.push(PATH.PROFILE)
+  //   } catch (error) {
+  //     console.error('프로필 업데이트 실패:', error)
+  //     alert(
+  //       error instanceof Error
+  //         ? error.message
+  //         : '프로필 업데이트에 실패했습니다. 다시 시도해주세요.'
+  //     )
+  //   } finally {
+  //     setIsUploading(false)
+  //   }
+  // }
+  // const handleFormSubmit = async () => {
+  //   const formErrors = validateProfileForm(
+  //     form,
+  //     formState.isNicknameVerified,
+  //     formState.isPhoneVerified
+  //   )
+  //   setIsValidated(true)
+
+  //   if (Object.keys(formErrors).length > 0) {
+  //     setErrors(formErrors)
+  //     return
+  //   }
+
+  //   try {
+  //     setIsUploading(true)
+
+  //     // 업데이트할 데이터 준비
+  //     const updateData = {
+  //       nickname: form.nickname,
+  //       phone: form.phone,
+  //       ...(form.password ? { password: form.password } : {}), // 비밀번호는 입력된 경우만 포함
+  //     }
+
+  //     console.log('프로필 업데이트 요청 데이터:', updateData) // 요청 데이터 확인
+
+  //     // 1. 프로필 정보 업데이트
+  //     const updatedProfileResponse = await axiosInstance.patch('/api/user/profile', updateData)
+
+  //     console.log('프로필 업데이트 응답:', updatedProfileResponse) // 응답 확인
+
+  //     if (!updatedProfileResponse.data.isSuccess) {
+  //       throw new Error(updatedProfileResponse.data.message || '프로필 업데이트에 실패했습니다.')
+  //     }
+
+  //     // 2. 이미지가 선택되어 있다면 이미지 업로드
+  //     if (selectedImage) {
+  //       console.log('이미지 업로드 시작') // 이미지 업로드 시작 로그
+
+  //       // presigned URL 요청
+  //       const presignedUrlResponse = await axiosInstance.put('/api/user/profile/image')
+
+  //       console.log('Presigned URL 응답:', presignedUrlResponse) // presigned URL 응답 확인
+
+  //       if (!presignedUrlResponse.data.isSuccess) {
+  //         throw new Error(presignedUrlResponse.data.message || 'Presigned URL 생성에 실패했습니다.')
+  //       }
+
+  //       // S3에 이미지 업로드
+  //       await uploadImageToS3(presignedUrlResponse.data.presignedUrl, selectedImage)
+  //     }
+
+  //     alert('프로필이 성공적으로 업데이트되었습니다.')
+  //     router.push(PATH.PROFILE)
+  //   } catch (error) {
+  //     console.error('프로필 업데이트 실패:', error)
+
+  //     // 에러 응답 구조 자세히 확인
+  //     if (axios.isAxiosError(error)) {
+  //       console.error('서버 응답:', error.response?.data)
+  //       alert(error.response?.data?.message || '프로필 업데이트에 실패했습니다. 다시 시도해주세요.')
+  //     } else {
+  //       alert(
+  //         error instanceof Error
+  //           ? error.message
+  //           : '프로필 업데이트에 실패했습니다. 다시 시도해주세요.'
+  //       )
+  //     }
+  //   } finally {
+  //     setIsUploading(false)
+  //   }
+  // }
+  // const handleFormSubmit = async () => {
+  //   const formErrors = validateProfileForm(
+  //     form,
+  //     formState.isNicknameVerified,
+  //     formState.isPhoneVerified
+  //   )
+  //   setIsValidated(true)
+
+  //   if (Object.keys(formErrors).length > 0) {
+  //     setErrors(formErrors)
+  //     return
+  //   }
+
+  //   try {
+  //     setIsUploading(true)
+
+  //     // 요청 데이터 구조화
+  //     const updateData = {
+  //       nickname: form.nickname,
+  //       phone: form.phone,
+  //       password: form.password || null,
+  //       email: form.email, // optional
+  //       imageChange: selectedImage !== null, // 이미지 변경 여부
+  //       ...(selectedImage && {
+  //         imageDto: {
+  //           imageName: selectedImage.name,
+  //           size: selectedImage.size,
+  //         },
+  //       }),
+  //     }
+
+  //     // 프로필 정보 업데이트
+  //     const response = await axiosInstance.patch('/api/users/mypage/profile', updateData)
+
+  //     if (!response.data.isSuccess) {
+  //       throw new Error(response.data.message)
+  //     }
+
+  //     // 이미지가 있고, presignedUrl을 받았다면 이미지 업로드
+  //     if (selectedImage && response.data.data?.presignedUrl) {
+  //       await uploadImageToS3(response.data.data.presignedUrl, selectedImage)
+  //     }
+
+  //     alert('프로필이 성공적으로 업데이트되었습니다.')
+  //     router.push(PATH.PROFILE)
+  //   } catch (error) {
+  //     console.error('프로필 업데이트 실패:', error)
+  //     if (axios.isAxiosError(error)) {
+  //       const errorMessage = error.response?.data?.message || '프로필 업데이트에 실패했습니다.'
+  //       alert(errorMessage)
+  //     } else {
+  //       alert('프로필 업데이트에 실패했습니다. 다시 시도해주세요.')
+  //     }
+  //   } finally {
+  //     setIsUploading(false)
+  //   }
+  // }
   const handleFormSubmit = async () => {
     const formErrors = validateProfileForm(
       form,
@@ -124,6 +369,51 @@ const UserInfo = ({ profile, isEditable = false }: Props) => {
     if (Object.keys(formErrors).length > 0) {
       setErrors(formErrors)
       return
+    }
+
+    try {
+      setIsUploading(true)
+
+      // 요청 데이터 구조화 - 필드명 수정
+      const updateData = {
+        nickName: form.nickname,
+        phoneNum: form.phone,
+        password: form.password || null,
+        email: form.email,
+        imageChange: selectedImage !== null,
+        profileImage: selectedImage
+          ? {
+              imageName: selectedImage.name,
+              size: selectedImage.size,
+            }
+          : null,
+      }
+
+      console.log('요청 데이터:', updateData) // 요청 데이터 확인
+
+      const response = await axiosInstance.patch('/api/users/mypage/profile', updateData)
+
+      if (!response.data.isSuccess) {
+        throw new Error(response.data.message)
+      }
+
+      // 이미지가 있고, presignedUrl을 받았다면 이미지 업로드
+      if (selectedImage && response.data.data?.presignedUrl) {
+        await uploadImageToS3(response.data.data.presignedUrl, selectedImage)
+      }
+
+      alert('프로필이 성공적으로 업데이트되었습니다.')
+      router.push(PATH.PROFILE)
+    } catch (error) {
+      console.error('프로필 업데이트 실패:', error)
+      if (axios.isAxiosError(error)) {
+        const errorMessage = error.response?.data?.message || '프로필 업데이트에 실패했습니다.'
+        alert(errorMessage)
+      } else {
+        alert('프로필 업데이트에 실패했습니다. 다시 시도해주세요.')
+      }
+    } finally {
+      setIsUploading(false)
     }
   }
 
@@ -140,12 +430,30 @@ const UserInfo = ({ profile, isEditable = false }: Props) => {
         <div className={cx('content-wrapper')}>
           <div className={cx('left-wrapper')}>
             <div className={cx('avatar-wrapper')}>
-              <Avatar size="xxlarge" />
+              {previewUrl ? (
+                <img src={previewUrl} alt="Preview" className={cx('avatar-preview')} />
+              ) : (
+                <Avatar size="xxlarge" />
+              )}
               <div className={cx('camera-wrapper')}>
-                <CameraIcon className={cx('camera-icon')} onClick={handleImageChange} />
+                <input
+                  type="file"
+                  id="profile-image"
+                  accept="image/*"
+                  onChange={handleImageChange}
+                  style={{ display: 'none' }}
+                />
+                <label htmlFor="profile-image">
+                  <CameraIcon
+                    className={cx('camera-icon')}
+                    style={{ cursor: isUploading ? 'wait' : 'pointer' }}
+                  />
+                </label>
               </div>
             </div>
-            {isEditable && <Button onClick={handleImageDelete}>프로필 사진 삭제</Button>}
+            {isEditable && selectedImage && (
+              <Button onClick={handleImageDelete}>프로필 사진 삭제</Button>
+            )}
           </div>
 
           <div className={cx('right-wrapper')}>
@@ -181,17 +489,27 @@ const UserInfo = ({ profile, isEditable = false }: Props) => {
               <div>
                 <p className={cx('title')}>휴대전화</p>
                 <div className={cx('position')}>
-                  <Input
-                    id="phone"
-                    name="phone"
-                    value={form.phone}
-                    onChange={handleInputChange}
-                    className={cx('input')}
-                    inputSize="compact"
-                    isWhiteDisabled={!isEditable}
-                  />
-
-                  {isEditable && <Button onClick={handlePhoneCheck}>확인</Button>}
+                  <div className={cx('position-wrapper')}>
+                    <Input
+                      id="phone"
+                      name="phone"
+                      value={form.phone}
+                      onChange={handleInputChange}
+                      className={cx('input')}
+                      inputSize="compact"
+                      isWhiteDisabled={!isEditable}
+                      errorMessage={errors.phone}
+                    />
+                    {isEditable && <Button onClick={handlePhoneCheck}>확인</Button>}
+                  </div>
+                  {formState.isPhoneVerified && !isPhoneModified && (
+                    <p className={cx('verified-message')}>사용할 수 있는 휴대폰 번호입니다.</p>
+                  )}
+                  {isPhoneModified && (
+                    <p className={cx('modified-message')}>
+                      휴대폰 번호가 수정되었습니다. 다시 확인해 주세요.
+                    </p>
+                  )}
                 </div>
               </div>
             </div>
@@ -210,17 +528,27 @@ const UserInfo = ({ profile, isEditable = false }: Props) => {
               <div>
                 <p className={cx('title')}>닉네임</p>
                 <div className={cx('position')}>
-                  <Input
-                    id="nickname"
-                    name="nickname"
-                    inputSize="compact"
-                    value={form.nickname}
-                    onChange={handleInputChange}
-                    className={cx('input')}
-                    isWhiteDisabled={!isEditable}
-                  />
-
-                  {isEditable && <Button onClick={handleNicknameCheck}>확인</Button>}
+                  <div className={cx('position-wrapper')}>
+                    <Input
+                      id="nickname"
+                      name="nickname"
+                      inputSize="compact"
+                      value={form.nickname}
+                      onChange={handleInputChange}
+                      className={cx('input')}
+                      isWhiteDisabled={!isEditable}
+                      errorMessage={errors.nickname}
+                    />
+                    {isEditable && <Button onClick={handleNicknameCheck}>확인</Button>}
+                  </div>
+                  {formState.isNicknameVerified && !isNicknameModified && (
+                    <p className={cx('verified-message')}>사용할 수 있는 닉네임입니다.</p>
+                  )}
+                  {isNicknameModified && (
+                    <p className={cx('modified-message')}>
+                      닉네임이 수정되었습니다. 다시 중복확인해 주세요.
+                    </p>
+                  )}
                 </div>
               </div>
             </div>
@@ -243,7 +571,6 @@ const UserInfo = ({ profile, isEditable = false }: Props) => {
                 </div>
                 <div>
                   <p className={cx('title')}>비밀번호 확인</p>
-
                   <Input
                     id="passwordConfirm"
                     name="passwordConfirm"
@@ -267,13 +594,32 @@ const UserInfo = ({ profile, isEditable = false }: Props) => {
           </div>
         </div>
 
-        {isEditable && (
+        {/* {isEditable && (
           <div className={cx('button-wrapper')}>
             <Button className={cx('left-button')} onClick={handleBack}>
               뒤로가기
             </Button>
             <Button className={cx('right-button')} variant="filled" onClick={handleFormSubmit}>
               저장하기
+            </Button>
+          </div>
+        )}
+      </div>
+    </div>
+  )
+} */}
+        {isEditable && (
+          <div className={cx('button-wrapper')}>
+            <Button className={cx('left-button')} onClick={handleBack} disabled={isUploading}>
+              뒤로가기
+            </Button>
+            <Button
+              className={cx('right-button')}
+              variant="filled"
+              onClick={handleFormSubmit}
+              disabled={isUploading}
+            >
+              {isUploading ? '저장 중...' : '저장하기'}
             </Button>
           </div>
         )}
