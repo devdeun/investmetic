@@ -2,8 +2,12 @@
 
 import React from 'react'
 
+import { useRouter } from 'next/navigation'
+
 import { ModalAlertIcon } from '@/public/icons'
 import classNames from 'classnames/bind'
+
+import { PATH } from '@/shared/constants/path'
 
 import Modal from '.'
 import { Button } from '../button'
@@ -14,10 +18,15 @@ const cx = classNames.bind(styles)
 interface Props {
   isModalOpen: boolean
   onCloseModal: () => void
-  onChange?: () => void
 }
 
-const SigninCheckModal = ({ isModalOpen, onCloseModal, onChange }: Props) => {
+const SigninCheckModal = ({ isModalOpen, onCloseModal }: Props) => {
+  const router = useRouter()
+
+  const handleRouter = () => {
+    router.push(PATH.SIGN_IN)
+  }
+
   return (
     <Modal isOpen={isModalOpen} icon={ModalAlertIcon}>
       <span className={cx('message')}>
@@ -25,7 +34,7 @@ const SigninCheckModal = ({ isModalOpen, onCloseModal, onChange }: Props) => {
       </span>
       <div className={cx('two-button')}>
         <Button onClick={onCloseModal}>아니오</Button>
-        <Button onClick={onChange} variant="filled" className={cx('button')}>
+        <Button onClick={handleRouter} variant="filled" className={cx('button')}>
           예
         </Button>
       </div>
