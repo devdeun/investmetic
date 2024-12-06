@@ -52,6 +52,8 @@
   .title {
     @include typo-h4;
     @include ellipsis(1);
+    display: flex;
+    justify-content: flex-start;
   }
   .trader-profile {
     display: flex;
@@ -94,6 +96,7 @@
   .icon-wrapper {
     .icon {
       position: relative;
+      height: 21px;
     }
     .tooltip {
       background-color: $color-gray-700;

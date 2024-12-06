@@ -51,16 +51,18 @@ const StatisticsTable = ({ title, statisticsData }: Props) => {
             <tr key={idx}>
               <td>{row[0]}</td>
               <td>
-                {formatNumber(row[1])}
-                {STATISTICS_PERCENT.includes(row[0] as string) && '%'}
+                {STATISTICS_PERCENT.includes(row[0] as string)
+                  ? Number(row[1]).toFixed(2) + '%'
+                  : formatNumber(row[1])}
                 {STATISTICS_DATE.includes(row[0] as string) && '일'}
               </td>
               {row[2] && (
                 <>
                   <td>{row[2]}</td>
                   <td>
-                    {formatNumber(row[3])}
-                    {STATISTICS_PERCENT.includes(row[2] as string) && '%'}
+                    {STATISTICS_PERCENT.includes(row[2] as string)
+                      ? Number(row[3]).toFixed(2) + '%'
+                      : formatNumber(row[3])}
                     {STATISTICS_DATE.includes(row[2] as string) && '일'}
                   </td>
                 </>
