@@ -84,7 +84,7 @@ const ProfitChart = ({
         <span className={cx('label')}>누적수익률</span>
         <span className={cx('value', { negative: isNegative })}>
           {isNegative ? '' : '+'}
-          {percentageChange}%
+          {percentageChange.toFixed(2)}%
         </span>
       </div>
     </div>
