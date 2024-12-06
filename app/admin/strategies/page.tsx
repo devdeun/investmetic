@@ -9,7 +9,6 @@ import Tabs from '@/shared/ui/tabs'
 import Title from '@/shared/ui/title'
 
 import AdminContentsHeader from '../_ui/admin-header'
-import AdminPostButton from '../_ui/admin-post-button'
 import setAdminStrategiesTableBody from './_api/set-admin-strategies-table-body'
 import useStrategiesData from './_hooks/query/use-strategies-data'
 import useAdminStrategiesPage from './_hooks/use-admin-strategies-page'
@@ -25,7 +24,6 @@ const AdminStrategyPage = () => {
     ...searchParams,
     isApproved: activeTab === 'ALL' ? undefined : 'PENDING',
   })
-  // const { mutate } = usePatchStrategyApproval(1, false)
 
   if (!data || isLoading) return null
 
@@ -33,7 +31,7 @@ const AdminStrategyPage = () => {
     <>
       <Title label="전략 관리" className={cx('title')} />
       <section className={cx('container')}>
-        <AdminPostButton label="전략 등록하기" pathname="strategies" />
+        {/* <AdminPostButton label="전략 등록하기" pathname="strategies" /> */}
         <Tabs tabs={tabs} activeTab={activeTab} onTabChange={onTabChange} />
         <AdminContentsHeader
           Left={
