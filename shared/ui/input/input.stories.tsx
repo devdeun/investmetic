@@ -7,33 +7,27 @@ const meta: Meta<typeof Input> = {
   component: Input,
   args: {
     inputSize: 'medium',
-    errorMessage: null,
     placeholder: 'Enter text',
     type: 'text',
   },
   argTypes: {
     inputSize: {
       control: { type: 'radio' },
-      options: ['small', 'medium', 'large', 'full'],
+      options: ['small', 'compact', 'medium', 'large', 'full'],
     },
     type: {
       control: { type: 'select' },
       options: ['email', 'password', 'tel', 'text'],
     },
-    errorMessage: {
-      control: { type: 'select' },
-      options: [
-        null,
-        '비밀번호는 8자리 이상, 문자와 숫자를 포함해야 합니다.',
-        '이메일 형식이 잘못되었습니다.',
-        '전화번호는 10자리 이상이어야 합니다.',
-        '필수 입력란입니다.',
-      ],
+    isWhiteDisabled: {
+      control: { type: 'boolean' },
+      description: 'White disabled input',
     },
   },
   tags: ['autodocs'],
 }
 
+export default meta
 type StoryType = StoryObj<typeof Input>
 
 export const Default: StoryType = {}
@@ -42,6 +36,13 @@ export const Small: StoryType = {
   args: {
     inputSize: 'small',
     placeholder: 'Small input',
+  },
+}
+
+export const Compact: StoryType = {
+  args: {
+    inputSize: 'compact',
+    placeholder: 'Compact input',
   },
 }
 
@@ -62,8 +63,22 @@ export const Large: StoryType = {
 export const Full: StoryType = {
   args: {
     inputSize: 'full',
-    placeholder: 'full input',
+    placeholder: 'Full input',
   },
 }
 
-export default meta
+export const Disabled: StoryType = {
+  args: {
+    inputSize: 'medium',
+    placeholder: 'Disabled input',
+    disabled: true,
+  },
+}
+
+export const WhiteDisabled: StoryType = {
+  args: {
+    inputSize: 'medium',
+    placeholder: 'White disabled input',
+    isWhiteDisabled: true,
+  },
+}

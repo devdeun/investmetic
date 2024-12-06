@@ -1,32 +1,53 @@
 'use client'
 
-import { ComponentProps } from 'react'
+import { ComponentPropsWithoutRef, forwardRef } from 'react'
 
 import classNames from 'classnames/bind'
 
-import { ErrorMessageType } from '@/shared/types/error-message'
-
+import { ErrorMessage } from '../error-message'
 import styles from './styles.module.scss'
 
 const cx = classNames.bind(styles)
 
-export type InputSizeType = 'small' | 'medium' | 'large' | 'full'
+export type InputSizeType = 'small' | 'compact' | 'medium' | 'large' | 'full'
 
-interface Props extends ComponentProps<'input'> {
+interface Props extends ComponentPropsWithoutRef<'input'> {
   inputSize?: InputSizeType
-  errorMessage?: ErrorMessageType | null
+  errorMessage?: string | null
+  isWhiteDisabled?: boolean
 }
 
-export const Input = ({ inputSize = 'medium', errorMessage, className, ...props }: Props) => {
-  return (
-    <div>
-      <input
-        className={cx('input', inputSize, className, {
-          error: !!errorMessage,
-        })}
-        {...props}
-      />
-      {errorMessage && <p className={cx('error-message')}>{errorMessage}</p>}
-    </div>
-  )
-}
+export const Input = forwardRef<HTMLInputElement, Props>(
+  (
+    {
+      inputSize = 'medium',
+      className,
+      value,
+      errorMessage,
+      isWhiteDisabled = false,
+      onChange,
+      ...props
+    },
+    ref
+  ) => {
+    return (
+      <div>
+        <input
+          ref={ref}
+          value={value}
+          onChange={onChange}
+          className={cx(
+            'input',
+            inputSize,
+            { error: !!errorMessage, 'white-disabled': isWhiteDisabled },
+            className
+          )}
+          {...props}
+        />
+        <ErrorMessage errorMessage={errorMessage} />
+      </div>
+    )
+  }
+)
+
+Input.displayName = 'Input'

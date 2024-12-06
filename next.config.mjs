@@ -1,9 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   transpilePackages: ['msw'],
-  experimental: {
-    appDir: true,
-  },
   sassOptions: {
     includePaths: ['./shared/styles'],
     prependData: `
@@ -13,17 +10,21 @@ const nextConfig = {
   `,
   },
   async rewrites() {
-    if (process.env.NODE_ENV === 'development') {
-      return []
-    }
     return [
       {
+        source: '/api/users/:path*',
+        destination: 'http://15.164.90.102:8081/api/users/:path*',
+      },
+      {
+        source: '/login',
+        destination: 'http://15.164.90.102:8081/login',
+      },
+      {
         source: '/api/:path*',
-        destination: `${process.env.API_HOST}/api/:path*`,
+        destination: 'http://15.164.90.102:8081/api/:path*',
       },
     ]
   },
-
   webpack: (config, { isServer }) => {
     if (isServer) {
       if (Array.isArray(config.resolve.alias)) {
@@ -42,10 +43,27 @@ const nextConfig = {
     config.module.rules.push({
       test: /\.svg$/,
       issuer: /\.[jt]sx?$/,
-      use: ['@svgr/webpack'],
+      use: [
+        {
+          loader: '@svgr/webpack',
+          options: {
+            dimensions: false,
+          },
+        },
+      ],
     })
 
     return config
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'fastcampus-team3.s3.ap-northeast-2.amazonaws.com',
+        port: '',
+        pathname: '/**',
+      },
+    ],
   },
 }
 

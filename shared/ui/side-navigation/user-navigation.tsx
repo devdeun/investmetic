@@ -5,8 +5,10 @@ import { usePathname } from 'next/navigation'
 import { ChangeIcon, ProfileIcon, SignOutIcon } from '@/public/icons'
 import classNames from 'classnames/bind'
 
-import { fetchUser } from '@/shared/api/user'
 import { PATH } from '@/shared/constants/path'
+import { useAuth } from '@/shared/hooks/custom/use-auth'
+import { useAuthStore } from '@/shared/stores/use-auth-store'
+import { isAdmin } from '@/shared/types/auth'
 import NavButtonItem from '@/shared/ui/side-navigation/nav-button-item'
 import NavLinkItem from '@/shared/ui/side-navigation/nav-link-item'
 
@@ -16,10 +18,11 @@ const cx = classNames.bind(styles)
 
 const UserNavigation = () => {
   const path = usePathname()
+  const { user } = useAuthStore()
+  const { logout } = useAuth()
   const isAdminPage = path.startsWith(PATH.ADMIN)
 
-  const user = fetchUser()
-  const isAdmin = user.role.includes('admin')
+  if (!user) return null
 
   return (
     <nav className={cx('user-navigation')} aria-label="사용자 메뉴">
@@ -29,13 +32,13 @@ const UserNavigation = () => {
           <span className={cx('email')}>{user.email}</span>
         </NavLinkItem>
 
-        {isAdmin && (
+        {isAdmin(user) && (
           <NavLinkItem href={isAdminPage ? PATH.STRATEGIES : PATH.ADMIN_USERS} icon={ChangeIcon}>
             {isAdminPage ? '메인 대시보드' : '관리자 대시보드'}
           </NavLinkItem>
         )}
 
-        <NavButtonItem icon={SignOutIcon} onClick={() => {}}>
+        <NavButtonItem icon={SignOutIcon} onClick={logout}>
           로그아웃
         </NavButtonItem>
       </ul>

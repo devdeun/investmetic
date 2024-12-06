@@ -2,24 +2,29 @@
 
 import dynamic from 'next/dynamic'
 
+import classNames from 'classnames/bind'
 import Highcharts from 'highcharts'
 
-import { ProfitRateChartDataModel } from '@/shared/types/strategy-details-data'
+import { ProfitRateChartDataModel } from '@/shared/types/strategy-data'
+
+import styles from './styles.module.scss'
+
+const cx = classNames.bind(styles)
 
 const HighchartsReact = dynamic(() => import('highcharts-react-official'), {
   ssr: false,
 })
+
 interface Props {
-  profitRateChartData: ProfitRateChartDataModel[]
+  profitRateChartData: ProfitRateChartDataModel
 }
 
-const AreaChart = ({ profitRateChartData }: Props) => {
-  const profit = profitRateChartData.map((data) => data.profitRate)
+const AreaChart = ({ profitRateChartData: data }: Props) => {
+  if (!data) return <div></div>
   const chartOptions: Highcharts.Options = {
     chart: {
       type: 'areaspline',
       height: 100,
-      width: 180,
       backgroundColor: 'transparent',
       margin: [0, 0, 0, 0],
     },
@@ -29,14 +34,14 @@ const AreaChart = ({ profitRateChartData }: Props) => {
     },
     yAxis: {
       visible: false,
-      min: Math.min(...profit),
-      max: Math.max(...profit),
+      min: Math.min(...data.profitRates),
+      max: Math.max(...data.profitRates),
     },
     legend: { enabled: false },
     plotOptions: {
       areaspline: {
         lineWidth: 1,
-        lineColor: '#4d4d4d',
+        lineColor: '#ff8f70',
         marker: {
           enabled: false,
           symbol: 'circle',
@@ -52,14 +57,14 @@ const AreaChart = ({ profitRateChartData }: Props) => {
     series: [
       {
         type: 'areaspline',
-        data: profitRateChartData.map((data) => ({
-          x: new Date(data.date).getTime(),
-          y: data.profitRate,
+        data: data.dates.map((x, idx) => ({
+          x: new Date(x).getTime(),
+          y: data.profitRates[idx],
         })),
         color: {
           linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
           stops: [
-            [0, '#4d4d4d'],
+            [0, '#ff8f70'],
             [1, 'rgba(255, 255, 255, 0)'],
           ],
         },
@@ -67,9 +72,27 @@ const AreaChart = ({ profitRateChartData }: Props) => {
     ],
     credits: { enabled: false },
     tooltip: { enabled: false },
+    responsive: {
+      rules: [
+        {
+          condition: {
+            maxWidth: 200,
+          },
+          chartOptions: {
+            chart: {
+              width: null,
+            },
+          },
+        },
+      ],
+    },
   }
 
-  return <HighchartsReact highcharts={Highcharts} options={chartOptions} />
+  return (
+    <div className={cx('chart')}>
+      <HighchartsReact highcharts={Highcharts} options={chartOptions} />
+    </div>
+  )
 }
 
 export default AreaChart

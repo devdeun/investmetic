@@ -1,9 +1,9 @@
-import StrategiesIcon from '@/app/(dashboard)/_ui/strategies-item/strategies-icon'
 import classNames from 'classnames/bind'
 
 import Avatar from '@/shared/ui/avatar'
 import TotalStar from '@/shared/ui/total-star'
 
+import StrategiesIcon from './strategies-icon'
 import styles from './styles.module.scss'
 
 const cx = classNames.bind(styles)
@@ -14,7 +14,8 @@ interface ProfileModel {
 }
 
 interface Props {
-  icon: string[]
+  iconUrls?: string[]
+  iconNames?: string[]
   title: string
   profile: ProfileModel
   subscriptionCount: number
@@ -23,7 +24,8 @@ interface Props {
 }
 
 const StrategiesSummary = ({
-  icon,
+  iconUrls,
+  iconNames,
   title,
   profile,
   subscriptionCount,
@@ -32,7 +34,7 @@ const StrategiesSummary = ({
 }: Props) => {
   return (
     <div className={cx('summary')}>
-      <StrategiesIcon icon={icon} />
+      <StrategiesIcon iconUrls={iconUrls} iconNames={iconNames} />
       <p className={cx('title')}>{title}</p>
       <div className={cx('trader-profile')}>
         <Avatar size={'medium'} src={profile.traderImage} />

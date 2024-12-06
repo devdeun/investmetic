@@ -1,6 +1,8 @@
 import classNames from 'classnames/bind'
 
-import { inKoreanData } from './inKorean'
+import { formatNumber } from '@/shared/utils/format'
+
+import { STATISTICS_DATE, STATISTICS_PERCENT, inKoreanData } from './constant'
 import styles from './styles.module.scss'
 
 const cx = classNames.bind(styles)
@@ -16,9 +18,13 @@ interface Props {
 const StatisticsTable = ({ title, statisticsData }: Props) => {
   const inKoreanDataToArray: string[][] = Object.entries(inKoreanData)
   const mappedDataInKorean: { [key: string]: string | number } = {}
+  let titleInKorean = null
+
   for (const [key, value] of inKoreanDataToArray) {
     if (statisticsData[key] !== undefined) {
       mappedDataInKorean[value] = statisticsData[key]
+    } else if (title === key) {
+      titleInKorean = value
     }
   }
 
@@ -38,17 +44,27 @@ const StatisticsTable = ({ title, statisticsData }: Props) => {
 
   return (
     <div className={cx('container')}>
-      <p>{title}</p>
+      <p>{titleInKorean ?? title}</p>
       <table>
         <tbody>
           {groupedData.map((row, idx) => (
             <tr key={idx}>
               <td>{row[0]}</td>
-              <td>{row[1]}</td>
+              <td>
+                {STATISTICS_PERCENT.includes(row[0] as string)
+                  ? Number(row[1]).toFixed(2) + '%'
+                  : formatNumber(row[1])}
+                {STATISTICS_DATE.includes(row[0] as string) && '일'}
+              </td>
               {row[2] && (
                 <>
                   <td>{row[2]}</td>
-                  <td>{row[3]}</td>
+                  <td>
+                    {STATISTICS_PERCENT.includes(row[2] as string)
+                      ? Number(row[3]).toFixed(2) + '%'
+                      : formatNumber(row[3])}
+                    {STATISTICS_DATE.includes(row[2] as string) && '일'}
+                  </td>
                 </>
               )}
             </tr>

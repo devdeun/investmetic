@@ -1,6 +1,6 @@
 'use client'
 
-import { ComponentProps } from 'react'
+import { ComponentProps, ReactNode } from 'react'
 
 import classNames from 'classnames/bind'
 
@@ -14,10 +14,10 @@ export type ButtonVariantType = 'outline' | 'filled'
 interface Props extends ComponentProps<'button'> {
   size?: ButtonSizeType
   variant?: ButtonVariantType
-  onClick: () => void
+  onClick?: () => void
 }
 
-export const Button = ({
+const _Button = ({
   children,
   size = 'medium',
   variant = 'outline',
@@ -35,3 +35,16 @@ export const Button = ({
     {children}
   </button>
 )
+
+interface ButtonGroupProps {
+  gap?: string
+  children: ReactNode
+}
+
+const ButtonGroup = ({ gap = '8px', children }: ButtonGroupProps) => {
+  return <div style={{ display: 'flex', gap }}>{children}</div>
+}
+
+_Button.ButtonGroup = ButtonGroup
+
+export { _Button as Button }

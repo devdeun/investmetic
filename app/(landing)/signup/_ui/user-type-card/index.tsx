@@ -2,11 +2,16 @@
 
 import { useRouter } from 'next/navigation'
 
-import useSignupStore from '@/app/(landing)/signup/_stores/use-signup-store'
+import {
+  getUserTypeCookie,
+  setIsAgreedTermsCookie,
+  setUserTypeCookie,
+} from '@/app/(landing)/signup/_lib/cookies'
+import { InvestorImg, TraderImg } from '@/public/images'
 import classNames from 'classnames/bind'
 
 import { PATH } from '@/shared/constants/path'
-import { UserType } from '@/shared/types/user'
+import { UserType } from '@/shared/types/auth'
 
 import styles from './styles.module.scss'
 
@@ -20,10 +25,14 @@ interface Props {
 
 const UserTypeCard = ({ userType, title, highlight }: Props) => {
   const router = useRouter()
-  const { setUserType } = useSignupStore((state) => state.actions)
+  const userTypeCookie = getUserTypeCookie()
 
   const handleTypeSelect = () => {
-    setUserType(userType)
+    if (userTypeCookie && userTypeCookie !== userType) {
+      setIsAgreedTermsCookie(false)
+    }
+
+    setUserTypeCookie(userType)
     router.push(PATH.SIGN_UP_TERMS_OF_USE)
   }
 
@@ -35,6 +44,11 @@ const UserTypeCard = ({ userType, title, highlight }: Props) => {
         인베스트메틱을 통해 <br />
         <span className={cx('highlight')}>{highlight}</span>해보세요!
       </p>
+      {userType === 'TRADER' ? (
+        <TraderImg className={cx('image')} />
+      ) : (
+        <InvestorImg className={cx('image')} />
+      )}
     </button>
   )
 }
