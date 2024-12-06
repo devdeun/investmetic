@@ -1,10 +1,10 @@
-import axios from 'axios'
+import axiosInstance from '@/shared/api/axios'
 
 import { ToggleStockActiveStateResponseModel } from '../types'
 
 const ToggleStockActiveState = async (stockTypeId: number) => {
   try {
-    const res = await axios.patch<ToggleStockActiveStateResponseModel>(
+    const res = await axiosInstance.patch<ToggleStockActiveStateResponseModel>(
       `/api/admin/strategies/stock-type/${stockTypeId}`
     )
 

@@ -1,4 +1,4 @@
-import axios from 'axios'
+import axiosInstance from '@/shared/api/axios'
 
 import { PresignedUrlResponseModel } from '../../trade/trade-manage/types'
 import { DomainType } from '../_hooks/use-category-icon-post'
@@ -22,7 +22,7 @@ const getPresignedUrl = async (
           size: imageSize,
         }
 
-  const res = await axios.post<PresignedUrlResponseModel>(
+  const res = await axiosInstance.post<PresignedUrlResponseModel>(
     `/api/admin/strategies/${domain}-type`,
     body
   )
