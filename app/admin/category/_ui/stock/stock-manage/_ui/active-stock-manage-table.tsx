@@ -14,6 +14,8 @@ const ActiveStockManageTable = () => {
   const [currentPage, setCurrentPage] = useState(1)
 
   const { data } = useStocksData('active', currentPage, TABLE_BODY_SIZE)
+  if (!data) return null
+
   const tableData = setAdminStockManageTableData(data)
 
   return (
