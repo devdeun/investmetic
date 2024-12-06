@@ -1,38 +1,25 @@
-// import axiosInstance from '@/shared/api/axios'
+import axiosInstance from '@/shared/api/axios'
 
-// interface ImageDto {
-//   imageName: string
-//   size: number
-// }
+import { UserProfileModel } from '../_hooks/query/use-patch-profile'
 
-// interface PatchUserProfileRequest {
-//   nickname: string
-//   password: string | null
-//   email?: string
-//   phone: string
-//   imageChange: boolean
-//   imageDto?: ImageDto
-// }
+interface PatchUserProfileModel {
+  isSuccess: boolean
+  message: string
+  result: string
+  code: number
+}
 
-// interface PatchUserProfileResponse {
-//   isSuccess: boolean
-//   message: string
-//   data?: {
-//     presignedUrl?: string
-//   }
-// }
+const patchUserProfile = async (data: UserProfileModel) => {
+  try {
+    const response = await axiosInstance.patch<PatchUserProfileModel>(
+      `/api/users/mypage/profile`,
+      data
+    )
+    return response.data
+  } catch (err) {
+    console.error('Error updating user profile:', err)
+    throw err
+  }
+}
 
-// const patchUserProfile = async (userId: number, profileData: PatchUserProfileRequest) => {
-//   try {
-//     const response = await axiosInstance.patch<PatchUserProfileResponse>(
-//       `/api/users/mypage/profile`,
-//       profileData
-//     )
-//     return response.data.result
-//   } catch (err) {
-//     console.error('Error updating user profile:', err)
-//     throw err
-//   }
-// }
-
-// export default patchUserProfile
+export default patchUserProfile

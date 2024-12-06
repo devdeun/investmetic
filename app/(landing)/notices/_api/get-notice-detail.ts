@@ -2,24 +2,23 @@ import axiosInstance from '@/shared/api/axios'
 
 interface NoticeResponseModel {
   isSuccess: true
-  message: 'string'
+  message: '공지사항 상세 조회'
   result: {
-    title: 'string'
-    content: 'string'
-    createdAt: '2024-12-05T21:49:06.561Z'
+    title: '제목'
+    content: '내용'
+    createdAt: '2024-12-06 11:24:59'
     files: [
       {
-        fileName: 'string'
-        noticeFileId: 0
+        fileName: '2.jpg'
+        noticeFileId: 3
       },
     ]
   }
-  code: 0
 }
 
 export const getNoticeDetail = async (noticeId: number): Promise<NoticeResponseModel['result']> => {
   try {
-    const response = await axiosInstance.get<NoticeResponseModel>(`/api/notices/${noticeId}`)
+    const response = await axiosInstance.get<NoticeResponseModel>(`/api/notice/${noticeId}`)
 
     if (response.data.isSuccess) {
       return response.data.result
@@ -28,6 +27,6 @@ export const getNoticeDetail = async (noticeId: number): Promise<NoticeResponseM
     }
   } catch (err) {
     console.error(err)
-    throw new Error('해당 회원의 정보를 찾을 수 없습니다.')
+    throw new Error('공지사항 조회 실패.')
   }
 }
