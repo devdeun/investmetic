@@ -14,7 +14,7 @@ import styles from './page.module.scss'
 const cx = classNames.bind(styles)
 
 const TraderDetailPage = () => {
-  const traderId = 1 // URL 파라미터나 상태에서 가져와야 합니다
+  const traderId = 1
   const { data: strategiesData, isLoading } = useGetTraderStrategies({
     traderId,
   })
