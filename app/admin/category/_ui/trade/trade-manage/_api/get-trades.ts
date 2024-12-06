@@ -1,10 +1,10 @@
-import axios from 'axios'
+import axiosInstance from '@/shared/api/axios'
 
 import { TradeResponseModel } from '../types'
 
 const getTrades = async (activateState: boolean) => {
   try {
-    const res = await axios<TradeResponseModel>('/api/admin/strategies/trade-type', {
+    const res = await axiosInstance<TradeResponseModel>('/api/admin/strategies/trade-type', {
       params: {
         activateState,
       },
