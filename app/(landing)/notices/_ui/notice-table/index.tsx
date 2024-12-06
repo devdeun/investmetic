@@ -9,6 +9,7 @@ import { usePagination } from '@/shared/hooks/custom/use-pagination'
 import Pagination from '@/shared/ui/pagination'
 import VerticalTable from '@/shared/ui/table/vertical'
 
+import useGetNotices from '../../_hooks/use-notice'
 import styles from './styles.module.scss'
 
 const cx = classNames.bind(styles)
@@ -27,50 +28,18 @@ const NoticeTable = () => {
     pageSize: COUNT_PER_PAGE,
   })
 
-  const data = {
-    content: [
-      {
-        noticeId: 1,
-        user: {
-          userId: 1,
-          nickname: '투자왕',
-        },
-        title: '오늘의 공지사항은 무엇일까요 궁금하면 클릭',
-        content: 'content3',
-        createdAt: '2024.12.04',
-      },
-      {
-        noticeId: 2,
-        user: {
-          userId: 1,
-          nickname: '투자왕',
-        },
-        title: '오늘의 공지사항은 무엇일까요 궁금하면 클릭',
-        content: 'content3',
-        createdAt: '2024.12.04',
-      },
-      {
-        noticeId: 3,
-        user: {
-          userId: 1,
-          nickname: '투자왕',
-        },
-        title: '오늘의 공지사항은 무엇일까요 궁금하면 클릭',
-        content: 'content3',
-        createdAt: '2024.12.04',
-      },
-    ],
-    page: 1,
-    size: 3,
-    totalElements: 3,
-    totalPages: 1,
-    first: true,
-    last: true,
+  const { data, isLoading } = useGetNotices({
+    page,
+    size: COUNT_PER_PAGE,
+  })
+
+  if (!data || isLoading) {
+    return null
   }
 
   const notices = data.content.map((values, idx) => ({
     no: (page - 1) * COUNT_PER_PAGE + (idx + 1),
-    title: <Link href={`${PATH.NOTICES}/${values.noticeId}`}>{values.title}</Link>,
+    title: <Link href={`${PATH.NOTICES}/${values.noticeId}/detail`}>{values.title}</Link>,
     createdAt: values.createdAt,
   }))
 
