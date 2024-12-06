@@ -83,12 +83,15 @@ const VerticalTable = ({
   )
 }
 
-const Skeleton = ({ tableHead, countPerPage }: Partial<VerticalTableProps>) => {
+const Skeleton = ({ tableHead, countPerPage, isEditable = false }: Partial<VerticalTableProps>) => {
   return (
     <div className={cx('container')}>
       <table>
         <thead>
-          <tr>{tableHead?.map((head) => <td key={head}>{head}</td>)}</tr>
+          <tr>
+            {tableHead?.map((head) => <td key={head}>{head}</td>)}
+            {isEditable && <td></td>}
+          </tr>
         </thead>
       </table>
       <div className={cx('no-data')} style={{ height: `calc(40px * ${countPerPage}` }} />

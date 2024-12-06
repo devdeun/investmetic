@@ -6,6 +6,8 @@ import useTradeData from '../_hooks/query/use-trades-data'
 
 const ActiveTradeManageTable = () => {
   const { data } = useTradeData('active')
+  if (!data) return null
+
   const tableData = setAdminTradeManageTableData(data.result)
 
   return <ManageTable data={tableData} active domain="매매 유형" />
