@@ -15,6 +15,7 @@ const getTrades = async (activateState: boolean) => {
     return res.data
   } catch (err) {
     console.log('Error : ' + err)
+    throw err
   }
 }
 
