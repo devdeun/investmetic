@@ -112,43 +112,43 @@ const AnalysisContent = ({
 
   return (
     <div className={cx('table-wrapper', 'analysis')}>
+      {!isEditable && analysisData && (
+        <Button
+          onClick={handleDownload}
+          size="small"
+          className={cx('excel-button')}
+          variant="filled"
+        >
+          엑셀 다운받기
+        </Button>
+      )}
+      {isEditable && (
+        <div className={cx('button-container')}>
+          <div className={cx('button-wrapper')}>
+            <Button
+              size="small"
+              className={cx('upload-button')}
+              variant="filled"
+              onClick={handleExcelUpload}
+            >
+              엑셀 업로드
+            </Button>
+            <Button
+              size="small"
+              className={cx('upload-button')}
+              variant="filled"
+              onClick={handleDirectInput}
+            >
+              직접 입력
+            </Button>
+          </div>
+          <Button size="small" variant="filled" onClick={handleDeleteAll} disabled={isLoading}>
+            전체 삭제
+          </Button>
+        </div>
+      )}
       {analysisData ? (
         <>
-          {!isEditable && (
-            <Button
-              onClick={handleDownload}
-              size="small"
-              className={cx('excel-button')}
-              variant="filled"
-            >
-              엑셀 다운받기
-            </Button>
-          )}
-          {isEditable && (
-            <div className={cx('button-container')}>
-              <div className={cx('button-wrapper')}>
-                <Button
-                  size="small"
-                  className={cx('upload-button')}
-                  variant="filled"
-                  onClick={handleExcelUpload}
-                >
-                  엑셀 업로드
-                </Button>
-                <Button
-                  size="small"
-                  className={cx('upload-button')}
-                  variant="filled"
-                  onClick={handleDirectInput}
-                >
-                  직접 입력
-                </Button>
-              </div>
-              <Button size="small" variant="filled" onClick={handleDeleteAll} disabled={isLoading}>
-                전체 삭제
-              </Button>
-            </div>
-          )}
           <VerticalTable
             tableHead={tableHeader}
             tableBody={analysisData.content}
