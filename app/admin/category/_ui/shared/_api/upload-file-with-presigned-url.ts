@@ -1,7 +1,7 @@
-import axios from 'axios'
+import axiosInstance from '@/shared/api/axios'
 
 const uploadFileWithPresignedUrl = async (presignedUrl: string, file: File) => {
-  await axios.put(presignedUrl, file, {
+  await axiosInstance.put(presignedUrl, file, {
     headers: {
       'Content-Type': file.type,
     },
