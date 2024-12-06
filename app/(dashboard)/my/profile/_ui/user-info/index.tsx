@@ -94,19 +94,17 @@ const UserInfo = ({ profile, isEditable = false }: Props) => {
     const file = e.target.files?.[0]
     if (!file) return
 
-    // 파일 유효성 검사
     if (!file.type.startsWith('image/')) {
       alert('이미지 파일만 업로드가 가능합니다.')
       return
     }
 
-    const maxSize = 5 * 1024 * 1024 // 5MB
+    const maxSize = 5 * 1024 * 1024
     if (file.size > maxSize) {
       alert('파일 크기는 5MB 이하여야 합니다.')
       return
     }
 
-    // 이미지 미리보기 설정
     const reader = new FileReader()
     reader.onload = (e) => {
       setPreviewUrl(e.target?.result as string)
@@ -181,7 +179,6 @@ const UserInfo = ({ profile, isEditable = false }: Props) => {
     try {
       setIsUploading(true)
 
-      // 요청 데이터 구조화 - 필드명 수정
       const updateData = {
         nickName: form.nickname,
         phoneNum: form.phone,
@@ -196,7 +193,7 @@ const UserInfo = ({ profile, isEditable = false }: Props) => {
           : null,
       }
 
-      console.log('요청 데이터:', updateData) // 요청 데이터 확인
+      console.log('요청 데이터:', updateData)
 
       const response = await axiosInstance.patch('/api/users/mypage/profile', updateData)
 
@@ -204,7 +201,6 @@ const UserInfo = ({ profile, isEditable = false }: Props) => {
         throw new Error(response.data.message)
       }
 
-      // 이미지가 있고, presignedUrl을 받았다면 이미지 업로드
       if (selectedImage && response.data.data?.presignedUrl) {
         await uploadImageToS3(response.data.data.presignedUrl, selectedImage)
       }
