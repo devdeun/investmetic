@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic'
 
 import Highcharts from 'highcharts'
 
-import { CardSizeType } from '../sm-score-card/index'
+import { CardSizeType } from '../top-strategy-card/types'
 
 const HighchartsReact = dynamic(() => import('highcharts-react-official'), {
   ssr: false,

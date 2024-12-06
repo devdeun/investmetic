@@ -15,7 +15,7 @@ const Percentage = ({ percent, label }: Props) => {
   return (
     <div className={cx('percentage-wrapper')}>
       <p className={cx('percent', isMinus && 'minus')}>
-        {percent}
+        {percent.toFixed(2)}
         {label !== 'Profit Factor' && '%'}
       </p>
       <p className={cx('label')}>{label}</p>
