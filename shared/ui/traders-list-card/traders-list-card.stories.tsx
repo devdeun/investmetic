@@ -26,20 +26,20 @@ type StoryType = StoryObj<typeof meta>
 export const Default: StoryType = {
   args: {
     nickname: '고양이는야옹하고울지',
-    profileImage: 'https://lh3.googleusercontent.com/a/your-image-id',
+    imageUrl: 'https://lh3.googleusercontent.com/a/your-image-id',
     strategyCount: 10,
     subscriberCount: 10,
-    traderId: '1234',
+    userId: '1234',
   },
 }
 
 export const WithoutButton: StoryType = {
   args: {
     nickname: '고양이는야옹하고울지',
-    profileImage: 'https://lh3.googleusercontent.com/a/your-image-id',
+    imageUrl: 'https://lh3.googleusercontent.com/a/your-image-id',
     strategyCount: 10,
     subscriberCount: 10,
-    traderId: '1234',
+    userId: '1234',
     hasButton: false,
   },
 }
