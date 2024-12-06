@@ -2,7 +2,7 @@ import axiosInstance from '@/shared/api/axios'
 
 import { StockResponseModel } from '../types'
 
-const getStocks = async (activateState: boolean, page: number, size: number) => {
+const getStocks = async (activateState: boolean, page: number = 1, size: number = 10) => {
   try {
     const res = await axiosInstance<StockResponseModel>('/api/admin/strategies/stock-type', {
       params: {

@@ -1,3 +1,5 @@
+'use client'
+
 import { useState } from 'react'
 
 import Image from 'next/image'
@@ -14,14 +16,15 @@ const InactiveTradeManageTable = () => {
   const [currentPage, setCurrentPage] = useState(1)
 
   const { data } = useStocksData('inactive', currentPage, TABLE_BODY_SIZE)
+
   const tableData =
     data?.content.map(({ stockTypeName, stockTypeIconUrl, stockTypeId }) => [
       stockTypeName,
       <Image
         src={stockTypeIconUrl}
         alt={stockTypeName}
-        width={24}
-        height={24}
+        width={20}
+        height={20}
         key={stockTypeName}
       />,
       <StockActiveStateToggleButton stockTypeId={stockTypeId} key={stockTypeId} />,
@@ -39,4 +42,7 @@ const InactiveTradeManageTable = () => {
   )
 }
 
-export default withSuspense(InactiveTradeManageTable, <ManageTable.Skeleton domain="종목" />)
+export default withSuspense(
+  InactiveTradeManageTable,
+  <ManageTable.Skeleton size={10} domain="종목" />
+)

@@ -16,4 +16,7 @@ const ActiveTradeManageTable = () => {
   return <ManageTable data={tableData} active domain="매매 유형" />
 }
 
-export default withSuspense(ActiveTradeManageTable, <ManageTable.Skeleton domain="매매 유형" />)
+export default withSuspense(
+  ActiveTradeManageTable,
+  <ManageTable.Skeleton active size={10} domain="매매 유형" />
+)
