@@ -8,10 +8,10 @@ import { Input } from '@/shared/ui/input'
 import { Textarea } from '@/shared/ui/textarea'
 import Title from '@/shared/ui/title'
 
+import FileInput from '../../_ui/file-input'
 import InputField from '../../_ui/input-field'
 import useNoticeForm from './_hooks/use-notice-form'
 import usePostNotice from './_hooks/use-notice-post'
-import FileInput from './_ui/file-input'
 import styles from './page.module.scss'
 
 const cx = classNames.bind(styles)

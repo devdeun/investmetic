@@ -2,7 +2,7 @@
 
 import { FormEvent } from 'react'
 
-import FileInput from '@/app/admin/category/_ui/shared/file-input'
+import FileInput from '@/app/admin/_ui/file-input'
 import { RegisterIcon } from '@/public/icons'
 import { useQueryClient } from '@tanstack/react-query'
 import classNames from 'classnames/bind'
