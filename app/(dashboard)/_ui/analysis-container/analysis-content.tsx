@@ -110,8 +110,6 @@ const AnalysisContent = ({
     }
   }
 
-  if (analysisData?.content === null || analysisData?.content === undefined) return null
-
   return (
     <div className={cx('table-wrapper', 'analysis')}>
       {!isEditable && (
@@ -149,19 +147,22 @@ const AnalysisContent = ({
           </Button>
         </div>
       )}
-
-      <VerticalTable
-        tableHead={tableHeader}
-        tableBody={analysisData?.content}
-        currentPage={currentPage}
-        countPerPage={ANALYSIS_PAGE_COUNT}
-        isEditable={isEditable}
-      />
-      <Pagination
-        currentPage={currentPage}
-        maxPage={analysisData?.totalPages}
-        onPageChange={onPageChange}
-      />
+      {analysisData && (
+        <>
+          <VerticalTable
+            tableHead={tableHeader}
+            tableBody={analysisData.content}
+            currentPage={1}
+            countPerPage={ANALYSIS_PAGE_COUNT}
+            isEditable={isEditable}
+          />
+          <Pagination
+            currentPage={currentPage}
+            maxPage={analysisData.totalPages}
+            onPageChange={onPageChange}
+          />
+        </>
+      )}
 
       {uploadType && (
         <AnalysisUploadModal
