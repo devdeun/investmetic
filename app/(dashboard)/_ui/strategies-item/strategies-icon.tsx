@@ -72,10 +72,7 @@ const StrategiesIcon = ({ iconUrls, iconNames, isDetailsPage = false }: Props) =
           <div key={url} className={cx('icon-wrapper')}>
             <div
               className={cx('icon')}
-              style={{
-                width: `${width / 2}px`,
-                height: `21px`,
-              }}
+              style={{ width: `${width / 2}px` }}
               data-tooltip-id={name}
               data-tooltip-content={name}
               data-tooltip-class-name="tooltip"
