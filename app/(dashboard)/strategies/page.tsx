@@ -34,7 +34,7 @@ const StrategiesPage = () => {
 const Skeleton = () => {
   return (
     <>
-      {Array.from({ length: 6 }, (_, idx) => (
+      {Array.from({ length: 8 }, (_, idx) => (
         <StrategiesItemSkeleton key={idx} />
       ))}
     </>
