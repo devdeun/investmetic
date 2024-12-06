@@ -2,10 +2,10 @@ import { useQuery } from '@tanstack/react-query'
 
 import { TradersParamsModel, getTraders } from '../_api/get-traders'
 
-const useGetTraders = (params: TradersParamsModel) => {
+const useGetTraders = ({ page, size, keyword, orderBy }: TradersParamsModel) => {
   return useQuery({
-    queryKey: ['traders', params],
-    queryFn: () => getTraders(params),
+    queryKey: ['traders', page, size, keyword, orderBy],
+    queryFn: () => getTraders({ page, size, keyword, orderBy }),
   })
 }
 

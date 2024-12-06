@@ -29,7 +29,7 @@ export const Default: StoryType = {
     imageUrl: 'https://lh3.googleusercontent.com/a/your-image-id',
     strategyCount: 10,
     subscriberCount: 10,
-    userId: '1234',
+    userId: 1234,
   },
 }
 
@@ -39,7 +39,7 @@ export const WithoutButton: StoryType = {
     imageUrl: 'https://lh3.googleusercontent.com/a/your-image-id',
     strategyCount: 10,
     subscriberCount: 10,
-    userId: '1234',
+    userId: 123,
     hasButton: false,
   },
 }

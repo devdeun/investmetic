@@ -13,7 +13,7 @@ interface Props {
   imageUrl: string
   strategyCount: number
   subscriberCount: number
-  userId: string | null
+  userId: number
   hasButton?: boolean
 }
 

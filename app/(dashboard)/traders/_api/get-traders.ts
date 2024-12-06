@@ -13,7 +13,6 @@ interface TradersResponseModel {
   isSuccess: boolean
   message: string
   result: {
-    result: string
     content: TraderModel[]
     page: number
     size: number
@@ -22,12 +21,13 @@ interface TradersResponseModel {
     first: boolean
     last: boolean
   }
+  code: number
 }
 
 export interface TradersParamsModel {
   page: number
   size: number
-  keyword: string
+  keyword?: string
   orderBy: 'STRATEGY_TOTAL' | 'SUBSCRIBE_TOTAL'
 }
 
@@ -35,9 +35,10 @@ export const getTraders = async (
   params: TradersParamsModel
 ): Promise<TradersResponseModel['result']> => {
   try {
-    const response = await axiosInstance.get<TradersResponseModel>('/api/users/traders', {
-      params,
-    })
+    const { page, size, keyword = '', orderBy } = params
+    const response = await axiosInstance.get<TradersResponseModel>(
+      `/api/users/traders?sort=${orderBy}&page=${page}&size=${size}&keyword=${keyword}`
+    )
 
     if (response.data.isSuccess) {
       return response.data.result
