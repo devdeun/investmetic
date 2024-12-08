@@ -5,7 +5,7 @@ import { useRef, useState } from 'react'
 import classNames from 'classnames/bind'
 
 import { Button } from '@/shared/ui/button'
-import { SearchInput } from '@/shared/ui/search-input'
+import SearchInput from '@/shared/ui/search-input'
 
 import useGetStrategiesSearch from '../../_hooks/query/use-get-strategies-search'
 import usePostStrategies from '../../_hooks/query/use-post-strategies'

@@ -7,7 +7,7 @@ import classNames from 'classnames/bind'
 import useModal from '@/shared/hooks/custom/use-modal'
 import { Button } from '@/shared/ui/button'
 import { ErrorMessage } from '@/shared/ui/error-message'
-import { Textarea } from '@/shared/ui/textarea'
+import Textarea from '@/shared/ui/textarea'
 
 import usePatchReview from '../../_hooks/query/use-patch-review'
 import usePostReview from '../../_hooks/query/use-post-review'

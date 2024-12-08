@@ -12,7 +12,7 @@ import { useAuthStore } from '@/shared/stores/use-auth-store'
 import { Button } from '@/shared/ui/button'
 import { ErrorMessage } from '@/shared/ui/error-message'
 import AddQuestionModal from '@/shared/ui/modal/add-question-modal'
-import { Textarea } from '@/shared/ui/textarea'
+import Textarea from '@/shared/ui/textarea'
 
 import useDeleteAnswer from '../../../_hooks/query/use-delete-answer'
 import useDeleteQuestion from '../../../_hooks/query/use-delete-question'

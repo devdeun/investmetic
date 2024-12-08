@@ -7,7 +7,7 @@ import { RegisterIcon } from '@/public/icons'
 import classNames from 'classnames/bind'
 
 import { Button } from '@/shared/ui/button'
-import { Input } from '@/shared/ui/input'
+import Input from '@/shared/ui/input'
 import Modal from '@/shared/ui/modal'
 
 import styles from './styles.module.scss'
