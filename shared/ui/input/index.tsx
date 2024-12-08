@@ -17,7 +17,7 @@ interface Props extends ComponentPropsWithoutRef<'input'> {
   isWhiteDisabled?: boolean
 }
 
-export const Input = forwardRef<HTMLInputElement, Props>(
+const Input = forwardRef<HTMLInputElement, Props>(
   (
     {
       inputSize = 'medium',
@@ -51,3 +51,5 @@ export const Input = forwardRef<HTMLInputElement, Props>(
 )
 
 Input.displayName = 'Input'
+
+export default Input

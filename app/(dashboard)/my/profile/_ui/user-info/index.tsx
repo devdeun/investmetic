@@ -14,7 +14,7 @@ import { checkNicknameDuplicate, checkPhoneDuplicate } from '@/shared/api/check-
 import { PATH } from '@/shared/constants/path'
 import Avatar from '@/shared/ui/avatar'
 import { Button } from '@/shared/ui/button'
-import { Input } from '@/shared/ui/input'
+import Input from '@/shared/ui/input'
 import { LinkButton } from '@/shared/ui/link-button'
 
 import { ProfileModel } from '../../../_api/get-profile'

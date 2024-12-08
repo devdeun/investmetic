@@ -9,11 +9,11 @@ export const RES = {
           id: 2,
           nickname: '관리자',
         },
-        title: '서비스 점검 안내', //공지사항 제목
-        content: '점검예정.', //공지사항 내용
-        createdAt: '2024-01-01 12:00:00', // 등록일
-        publishedAt: '2024-11-15T09:00:00', //공개일
-        createdBy: '관리자', // 등록자
+        title: '서비스 점검 안내',
+        content: '점검예정.',
+        createdAt: '2024-01-01 12:00:00',
+        publishedAt: '2024-11-15T09:00:00',
+        createdBy: '관리자',
       },
       {
         noticeId: 2,

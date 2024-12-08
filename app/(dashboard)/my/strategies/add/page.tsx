@@ -10,7 +10,7 @@ import classNames from 'classnames/bind'
 
 import { Button } from '@/shared/ui/button'
 import BackHeader from '@/shared/ui/header/back-header'
-import { Input } from '@/shared/ui/input'
+import Input from '@/shared/ui/input'
 import Select from '@/shared/ui/select'
 import Title from '@/shared/ui/title'
 

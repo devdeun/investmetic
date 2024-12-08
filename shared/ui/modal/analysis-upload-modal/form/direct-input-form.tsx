@@ -6,7 +6,7 @@ import { useAnalysisUploadMutation } from '@/app/(dashboard)/my/_hooks/query/use
 import classNames from 'classnames/bind'
 
 import { Button } from '@/shared/ui/button'
-import { Input } from '@/shared/ui/input'
+import Input from '@/shared/ui/input'
 
 import styles from './styles.module.scss'
 

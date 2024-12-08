@@ -3,7 +3,7 @@
 import classNames from 'classnames/bind'
 
 import Pagination from '@/shared/ui/pagination'
-import { SearchInput } from '@/shared/ui/search-input'
+import SearchInput from '@/shared/ui/search-input'
 import Select from '@/shared/ui/select'
 import VerticalTable from '@/shared/ui/table/vertical'
 import Tabs from '@/shared/ui/tabs'
