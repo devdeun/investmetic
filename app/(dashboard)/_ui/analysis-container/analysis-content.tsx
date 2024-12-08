@@ -6,6 +6,7 @@ import { ANALYSIS_PAGE_COUNT } from '@/shared/constants/count-per-page'
 import useModal from '@/shared/hooks/custom/use-modal'
 import { Button } from '@/shared/ui/button'
 import AnalysisUploadModal from '@/shared/ui/modal/analysis-upload-modal'
+import DailyAnalysisDeleteAllModal from '@/shared/ui/modal/daily-analysis-delete-all-modal'
 import Pagination from '@/shared/ui/pagination'
 import VerticalTable from '@/shared/ui/table/vertical'
 
@@ -53,9 +54,14 @@ const AnalysisContent = ({
   isEditable = false,
 }: Props) => {
   const { mutate } = useGetAnalysisDownload()
-
   const [uploadType, setUploadType] = useState<'excel' | 'direct' | null>(null)
+
   const { isModalOpen, openModal, closeModal } = useModal()
+  const {
+    isModalOpen: isDeleteModalOpen,
+    openModal: openDeleteModal,
+    closeModal: closeDeleteModal,
+  } = useModal()
 
   const { data: myAnalysisData } = useGetMyDailyAnalysis(
     strategyId,
@@ -99,13 +105,11 @@ const AnalysisContent = ({
   }
 
   const handleDeleteAll = async () => {
-    if (window.confirm('모든 데이터를 삭제하시겠습니까?')) {
-      try {
-        await deleteAllAnalysis()
-      } catch (error) {
-        console.error('Delete error:', error)
-        alert('데이터 삭제 중 오류가 발생했습니다.')
-      }
+    try {
+      await deleteAllAnalysis()
+      closeDeleteModal()
+    } catch (error) {
+      console.error('Delete error:', error)
     }
   }
 
@@ -141,7 +145,7 @@ const AnalysisContent = ({
               직접 입력
             </Button>
           </div>
-          <Button size="small" variant="filled" onClick={handleDeleteAll} disabled={isLoading}>
+          <Button size="small" variant="filled" onClick={openDeleteModal} disabled={isLoading}>
             전체 삭제
           </Button>
         </div>
@@ -177,6 +181,13 @@ const AnalysisContent = ({
           message={uploadType === 'excel' ? '엑셀 업로드' : '일간분석 데이터 입력'}
         />
       )}
+
+      <DailyAnalysisDeleteAllModal
+        isModalOpen={isDeleteModalOpen}
+        onCloseModal={closeDeleteModal}
+        onDelete={handleDeleteAll}
+        isPending={isLoading}
+      />
     </div>
   )
 }

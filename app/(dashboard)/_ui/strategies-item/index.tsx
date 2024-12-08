@@ -9,6 +9,7 @@ import { StrategiesModel } from '@/shared/types/strategy-data'
 import { Button } from '@/shared/ui/button'
 import { LinkButton } from '@/shared/ui/link-button'
 import SigninCheckModal from '@/shared/ui/modal/signin-check-modal'
+import StrategyDeleteModal from '@/shared/ui/modal/strategy-delete-modal'
 import { formatNumber } from '@/shared/utils/format'
 
 import AreaChart from './area-chart'
@@ -27,6 +28,11 @@ const StrategiesItem = ({ strategiesData: data, type = 'default' }: Props) => {
   const router = useRouter()
   const user = useAuthStore((state) => state.user)
   const { isModalOpen, openModal, closeModal } = useModal()
+  const {
+    isModalOpen: isDeleteModalOpen,
+    openModal: openDeleteModal,
+    closeModal: closeDeleteModal,
+  } = useModal()
 
   const handleRouter = () => {
     if (!user) {
@@ -90,7 +96,15 @@ const StrategiesItem = ({ strategiesData: data, type = 'default' }: Props) => {
               >
                 관리
               </LinkButton>
-              <Button size="small" variant="outline" className={cx('manage-button')}>
+              <Button
+                size="small"
+                variant="outline"
+                className={cx('manage-button')}
+                onClick={(e) => {
+                  e.stopPropagation()
+                  openDeleteModal()
+                }}
+              >
                 삭제
               </Button>
             </div>
@@ -98,6 +112,11 @@ const StrategiesItem = ({ strategiesData: data, type = 'default' }: Props) => {
         )}
       </button>
       <SigninCheckModal isModalOpen={isModalOpen} onCloseModal={closeModal} />
+      <StrategyDeleteModal
+        isModalOpen={isDeleteModalOpen}
+        onCloseModal={closeDeleteModal}
+        strategyId={data.strategyId}
+      />
     </>
   )
 }
