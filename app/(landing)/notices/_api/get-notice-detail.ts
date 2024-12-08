@@ -18,7 +18,7 @@ interface NoticeResponseModel {
 
 export const getNoticeDetail = async (noticeId: number): Promise<NoticeResponseModel['result']> => {
   try {
-    const response = await axiosInstance.get<NoticeResponseModel>(`/api/notice/${noticeId}`)
+    const response = await axiosInstance.get<NoticeResponseModel>(`/api/notices/${noticeId}`)
 
     if (response.data.isSuccess) {
       return response.data.result
