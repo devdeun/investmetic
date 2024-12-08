@@ -86,6 +86,7 @@ const StrategiesItem = ({ strategiesData: data, type = 'default' }: Props) => {
                 variant="filled"
                 href={`/my/strategies/manage/${data.strategyId}`}
                 className={cx('manage-button')}
+                onClick={(e) => e.stopPropagation()}
               >
                 관리
               </LinkButton>

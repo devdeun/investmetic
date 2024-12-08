@@ -57,7 +57,6 @@ const AnalysisContent = ({
   const [uploadType, setUploadType] = useState<'excel' | 'direct' | null>(null)
   const { isModalOpen, openModal, closeModal } = useModal()
 
-  //TODO 현재 나의 전략 일간분석 조회 권한이 없어서 안보임
   const { data: myAnalysisData } = useGetMyDailyAnalysis(
     strategyId,
     currentPage,
@@ -155,6 +154,7 @@ const AnalysisContent = ({
             currentPage={1}
             countPerPage={ANALYSIS_PAGE_COUNT}
             isEditable={isEditable}
+            strategyId={strategyId}
           />
           <Pagination
             currentPage={currentPage}
