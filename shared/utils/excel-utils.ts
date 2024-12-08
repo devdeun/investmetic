@@ -39,8 +39,8 @@ export const processExcelFile = (file: File): Promise<RowDataModel[]> => {
           }))
 
         resolve(rows)
-      } catch (error) {
-        reject(error)
+      } catch (err) {
+        reject(err)
       }
     }
 

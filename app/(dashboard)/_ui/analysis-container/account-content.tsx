@@ -80,8 +80,8 @@ const AccountContent = ({ strategyId, currentPage, onPageChange, isEditable = fa
         imageIds: selectedImages,
       })
       setSelectedImages([])
-    } catch (error) {
-      console.error('Failed to delete images:', error)
+    } catch (err) {
+      console.error('Failed to delete images:', err)
     }
   }
 

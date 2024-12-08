@@ -28,8 +28,8 @@ export const useAnalysisUploadMutation = (
       try {
         const newData = await getMyDailyAnalysis(strategyId, page, size)
         queryClient.setQueryData(['myDailyAnalysis', strategyId], newData)
-      } catch (error) {
-        console.error('Failed to fetch updated my daily analysis data:', error)
+      } catch (err) {
+        console.error('Failed to fetch updated my daily analysis data:', err)
       }
     },
   })
@@ -44,8 +44,8 @@ export const useAnalysisUploadMutation = (
       try {
         const newData = await getMyDailyAnalysis(strategyId, page, size)
         queryClient.setQueryData(['myDailyAnalysis', strategyId], newData)
-      } catch (error) {
-        console.error('Failed to fetch updated my daily analysis data:', error)
+      } catch (err) {
+        console.error('Failed to fetch updated my daily analysis data:', err)
       }
     },
   })

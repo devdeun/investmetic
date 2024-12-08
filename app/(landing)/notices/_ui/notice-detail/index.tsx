@@ -30,8 +30,8 @@ const NoticeDetail = ({ noticeId }: { noticeId: number }) => {
 
       link.remove()
       window.URL.revokeObjectURL(url)
-    } catch (error) {
-      console.error('파일 다운로드 중 오류 발생:', error)
+    } catch (err) {
+      console.error('파일 다운로드 중 오류 발생:', err)
     }
   }
 

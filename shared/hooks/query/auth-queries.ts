@@ -39,10 +39,10 @@ export const useLoginMutation = () => {
           isAuthenticated: true,
           user,
         })
-      } catch (error) {
-        console.error('Login process failed:', error)
+      } catch (err) {
+        console.error('Login process failed:', err)
         removeAccessToken()
-        throw error
+        throw err
       }
     },
   })
@@ -102,19 +102,19 @@ export const useRefreshTokenMutation = () => {
           isAuthenticated: true,
           user,
         })
-      } catch (error) {
-        console.error('Token refresh process failed:', error)
+      } catch (err) {
+        console.error('Token refresh process failed:', err)
         removeAccessToken()
         useAuthStore.getState().setAuthState({
           isAuthenticated: false,
           user: null,
         })
         router.replace(PATH.SIGN_IN)
-        throw error
+        throw err
       }
     },
-    onError: (error) => {
-      console.error('Token refresh mutation failed:', error)
+    onError: (err) => {
+      console.error('Token refresh mutation failed:', err)
       removeAccessToken()
       useAuthStore.getState().setAuthState({
         isAuthenticated: false,

@@ -108,8 +108,8 @@ const AnalysisContent = ({
     try {
       await deleteAllAnalysis()
       closeDeleteModal()
-    } catch (error) {
-      console.error('Delete error:', error)
+    } catch (err) {
+      console.error('Delete error:', err)
     }
   }
 

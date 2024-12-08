@@ -97,7 +97,7 @@ const EditAnalysisModal = ({
           },
         }
       )
-    } catch (error) {
+    } catch (err) {
       setError('데이터 수정 중 오류가 발생했습니다.')
     }
   }

@@ -71,8 +71,8 @@ const VerticalTable = ({
     if (window.confirm('해당 데이터를 삭제하시겠습니까?')) {
       try {
         await deleteAnalysisData(dailyAnalysisId)
-      } catch (error) {
-        console.error('Delete failed:', error)
+      } catch (err) {
+        console.error('Delete failed:', err)
         alert('삭제 중 오류가 발생했습니다.')
       }
     }
