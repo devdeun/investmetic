@@ -33,9 +33,9 @@ export const processExcelFile = (file: File): Promise<RowDataModel[]> => {
           .slice(1)
           .filter((row) => row.length >= 3)
           .map((row) => ({
-            date: parseExcelDate(row[0] as number),
-            transaction: Number(row[1]),
-            dailyProfitLoss: Number(row[2]),
+            date: parseExcelDate(row[0] ?? ''),
+            transaction: Number(row[1] ?? 0),
+            dailyProfitLoss: Number(row[2] ?? 0),
           }))
 
         resolve(rows)
@@ -49,7 +49,17 @@ export const processExcelFile = (file: File): Promise<RowDataModel[]> => {
   })
 }
 
-const parseExcelDate = (excelDate: number): string => {
+const parseExcelDate = (excelDate: number | string | null): string => {
+  if (excelDate === null) return ''
+
+  const dateStr = String(excelDate)
+  if (dateStr.length === 8) {
+    const year = dateStr.substring(0, 4)
+    const month = dateStr.substring(4, 6)
+    const day = dateStr.substring(6, 8)
+    return `${year}-${month}-${day}`
+  }
+
   if (typeof excelDate === 'number') {
     const date = XLSX.SSF.parse_date_code(excelDate)
     const year = date.y
@@ -57,5 +67,6 @@ const parseExcelDate = (excelDate: number): string => {
     const day = String(date.d).padStart(2, '0')
     return `${year}-${month}-${day}`
   }
+
   return String(excelDate)
 }
