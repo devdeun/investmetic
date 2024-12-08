@@ -100,7 +100,7 @@ const VerticalTable = ({
               {tableHead.map((head) => (
                 <td key={head}>{head}</td>
               ))}
-              {isEditable && <td>관리</td>}
+              {isEditable && <td></td>}
             </tr>
           </thead>
           {hasData && (
