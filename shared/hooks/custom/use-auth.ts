@@ -42,8 +42,8 @@ export const useAuth = () => {
         timeUntilExpiry,
         isNearExpiry: timeUntilExpiry < AUTH_TIME.ADMIN_EXPIRY_WARNING,
       }
-    } catch (error) {
-      console.error('Token status check failed:', error)
+    } catch (err) {
+      console.error('Token status check failed:', err)
       logout()
       return null
     }

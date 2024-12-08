@@ -21,9 +21,9 @@ export const useMyAnalysisMutation = (strategyId: number, page: number, size: nu
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey })
     },
-    onError: (error: Error) => {
-      console.error('Edit error:', error)
-      throw error
+    onError: (err: Error) => {
+      console.error('Edit error:', err)
+      throw err
     },
   })
 
@@ -37,9 +37,9 @@ export const useMyAnalysisMutation = (strategyId: number, page: number, size: nu
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey })
     },
-    onError: (error: Error) => {
-      console.error('Delete error:', error)
-      throw error
+    onError: (err: Error) => {
+      console.error('Delete error:', err)
+      throw err
     },
   })
 
@@ -53,9 +53,9 @@ export const useMyAnalysisMutation = (strategyId: number, page: number, size: nu
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey })
     },
-    onError: (error: Error) => {
-      console.error('Delete all error:', error)
-      throw error
+    onError: (err: Error) => {
+      console.error('Delete all error:', err)
+      throw err
     },
   })
 

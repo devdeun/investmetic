@@ -39,7 +39,7 @@ export const useAddStrategy = () => {
     mutationFn: (data) => strategyApi.registerStrategy(data).then((response) => response.data),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['addStrategies'],
+        queryKey: ['myStrategies'],
       })
       router.back()
     },

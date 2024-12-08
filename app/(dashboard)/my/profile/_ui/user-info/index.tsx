@@ -41,8 +41,8 @@ const uploadImageToS3 = async (presignedUrl: string, file: File): Promise<void> 
         'Content-Type': file.type,
       },
     })
-  } catch (error) {
-    console.error('이미지 업로드 실패:', error)
+  } catch (err) {
+    console.error('이미지 업로드 실패:', err)
     throw new Error('이미지 업로드에 실패했습니다')
   }
 }
@@ -207,10 +207,10 @@ const UserInfo = ({ profile, isEditable = false }: Props) => {
 
       alert('프로필이 성공적으로 업데이트되었습니다.')
       router.push(PATH.PROFILE)
-    } catch (error) {
-      console.error('프로필 업데이트 실패:', error)
-      if (axios.isAxiosError(error)) {
-        const errorMessage = error.response?.data?.message || '프로필 업데이트에 실패했습니다.'
+    } catch (err) {
+      console.error('프로필 업데이트 실패:', err)
+      if (axios.isAxiosError(err)) {
+        const errorMessage = err.response?.data?.message || '프로필 업데이트에 실패했습니다.'
         alert(errorMessage)
       } else {
         alert('프로필 업데이트에 실패했습니다. 다시 시도해주세요.')

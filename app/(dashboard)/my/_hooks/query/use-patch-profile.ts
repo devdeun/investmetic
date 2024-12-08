@@ -22,8 +22,8 @@ const usePatchUserProfile = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['userProfile'] })
     },
-    onError: (error) => {
-      console.error('Error updating user profile:', error)
+    onError: (err) => {
+      console.error('Error updating user profile:', err)
     },
   })
 }

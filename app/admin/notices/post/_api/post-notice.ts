@@ -17,8 +17,8 @@ const postNotice = async (formData: NoticeFormModel) => {
     if (!res.data.isSuccess) throw new Error('Error : ' + res.data.message)
 
     alert('공지 등록이 완료되었습니다.')
-  } catch (error) {
-    console.error(error)
+  } catch (err) {
+    console.error(err)
     alert('공지 등록 중 오류가 발생했습니다.')
   }
 }
