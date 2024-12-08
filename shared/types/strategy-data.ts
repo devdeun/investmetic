@@ -9,6 +9,17 @@ export interface DailyAnalysisModel {
   cumulativeProfitLossRate: number
 }
 
+export interface MyDailyAnalysisModel {
+  dailyAnalysisId: number
+  dailyDate: string
+  transaction: number
+  dailyProfitLoss: number
+  dailyProfitLossRate: number
+  principal: number
+  cumulativeProfitLoss: number
+  cumulativeProfitLossRate: number
+}
+
 export interface MonthlyAnalysisModel {
   month: string
   monthlyAveragePrincipal: number
