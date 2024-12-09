@@ -5,10 +5,11 @@ import { ReactNode, createContext, useEffect } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 
 import { PATH } from '@/shared/constants/path'
+import useModal from '@/shared/hooks/custom/use-modal'
 import { getAccessToken } from '@/shared/lib/auth-tokens'
+import SigninCheckModal from '@/shared/ui/modal/signin-check-modal'
 
 import { useAuth } from '../hooks/custom/use-auth'
-import { useSessionExpiryWarning } from '../hooks/custom/use-session-expiry-warning'
 import { useAuthStore } from '../stores/use-auth-store'
 import { isAuthRequiredPath, isNonAuthPage } from '../utils/auth-path'
 
@@ -22,9 +23,9 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const pathname = usePathname()
   const router = useRouter()
   const { initializeAuthState } = useAuthStore()
+  const { isModalOpen, openModal, closeModal } = useModal()
 
   useAuth()
-  const SessionExpiryWarningModal = useSessionExpiryWarning()
 
   useEffect(() => {
     initializeAuthState()
@@ -34,7 +35,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     const accessToken = getAccessToken()
 
     if (isAuthRequiredPath(pathname) && !accessToken) {
-      router.replace(`${PATH.SIGN_IN}?returnUrl=${pathname}`)
+      openModal()
       return
     }
 
@@ -44,10 +45,19 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
     }
   }, [pathname, router])
 
+  const handleLoginConfirm = () => {
+    closeModal()
+    router.push(`${PATH.SIGN_IN}?returnUrl=${pathname}`)
+  }
+
   return (
     <AuthContext.Provider value={null}>
       {children}
-      {SessionExpiryWarningModal}
+      <SigninCheckModal
+        isModalOpen={isModalOpen}
+        onCloseModal={closeModal}
+        onConfirm={handleLoginConfirm}
+      />
     </AuthContext.Provider>
   )
 }

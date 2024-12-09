@@ -13,7 +13,7 @@ export const AUTH_TIME = {
   SAFETY_MARGIN: 5 * 1000,
 } as const
 
-export const AUTH_REQUIRED_PATTERNS = ['/my/', '/admin', '/traders', '/strategies/'] as const
+export const AUTH_REQUIRED_PATTERNS = ['/my/', '/admin', '/traders/', '/strategies/[0-9]+'] as const
 
 export const NON_AUTH_PAGES = [
   PATH.SIGN_IN,
