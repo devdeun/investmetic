@@ -7,7 +7,7 @@ import { isTokenExpired, refreshToken } from '@/shared/utils/token-utils'
 
 export const createAxiosInstance = (options: { withInterceptors?: boolean } = {}) => {
   const instance = axios.create({
-    baseURL: process.env.NEXT_PUBLIC_API_HOST,
+    baseURL: process.env.NEXT_PUBLIC_API_HOST || 'http://localhost:3000',
     withCredentials: true,
   })
 
