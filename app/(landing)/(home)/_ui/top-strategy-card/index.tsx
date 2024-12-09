@@ -62,7 +62,7 @@ const SmScore = ({ score }: { score: number }) => {
   return (
     <div className={cx('score-wrapper')}>
       <span className={cx('label')}>SM SCORE</span>
-      <span className={cx('score')}>{score}</span>
+      <span className={cx('score')}>{score.toFixed(1)}</span>
     </div>
   )
 }
