@@ -4,7 +4,6 @@ import { useRef, useState } from 'react'
 
 import { useParams, useRouter } from 'next/navigation'
 
-import usePostQuestion from '@/app/(dashboard)/strategies/[strategyId]/_hooks/query/use-post-question'
 import classNames from 'classnames/bind'
 
 import { PATH } from '@/shared/constants/path'
@@ -38,7 +37,7 @@ const QuestionContainer = () => {
   const { mutate: submitAnswer } = usePostAnswer(parseInt(questionId as string))
   const { mutate: deleteAnswer } = useDeleteAnswer()
   const { mutate: deleteQuestion } = useDeleteQuestion()
-  const { mutate: postQuestion } = usePostQuestion()
+
   const { data: questionDetails } = useGetQuestionDetails({
     questionId: parseInt(questionId as string),
   })
