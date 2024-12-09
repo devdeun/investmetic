@@ -1,19 +1,19 @@
 import withSuspense from '@/shared/utils/with-suspense'
 
 import ManageTable from '../../../shared/manage-table'
+import setAdminTradeManageTableData from '../_api/set-admin-trade-manage-table-data'
 import useTradeData from '../_hooks/query/use-trades-data'
-import TradeActiveStateToggleButton from './trade-active-state-toggle-button'
 
 const ActiveTradeManageTable = () => {
   const { data } = useTradeData('active')
-  const tableData =
-    data?.result?.map(({ tradeName, tradeTypeIconUrl, tradeTypeId }) => [
-      tradeName,
-      <img src={tradeTypeIconUrl} alt={tradeName} key={tradeName} />,
-      <TradeActiveStateToggleButton tradeTypeId={tradeTypeId} active key={tradeTypeId} />,
-    ]) ?? []
+  if (!data) return null
+
+  const tableData = setAdminTradeManageTableData(data.result)
 
   return <ManageTable data={tableData} active domain="매매 유형" />
 }
 
-export default withSuspense(ActiveTradeManageTable, <ManageTable.Skeleton domain="매매 유형" />)
+export default withSuspense(
+  ActiveTradeManageTable,
+  <ManageTable.Skeleton active size={10} domain="매매 유형" />
+)

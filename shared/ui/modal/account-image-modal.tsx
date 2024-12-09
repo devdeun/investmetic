@@ -17,7 +17,7 @@ interface Props {
 
 const AccountImageModal = ({ isOpen, title, url, onClose }: Props) => {
   return (
-    <Modal isOpen={isOpen} message={title} className={cx('account')}>
+    <Modal isOpen={isOpen} message={title} className={cx('medium')}>
       <div className={cx('image')}>
         <Image src={url} alt={'imageData.title'} fill sizes="100%" />
       </div>

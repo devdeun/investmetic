@@ -1,6 +1,7 @@
 import { useRouter } from 'next/navigation'
 
 import { useMutation } from '@tanstack/react-query'
+import axios from 'axios'
 
 import { login, logout, refreshAccessToken } from '@/shared/api/auth'
 import axiosInstance from '@/shared/api/axios'
@@ -17,14 +18,16 @@ export const useLoginMutation = () => {
       if (!accessToken) {
         throw new Error('No access token received')
       }
-
       try {
         const userEmail = getEmailFromToken(accessToken)
         if (!userEmail) {
           throw new Error('Invalid token')
         }
-
-        const userResponse = await axiosInstance.get(`/api/users/mypage/profile?email=${userEmail}`)
+        const userResponse = await axios.get(`/api/users/mypage/profile?email=${userEmail}`, {
+          headers: {
+            'access-token': `Bearer ${accessToken}`,
+          },
+        })
         if (!userResponse.data.isSuccess) {
           throw new Error('Failed to fetch user profile')
         }
@@ -36,10 +39,10 @@ export const useLoginMutation = () => {
           isAuthenticated: true,
           user,
         })
-      } catch (error) {
-        console.error('Login process failed:', error)
+      } catch (err) {
+        console.error('Login process failed:', err)
         removeAccessToken()
-        throw error
+        throw err
       }
     },
   })
@@ -99,19 +102,19 @@ export const useRefreshTokenMutation = () => {
           isAuthenticated: true,
           user,
         })
-      } catch (error) {
-        console.error('Token refresh process failed:', error)
+      } catch (err) {
+        console.error('Token refresh process failed:', err)
         removeAccessToken()
         useAuthStore.getState().setAuthState({
           isAuthenticated: false,
           user: null,
         })
         router.replace(PATH.SIGN_IN)
-        throw error
+        throw err
       }
     },
-    onError: (error) => {
-      console.error('Token refresh mutation failed:', error)
+    onError: (err) => {
+      console.error('Token refresh mutation failed:', err)
       removeAccessToken()
       useAuthStore.getState().setAuthState({
         isAuthenticated: false,

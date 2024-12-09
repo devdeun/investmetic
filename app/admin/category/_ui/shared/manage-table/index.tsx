@@ -59,7 +59,7 @@ const Skeleton = ({ active, domain, size }: Pick<Props, 'active' | 'domain' | 's
       <span className={cx('title')}>{active ? '활성화' : '비활성화'}</span>
       <VerticalTable.Skeleton
         tableHead={['No.', domain === '종목' ? '종목명' : '매매 유형', '분류', '상태']}
-        countPerPage={size} //TODO: 이거 디자인에 맞춰서 크기 조절
+        countPerPage={size}
       />
     </div>
   )

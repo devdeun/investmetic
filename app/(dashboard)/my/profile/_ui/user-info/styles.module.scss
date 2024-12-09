@@ -130,6 +130,17 @@
 
 .position {
   display: flex;
+  flex-direction: column;
   align-items: center;
   gap: 27px;
+}
+.position-wrapper {
+  display: flex;
+  gap: 12px;
+}
+
+.nickname-verified {
+  margin-top: 0;
+  @include typo-b3;
+  color: $color-indigo;
 }

@@ -4,7 +4,10 @@ import classNames from 'classnames/bind'
 
 import Title from '@/shared/ui/title'
 
+import ListHeader from '../_ui/list-header'
+import StrategiesItemSkeleton from '../_ui/strategies-item/skeleton'
 import SearchBarContainer from './_ui/search-bar'
+import SearchBarSkeleton from './_ui/search-bar/search-bar-skeleton'
 import SideContainer from './_ui/side-container'
 import StrategyList from './_ui/strategy-list'
 import styles from './page.module.scss'
@@ -15,13 +18,26 @@ const StrategiesPage = () => {
   return (
     <div className={cx('container')}>
       <Title label={'전략 랭킹 모음'} />
-      <Suspense fallback={<div>Loading...</div>}>
+      <ListHeader />
+      <Suspense fallback={<Skeleton />}>
         <StrategyList />
       </Suspense>
       <SideContainer>
-        <SearchBarContainer />
+        <Suspense fallback={<SearchBarSkeleton />}>
+          <SearchBarContainer />
+        </Suspense>
       </SideContainer>
     </div>
+  )
+}
+
+const Skeleton = () => {
+  return (
+    <>
+      {Array.from({ length: 8 }, (_, idx) => (
+        <StrategiesItemSkeleton key={idx} />
+      ))}
+    </>
   )
 }
 

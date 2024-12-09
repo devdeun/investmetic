@@ -1,12 +1,12 @@
-import { useState } from 'react'
+'use client'
 
-import Image from 'next/image'
+import { useState } from 'react'
 
 import withSuspense from '@/shared/utils/with-suspense'
 
 import ManageTable from '../../../shared/manage-table'
+import setAdminStockManageTableData from '../_api/set-admin-stock-manage-table-data'
 import useStocksData from '../_hooks/query/use-stocks-data'
-import StockActiveStateToggleButton from './stock-active-state-toggle-button'
 
 const TABLE_BODY_SIZE = 10
 
@@ -14,18 +14,9 @@ const InactiveTradeManageTable = () => {
   const [currentPage, setCurrentPage] = useState(1)
 
   const { data } = useStocksData('inactive', currentPage, TABLE_BODY_SIZE)
-  const tableData =
-    data?.content.map(({ stockTypeName, stockTypeIconUrl, stockTypeId }) => [
-      stockTypeName,
-      <Image
-        src={stockTypeIconUrl}
-        alt={stockTypeName}
-        width={24}
-        height={24}
-        key={stockTypeName}
-      />,
-      <StockActiveStateToggleButton stockTypeId={stockTypeId} key={stockTypeId} />,
-    ]) ?? []
+  if (!data) return null
+
+  const tableData = setAdminStockManageTableData(data)
 
   return (
     <ManageTable
@@ -39,4 +30,7 @@ const InactiveTradeManageTable = () => {
   )
 }
 
-export default withSuspense(InactiveTradeManageTable, <ManageTable.Skeleton domain="종목" />)
+export default withSuspense(
+  InactiveTradeManageTable,
+  <ManageTable.Skeleton size={10} domain="종목" />
+)

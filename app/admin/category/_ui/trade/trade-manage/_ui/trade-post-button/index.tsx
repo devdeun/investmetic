@@ -2,14 +2,14 @@
 
 import { FormEvent } from 'react'
 
-import FileInput from '@/app/admin/category/_ui/shared/file-input'
+import FileInput from '@/app/admin/_ui/file-input'
 import { RegisterIcon } from '@/public/icons'
 import { useQueryClient } from '@tanstack/react-query'
 import classNames from 'classnames/bind'
 
 import useModal from '@/shared/hooks/custom/use-modal'
 import { Button } from '@/shared/ui/button'
-import { Input } from '@/shared/ui/input'
+import Input from '@/shared/ui/input'
 import Modal from '@/shared/ui/modal'
 
 import useStrategyIconPost from '../../../../shared/_hooks/use-category-icon-post'

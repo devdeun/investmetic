@@ -3,7 +3,7 @@
 import classNames from 'classnames/bind'
 
 import Pagination from '@/shared/ui/pagination'
-import { SearchInput } from '@/shared/ui/search-input'
+import SearchInput from '@/shared/ui/search-input'
 import Select from '@/shared/ui/select'
 import VerticalTable from '@/shared/ui/table/vertical'
 import Tabs from '@/shared/ui/tabs'
@@ -35,8 +35,6 @@ const AdminUsersPage = () => {
   const { isLoading, data } = useAdminUsers({ role: activeTab, condition, keyword })
 
   if (isLoading || !data) return null
-
-  console.log('data', data)
 
   return (
     <>
@@ -72,11 +70,11 @@ const AdminUsersPage = () => {
         />
         <VerticalTable
           tableHead={['No.', '프로필', '이름', '닉네임', '이메일', '전화번호', '회원분류', '탈퇴']}
-          tableBody={data?.content ? setTableBody(data.content) : []}
+          tableBody={setTableBody(data?.content)}
           countPerPage={10}
           currentPage={1}
         />
-        <Pagination currentPage={1} maxPage={data?.totalPages} onPageChange={() => {}} />
+        <Pagination currentPage={data?.page} maxPage={data?.totalPages} onPageChange={() => {}} />
       </section>
     </>
   )

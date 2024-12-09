@@ -14,7 +14,7 @@ interface Props extends ComponentPropsWithoutRef<'input'> {
   onSearchIconClick?: () => void
 }
 
-export const SearchInput = forwardRef<HTMLInputElement, Props>(
+const SearchInput = forwardRef<HTMLInputElement, Props>(
   ({ placeholder = '', onSearchIconClick, value, onChange, ...props }: Props, ref) => {
     return (
       <div className={cx('search-input-container')}>
@@ -33,3 +33,5 @@ export const SearchInput = forwardRef<HTMLInputElement, Props>(
 )
 
 SearchInput.displayName = 'SearchInput'
+
+export default SearchInput

@@ -11,7 +11,6 @@ import { isAuthRequiredPath } from '@/shared/utils/auth-path'
 import { getTimeUntilExpiry } from '@/shared/utils/token-utils'
 
 export const useAuth = () => {
-  const { user } = useAuthStore()
   const { mutate: logout } = useLogoutMutation()
   const pathname = usePathname()
 
@@ -43,8 +42,8 @@ export const useAuth = () => {
         timeUntilExpiry,
         isNearExpiry: timeUntilExpiry < AUTH_TIME.ADMIN_EXPIRY_WARNING,
       }
-    } catch (error) {
-      console.error('Token status check failed:', error)
+    } catch (err) {
+      console.error('Token status check failed:', err)
       logout()
       return null
     }

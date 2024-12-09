@@ -5,7 +5,7 @@ import { useRef, useState } from 'react'
 import classNames from 'classnames/bind'
 
 import { Button } from '@/shared/ui/button'
-import { SearchInput } from '@/shared/ui/search-input'
+import SearchInput from '@/shared/ui/search-input'
 
 import useGetStrategiesSearch from '../../_hooks/query/use-get-strategies-search'
 import usePostStrategies from '../../_hooks/query/use-post-strategies'
@@ -38,6 +38,12 @@ const SearchBarContainer = () => {
   const handleSearchWord = () => {
     if (searchRef.current) {
       setSearchWord(searchRef.current.value)
+    }
+  }
+
+  const handleEnterSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      onSearch()
     }
   }
 
@@ -84,6 +90,7 @@ const SearchBarContainer = () => {
           ref={searchRef}
           placeholder="전략명을 검색하세요."
           onChange={handleSearchWord}
+          onKeyDown={(e) => handleEnterSearch(e)}
           onSearchIconClick={onSearch}
         />
       </div>

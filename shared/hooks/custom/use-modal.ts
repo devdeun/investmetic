@@ -6,9 +6,10 @@ const useModal = () => {
   const [isModalOpen, setIsModalOpen] = useState(false)
 
   const openModal = () => setIsModalOpen(true)
+
   const closeModal = (e?: React.MouseEvent) => {
     if (e) {
-      e.preventDefault()
+      e.stopPropagation()
     }
     setIsModalOpen(false)
   }

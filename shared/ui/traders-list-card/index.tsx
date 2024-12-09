@@ -10,19 +10,19 @@ const cx = classNames.bind(styles)
 
 interface Props {
   nickname: string
-  profileImage?: string
+  imageUrl: string
   strategyCount: number
   subscriberCount: number
-  traderId: string
+  userId: number
   hasButton?: boolean
 }
 
 const TradersListCard = ({
   nickname,
-  profileImage,
   strategyCount,
   subscriberCount,
-  traderId,
+  userId,
+  imageUrl,
   hasButton = true,
 }: Props) => {
   return (
@@ -36,13 +36,13 @@ const TradersListCard = ({
           </div>
         </div>
         <div className={cx('avatar')}>
-          <Avatar src={profileImage} size="large" />
+          <Avatar src={imageUrl} size="large" />
         </div>
       </div>
       {hasButton && (
         <div className="link-button-wrapper">
           <LinkButton
-            href={`${PATH.TRADERS}/${traderId}`}
+            href={`${PATH.TRADERS}/${userId}`}
             size="medium"
             variant="filled"
             className={cx('link-button')}

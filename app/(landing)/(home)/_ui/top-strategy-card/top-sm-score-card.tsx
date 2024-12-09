@@ -1,8 +1,9 @@
 'use client'
 
 import TopStrategyCard from '.'
-import { CardSizeType } from '../sm-score-card'
 import { TopStrategyCardCommonProps } from './types'
+
+export type CardSizeType = 'small' | 'large'
 
 interface Props extends TopStrategyCardCommonProps {
   size?: CardSizeType

@@ -62,7 +62,7 @@ const SmScore = ({ score }: { score: number }) => {
   return (
     <div className={cx('score-wrapper')}>
       <span className={cx('label')}>SM SCORE</span>
-      <span className={cx('score')}>{score}</span>
+      <span className={cx('score')}>{score.toFixed(1)}</span>
     </div>
   )
 }
@@ -84,7 +84,7 @@ const ProfitChart = ({
         <span className={cx('label')}>누적수익률</span>
         <span className={cx('value', { negative: isNegative })}>
           {isNegative ? '' : '+'}
-          {percentageChange}%
+          {percentageChange.toFixed(2)}%
         </span>
       </div>
     </div>
