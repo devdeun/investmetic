@@ -11,7 +11,7 @@ const PROTECTED_API_PATHS = [
   '/api/admin/',
   '/api/notices/',
   '/api/trader/',
-  '/review',
+  '/reviews',
 ] as const
 
 const isProtectedApiPath = (path: string): boolean => {

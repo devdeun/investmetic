@@ -1,6 +1,6 @@
 'use client'
 
-import { ReactNode, createContext, useEffect, useRef } from 'react'
+import { ReactNode, createContext, useEffect } from 'react'
 
 import { usePathname, useRouter } from 'next/navigation'
 
