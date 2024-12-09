@@ -76,13 +76,17 @@
         color: $color-gray-500;
         font-weight: $text-normal;
         margin-right: 5px;
+        @include typo-b3;
       }
     }
   }
   .content {
     margin: 10px 0;
-    font-size: 18px;
-    font-weight: $text-medium;
+    @include typo-b2;
+    font-weight: $text-normal;
+    @include tablet-sm {
+      font-size: $text-b3;
+    }
   }
 }
 

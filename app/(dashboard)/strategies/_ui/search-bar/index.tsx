@@ -41,12 +41,6 @@ const SearchBarContainer = () => {
     }
   }
 
-  const handleEnterSearch = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
-      onSearch()
-    }
-  }
-
   const onReset = async () => {
     await resetState()
     if (searchRef.current) {
@@ -85,16 +79,17 @@ const SearchBarContainer = () => {
 
   return (
     <>
-      <div className={cx('searchInput-wrapper')}>
+      <div className={cx('search-input-wrapper')}>
         <SearchInput
           ref={searchRef}
+          className={cx('input')}
           placeholder="전략명을 검색하세요."
           onChange={handleSearchWord}
-          onKeyDown={(e) => handleEnterSearch(e)}
           onSearchIconClick={onSearch}
+          maxLength={16}
         />
       </div>
-      <div className={cx('searchInput-wrapper')}>
+      <div className={cx('search-input-wrapper')}>
         <SearchBarTab isMainTab={isMainTab} onChangeTab={setIsMainTab} />
         {isMainTab
           ? ACCORDION_MENU.map((menu) => (

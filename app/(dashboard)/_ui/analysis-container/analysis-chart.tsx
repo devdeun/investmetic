@@ -38,7 +38,7 @@ const AnalysisChart = ({ analysisChartData: data }: Props) => {
       type: 'areaspline',
       height: 367,
       backgroundColor: 'transparent',
-      margin: [10, 60, 10, 60],
+      margin: [10, 75, 10, 75],
       zoomType: 'x',
     } as Highcharts.ChartOptions,
     title: { text: undefined },
@@ -86,7 +86,7 @@ const AnalysisChart = ({ analysisChartData: data }: Props) => {
       align: 'left',
       verticalAlign: 'top',
       layout: 'vertical',
-      x: 40,
+      x: 70,
       y: -10,
       itemStyle: {
         color: '#4D4D4D',

@@ -11,12 +11,18 @@
     }
 
     td {
-      padding: 0 20px;
+      padding: 0 4px;
       height: 40px;
       text-align: start;
       vertical-align: middle;
       border-top: 1px solid $color-gray-200;
       border-bottom: 1px solid $color-gray-200;
+    }
+    & td:first-child {
+      padding-left: 20px;
+      @include tablet-md {
+        padding-left: 10px;
+      }
     }
 
     .button-container {
@@ -26,6 +32,9 @@
       padding: 0;
       text-align: right;
     }
+  }
+  @include tablet-md {
+    padding: 10px;
   }
 }
 

@@ -16,7 +16,7 @@
       display: contents;
     }
     p {
-      @include typo-c1;
+      @include typo-b3;
       line-height: 18px;
       color: $color-gray-600;
     }
@@ -34,7 +34,8 @@
       color: $color-gray-500;
       background-color: transparent;
       svg {
-        margin: -3px 0 0 7px;
+        margin-top: -3px;
+        width: 28px;
       }
     }
   }
