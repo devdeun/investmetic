@@ -24,18 +24,6 @@ export type TableBodyDataType =
   | NoticeListContentModel
   | Array<ReactNode | string | number>
 
-export const isMyAnalysisData = (data: TableBodyDataType): data is MyDailyAnalysisModel => {
-  if (!data || typeof data !== 'object' || Array.isArray(data)) return false
-
-  return (
-    'dailyAnalysisId' in data &&
-    'dailyDate' in data &&
-    'transaction' in data &&
-    'dailyProfitLoss' in data &&
-    'principal' in data
-  )
-}
-
 export interface VerticalTableProps {
   tableHead: string[]
   tableBody: TableBodyDataType[]

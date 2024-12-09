@@ -10,7 +10,7 @@ import AnalysisUploadModal from '@/shared/ui/modal/analysis-upload-modal'
 import DailyAnalysisDeleteAllModal from '@/shared/ui/modal/daily-analysis-delete-all-modal'
 import EditAnalysisModal from '@/shared/ui/modal/edit-daily-analysis-modal.ts'
 import Pagination from '@/shared/ui/pagination'
-import VerticalTable, { TableBodyDataType, isMyAnalysisData } from '@/shared/ui/table/vertical'
+import VerticalTable, { TableBodyDataType } from '@/shared/ui/table/vertical'
 
 import { useAnalysisUploadMutation } from '../../my/_hooks/query/use-analysis-mutation'
 import useGetMyDailyAnalysis from '../../my/_hooks/query/use-get-my-daily-analysis'
@@ -20,6 +20,14 @@ import useGetAnalysisDownload from '../../strategies/[strategyId]/_hooks/query/u
 import styles from './styles.module.scss'
 
 const cx = classNames.bind(styles)
+
+interface Props {
+  type: 'daily' | 'monthly'
+  strategyId: number
+  currentPage: number
+  onPageChange: (page: number) => void
+  isEditable?: boolean
+}
 
 const DAILY_TABLE_HEADER = [
   '날짜',
@@ -41,12 +49,16 @@ const MONTHLY_TABLE_HEADER = [
   '누적 수익률',
 ]
 
-interface Props {
-  type: 'daily' | 'monthly'
-  strategyId: number
-  currentPage: number
-  onPageChange: (page: number) => void
-  isEditable?: boolean
+const isMyAnalysisData = (data: TableBodyDataType): data is MyDailyAnalysisModel => {
+  if (!data || typeof data !== 'object' || Array.isArray(data)) return false
+
+  return (
+    'dailyAnalysisId' in data &&
+    'dailyDate' in data &&
+    'transaction' in data &&
+    'dailyProfitLoss' in data &&
+    'principal' in data
+  )
 }
 
 const AnalysisContent = ({
