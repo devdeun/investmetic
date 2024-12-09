@@ -31,10 +31,6 @@ const ExcelUploadForm = ({ strategyId, onClose }: Props) => {
     }
   }
 
-  const handleGuidDownload = () => {
-    //TODO 업로드 가이드 다운로드 api 없음 ;;
-  }
-
   const handleSubmit = async () => {
     if (!file) return
 
@@ -72,8 +68,10 @@ const ExcelUploadForm = ({ strategyId, onClose }: Props) => {
             <FileIcon />
           </button>
         </label>
-        <Button variant="outline" className={cx('guide-button')} onClick={handleGuidDownload}>
-          업로드 가이드 다운
+        <Button variant="outline" className={cx('guide-button')} disabled={isLoading}>
+          <a href="/files/엑셀업로드설명.xls" download="엑셀업로드설명.xls">
+            업로드 가이드 다운
+          </a>
         </Button>
       </div>
 
