@@ -1,4 +1,3 @@
-// API Request Data
 export interface DailyAnalysisModel {
   date: string
   principal: number
@@ -92,4 +91,20 @@ export interface AnalysisDataModel {
   date: string
   transaction: number
   dailyProfitLoss: number
+}
+
+export interface ImageDataModel {
+  id: number
+  imageUrl: string
+  title: string
+}
+
+export interface AccountImageDataModel {
+  content: ImageDataModel
+  first: boolean
+  last: boolean
+  page: number
+  size: number
+  totalElements: number
+  totalPages: number
 }
