@@ -54,7 +54,7 @@ const StrategiesItem = ({ strategiesData: data, type = 'default' }: Props) => {
           <p>{formatNumber(data.mdd)}</p>
         </div>
         <div className={cx('sm-score')}>
-          <p>{data.smScore}</p>
+          <p>{data.smScore.toFixed(1)}</p>
         </div>
         <div className={cx('profit')}>
           <span>누적 수익률</span>

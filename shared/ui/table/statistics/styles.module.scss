@@ -19,4 +19,12 @@
       border: 1px solid $color-white;
     }
   }
+  @include tablet-md {
+    padding: 10px;
+    table {
+      td {
+        padding: 0 4px;
+      }
+    }
+  }
 }

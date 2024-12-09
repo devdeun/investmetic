@@ -2,7 +2,9 @@
 
 import classNames from 'classnames/bind'
 
+import { PATH } from '@/shared/constants/path'
 import { Button } from '@/shared/ui/button'
+import { LinkButton } from '@/shared/ui/link-button'
 
 import styles from './styles.module.scss'
 
@@ -11,11 +13,18 @@ const cx = classNames.bind(styles)
 interface Props {
   isMyStrategy?: boolean
   isSubscribed?: boolean
+  strategyId?: number
   subscribers: number
   onClick?: () => void
 }
 
-const SubscriberItem = ({ isSubscribed, isMyStrategy = false, subscribers, onClick }: Props) => {
+const SubscriberItem = ({
+  isSubscribed,
+  isMyStrategy = false,
+  strategyId,
+  subscribers,
+  onClick,
+}: Props) => {
   return (
     <div className={cx('container')}>
       <div>
@@ -23,10 +32,19 @@ const SubscriberItem = ({ isSubscribed, isMyStrategy = false, subscribers, onCli
         <span>| </span>
         <span>{subscribers}</span>
       </div>
-      {!isMyStrategy && (
+      {!isMyStrategy ? (
         <Button size="small" variant="filled" onClick={onClick}>
           {isSubscribed ? '구독취소' : '구독하기'}
         </Button>
+      ) : (
+        <LinkButton
+          href={`${PATH.MY_STRATEGIES}/manage/${strategyId}`}
+          size="small"
+          variant="filled"
+          className={cx('trader-button')}
+        >
+          관리하기
+        </LinkButton>
       )}
     </div>
   )

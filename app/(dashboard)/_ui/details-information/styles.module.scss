@@ -5,22 +5,29 @@
 }
 
 .name-container {
-  width: 30%;
+  width: 35%;
   height: 144px;
-  padding: 20px;
+  padding: 18px 10px;
   display: flex;
+  justify-content: center;
   flex-direction: column;
-  gap: 10px;
+  gap: 4px;
   border-radius: 5px;
   background-color: $color-white;
   .name {
-    @include typo-h4;
+    @include typo-b1;
   }
   button {
-    height: 36px;
+    height: 30px;
     border-radius: 8px;
-    background-color: $color-gray-100;
+    background-color: $color-gray-200;
     color: $color-gray-700;
+  }
+  @include tablet-md {
+    gap: 2px;
+    button {
+      font-size: $text-b3;
+    }
   }
 }
 
@@ -48,6 +55,9 @@
       @include typo-b3;
       color: $color-gray-700;
       margin-top: 16px;
+      @include tablet-md {
+        font-size: $text-c1;
+      }
     }
   }
 }
@@ -71,12 +81,24 @@
   .label {
     @include typo-b2;
     color: $color-gray-800;
+    @include tablet-md {
+      font-size: $text-b3;
+    }
+    @include tablet-sm {
+      font-size: $text-c1;
+    }
   }
   .percent {
-    @include typo-h3;
+    @include typo-h4;
     color: #f53500;
     &.minus {
       color: #6877ff;
+    }
+    @include tablet-md {
+      font-size: $text-b1;
+    }
+    @include tablet-sm {
+      font-size: $text-b2;
     }
   }
 }
