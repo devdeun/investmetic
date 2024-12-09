@@ -31,19 +31,6 @@ const ExcelUploadForm = ({ strategyId, onClose }: Props) => {
     }
   }
 
-  const handleGuidDownload = () => {
-    const fileName = '엑셀업로드설명.xls'
-    const filePath = `/files/${encodeURIComponent(fileName)}`
-
-    const link = document.createElement('a')
-    link.href = filePath
-    link.download = fileName
-
-    document.body.appendChild(link)
-    link.click()
-    document.body.removeChild(link)
-  }
-
   const handleSubmit = async () => {
     if (!file) return
 
@@ -81,9 +68,11 @@ const ExcelUploadForm = ({ strategyId, onClose }: Props) => {
             <FileIcon />
           </button>
         </label>
-        <Button variant="outline" className={cx('guide-button')} onClick={handleGuidDownload}>
-          업로드 가이드 다운
-        </Button>
+        <a href="/files/엑셀업로드설명.xls" download="엑셀업로드설명.xls">
+          <Button variant="outline" className={cx('guide-button')} disabled={isLoading}>
+            업로드 가이드 다운
+          </Button>
+        </a>
       </div>
 
       {error && <p className={cx('error-message')}>{error}</p>}
