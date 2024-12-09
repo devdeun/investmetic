@@ -28,7 +28,7 @@
   }
 
   @include mobile {
-    grid-template-columns: 2fr;
+    grid-template-columns: 1fr;
     gap: 16px;
   }
 }
