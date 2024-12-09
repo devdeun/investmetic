@@ -23,7 +23,12 @@
   margin-bottom: 30px;
 
   @include tablet-md {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  @include mobile {
+    grid-template-columns: 2fr;
     gap: 16px;
   }
 }
