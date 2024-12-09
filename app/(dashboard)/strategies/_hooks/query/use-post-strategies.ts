@@ -13,7 +13,7 @@ const usePostStrategies = ({
   searchTerms: SearchTermsModel
 }) => {
   return useQuery({
-    queryKey: ['strategies'],
+    queryKey: ['strategies', page, size],
     queryFn: () => postStrategies(page, size, searchTerms),
   })
 }
