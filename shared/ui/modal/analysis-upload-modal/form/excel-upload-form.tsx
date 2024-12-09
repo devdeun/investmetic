@@ -32,7 +32,16 @@ const ExcelUploadForm = ({ strategyId, onClose }: Props) => {
   }
 
   const handleGuidDownload = () => {
-    //TODO 업로드 가이드 다운로드 api 없음 ;;
+    const fileName = '엑셀업로드설명.xls'
+    const filePath = `/files/${encodeURIComponent(fileName)}`
+
+    const link = document.createElement('a')
+    link.href = filePath
+    link.download = fileName
+
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
   }
 
   const handleSubmit = async () => {
