@@ -11,7 +11,7 @@ const useDeleteQuestion = ({ strategyId, questionId }: ArgModel) => {
   return useMutation({
     mutationFn: () => deleteAdminQuestion({ strategyId, questionId }),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['adminUsers'] })
+      queryClient.invalidateQueries({ queryKey: ['adminQuestions'] })
     },
   })
 }
