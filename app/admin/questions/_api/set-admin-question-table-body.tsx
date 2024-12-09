@@ -1,4 +1,5 @@
-import { Button } from '@/shared/ui/button'
+import { PATH } from '@/shared/constants/path'
+import { LinkButton } from '@/shared/ui/link-button'
 
 import AdminQuestionDeleteButton from '../_ui/admin-question-delete-button'
 import AdminQuestionStateBox from '../_ui/admin-question-state-box'
@@ -13,8 +14,9 @@ const setAdminQuestionTableBody = (data: AdminQuestionsResponeseModel['result'][
       data.trader.userName,
       data.investor.userName,
       <AdminQuestionStateBox questionState={data.stateCondition} key={data.questionId} />,
-      <Button.ButtonGroup gap="24px" key={data.questionId}>
-        <Button
+      <div style={{ display: 'flex', gap: '24px' }} key={data.questionId}>
+        <LinkButton
+          href={`${PATH.MY_QUESTIONS}/${data.questionId}`}
           size="small"
           style={{
             width: 'fit-content',
@@ -24,9 +26,9 @@ const setAdminQuestionTableBody = (data: AdminQuestionsResponeseModel['result'][
           }}
         >
           상세보기
-        </Button>
+        </LinkButton>
         <AdminQuestionDeleteButton questionId={data.questionId} strategyId={data.strategy.id} />
-      </Button.ButtonGroup>,
+      </div>,
     ]
   })
 
