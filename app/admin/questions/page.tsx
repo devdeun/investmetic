@@ -33,7 +33,7 @@ const AdminQuestionsPage = () => {
     onTabChange,
   } = useAdminQuestionsPage()
 
-  const { isLoading, data } = useAdminQuestions({
+  const { isLoading, data, refetch } = useAdminQuestions({
     ...searchParams,
     stateCondition,
   })
@@ -67,7 +67,10 @@ const AdminQuestionsPage = () => {
               <SearchInput
                 value={keyword}
                 onChange={(e) => setKeyword(e.target.value)}
-                onSearchIconClick={setConditionAndKeyword}
+                onSearchIconClick={() => {
+                  setConditionAndKeyword()
+                  refetch()
+                }}
               />
             </div>
           }
