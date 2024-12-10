@@ -10,15 +10,15 @@ import Title from '@/shared/ui/title'
 
 import FileInput from '../../_ui/file-input'
 import InputField from '../../_ui/input-field'
+import usePostNotice from './_hooks/query/use-post-notice'
 import useNoticeForm from './_hooks/use-notice-form'
-import usePostNotice from './_hooks/use-notice-post'
 import styles from './page.module.scss'
 
 const cx = classNames.bind(styles)
 
 const AdminNoticePostPage = () => {
   const { formData, onInputChange } = useNoticeForm()
-  const { mutate: postNotice } = usePostNotice(formData)
+  const { mutate: postNotice } = usePostNotice()
 
   return (
     <>
@@ -29,7 +29,7 @@ const AdminNoticePostPage = () => {
           className={cx('form')}
           onSubmit={(e) => {
             e.preventDefault()
-            postNotice()
+            postNotice(formData)
           }}
         >
           <div className={cx('input-field')}>
@@ -60,7 +60,9 @@ const AdminNoticePostPage = () => {
               label="파일첨부"
               Input={
                 <FileInput
+                  className={cx('file-input')}
                   onChange={(e) => onInputChange('files', Array.from(e.target.files || []))}
+                  multiple
                 />
               }
             />
