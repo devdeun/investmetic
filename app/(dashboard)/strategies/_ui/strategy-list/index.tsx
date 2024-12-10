@@ -2,6 +2,8 @@
 
 import { useEffect } from 'react'
 
+import { usePathname } from 'next/navigation'
+
 import StrategiesItem from '@/app/(dashboard)/_ui/strategies-item'
 import classNames from 'classnames/bind'
 
@@ -26,25 +28,32 @@ const StrategyList = () => {
   })
   const searchTerms = useSearchingItemStore((state) => state.searchTerms)
   const { resetState } = useSearchingItemStore((state) => state.actions)
-  const { data } = usePostStrategies({ page, size, searchTerms })
+  const { data, isLoading } = usePostStrategies({ page, size, searchTerms })
+  const path = usePathname()
 
   useEffect(() => {
     resetState()
-  }, [])
+  }, [path])
 
   const strategiesData = data?.content as StrategiesModel[]
   const totalPages = (data?.totalPages as number) || null
 
   return (
     <>
-      {strategiesData?.map((strategy) => (
-        <StrategiesItem key={strategy.strategyId} strategiesData={strategy} />
-      ))}
-      <div className={cx('pagination')}>
-        {totalPages && (
-          <Pagination currentPage={page} maxPage={totalPages} onPageChange={handlePageChange} />
-        )}
-      </div>
+      {strategiesData?.length > 0 ? (
+        <>
+          {strategiesData.map((strategy) => (
+            <StrategiesItem key={strategy.strategyId} strategiesData={strategy} />
+          ))}
+          <div className={cx('pagination')}>
+            {totalPages && (
+              <Pagination currentPage={page} maxPage={totalPages} onPageChange={handlePageChange} />
+            )}
+          </div>
+        </>
+      ) : (
+        !isLoading && <div className={cx('no-data')}>검색된 전략이 없습니다.</div>
+      )}
     </>
   )
 }
