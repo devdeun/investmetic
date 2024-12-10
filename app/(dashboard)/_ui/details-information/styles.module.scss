@@ -36,7 +36,7 @@
   height: 144px;
   display: flex;
   gap: 20px;
-  padding: 30px;
+  padding: 20px;
   border-radius: 5px;
   background-color: $color-white;
   .info-item {
@@ -44,6 +44,7 @@
     height: 100%;
     border-right: 1px solid $color-gray-200;
     padding-right: 4px;
+    overflow-y: auto;
     &:last-child {
       border-right: 0;
     }
@@ -58,6 +59,13 @@
       @include tablet-md {
         font-size: $text-c1;
       }
+    }
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: $color-gray-200;
+      border-radius: 10px;
     }
   }
 }
