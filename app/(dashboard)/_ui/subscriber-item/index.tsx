@@ -1,5 +1,7 @@
 'use client'
 
+import { usePathname } from 'next/navigation'
+
 import classNames from 'classnames/bind'
 
 import { PATH } from '@/shared/constants/path'
@@ -25,6 +27,8 @@ const SubscriberItem = ({
   subscribers,
   onClick,
 }: Props) => {
+  const currentPath = usePathname()
+
   return (
     <div className={cx('container')}>
       <div>
@@ -37,14 +41,16 @@ const SubscriberItem = ({
           {isSubscribed ? '구독취소' : '구독하기'}
         </Button>
       ) : (
-        <LinkButton
-          href={`${PATH.MY_STRATEGIES}/manage/${strategyId}`}
-          size="small"
-          variant="filled"
-          className={cx('trader-button')}
-        >
-          관리하기
-        </LinkButton>
+        !currentPath.includes(PATH.STRATEGIES_MANAGE) && (
+          <LinkButton
+            href={`${PATH.MY_STRATEGIES}/manage/${strategyId}`}
+            size="small"
+            variant="filled"
+            className={cx('trader-button')}
+          >
+            관리하기
+          </LinkButton>
+        )
       )}
     </div>
   )
