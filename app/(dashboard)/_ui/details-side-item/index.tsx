@@ -43,7 +43,7 @@ const DetailsSideItem = ({
             <div key={item.title}>
               <div className={cx('title')}>{item.title}</div>
               <div className={cx('data')}>
-                <p>{item.data}</p>
+                <p>{typeof item.data === 'number' ? item.data.toFixed(2) : item.data}</p>
               </div>
             </div>
           ))}

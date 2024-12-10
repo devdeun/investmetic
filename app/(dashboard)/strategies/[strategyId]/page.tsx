@@ -81,6 +81,7 @@ const StrategyDetailPage = ({ params }: { params: { strategyId: string } }) => {
                 isSubscribed={information?.isSubscribed}
                 subscribers={information?.subscriptionCount}
                 onClick={openModal}
+                strategyId={strategyNumber}
               />
               {hasDetailsSideData?.[0] &&
                 detailsSideData?.map((data, idx) => (

@@ -1,6 +1,7 @@
 import Image from 'next/image'
 
-import StockActiveStateToggleButton from '../../../stock/stock-manage/_ui/stock-active-state-toggle-button'
+import TradeActiveStateToggleButton from '../_ui/trade-active-state-toggle-button'
+// import StockActiveStateToggleButton from '../../../stock/stock-manage/_ui/stock-active-state-toggle-button'
 import { TradeResponseModel } from '../types'
 
 const setAdminTradeManageTableData = (data: TradeResponseModel['result']) =>
@@ -13,7 +14,7 @@ const setAdminTradeManageTableData = (data: TradeResponseModel['result']) =>
       height={24}
       key={data.tradeTypeId}
     />,
-    <StockActiveStateToggleButton stockTypeId={data.tradeTypeId} active key={data.tradeTypeId} />,
+    <TradeActiveStateToggleButton tradeTypeId={data.tradeTypeId} active key={data.tradeTypeId} />,
   ]) ?? []
 
 export default setAdminTradeManageTableData

@@ -42,21 +42,19 @@ const QuestionsTabContent = ({ options }: Props) => {
   return (
     <>
       <ul className={cx('question-list')}>
-        {questionsData &&
-          !!questionsData.length &&
-          questionsData.map((question) => (
-            <li key={question.questionId}>
-              <QuestionCard
-                questionId={question.questionId}
-                strategyName={question.strategyName}
-                title={question.title}
-                questionState={question.stateCondition}
-                contents={question.questionContent}
-                nickname={question.nickname}
-                createdAt={question.createdAt}
-              />
-            </li>
-          ))}
+        {questionsData?.map((question) => (
+          <li key={question.questionId}>
+            <QuestionCard
+              questionId={question.questionId}
+              strategyName={question.strategyName}
+              title={question.title}
+              questionState={question.stateCondition}
+              contents={question.questionContent}
+              nickname={question.nickname}
+              createdAt={question.createdAt}
+            />
+          </li>
+        ))}
       </ul>
 
       {(!questionsData || !questionsData.length) && (

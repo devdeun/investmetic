@@ -13,4 +13,13 @@
     color: $color-gray-800;
     margin-left: 4px;
   }
+  .trader-button {
+    padding: 10px 20px;
+  }
+  @include tablet-md {
+    padding: 0 20px;
+    span {
+      font-size: $text-b2;
+    }
+  }
 }
