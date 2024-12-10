@@ -36,10 +36,10 @@ const SearchBarContainer = () => {
   )
   const searchRef = useRef<HTMLInputElement>(null)
   const { data } = useGetStrategiesSearch()
-  const { refetch } = usePostStrategies({ page: 1, size: 8, searchTerms })
   const params = useSearchParams()
   const router = useRouter()
   const page = parseInt(params.get('page') || '1')
+  const { refetch } = usePostStrategies({ page, size: 8, searchTerms })
 
   const handleSearchWord = () => {
     if (searchRef.current) {

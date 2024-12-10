@@ -15,6 +15,7 @@ const usePostStrategies = ({
   return useQuery({
     queryKey: ['strategies', page, size],
     queryFn: () => postStrategies(page, size, searchTerms),
+    staleTime: 0,
   })
 }
 
