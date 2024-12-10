@@ -15,15 +15,20 @@ const cx = classNames.bind(styles)
 interface Props {
   isModalOpen: boolean
   isErr: boolean
+  isMyStrategy?: boolean
   onCloseModal: () => void
   onChange?: () => void
 }
 
-const ReviewGuideModal = ({ isModalOpen, isErr, onCloseModal, onChange }: Props) => {
+const ReviewGuideModal = ({ isModalOpen, isErr, isMyStrategy, onCloseModal, onChange }: Props) => {
   return (
     <Modal isOpen={isModalOpen} icon={ModalAlertIcon}>
       <span className={cx('message')}>
-        {isErr ? (
+        {isMyStrategy ? (
+          <>
+            나의 전략엔 리뷰를 <br /> 등록 할 수 없습니다.
+          </>
+        ) : isErr ? (
           <>
             이미 등록된 리뷰가 있습니다. <br /> 리뷰는 한 번만 등록 가능합니다.
           </>

@@ -6,11 +6,11 @@ import classNames from 'classnames/bind'
 
 import useModal from '@/shared/hooks/custom/use-modal'
 import Avatar from '@/shared/ui/avatar'
+import ReviewGuideModal from '@/shared/ui/modal/review-guide-modal'
 
 import useDeleteReview from '../../_hooks/query/use-delete-review'
 import StarRating from '../star-rating/index'
 import AddReview from './add-review'
-import ReviewGuideModal from './review-guide-modal'
 import styles from './styles.module.scss'
 
 const cx = classNames.bind(styles)
