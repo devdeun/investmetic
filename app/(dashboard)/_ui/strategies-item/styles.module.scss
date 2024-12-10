@@ -138,3 +138,8 @@
     row-gap: 1px;
   }
 }
+
+.no-data {
+  @include typo-b3;
+  color: $color-gray-600;
+}
