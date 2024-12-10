@@ -9,6 +9,7 @@ import { pretendard } from './fonts'
 export const metadata: Metadata = {
   title: 'InvestMetic',
   description: '성공적인 투자 전략을 참고하거나 공유하고 싶다면 인베스트 메틱에서!',
+  metadataBase: new URL('https://www.investmetic.co.kr'),
 }
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => {
