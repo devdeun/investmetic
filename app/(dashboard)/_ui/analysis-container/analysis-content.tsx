@@ -17,6 +17,7 @@ import useGetMyDailyAnalysis from '../../my/_hooks/query/use-get-my-daily-analys
 import { useMyAnalysisMutation } from '../../my/_hooks/query/use-manage-daily-analysis'
 import useGetAnalysis from '../../strategies/[strategyId]/_hooks/query/use-get-analysis'
 import useGetAnalysisDownload from '../../strategies/[strategyId]/_hooks/query/use-get-analysis-download'
+import { DAILY_TABLE_HEADER, MONTHLY_TABLE_HEADER } from './constants'
 import styles from './styles.module.scss'
 
 const cx = classNames.bind(styles)
@@ -28,26 +29,6 @@ interface Props {
   onPageChange: (page: number) => void
   isEditable?: boolean
 }
-
-const DAILY_TABLE_HEADER = [
-  '날짜',
-  '원금',
-  '입출금',
-  '일 손익',
-  '일 손익률',
-  '누적 손익',
-  '누적 수익률',
-]
-
-const MONTHLY_TABLE_HEADER = [
-  '날짜',
-  '원금',
-  '입출금',
-  '월 손익',
-  '월 손익률',
-  '누적 손익',
-  '누적 수익률',
-]
 
 const isMyAnalysisData = (data: TableBodyDataType): data is MyDailyAnalysisModel => {
   if (!data || typeof data !== 'object' || Array.isArray(data)) return false

@@ -1,4 +1,4 @@
-export const YAXIS_OPTIONS = {
+export const CHART_SELECT_OPTIONS = {
   BALANCE: '잔고',
   PRINCIPAL: '원금',
   CUMULATIVE_TRANSACTION_AMOUNT: '누적 입출 금액',
@@ -17,3 +17,23 @@ export const YAXIS_OPTIONS = {
   TOTAL_PROFIT: '총 이익',
   TOTAL_LOSS: '총 손실',
 } as const
+
+export const DAILY_TABLE_HEADER = [
+  '날짜',
+  '원금',
+  '입출금',
+  '일 손익',
+  '일 손익률',
+  '누적 손익',
+  '누적 수익률',
+]
+
+export const MONTHLY_TABLE_HEADER = [
+  '날짜',
+  '원금',
+  '입출금',
+  '월 손익',
+  '월 손익률',
+  '누적 손익',
+  '누적 수익률',
+]
