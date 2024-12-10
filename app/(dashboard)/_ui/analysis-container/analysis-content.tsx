@@ -159,7 +159,7 @@ const AnalysisContent = ({
 
   return (
     <div className={cx('table-wrapper', isEditable ? 'my-analysis' : 'analysis')}>
-      {!isEditable && analysisData && (
+      {!isEditable && analysisData?.content.length > 0 && (
         <Button
           onClick={handleDownload}
           size="small"
@@ -200,7 +200,7 @@ const AnalysisContent = ({
           </Button>
         </div>
       )}
-      {analysisData ? (
+      {analysisData?.content.length > 0 ? (
         <>
           <VerticalTable
             tableHead={tableHeader}
