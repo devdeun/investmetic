@@ -24,7 +24,7 @@ interface Props {
   createdAt: string
   starRating: number
   isReviewer: boolean
-  isAdmin: boolean
+  isAdmin?: boolean
 }
 
 const ReviewItem = ({
