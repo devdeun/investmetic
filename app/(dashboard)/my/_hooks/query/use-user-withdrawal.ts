@@ -5,7 +5,7 @@ import { useMutation } from '@tanstack/react-query'
 import { PATH } from '@/shared/constants/path'
 import { useAuth } from '@/shared/hooks/custom/use-auth'
 
-import { deleteUser } from '../../_api/delete-user-withdrawl'
+import { deleteUser } from '../../_api/delete-user-withdrawal'
 
 export const useWithdraw = () => {
   const router = useRouter()

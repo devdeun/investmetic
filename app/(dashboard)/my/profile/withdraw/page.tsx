@@ -9,7 +9,7 @@ import { Button } from '@/shared/ui/button'
 import WithdrawCheckModal from '@/shared/ui/modal/withdraw-check-modal'
 
 import useGetProfile from '../../_hooks/query/use-get-profile'
-import { useWithdraw } from '../../_hooks/query/use-user-withdrawl'
+import { useWithdraw } from '../../_hooks/query/use-user-withdrawal'
 import UserProfile from '../_ui/user-profile'
 import styles from './styles.module.scss'
 
