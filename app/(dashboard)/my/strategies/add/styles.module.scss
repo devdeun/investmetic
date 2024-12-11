@@ -1,3 +1,9 @@
+.container {
+  background-color: $color-white;
+  border-radius: 8px;
+  margin-top: 24px;
+}
+
 .form {
   max-width: 800px;
   margin: 0 auto;
@@ -34,6 +40,15 @@
 
 .form-field {
   flex: 1;
+
+  .strategy-name-input {
+    border-radius: 6px;
+    padding-left: 12px;
+
+    &::placeholder {
+      color: $color-gray-400;
+    }
+  }
 }
 
 .error {
@@ -41,7 +56,13 @@
   padding: 12px;
   border-radius: 4px;
   background-color: $color-white;
-  color: $color-orange-600;
+  color: $color-orange-700;
+  font-size: 14px;
+}
+
+.field-error {
+  margin-top: 8px;
+  color: $color-orange-700;
   font-size: 14px;
 }
 
@@ -52,18 +73,8 @@
   min-height: 200px;
 }
 
-.input {
-  width: 100%;
-  padding: 8px 12px;
-  border: 1px solid $color-gray-300;
-  border-radius: 4px;
-  font-size: 14px;
-  line-height: 1.5;
-  transition: border-color 0.2s;
-
-  &.error {
-    border-color: $color-orange-600;
-  }
+.input.error {
+  border-color: $color-orange-700;
 }
 
 .stock-grid {
@@ -141,4 +152,31 @@
   justify-content: center;
   margin-top: 32px;
   gap: 24px;
+}
+
+.description-textarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 12px;
+  border: 1px solid $color-gray-300;
+  border-radius: 4px;
+  resize: vertical;
+  font-size: 14px;
+  line-height: 1.5;
+  font-family: inherit;
+
+  &:focus {
+    outline: none;
+    border-color: none;
+  }
+
+  &::placeholder {
+    color: $color-gray-400;
+  }
+}
+
+.notice {
+  @include typo-c1;
+  color: $color-gray-600;
+  margin: 36px 0;
 }
