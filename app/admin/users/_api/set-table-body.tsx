@@ -1,10 +1,18 @@
+import { Dispatch, SetStateAction } from 'react'
+
 import Avatar from '@/shared/ui/avatar'
 
 import RoleSelect from '../_ui/role-select'
 import UserDeleteButton from '../_ui/user-delete-button'
 import { AdminUserInfoModel } from '../types'
 
-const setTableBody = (data: AdminUserInfoModel[]) =>
+interface ArgModel {
+  data: AdminUserInfoModel[]
+  openModal: () => void
+  setDeleteUserId: Dispatch<SetStateAction<number>>
+}
+
+const setTableBody = ({ data, openModal, setDeleteUserId }: ArgModel) =>
   data.map((data, idx) => {
     return [
       idx + 1,
@@ -14,7 +22,13 @@ const setTableBody = (data: AdminUserInfoModel[]) =>
       data.email,
       data.phone,
       <RoleSelect data={data} key={data.userId} />,
-      <UserDeleteButton userId={data.userId} key={data.userId} />,
+      <UserDeleteButton
+        onClick={() => {
+          openModal()
+          setDeleteUserId(data.userId)
+        }}
+        key={data.userId}
+      />,
     ]
   })
 

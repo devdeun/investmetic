@@ -1,7 +1,10 @@
 'use client'
 
+import { useState } from 'react'
+
 import classNames from 'classnames/bind'
 
+import useModal from '@/shared/hooks/custom/use-modal'
 import Pagination from '@/shared/ui/pagination'
 import SearchInput from '@/shared/ui/search-input'
 import Select from '@/shared/ui/select'
@@ -13,6 +16,7 @@ import AdminContentsHeader from '../_ui/admin-header'
 import setTableBody from './_api/set-table-body'
 import useAdminUsers from './_hooks/query/use-admin-users'
 import useUserSearch from './_hooks/use-user-search-page'
+import UserDeleteModal from './_ui/user-delete-modal'
 import styles from './page.module.scss'
 
 const cx = classNames.bind(styles)
@@ -33,6 +37,8 @@ const AdminUsersPage = () => {
   } = useUserSearch()
 
   const { isLoading, data } = useAdminUsers({ role: activeTab, condition, keyword })
+  const { isModalOpen, closeModal, openModal } = useModal()
+  const [deleteUserId, setDeleteUserId] = useState<number>(0)
 
   if (isLoading || !data) return null
 
@@ -70,12 +76,13 @@ const AdminUsersPage = () => {
         />
         <VerticalTable
           tableHead={['No.', '프로필', '이름', '닉네임', '이메일', '전화번호', '회원분류', '탈퇴']}
-          tableBody={setTableBody(data?.content)}
+          tableBody={setTableBody({ data: data?.content, openModal, setDeleteUserId })}
           countPerPage={10}
           currentPage={1}
         />
         <Pagination currentPage={data?.page} maxPage={data?.totalPages} onPageChange={() => {}} />
       </section>
+      <UserDeleteModal userId={deleteUserId} isModalOpen={isModalOpen} closeModal={closeModal} />
     </>
   )
 }
