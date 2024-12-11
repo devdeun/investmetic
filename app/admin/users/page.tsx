@@ -23,20 +23,23 @@ const cx = classNames.bind(styles)
 
 const AdminUsersPage = () => {
   const {
+    searchParams,
     searchOptions,
     tabs,
     select,
     setSelect,
     activeTab,
-    setActiveTab,
     inputValue,
     setInputValue,
     keyword,
     condition,
     setConditionAndKeyword,
+    currentPage,
+    setCurrentPage,
+    onTabChange,
   } = useUserSearch()
 
-  const { isLoading, data } = useAdminUsers({ role: activeTab, condition, keyword })
+  const { isLoading, data } = useAdminUsers(searchParams)
   const { isModalOpen, closeModal, openModal } = useModal()
   const [deleteUserId, setDeleteUserId] = useState<number>(0)
 
@@ -46,7 +49,7 @@ const AdminUsersPage = () => {
     <>
       <Title label="회원 관리" className={cx('title')} />
       <section className={cx('container')}>
-        <Tabs tabs={tabs} activeTab={activeTab} onTabChange={setActiveTab} />
+        <Tabs tabs={tabs} activeTab={activeTab} onTabChange={onTabChange} />
         <AdminContentsHeader
           Left={
             <span>
@@ -77,10 +80,14 @@ const AdminUsersPage = () => {
         <VerticalTable
           tableHead={['No.', '프로필', '이름', '닉네임', '이메일', '전화번호', '회원분류', '탈퇴']}
           tableBody={setTableBody({ data: data?.content, openModal, setDeleteUserId })}
-          countPerPage={10}
+          countPerPage={data.size}
           currentPage={1}
         />
-        <Pagination currentPage={data?.page} maxPage={data?.totalPages} onPageChange={() => {}} />
+        <Pagination
+          currentPage={data?.page}
+          maxPage={data?.totalPages}
+          onPageChange={(page) => setCurrentPage(page)}
+        />
       </section>
       <UserDeleteModal userId={deleteUserId} isModalOpen={isModalOpen} closeModal={closeModal} />
     </>

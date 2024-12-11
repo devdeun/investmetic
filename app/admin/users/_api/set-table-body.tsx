@@ -13,9 +13,9 @@ interface ArgModel {
 }
 
 const setTableBody = ({ data, openModal, setDeleteUserId }: ArgModel) =>
-  data.map((data, idx) => {
+  data.map((data) => {
     return [
-      idx + 1,
+      data.userId,
       <Avatar src={data?.imageUrl ?? undefined} key={data.userId} />,
       data.userName,
       data.nickname,
