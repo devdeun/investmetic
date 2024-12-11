@@ -2,8 +2,6 @@
 
 import { useEffect } from 'react'
 
-import { usePathname } from 'next/navigation'
-
 import StrategiesItem from '@/app/(dashboard)/_ui/strategies-item'
 import classNames from 'classnames/bind'
 
@@ -28,12 +26,16 @@ const StrategyList = () => {
   })
   const searchTerms = useSearchingItemStore((state) => state.searchTerms)
   const { resetState } = useSearchingItemStore((state) => state.actions)
-  const { data, isLoading } = usePostStrategies({ page, size, searchTerms })
-  const path = usePathname()
+  const { data, isLoading, refetch } = usePostStrategies({ page, size, searchTerms })
 
   useEffect(() => {
-    resetState()
-  }, [path])
+    handleInitialize()
+  }, [])
+
+  const handleInitialize = async () => {
+    await resetState()
+    await refetch()
+  }
 
   const strategiesData = data?.content as StrategiesModel[]
   const totalPages = (data?.totalPages as number) || null
