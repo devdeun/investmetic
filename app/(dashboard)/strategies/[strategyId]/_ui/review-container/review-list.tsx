@@ -44,7 +44,7 @@ const ReviewList = ({ strategyId, reviews, totalReview, currentPage, setCurrentP
             starRating={review.starRating}
             content={review.content}
             isReviewer={user?.nickname === review.nickname}
-            isAdmin={!user?.role.includes('admin')}
+            isAdmin={user?.role.includes('ADMIN')}
           />
         ))}
       </ul>
