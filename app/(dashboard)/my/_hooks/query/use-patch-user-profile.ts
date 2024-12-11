@@ -61,11 +61,11 @@ const usePatchUserProfile = () => {
         }
 
         return profileResponse
-      } catch (error) {
-        if (error instanceof Error) {
-          throw new Error(`프로필 업데이트 실패: ${error.message}`)
+      } catch (err) {
+        if (err instanceof Error) {
+          throw new Error(`프로필 업데이트 실패: ${err.message}`)
         }
-        throw error
+        throw err
       }
     },
     onSuccess: (data) => {
@@ -82,8 +82,8 @@ const usePatchUserProfile = () => {
         })
       }
     },
-    onError: (error: Error) => {
-      console.error('프로필 업데이트 실패:', error.message)
+    onError: (err: Error) => {
+      console.error('프로필 업데이트 실패:', err.message)
     },
   })
 }
