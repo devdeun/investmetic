@@ -1,6 +1,6 @@
 import axiosInstance from '@/shared/api/axios'
 
-import { UserProfileModel } from '../_hooks/query/use-patch-profile'
+import { UserProfileModel } from '../_hooks/query/use-patch-user-profile'
 
 interface PatchUserProfileModel {
   isSuccess: boolean

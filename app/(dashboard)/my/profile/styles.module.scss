@@ -1,5 +1,5 @@
 .container {
-  padding: 40px 28px;
+  padding: 20px 28px;
 }
 
 .title {
@@ -10,12 +10,15 @@
 
 .wrapper {
   display: flex;
-  justify-content: space-between;
+  flex-direction: row;
+  gap: 28px;
+  height: 100%;
 }
 
 .user-profile {
   display: flex;
   flex-direction: column;
+  justify-content: start;
 }
 
 .link-button {
