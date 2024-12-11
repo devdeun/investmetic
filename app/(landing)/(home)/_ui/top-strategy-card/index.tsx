@@ -1,7 +1,7 @@
-import { StarIcon } from '@/public/icons'
 import classNames from 'classnames/bind'
 
 import Avatar from '@/shared/ui/avatar'
+import TotalStar from '@/shared/ui/total-star'
 
 import LineChart from '../line-chart'
 import styles from './styles.module.scss'
@@ -48,12 +48,7 @@ const ContentDetails = ({
   return (
     <div className={cx('content-details-wrapper')}>
       <span className={cx('subscription')}>{subscriptionCount.toLocaleString()}명 구독</span>
-      <div className={cx('rating-wrapper')}>
-        <StarIcon width="24px" height="24px" />
-        <span>
-          {averageRating} ({reviewCount})
-        </span>
-      </div>
+      <TotalStar averageRating={averageRating} totalElements={reviewCount} />
     </div>
   )
 }
