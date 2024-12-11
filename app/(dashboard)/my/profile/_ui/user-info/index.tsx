@@ -85,6 +85,9 @@ const UserInfo = ({ profile, isEditable = false }: Props) => {
 
   if (!profile) return null
 
+  const displayImageUrl = previewUrl || profile.imageUrl || ''
+  const shouldShowImage = Boolean(previewUrl || profile.imageUrl)
+
   return (
     <div className={cx('container')}>
       <p className={cx('title')}>개인 정보</p>
@@ -93,10 +96,10 @@ const UserInfo = ({ profile, isEditable = false }: Props) => {
         <div className={cx('content-wrapper')}>
           <div className={cx('left-wrapper')}>
             <div className={cx('avatar-wrapper', { isEditable })}>
-              {previewUrl || profile.imageUrl ? (
+              {shouldShowImage ? (
                 <div className={cx('image-container')}>
                   <Image
-                    src={profile.imageUrl as string}
+                    src={displayImageUrl}
                     alt="Profile"
                     width={200}
                     height={200}
