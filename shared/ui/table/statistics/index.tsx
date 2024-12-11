@@ -42,6 +42,16 @@ const StatisticsTable = ({ title, statisticsData }: Props) => {
     }
   )
 
+  const formatStatisticsValue = (key: string, value: number) => {
+    if (STATISTICS_PERCENT.includes(key)) {
+      return Number(value).toFixed(2) + ' %'
+    }
+    if (STATISTICS_DATE.includes(key)) {
+      return formatNumber(value) + ' 일'
+    }
+    return formatNumber(value) + ' 원'
+  }
+
   return (
     <div className={cx('container')}>
       <p>{titleInKorean ?? title}</p>
@@ -50,21 +60,11 @@ const StatisticsTable = ({ title, statisticsData }: Props) => {
           {groupedData.map((row, idx) => (
             <tr key={idx}>
               <td>{row[0]}</td>
-              <td>
-                {STATISTICS_PERCENT.includes(row[0] as string)
-                  ? Number(row[1]).toFixed(2) + '%'
-                  : formatNumber(row[1])}
-                {STATISTICS_DATE.includes(row[0] as string) && '일'}
-              </td>
+              <td>{formatStatisticsValue(row[0] as string, row[1] as number)}</td>
               {row[2] && (
                 <>
                   <td>{row[2]}</td>
-                  <td>
-                    {STATISTICS_PERCENT.includes(row[2] as string)
-                      ? Number(row[3]).toFixed(2) + '%'
-                      : formatNumber(row[3])}
-                    {STATISTICS_DATE.includes(row[2] as string) && '일'}
-                  </td>
+                  <td>{formatStatisticsValue(row[2] as string, row[3] as number)}</td>
                 </>
               )}
             </tr>

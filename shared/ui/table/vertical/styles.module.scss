@@ -4,7 +4,7 @@
 
   table {
     width: 100%;
-    font-size: $text-c1;
+    font-size: $text-b3;
 
     thead {
       background-color: $color-gray-100;
@@ -12,7 +12,7 @@
 
     td {
       padding: 0 4px;
-      height: 40px;
+      height: 44px;
       text-align: start;
       vertical-align: middle;
       border-top: 1px solid $color-gray-200;
@@ -35,6 +35,10 @@
   }
   @include tablet-md {
     padding: 10px;
+    table {
+      height: 40px;
+      font-size: $text-c1;
+    }
   }
 }
 
