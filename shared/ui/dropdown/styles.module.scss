@@ -2,6 +2,8 @@ $small-width: 90px;
 $small-height: 30px;
 $large-width: 160px;
 $large-height: 40px;
+$medium-width: 124px;
+$medium-height: 30px;
 
 $color-selected-text: #171717;
 
@@ -18,6 +20,9 @@ $color-selected-text: #171717;
   &-large {
     width: $large-width;
     height: fit-content;
+    @include tablet-md {
+      width: $medium-width;
+    }
   }
 }
 
@@ -68,6 +73,10 @@ $color-selected-text: #171717;
   height: $large-height;
   padding-left: 10.5px;
   padding-right: 14.5px;
+  @include tablet-md {
+    width: $medium-width;
+    height: $medium-height;
+  }
 }
 
 .options {
@@ -92,6 +101,9 @@ $color-selected-text: #171717;
   &.large {
     width: $large-width;
     max-height: 200px;
+    @include tablet-md {
+      width: $medium-width;
+    }
   }
 }
 
