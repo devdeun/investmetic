@@ -6,6 +6,7 @@ import { usePathname, useRouter } from 'next/navigation'
 
 import { PATH } from '@/shared/constants/path'
 import useModal from '@/shared/hooks/custom/use-modal'
+import { useSessionExpiryWarning } from '@/shared/hooks/custom/use-session-expiry-warning'
 import { getAccessToken } from '@/shared/lib/auth-tokens'
 import SigninCheckModal from '@/shared/ui/modal/signin-check-modal'
 
@@ -24,6 +25,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   const router = useRouter()
   const { initializeAuthState } = useAuthStore()
   const { isModalOpen, openModal, closeModal } = useModal()
+  const SessionModal = useSessionExpiryWarning()
 
   useAuth()
 
@@ -43,7 +45,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       router.replace(PATH.STRATEGIES)
       return
     }
-  }, [pathname, router])
+  }, [pathname, router, openModal])
 
   const handleLoginConfirm = () => {
     closeModal()
@@ -58,6 +60,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
         onCloseModal={closeModal}
         onConfirm={handleLoginConfirm}
       />
+      {SessionModal}
     </AuthContext.Provider>
   )
 }
