@@ -8,6 +8,7 @@ import { PATH } from '@/shared/constants/path'
 import { usePagination } from '@/shared/hooks/custom/use-pagination'
 import BackHeader from '@/shared/ui/header/back-header'
 import Pagination from '@/shared/ui/pagination'
+import Spinner from '@/shared/ui/spinner'
 import Title from '@/shared/ui/title'
 import TradersListCard from '@/shared/ui/traders-list-card'
 
@@ -32,11 +33,14 @@ const TraderDetailPage = () => {
   })
 
   const strategies = strategiesData?.content
-  const firstStrategy = strategies?.[0]
   const totalPages = strategiesData?.totalPages
 
-  if (!firstStrategy || isLoading || !totalPages || !traderProfile) {
-    return null
+  if (isLoading) {
+    return <Spinner className={cx('spinner')} />
+  }
+
+  if (!traderProfile) {
+    return <p className={cx('empty-message')}>트레이더 정보를 불러오지 못했습니다.</p>
   }
 
   return (
@@ -60,7 +64,10 @@ const TraderDetailPage = () => {
         {strategies?.map((strategy) => (
           <StrategiesItem key={strategy.strategyId} strategiesData={strategy} />
         ))}
-        <Pagination currentPage={page} maxPage={totalPages} onPageChange={handlePageChange} />
+        {!strategies?.length && <p className={cx('empty-message')}>등록한 전략이 없습니다.</p>}
+        {!!totalPages && (
+          <Pagination currentPage={page} maxPage={totalPages} onPageChange={handlePageChange} />
+        )}
       </div>
     </>
   )
