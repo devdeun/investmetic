@@ -1,7 +1,5 @@
 import getNotices from '@/app/(landing)/notices/_api/get-notice'
-import { useSuspenseQuery } from '@tanstack/react-query'
-
-// import getNotices from '../_api/get-notice'
+import { useQuery } from '@tanstack/react-query'
 
 interface Props {
   page?: number
@@ -9,7 +7,7 @@ interface Props {
 }
 
 const useAdminNotices = ({ page, size }: Props = {}) => {
-  return useSuspenseQuery({
+  return useQuery({
     queryKey: ['notices', page, size],
     queryFn: () => getNotices({ page, size }),
   })
