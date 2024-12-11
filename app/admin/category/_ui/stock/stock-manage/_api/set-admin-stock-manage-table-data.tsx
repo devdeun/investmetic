@@ -3,8 +3,9 @@ import Image from 'next/image'
 import StockActiveStateToggleButton from '../_ui/stock-active-state-toggle-button'
 import { StockResponseModel } from '../types'
 
-const setAdminStockManageTableData = (data: StockResponseModel['result']) =>
+const setAdminStockManageTableData = (data: StockResponseModel['result'], isActive: boolean) =>
   data?.content.map((data) => [
+    data.stockTypeId,
     data.stockTypeName,
     <Image
       src={data.stockTypeIconUrl}
@@ -13,7 +14,11 @@ const setAdminStockManageTableData = (data: StockResponseModel['result']) =>
       height={24}
       key={data.stockTypeName}
     />,
-    <StockActiveStateToggleButton stockTypeId={data.stockTypeId} active key={data.stockTypeId} />,
+    <StockActiveStateToggleButton
+      active={isActive}
+      stockTypeId={data.stockTypeId}
+      key={data.stockTypeId}
+    />,
   ]) ?? []
 
 export default setAdminStockManageTableData

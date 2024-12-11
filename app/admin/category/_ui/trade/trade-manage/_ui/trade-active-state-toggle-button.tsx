@@ -15,7 +15,6 @@ const TradeActiveStateToggleButton = ({ active, tradeTypeId }: Props) => {
   const { mutate, isPending } = useToggoleTradeActiveState(tradeTypeId)
   const onButtonClick = () => {
     mutate()
-    console.log('t', tradeTypeId)
   }
 
   return (

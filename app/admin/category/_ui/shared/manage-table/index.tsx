@@ -7,7 +7,6 @@ import VerticalTable from '@/shared/ui/table/vertical'
 
 import { COUNT_PER_PAGE } from './constant'
 import styles from './styles.module.scss'
-import addIndexToData from './utils/add-index-to-data'
 
 const cx = classNames.bind(styles)
 
@@ -38,7 +37,7 @@ const ManageTable = ({
       <span className={cx('title')}>{active ? '활성화' : '비활성화'}</span>
       <VerticalTable
         tableHead={['No.', domain === '종목' ? '종목명' : '매매 유형', '분류', '상태']}
-        tableBody={addIndexToData(data)}
+        tableBody={data}
         countPerPage={size}
         currentPage={1} // 공통 컴포넌트와의 호환성 문제...
       />

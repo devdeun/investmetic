@@ -2,8 +2,6 @@
 
 import { useState } from 'react'
 
-import withSuspense from '@/shared/utils/with-suspense'
-
 import ManageTable from '../../../shared/manage-table'
 import setAdminStockManageTableData from '../_api/set-admin-stock-manage-table-data'
 import useStocksData from '../_hooks/query/use-stocks-data'
@@ -16,7 +14,7 @@ const InactiveTradeManageTable = () => {
   const { data } = useStocksData('inactive', currentPage, TABLE_BODY_SIZE)
   if (!data) return null
 
-  const tableData = setAdminStockManageTableData(data)
+  const tableData = setAdminStockManageTableData(data, false)
 
   return (
     <ManageTable
@@ -30,7 +28,4 @@ const InactiveTradeManageTable = () => {
   )
 }
 
-export default withSuspense(
-  InactiveTradeManageTable,
-  <ManageTable.Skeleton size={10} domain="종목" />
-)
+export default InactiveTradeManageTable
