@@ -21,8 +21,8 @@ const AdminNoticeTable = () => {
   }
 
   const tableBody =
-    data?.content.map((data, idx) => [
-      idx + 1,
+    data?.content.map((data) => [
+      data.noticeId,
       data.title,
       data.content.slice(0, 15),
       data.createdAt.slice(0, 10),
