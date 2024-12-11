@@ -17,6 +17,11 @@ $color-selected-text: #171717;
     height: fit-content;
   }
 
+  &-medium {
+    width: $medium-width;
+    height: fit-content;
+  }
+
   &-large {
     width: $large-width;
     height: fit-content;
@@ -68,6 +73,12 @@ $color-selected-text: #171717;
   padding: 3px 6px 3px 10px;
 }
 
+.medium {
+  width: $medium-width;
+  height: $medium-height;
+  padding: 3px 6px 3px 10px;
+}
+
 .large {
   width: $large-width;
   height: $large-height;
@@ -95,6 +106,11 @@ $color-selected-text: #171717;
 
   &.small {
     width: $small-width;
+    max-height: 180px;
+  }
+
+  &.medium {
+    width: $medium-width;
     max-height: 180px;
   }
 

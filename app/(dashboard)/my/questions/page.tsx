@@ -64,7 +64,7 @@ const MyQuestionsPage = () => {
         <Title label="문의 내역" />
         <div className={cx('search-wrapper')}>
           <Select
-            size="small"
+            size="medium"
             value={selectedOption}
             placeholder="검색 조건"
             onChange={setSelectedOption}
