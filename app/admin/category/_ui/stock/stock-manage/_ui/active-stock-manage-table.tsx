@@ -16,7 +16,7 @@ const ActiveStockManageTable = () => {
   const { data } = useStocksData('active', currentPage, TABLE_BODY_SIZE)
   if (!data) return null
 
-  const tableData = setAdminStockManageTableData(data)
+  const tableData = setAdminStockManageTableData(data, true)
 
   return (
     <ManageTable
@@ -31,7 +31,4 @@ const ActiveStockManageTable = () => {
   )
 }
 
-export default withSuspense(
-  ActiveStockManageTable,
-  <ManageTable.Skeleton active size={10} domain="종목" />
-)
+export default ActiveStockManageTable
