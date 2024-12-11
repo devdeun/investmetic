@@ -17,7 +17,7 @@ const getProposalDownload = async (strategyId: number, name: string) => {
 
     downloadFile(blob, fileName)
   } catch (err) {
-    throw new Error('분석자료 다운 실패', err as AxiosError)
+    throw new Error('제안서 다운 실패', err as AxiosError)
   }
 }
 
