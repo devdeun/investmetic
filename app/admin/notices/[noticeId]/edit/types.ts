@@ -1,5 +1,5 @@
 import { APIResponseBaseModel } from '@/shared/types/response'
 
-export interface PostNoticeResopnseModel extends APIResponseBaseModel<boolean> {
+export interface PatchNoticeResponeseModel extends APIResponseBaseModel<boolean> {
   result: string[]
 }
