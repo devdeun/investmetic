@@ -1,11 +1,18 @@
-import axiosInstance from '@/shared/api/axios'
-
 const uploadFileWithPresignedUrl = async (presignedUrl: string, file: File) => {
-  await axiosInstance.put(presignedUrl, file, {
-    headers: {
-      'Content-Type': file.type,
-    },
-  })
+  try {
+    await fetch(presignedUrl, {
+      method: 'PUT',
+      body: file,
+      headers: {
+        'Content-Type': file.type,
+      },
+    })
+  } catch (err) {
+    if (err instanceof Error) {
+      throw new Error(`File upload failed: ${err.message}`)
+    }
+    throw err
+  }
 }
 
 export default uploadFileWithPresignedUrl
