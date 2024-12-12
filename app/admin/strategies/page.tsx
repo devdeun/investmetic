@@ -12,6 +12,7 @@ import AdminContentsHeader from '../_ui/admin-header'
 import setAdminStrategiesTableBody from './_api/set-admin-strategies-table-body'
 import useStrategiesData from './_hooks/query/use-strategies-data'
 import useAdminStrategiesPage from './_hooks/use-admin-strategies-page'
+import AdminStrategyPostButton from './_ui/admin-strategies-post-button'
 import styles from './page.module.scss'
 
 const cx = classNames.bind(styles)
@@ -39,7 +40,7 @@ const AdminStrategyPage = () => {
     <>
       <Title label="전략 관리" className={cx('title')} />
       <section className={cx('container')}>
-        {/* <AdminPostButton label="전략 등록하기" pathname="strategies" /> */}
+        <AdminStrategyPostButton />
         <Tabs tabs={tabs} activeTab={activeTab} onTabChange={onTabChange} />
         <AdminContentsHeader
           Left={
