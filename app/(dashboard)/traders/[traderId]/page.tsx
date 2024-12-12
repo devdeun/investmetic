@@ -46,7 +46,7 @@ const TraderDetailPage = () => {
   return (
     <>
       <div className={cx('page-container')}>
-        <BackHeader label={'목록으로 돌아가기'} />
+        <BackHeader label={'목록으로 돌아가기'} href={PATH.TRADERS} />
         <div className={cx('title')}>
           <Title label={'트레이더 상세보기'} />
         </div>
