@@ -129,6 +129,7 @@ const QuestionContainer = () => {
           title={questionDetails.title}
           contents={questionDetails.content}
           nickname={questionDetails.nickname}
+          profileImage={questionDetails.profileImageUrl}
           createdAt={questionDetails.createdAt}
           status={questionDetails.state === 'WAITING' ? '답변 대기' : '답변 완료'}
           onDelete={handleDeleteQuestionClick}
@@ -139,6 +140,7 @@ const QuestionContainer = () => {
             isAuthor={isTrader}
             contents={questionDetails.answer.content}
             nickname={questionDetails.answer.nickname}
+            profileImage={questionDetails.answer.profileImageUrl}
             createdAt={questionDetails.answer.createdAt}
             onDelete={handleDeleteAnswerClick}
           />

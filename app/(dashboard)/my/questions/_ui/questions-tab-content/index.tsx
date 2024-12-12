@@ -26,10 +26,12 @@ const QuestionsTabContent = ({ options }: Props) => {
 
   const user = useAuthStore((state) => state.user)
 
+  const userType = user?.role.includes('TRADER') ? 'TRADER' : 'INVESTOR'
+
   const { data } = useGetMyQuestionList({
     page,
     size: COUNT_PER_PAGE,
-    userType: user?.role.includes('TRADER') ? 'TRADER' : 'INVESTOR',
+    userType,
     options,
   })
 
@@ -42,19 +44,24 @@ const QuestionsTabContent = ({ options }: Props) => {
   return (
     <>
       <ul className={cx('question-list')}>
-        {questionsData?.map((question) => (
-          <li key={question.questionId}>
-            <QuestionCard
-              questionId={question.questionId}
-              strategyName={question.strategyName}
-              title={question.title}
-              questionState={question.stateCondition}
-              contents={question.questionContent}
-              nickname={question.nickname}
-              createdAt={question.createdAt}
-            />
-          </li>
-        ))}
+        {questionsData?.map((question) => {
+          const userInfo = userType === 'TRADER' ? question.investor : question.trader
+
+          return (
+            <li key={question.questionId}>
+              <QuestionCard
+                questionId={question.questionId}
+                strategyName={question.strategy.name}
+                title={question.title}
+                questionState={question.stateCondition}
+                contents={question.questionContent}
+                nickname={userInfo?.userName || ''}
+                profileImage={userInfo?.profileImageUrl}
+                createdAt={question.createdAt}
+              />
+            </li>
+          )
+        })}
       </ul>
 
       {(!questionsData || !questionsData.length) && (
