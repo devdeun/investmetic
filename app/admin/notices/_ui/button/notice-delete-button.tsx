@@ -34,9 +34,7 @@ const NoticeDeleteButton = ({ noticeId }: Props) => {
         message={`해당 공지를\n삭제하시겠습니까?`}
         isModalOpen={isModalOpen}
         onCancel={closeModal}
-        onConfirm={() => {
-          mutate()
-        }}
+        onConfirm={mutate}
       />
     </>
   )
