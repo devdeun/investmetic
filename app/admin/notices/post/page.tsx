@@ -18,7 +18,7 @@ const cx = classNames.bind(styles)
 
 const AdminNoticePostPage = () => {
   const { formData, onInputChange } = useNoticeForm()
-  const { mutate: postNotice } = usePostNotice()
+  const { mutate: postNotice, isPending } = usePostNotice()
 
   return (
     <>
@@ -67,7 +67,7 @@ const AdminNoticePostPage = () => {
               }
             />
           </div>
-          <Button size="small" type="submit" variant="filled">
+          <Button disabled={isPending} size="small" type="submit" variant="filled">
             공지 등록하기
           </Button>
         </form>
