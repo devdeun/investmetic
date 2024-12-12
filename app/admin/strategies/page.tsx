@@ -21,16 +21,18 @@ const AdminStrategyPage = () => {
   const {
     tabs,
     activeTab,
-    keyword,
-    setKeyword,
+    inputValue,
+    setInputValue,
     searchParams,
     searchWithKeyword,
     onTabChange,
+    currentPage,
     setCurrentPage,
   } = useAdminStrategiesPage()
 
   const { data, isLoading } = useStrategiesData({
     ...searchParams,
+    size: 8,
     isApproved: activeTab === 'ALL' ? undefined : 'PENDING',
   })
 
@@ -45,15 +47,15 @@ const AdminStrategyPage = () => {
         <AdminContentsHeader
           Left={
             <span>
-              총 <span className={cx('color-primary-500')}>{data.totalElements}</span>명
+              총 <span className={cx('color-primary-500')}>{data.totalElements}</span>개
             </span>
           }
           Right={
             <div>
               <SearchInput
-                value={keyword}
+                value={inputValue}
                 placeholder="전략명을 입력하세요."
-                onChange={(e) => setKeyword(e.target.value)}
+                onChange={(e) => setInputValue(e.target.value)}
                 onSearchIconClick={searchWithKeyword}
               />
             </div>
@@ -67,7 +69,7 @@ const AdminStrategyPage = () => {
           currentPage={1}
         />
         <Pagination
-          currentPage={data.page}
+          currentPage={currentPage}
           maxPage={data.totalPages}
           onPageChange={setCurrentPage}
         />
