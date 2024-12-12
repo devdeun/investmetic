@@ -25,9 +25,7 @@ export const processExcelFile = (file: File): Promise<RowDataModel[]> => {
         })
 
         const header = jsonData[0]
-        if (!header || header[0] !== '일자' || header[1] !== '입출금' || header[2] !== '일일손익') {
-          throw new Error('올바른 형식의 엑셀 파일이 아닙니다.')
-        }
+        validateHeaders(header)
 
         const rows: RowDataModel[] = jsonData
           .slice(1)
@@ -52,7 +50,7 @@ export const processExcelFile = (file: File): Promise<RowDataModel[]> => {
 const parseExcelDate = (excelDate: number | string | null): string => {
   if (excelDate === null) return ''
 
-  const dateStr = String(excelDate)
+  const dateStr = String(excelDate).replace(/[^0-9]/g, '')
   if (dateStr.length === 8) {
     const year = dateStr.substring(0, 4)
     const month = dateStr.substring(4, 6)
@@ -69,4 +67,16 @@ const parseExcelDate = (excelDate: number | string | null): string => {
   }
 
   return String(excelDate)
+}
+
+const validateHeaders = (header: (string | number | null)[]) => {
+  const requiredHeaders = ['일자', '입출금', '일손익']
+
+  const missingHeaders = requiredHeaders.filter(
+    (requiredHeader) => !header.some((h) => h?.toString().includes(requiredHeader))
+  )
+
+  if (missingHeaders.length > 0) {
+    throw new Error(`다음 헤더를 포함해야 합니다: ${missingHeaders.join(', ')}`)
+  }
 }
