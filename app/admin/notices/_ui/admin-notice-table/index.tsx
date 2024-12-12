@@ -8,15 +8,18 @@ import Pagination from '@/shared/ui/pagination'
 import VerticalTable from '@/shared/ui/table/vertical'
 
 import useAdminNotices from '../../_hook/query/get-admin-notices'
-import NoticeDeleteButton from '../notice-delete-button'
+import useAdminNoticePage from '../../_hook/use-admin-notice-page'
+import NoticeDeleteButton from '../button/notice-delete-button'
+import NoticeEditButton from '../button/notice-edit-button'
 import styles from './styles.module.scss'
 
 const cx = classNames.bind(styles)
 
 const AdminNoticeTable = () => {
+  const { currentPage, setCurrentPage } = useAdminNoticePage()
   const { data, isLoading } = useAdminNotices()
 
-  if (isLoading) {
+  if (isLoading || !data) {
     return <VerticalTable.Skeleton tableHead={['No.', '제목', '내용', '작성일', '']} />
   }
 
@@ -25,16 +28,9 @@ const AdminNoticeTable = () => {
       data.noticeId,
       data.title,
       data.content.slice(0, 15),
-      data.createdAt.slice(0, 10),
-      <Button.ButtonGroup key={data.content}>
-        <Button
-          onClick={() => {}}
-          size="small"
-          className={cx('button')}
-          style={{ padding: '16px 7px' }}
-        >
-          수정
-        </Button>
+      data.createdAt,
+      <Button.ButtonGroup key={data.noticeId}>
+        <NoticeEditButton noticeId={data.noticeId} />
         <NoticeDeleteButton noticeId={data.noticeId} />
       </Button.ButtonGroup>,
     ]) || []
@@ -55,7 +51,11 @@ const AdminNoticeTable = () => {
         countPerPage={10}
         currentPage={1}
       />
-      <Pagination currentPage={1} maxPage={1} onPageChange={() => {}} />
+      <Pagination
+        currentPage={currentPage}
+        maxPage={data?.totalPages}
+        onPageChange={setCurrentPage}
+      />
     </>
   )
 }
