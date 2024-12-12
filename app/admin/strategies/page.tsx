@@ -17,8 +17,16 @@ import styles from './page.module.scss'
 const cx = classNames.bind(styles)
 
 const AdminStrategyPage = () => {
-  const { tabs, activeTab, keyword, setKeyword, searchParams, searchWithKeyword, onTabChange } =
-    useAdminStrategiesPage()
+  const {
+    tabs,
+    activeTab,
+    keyword,
+    setKeyword,
+    searchParams,
+    searchWithKeyword,
+    onTabChange,
+    setCurrentPage,
+  } = useAdminStrategiesPage()
 
   const { data, isLoading } = useStrategiesData({
     ...searchParams,
@@ -57,7 +65,11 @@ const AdminStrategyPage = () => {
           countPerPage={data.size}
           currentPage={1}
         />
-        <Pagination currentPage={data.page} maxPage={data.totalPages} onPageChange={() => {}} />
+        <Pagination
+          currentPage={data.page}
+          maxPage={data.totalPages}
+          onPageChange={setCurrentPage}
+        />
       </section>
     </>
   )

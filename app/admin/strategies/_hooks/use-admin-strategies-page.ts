@@ -6,6 +6,8 @@ import { AdminStrategiesTapType } from '../types'
 const useAdminQuestionsPage = () => {
   const [activeTab, setActiveTab] = useState<AdminStrategiesTapType>('ALL')
   const [keyword, setKeyword] = useState('')
+  const [currentPage, setCurrentPage] = useState(1)
+
   const initialSearchParams = {
     searchWord: '',
   }
@@ -33,6 +35,8 @@ const useAdminQuestionsPage = () => {
     setActiveTab,
     keyword,
     setKeyword,
+    currentPage,
+    setCurrentPage,
     searchParams,
     searchWithKeyword,
     onTabChange,
