@@ -14,6 +14,13 @@
   gap: 4px;
   border-radius: 5px;
   background-color: $color-white;
+  .input,
+  .name-input {
+    padding: 10px;
+    height: 30px;
+    width: 100%;
+  }
+
   .name {
     @include typo-b1;
   }
@@ -39,6 +46,11 @@
   padding: 20px;
   border-radius: 5px;
   background-color: $color-white;
+
+  &.edit {
+    background-color: $color-gray-200;
+  }
+
   .info-item {
     width: 100%;
     height: 100%;
