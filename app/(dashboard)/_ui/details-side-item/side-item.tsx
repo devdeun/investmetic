@@ -22,6 +22,7 @@ interface Props {
   profileImage?: string
   isMyStrategy?: boolean
   strategyName?: string
+  isEditable?: boolean
 }
 
 const SideItem = ({
@@ -31,6 +32,7 @@ const SideItem = ({
   profileImage,
   isMyStrategy = false,
   strategyName,
+  isEditable = false,
 }: Props) => {
   const {
     isModalOpen: isAddQuestionModalOpen,
@@ -47,7 +49,7 @@ const SideItem = ({
   const isTrader = user?.role.includes('TRADER')
 
   return (
-    <div className={cx('side-item')}>
+    <div className={cx('side-item', { edit: isEditable })}>
       <div className={cx('title')}>{title}</div>
       <div className={cx('data')}>
         {title === '트레이더' ? (
