@@ -1,5 +1,7 @@
 'use client'
 
+import Link from 'next/link'
+
 import AdminContentsHeader from '@/app/admin/_ui/admin-header'
 import classNames from 'classnames/bind'
 
@@ -26,7 +28,9 @@ const AdminNoticeTable = () => {
   const tableBody =
     data?.content.map((data) => [
       data.noticeId,
-      data.title,
+      <Link href={`/notices/${data.noticeId}/detail`} key={data.noticeId}>
+        {data.title}
+      </Link>,
       data.content.slice(0, 15),
       data.createdAt,
       <Button.ButtonGroup key={data.noticeId}>
