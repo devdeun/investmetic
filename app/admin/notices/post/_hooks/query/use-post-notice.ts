@@ -3,6 +3,7 @@ import { useRouter } from 'next/navigation'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import axiosInstance from '@/shared/api/axios'
+import { QUERY_KEY } from '@/shared/constants/query-key'
 import uploadFileWithPresignedUrl from '@/shared/utils/upload-file-with-presigned-url'
 
 import { NoticeFormModel } from '../../../types'
@@ -34,7 +35,7 @@ const usePostNotice = () => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['notices'],
+        queryKey: [QUERY_KEY.NOTICES],
       })
       router.replace('/admin/notices')
     },

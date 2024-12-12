@@ -1,5 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
+import { QUERY_KEY } from '@/shared/constants/query-key'
+
 import ToggleStockActiveState from '../../_api/toggle-stock-active-state'
 
 const useToggoleStockActiveState = (stockTypeId: number) => {
@@ -9,7 +11,7 @@ const useToggoleStockActiveState = (stockTypeId: number) => {
     mutationFn: () => ToggleStockActiveState(stockTypeId),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['adminStocks'],
+        queryKey: [QUERY_KEY.ADMIN_STOCKS],
       })
     },
     onError: (err) => {

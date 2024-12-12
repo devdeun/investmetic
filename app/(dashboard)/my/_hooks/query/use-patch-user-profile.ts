@@ -1,5 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
+import { QUERY_KEY } from '@/shared/constants/query-key'
+
 import patchProfile from '../../_api/patch-user-profile'
 
 export interface UserProfileModel {
@@ -69,11 +71,11 @@ const usePatchUserProfile = () => {
       }
     },
     onSuccess: (data) => {
-      queryClient.invalidateQueries({ queryKey: ['userProfile'] })
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEY.MY_PROFILE] })
 
       if (data.result) {
         const imageUrl = data.result.split('?')[0]
-        queryClient.setQueryData<UserProfileDataModel>(['userProfile'], (oldData) => {
+        queryClient.setQueryData<UserProfileDataModel>([QUERY_KEY.MY_PROFILE], (oldData) => {
           if (!oldData) return oldData
           return {
             ...oldData,

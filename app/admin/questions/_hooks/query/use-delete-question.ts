@@ -1,5 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
+import { QUERY_KEY } from '@/shared/constants/query-key'
+
 import deleteAdminQuestion from '../../_api/delete-admin-question'
 
 interface ArgModel {
@@ -11,7 +13,7 @@ const useDeleteQuestion = ({ strategyId, questionId }: ArgModel) => {
   return useMutation({
     mutationFn: () => deleteAdminQuestion({ strategyId, questionId }),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['adminQuestions'] })
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEY.ADMIN_QUESTIONS] })
     },
   })
 }

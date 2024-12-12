@@ -5,6 +5,8 @@ import { useRouter } from 'next/navigation'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
 
+import { QUERY_KEY } from '@/shared/constants/query-key'
+
 import {
   StrategyModel,
   StrategyResponseModel,
@@ -25,7 +27,7 @@ export const useAddStrategy = () => {
     StrategyTypeResponseModel,
     AxiosError<ErrorResponseModel>
   >({
-    queryKey: ['strategyTypes'],
+    queryKey: [QUERY_KEY.STRATEGY_TYPE],
     queryFn: () => strategyApi.getStrategyTypes().then((response) => response.data),
     retry: false,
     refetchOnWindowFocus: false,
@@ -39,7 +41,7 @@ export const useAddStrategy = () => {
     mutationFn: (data) => strategyApi.registerStrategy(data).then((response) => response.data),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['myStrategies'],
+        queryKey: [QUERY_KEY.MY_STRATEGIES],
       })
       router.back()
     },
