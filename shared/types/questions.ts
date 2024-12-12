@@ -29,7 +29,7 @@ export interface QuestionModel {
   }
   stateCondition: QuestionStateConditionType
   createdAt: string
-  investor: QuestionUserModel
+  investor?: QuestionUserModel
   trader?: QuestionUserModel
 }
 

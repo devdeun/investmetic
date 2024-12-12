@@ -44,20 +44,24 @@ const QuestionsTabContent = ({ options }: Props) => {
   return (
     <>
       <ul className={cx('question-list')}>
-        {questionsData?.map((question) => (
-          <li key={question.questionId}>
-            <QuestionCard
-              questionId={question.questionId}
-              strategyName={question.strategy.name}
-              title={question.title}
-              questionState={question.stateCondition}
-              contents={question.questionContent}
-              nickname={question.investor.userName}
-              profileImage={question.investor.profileImageUrl}
-              createdAt={question.createdAt}
-            />
-          </li>
-        ))}
+        {questionsData?.map((question) => {
+          const userInfo = userType === 'TRADER' ? question.investor : question.trader
+
+          return (
+            <li key={question.questionId}>
+              <QuestionCard
+                questionId={question.questionId}
+                strategyName={question.strategy.name}
+                title={question.title}
+                questionState={question.stateCondition}
+                contents={question.questionContent}
+                nickname={userInfo?.userName || ''}
+                profileImage={userInfo?.profileImageUrl}
+                createdAt={question.createdAt}
+              />
+            </li>
+          )
+        })}
       </ul>
 
       {(!questionsData || !questionsData.length) && (
