@@ -16,13 +16,21 @@ const cx = classNames.bind(styles)
 
 interface Props {
   strategyId: number
+  name: string
+  hasProposal: boolean
   iconUrls?: string[]
   iconNames?: string[]
-  name: string
   isEditable?: boolean
 }
 
-const StrategyNameBox = ({ strategyId, iconUrls, iconNames, name, isEditable = false }: Props) => {
+const StrategyNameBox = ({
+  strategyId,
+  name,
+  hasProposal,
+  iconUrls,
+  iconNames,
+  isEditable = false,
+}: Props) => {
   const information = useEditInformationStore((state) => state.information)
   const setStrategyName = useEditInformationStore((state) => state.actions.setStrategyName)
   const { mutate } = useGetProposalDownload()
@@ -49,7 +57,7 @@ const StrategyNameBox = ({ strategyId, iconUrls, iconNames, name, isEditable = f
       ) : (
         <p className={cx('name')}>{name}</p>
       )}
-      <button onClick={handleDownload}>제안서 다운로드</button>
+      {hasProposal && <button onClick={handleDownload}>제안서 다운로드</button>}
     </div>
   )
 }

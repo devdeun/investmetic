@@ -72,6 +72,7 @@ export interface StrategyDetailsInformationModel extends BaseStrategyModel {
   kpRatio: number
   finalProfitLossDate: string
   createdAt: string
+  hasProposal: boolean
 }
 
 export interface StrategyCardModel {
