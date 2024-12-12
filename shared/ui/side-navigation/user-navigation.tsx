@@ -2,7 +2,7 @@
 
 import { usePathname } from 'next/navigation'
 
-import { ChangeIcon, ProfileIcon, SignOutIcon } from '@/public/icons'
+import { ChangeIcon, SignOutIcon } from '@/public/icons'
 import classNames from 'classnames/bind'
 
 import { PATH } from '@/shared/constants/path'
@@ -23,7 +23,7 @@ const UserNavigation = () => {
   const isAdminPage = path.startsWith(PATH.ADMIN)
 
   if (!user) return null
-  console.log(user)
+
   return (
     <nav className={cx('user-navigation')} aria-label="사용자 메뉴">
       <ul>
