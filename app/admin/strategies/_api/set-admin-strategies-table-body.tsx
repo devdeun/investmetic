@@ -1,4 +1,5 @@
 import { Button } from '@/shared/ui/button'
+import { formatDate } from '@/shared/utils/format'
 
 import AdminStrategiesApproveTd from '../_ui/admin-strategies-approve-td'
 import StrategyDeleteButton from '../_ui/button/strategy-delete-button copy'
@@ -10,7 +11,7 @@ const setAdminStrategiesTableBody = (data: StrategiesResponseModel['result']['co
   data.map((data) => {
     return [
       data.strategyId,
-      data.createAt,
+      formatDate(data.createAt),
       data.strategyName,
       data.nickname,
       <PublicSelect data={data} key={data.strategyId} />,
