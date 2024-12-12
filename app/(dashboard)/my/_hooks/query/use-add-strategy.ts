@@ -27,7 +27,7 @@ export const useAddStrategy = () => {
     StrategyTypeResponseModel,
     AxiosError<ErrorResponseModel>
   >({
-    queryKey: [QUERY_KEY.STRATEGY_TYPE],
+    queryKey: [QUERY_KEY.STRATEGY_TYPES],
     queryFn: () => strategyApi.getStrategyTypes().then((response) => response.data),
     retry: false,
     refetchOnWindowFocus: false,

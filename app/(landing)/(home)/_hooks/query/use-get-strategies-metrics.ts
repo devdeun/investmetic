@@ -7,7 +7,7 @@ import { AverageMetricsChartDataModel } from '../../_ui/average-metrics-section/
 
 const useGetStrategiesMetrics = () => {
   return useQuery<AverageMetricsChartDataModel>({
-    queryKey: [QUERY_KEY.TOTAL_STRATEGIES_MATRICS],
+    queryKey: [QUERY_KEY.TOTAL_STRATEGIES_METRICS],
     queryFn: getStrategiesMetrics,
   })
 }

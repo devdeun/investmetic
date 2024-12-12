@@ -8,7 +8,7 @@ export const QUERY_KEY = {
 
   // sTRATEGY
   STRATEGIES: 'strategies',
-  STRATEGY_TYPE: 'strategyTypes',
+  STRATEGY_TYPES: 'strategyTypes',
   STRATEGY_DETAILS: 'strategyDetails',
   STRATEGY_REVIEWS: 'strategyReviews',
   STRATEGY_ACCOUNT_IMAGES: 'strategyAccountImages',
@@ -37,7 +37,7 @@ export const QUERY_KEY = {
   ADMIN_USERS: 'adminUsers',
 
   // etc
-  TOTAL_STRATEGIES_MATRICS: 'totalStrategiesMetrics',
+  TOTAL_STRATEGIES_METRICS: 'totalStrategiesMetrics',
   TOP_RANKING_SM_SCORE: 'topRankingSmScore',
   TOP_RANKING: 'topRanking',
   USER_METRICS: 'userMetrics',
