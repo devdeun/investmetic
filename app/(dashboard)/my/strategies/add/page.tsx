@@ -85,7 +85,6 @@ const StrategyAddPage = () => {
         ? '최소 운용가능 금액을 선택해주세요.'
         : '',
       description: !formData.description ? '전략 소개를 입력해주세요.' : '',
-      proposalFile: !formData.proposalFile ? '제안서를 업로드해주세요.' : '',
     }
 
     setFormErrors(newErrors)
@@ -111,12 +110,12 @@ const StrategyAddPage = () => {
     e.preventDefault()
     if (!validateForm() || !formData.tradeType) return
 
-    const fileInfo: ProposalFileInfoModel | undefined = formData.proposalFile
+    const fileInfo: ProposalFileInfoModel | null = formData.proposalFile
       ? {
           proposalFileName: formData.proposalFile.name,
           proposalFileSize: formData.proposalFile.size,
         }
-      : undefined
+      : null
 
     const data: StrategyModel = {
       strategyName: formData.strategyName,
