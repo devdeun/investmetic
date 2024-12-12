@@ -25,12 +25,14 @@ interface Props {
   profileImage?: string
   isMyStrategy?: boolean
   strategyName?: string
+  isEditable?: boolean
 }
 
 const DetailsSideItem = ({
   strategyId,
   information,
   profileImage,
+  isEditable = false,
   isMyStrategy = true,
   strategyName,
 }: Props) => {
@@ -38,7 +40,7 @@ const DetailsSideItem = ({
   return (
     <>
       {isArray ? (
-        <div className={cx('side-items')}>
+        <div className={cx('side-items', { edit: isEditable })}>
           {information.map((item) => (
             <div key={item.title}>
               <div className={cx('title')}>{item.title}</div>
@@ -56,6 +58,7 @@ const DetailsSideItem = ({
           profileImage={profileImage}
           isMyStrategy={isMyStrategy}
           strategyName={strategyName}
+          isEditable={isEditable}
         />
       )}
     </>

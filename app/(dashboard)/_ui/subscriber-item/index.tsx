@@ -14,6 +14,7 @@ const cx = classNames.bind(styles)
 
 interface Props {
   isMyStrategy?: boolean
+  isEditable?: boolean
   isSubscribed?: boolean
   strategyId?: number
   subscribers: number
@@ -22,6 +23,7 @@ interface Props {
 
 const SubscriberItem = ({
   isSubscribed,
+  isEditable = false,
   isMyStrategy = false,
   strategyId,
   subscribers,
@@ -30,7 +32,7 @@ const SubscriberItem = ({
   const currentPath = usePathname()
 
   return (
-    <div className={cx('container')}>
+    <div className={cx('container', { edit: isEditable })}>
       <div>
         <span>구독 </span>
         <span>| </span>
