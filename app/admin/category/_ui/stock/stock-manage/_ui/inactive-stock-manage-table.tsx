@@ -19,7 +19,7 @@ const InactiveTradeManageTable = () => {
   return (
     <ManageTable
       data={tableData}
-      size={TABLE_BODY_SIZE}
+      size={data.size}
       currentPage={currentPage}
       setCurrentPage={setCurrentPage}
       maxPage={data?.totalPages}
