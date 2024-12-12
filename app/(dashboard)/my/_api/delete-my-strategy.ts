@@ -1,10 +1,8 @@
 import axiosInstance from '@/shared/api/axios'
+import { APIResponseBaseModel } from '@/shared/types/response'
 
-export interface DeleteStrategyResponseModel {
-  isSuccess: boolean
-  message: string
+export interface DeleteStrategyResponseModel extends APIResponseBaseModel<boolean> {
   result: Record<string, never>
-  code: number
 }
 
 export const deleteMyStrategy = async (
