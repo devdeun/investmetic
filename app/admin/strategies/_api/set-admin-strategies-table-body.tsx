@@ -3,16 +3,17 @@ import { Button } from '@/shared/ui/button'
 import AdminStrategiesApproveTd from '../_ui/admin-strategies-approve-td'
 import StrategyDeleteButton from '../_ui/button/strategy-delete-button copy'
 import StrategyEditButton from '../_ui/button/strategy-edit-button'
+import PublicSelect from '../_ui/public-select'
 import { StrategiesResponseModel } from '../types'
 
 const setAdminStrategiesTableBody = (data: StrategiesResponseModel['result']['content']) =>
-  data.map((data, idx) => {
+  data.map((data) => {
     return [
-      idx + 1,
+      data.strategyId,
       data.createAt,
       data.strategyName,
       data.nickname,
-      data.isPublic === 'PUBLIC' ? '공개' : '비공개',
+      <PublicSelect data={data} key={data.strategyId} />,
       <AdminStrategiesApproveTd
         isApproved={data.isApproved}
         strategyId={data.strategyId}
