@@ -46,6 +46,7 @@ const DetailsInformation = ({
           name={information.strategyName}
           strategyId={strategyId}
           isEditable={isEditable}
+          hasProposal={information.hasProposal}
         />
         <InvestInformation
           stock={information.stockTypeInfo?.stockTypeNames || []}
