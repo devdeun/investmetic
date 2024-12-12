@@ -45,7 +45,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       router.replace(PATH.STRATEGIES)
       return
     }
-  }, [pathname, router, openModal])
+  }, [pathname, router])
 
   const handleLoginConfirm = () => {
     closeModal()
