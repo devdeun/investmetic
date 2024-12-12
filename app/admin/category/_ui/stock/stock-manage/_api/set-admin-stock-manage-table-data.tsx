@@ -1,5 +1,8 @@
 import Image from 'next/image'
 
+import { Button } from '@/shared/ui/button'
+
+import InactiveStockDeleteButton from '../_ui/inactive-stock-delete-button'
 import StockActiveStateToggleButton from '../_ui/stock-active-state-toggle-button'
 import { StockResponseModel } from '../types'
 
@@ -14,11 +17,10 @@ const setAdminStockManageTableData = (data: StockResponseModel['result'], isActi
       height={24}
       key={data.stockTypeName}
     />,
-    <StockActiveStateToggleButton
-      active={isActive}
-      stockTypeId={data.stockTypeId}
-      key={data.stockTypeId}
-    />,
+    <Button.ButtonGroup key={data.stockTypeId}>
+      <StockActiveStateToggleButton active={isActive} stockTypeId={data.stockTypeId} />
+      {!isActive && <InactiveStockDeleteButton stockTypeId={data.stockTypeId} />}
+    </Button.ButtonGroup>,
   ]) ?? []
 
 export default setAdminStockManageTableData
