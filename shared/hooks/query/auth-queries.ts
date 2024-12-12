@@ -1,5 +1,6 @@
 import { useRouter } from 'next/navigation'
 
+import useSearchingItemStore from '@/app/(dashboard)/strategies/_ui/search-bar/_store/use-searching-item-store'
 import { useMutation } from '@tanstack/react-query'
 import axios from 'axios'
 
@@ -59,6 +60,7 @@ export const useLogoutMutation = () => {
         isAuthenticated: false,
         user: null,
       })
+      useSearchingItemStore.getState().actions.resetState()
       router.replace(PATH.SIGN_IN)
     },
     onError: (error) => {
@@ -68,6 +70,7 @@ export const useLogoutMutation = () => {
         isAuthenticated: false,
         user: null,
       })
+      useSearchingItemStore.getState().actions.resetState()
       router.replace(PATH.SIGN_IN)
     },
   })
