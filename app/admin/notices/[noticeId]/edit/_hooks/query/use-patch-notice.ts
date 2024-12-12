@@ -1,22 +1,22 @@
 import { useRouter } from 'next/navigation'
 
+import { NoticeFormModel } from '@/app/admin/notices/types'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import axiosInstance from '@/shared/api/axios'
 import uploadFileWithPresignedUrl from '@/shared/utils/upload-file-with-presigned-url'
 
-import { NoticeFormModel } from '../../../types'
-import { PostNoticeResopnseModel } from '../../types'
+import { PatchNoticeResponeseModel } from '../../types'
 
-const usePostNotice = () => {
+const usePatchNotice = (formData: NoticeFormModel, noticeId: string) => {
   const router = useRouter()
   const queryClient = useQueryClient()
 
   return useMutation({
-    mutationFn: async (formData: NoticeFormModel) => {
-      // Presigned URL 요청`
-      const uploadResponse = await axiosInstance.post<PostNoticeResopnseModel>(
-        '/api/admin/notices',
+    mutationFn: async () => {
+      // Presigned URL 요청
+      const uploadResponse = await axiosInstance.patch<PatchNoticeResponeseModel>(
+        `/api/admin/notices/${noticeId}`,
         {
           title: formData.title,
           content: formData.content,
@@ -41,4 +41,4 @@ const usePostNotice = () => {
   })
 }
 
-export default usePostNotice
+export default usePatchNotice

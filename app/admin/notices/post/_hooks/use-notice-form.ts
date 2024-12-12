@@ -1,13 +1,15 @@
 import { useState } from 'react'
 
-import { NoticeFormModel } from '../types'
+import { NoticeFormModel } from '../../types'
 
-const useNoticeForm = () => {
-  const [formData, setFormData] = useState<NoticeFormModel>({
+const useNoticeForm = (
+  initialValue = {
     title: '',
     content: '',
-    files: [],
-  })
+    // files: [],
+  }
+) => {
+  const [formData, setFormData] = useState<NoticeFormModel>(initialValue)
 
   const onInputChange = (name: keyof NoticeFormModel, value: string | File[]) => {
     setFormData((prev) => ({
@@ -18,6 +20,7 @@ const useNoticeForm = () => {
 
   return {
     formData,
+    setFormData,
     onInputChange,
   }
 }
