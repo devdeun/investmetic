@@ -49,7 +49,7 @@ const AdminNoticePostPage = () => {
               label="내용"
               Input={
                 <Textarea
-                  className={cx('textarea')}
+                  className={cx('content')}
                   placeholder="내용을 입력하세요."
                   value={formData.content}
                   onChange={(e) => onInputChange('content', e.target.value)}

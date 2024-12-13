@@ -15,10 +15,13 @@
     &.expand {
       display: contents;
     }
-    p {
+    pre {
       @include typo-b3;
       line-height: 18px;
       color: $color-gray-600;
+      word-wrap: break-word;
+      word-break: break-word;
+      white-space: pre-wrap;
     }
   }
 

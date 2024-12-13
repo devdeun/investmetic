@@ -82,6 +82,9 @@
   }
   .content {
     margin: 10px 0;
+    word-wrap: break-word;
+    word-break: break-word;
+    white-space: pre-wrap;
     @include typo-b2;
     font-weight: $text-normal;
     @include tablet-sm {

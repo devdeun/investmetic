@@ -85,7 +85,7 @@ const ReviewItem = ({
           onCancel={() => setIsEditable(false)}
         />
       ) : (
-        <div className={cx('content')}>{content}</div>
+        <pre className={cx('content')}>{content}</pre>
       )}
       <ReviewGuideModal
         isModalOpen={isModalOpen}

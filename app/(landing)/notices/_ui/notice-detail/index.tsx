@@ -23,7 +23,9 @@ const NoticeDetail = ({ noticeId }: { noticeId: number }) => {
         <div className={cx('date')}>{notice?.createdAt}</div>
       </div>
       <div className={cx('top-line')}></div>
-      <div className={cx('content')}>{notice?.content}</div>
+      <div className={cx('content')}>
+        <pre>{notice?.content}</pre>
+      </div>
       <div className={cx('bottom-line')}></div>
 
       <div className={cx('attach-file')}>

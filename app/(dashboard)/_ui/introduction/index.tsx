@@ -22,7 +22,7 @@ const StrategyIntroduction = ({ content, isEditable = false }: Props) => {
   const [shouldShowMore, setShouldShowMore] = useState(false)
   const [editContent, setEditContent] = useState<HTMLTextAreaElement | string | null>(null)
   const [isOverflow, setIsOverflow] = useState(false)
-  const contentRef = useRef<HTMLParagraphElement>(null)
+  const contentRef = useRef<HTMLPreElement>(null)
   const setDescription = useEditInformationStore((state) => state.actions.setDescription)
 
   useEffect(() => {
@@ -53,7 +53,7 @@ const StrategyIntroduction = ({ content, isEditable = false }: Props) => {
             onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => setEditContent(e.target.value)}
           />
         ) : (
-          <p ref={contentRef}>{content}</p>
+          <pre ref={contentRef}>{content}</pre>
         )}
       </div>
       {isOverflow && (
