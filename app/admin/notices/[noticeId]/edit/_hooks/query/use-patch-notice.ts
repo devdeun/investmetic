@@ -4,6 +4,7 @@ import { NoticeFormModel } from '@/app/admin/notices/types'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import axiosInstance from '@/shared/api/axios'
+import { QUERY_KEY } from '@/shared/constants/query-key'
 import uploadFileWithPresignedUrl from '@/shared/utils/upload-file-with-presigned-url'
 
 import { PatchNoticeResponeseModel } from '../../types'
@@ -34,7 +35,7 @@ const usePatchNotice = (formData: NoticeFormModel, noticeId: string) => {
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['notices'],
+        queryKey: [QUERY_KEY.NOTICES],
       })
       router.replace('/admin/notices')
     },

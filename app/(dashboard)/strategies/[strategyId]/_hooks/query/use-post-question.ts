@@ -1,5 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
+import { QUERY_KEY } from '@/shared/constants/query-key'
+
 import postQuestions from '../../_api/post-question'
 
 interface Props {
@@ -15,7 +17,7 @@ const usePostQuestion = () => {
     mutationFn: ({ strategyId, title, content }: Props) =>
       postQuestions(strategyId, title, content),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['questionList'] })
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEY.QUESTION_LIST] })
     },
   })
 }

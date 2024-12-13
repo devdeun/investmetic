@@ -1,5 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
+import { QUERY_KEY } from '@/shared/constants/query-key'
+
 import {
   EditAnalysisPayloadModel,
   deleteAllAnalysis,
@@ -9,7 +11,7 @@ import {
 
 export const useMyAnalysisMutation = (strategyId: number, page: number, size: number) => {
   const queryClient = useQueryClient()
-  const queryKey = ['myDailyAnalysis', strategyId, page, size]
+  const queryKey = [QUERY_KEY.MY_DAILY_ANALYSIS, strategyId, page, size]
 
   const { mutate: editAnalysisData } = useMutation({
     mutationFn: ({ payload }: { payload: EditAnalysisPayloadModel }) => {

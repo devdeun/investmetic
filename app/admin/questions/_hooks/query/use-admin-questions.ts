@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query'
 
+import { QUERY_KEY } from '@/shared/constants/query-key'
 import { QuestionSearchConditionType, QuestionStateTapType } from '@/shared/types/questions'
 
 import getAdminQuestions from '../../_api/get-admin-questions'
@@ -20,7 +21,7 @@ const useAdminQuestions = ({
   size = 10,
 }: ArgModel) => {
   return useQuery({
-    queryKey: ['adminQuestions', [keyword, searchCondition, stateCondition, page, size]],
+    queryKey: [QUERY_KEY.ADMIN_QUESTIONS, [keyword, searchCondition, stateCondition, page, size]],
     queryFn: () =>
       getAdminQuestions({
         keyword,

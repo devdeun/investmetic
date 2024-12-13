@@ -1,5 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
+import { QUERY_KEY } from '@/shared/constants/query-key'
+
 import deleteInactiveStock from '../../_api/delete-inactive-stock'
 
 const useDeleteInactiveStock = (stockTypeId: number) => {
@@ -9,7 +11,7 @@ const useDeleteInactiveStock = (stockTypeId: number) => {
     mutationFn: () => deleteInactiveStock(stockTypeId),
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['adminStocks'],
+        queryKey: [QUERY_KEY.ADMIN_STOCKS],
       })
     },
     onError: (err) => {

@@ -1,5 +1,7 @@
 import { QueryClient, useMutation } from '@tanstack/react-query'
 
+import { QUERY_KEY } from '@/shared/constants/query-key'
+
 import postEditStrategy, { ContentModel } from '../../_api/post-edit-strategy'
 
 const usePostEditStrategy = () => {
@@ -12,7 +14,7 @@ const usePostEditStrategy = () => {
     mutationFn: ({ strategyId, information }: { strategyId: number; information: ContentModel }) =>
       postEditStrategy(strategyId, information),
     onSuccess: (strategyId) => {
-      queryClient.invalidateQueries({ queryKey: ['strategyDetails', strategyId] })
+      queryClient.invalidateQueries({ queryKey: [QUERY_KEY.STRATEGY_DETAILS, strategyId] })
     },
   })
 }

@@ -5,6 +5,7 @@ import {
 } from '@/app/(dashboard)/my/_api/post-daily-analysis'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
+import { QUERY_KEY } from '@/shared/constants/query-key'
 import { AnalysisDataModel } from '@/shared/types/strategy-data'
 
 interface UploadMutationParamsModel {
@@ -22,12 +23,12 @@ export const useAnalysisUploadMutation = (
     mutationFn: ({ data }) => uploadDailyAnalysis(strategyId, data),
     onSuccess: async () => {
       queryClient.invalidateQueries({
-        queryKey: ['myDailyAnalysis', strategyId],
+        queryKey: [QUERY_KEY.MY_DAILY_ANALYSIS, strategyId],
       })
 
       try {
         const newData = await getMyDailyAnalysis(strategyId, page, size)
-        queryClient.setQueryData(['myDailyAnalysis', strategyId], newData)
+        queryClient.setQueryData([QUERY_KEY.MY_DAILY_ANALYSIS, strategyId], newData)
       } catch (err) {
         console.error('Failed to fetch updated my daily analysis data:', err)
       }
@@ -38,12 +39,12 @@ export const useAnalysisUploadMutation = (
     mutationFn: () => deleteAllAnalysis(strategyId),
     onSuccess: async () => {
       queryClient.invalidateQueries({
-        queryKey: ['myDailyAnalysis', strategyId],
+        queryKey: [QUERY_KEY.MY_DAILY_ANALYSIS, strategyId],
       })
 
       try {
         const newData = await getMyDailyAnalysis(strategyId, page, size)
-        queryClient.setQueryData(['myDailyAnalysis', strategyId], newData)
+        queryClient.setQueryData([QUERY_KEY.MY_DAILY_ANALYSIS, strategyId], newData)
       } catch (err) {
         console.error('Failed to fetch updated my daily analysis data:', err)
       }
