@@ -1,6 +1,6 @@
 ## investmetic
 
-![2024-12-147 46 07-ezgif com-video-to-gif-converter](https://github.com/user-attachments/assets/2c6616f6-c36a-453e-abbd-41ed97064211)
+![inve](https://github.com/user-attachments/assets/04760f5b-1c52-48ee-9bd4-763b947e1899)
 
 <div align="center">
 
