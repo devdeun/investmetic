@@ -79,7 +79,7 @@
 
 ![fsd폴더구조](https://github.com/user-attachments/assets/4afd073c-b1e2-469f-9c49-cab5cffd74a4)
 
-#### FSD(Folder Structure by Feature)의 장점
+#### FSD(Feature Sliced Design)의 장점
 
 **1. 모듈화와 독립성:** 기능별로 파일을 관리해 수정, 삭제, 추가가 용이<br>
 **2. 명확한 구조:** 기능 단위로 폴더가 구성되어 파일을 쉽게 찾을 수 있음<br>
@@ -89,7 +89,3 @@
 ## 타임라인
 
 ![타임라인](https://github.com/user-attachments/assets/ff6909a0-f2b5-45f6-8247-05309e1f3ab2)
-
-## 트러블슈팅
-
-![트러블슈팅](https://github.com/user-attachments/assets/1403b945-cba6-425d-965d-f65834186f66)
