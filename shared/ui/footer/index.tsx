@@ -16,7 +16,7 @@ const Footer = () => {
         <FooterLogo />
         <div className={cx('info-wrapper')}>
           <div className={cx('info')}>
-            <strong>(주)인베스트메틱</strong>
+            <strong>(주) 시스메틱</strong>
             <ul className={cx('contents')}>
               <li>대표이사: 박혜정</li>
               <li>사업자 등록 번호 ㅣ 711-86-00050</li>
