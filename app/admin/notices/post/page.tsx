@@ -61,7 +61,7 @@ const AdminNoticePostPage = () => {
               Input={
                 <FileInput
                   className={cx('file-input')}
-                  onChange={(e) => onInputChange('files', Array.from(e.target.files || []))}
+                  onChange={(e) => onInputChange('newFiles', Array.from(e.target.files || []))}
                   multiple
                 />
               }

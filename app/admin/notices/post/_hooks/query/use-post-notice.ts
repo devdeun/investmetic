@@ -21,17 +21,17 @@ const usePostNotice = () => {
         {
           title: formData.title,
           content: formData.content,
-          filePaths: formData?.files?.map((file) => file.name) ?? [],
-          sizes: formData?.files?.map((file) => file.size) ?? [],
+          filePaths: formData?.newFiles?.map((file) => file.name) ?? [],
+          sizes: formData?.newFiles?.map((file) => file.size) ?? [],
         }
       )
 
-      const { files } = formData
-      if (!files) return
+      const { newFiles } = formData
+      if (!newFiles) return
 
       const presignedUrls = uploadResponse.data.result
 
-      await uploadFileWithPresignedUrl(files, presignedUrls)
+      await uploadFileWithPresignedUrl(newFiles, presignedUrls)
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
