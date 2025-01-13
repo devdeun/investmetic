@@ -1,4 +1,6 @@
-import { SetStateAction } from 'react'
+'use client'
+
+import { SetStateAction, useState } from 'react'
 
 import { NoticeFileModel, NoticeFormModel } from '../types'
 
@@ -9,6 +11,8 @@ interface UseFileHandlerProps {
 }
 
 const useFileHandler = ({ formData, setFormData, onInputChange }: UseFileHandlerProps) => {
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
   const hasDuplicateFile = (file: File) => {
     return (
       formData.existingFiles?.some((existingFile) => existingFile.fileName === file.name) ||
@@ -23,7 +27,8 @@ const useFileHandler = ({ formData, setFormData, onInputChange }: UseFileHandler
     const duplicateFiles = selectedFiles.filter((file) => hasDuplicateFile(file))
 
     if (duplicateFiles.length > 0) {
-      alert('이미 추가된 파일입니다.')
+      setIsModalOpen(true)
+      return
     }
 
     if (uniqueFiles.length > 0) {
@@ -47,9 +52,15 @@ const useFileHandler = ({ formData, setFormData, onInputChange }: UseFileHandler
     }
   }
 
+  const handleCloseModal = () => {
+    setIsModalOpen(false)
+  }
+
   return {
     handleFileChange,
     handleDeleteFile,
+    handleCloseModal,
+    isModalOpen,
   }
 }
 

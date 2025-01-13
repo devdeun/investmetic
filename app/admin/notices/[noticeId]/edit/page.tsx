@@ -12,6 +12,7 @@ import classNames from 'classnames/bind'
 import { Button } from '@/shared/ui/button'
 import BackHeader from '@/shared/ui/header/back-header'
 import Input from '@/shared/ui/input'
+import NotificationModal from '@/shared/ui/modal/notification-modal'
 import Textarea from '@/shared/ui/textarea'
 import Title from '@/shared/ui/title'
 
@@ -28,7 +29,7 @@ const AdminNoticeEditPage = () => {
   const { data } = useNoticeDetail(Number(noticeId as string))
   const { formData, setFormData, onInputChange } = useNoticeForm()
   const { mutate } = usePatchNotice(formData, Number(noticeId as string))
-  const { handleDeleteFile, handleFileChange } = useFileHandler({
+  const { handleDeleteFile, handleFileChange, isModalOpen, handleCloseModal } = useFileHandler({
     formData,
     setFormData,
     onInputChange,
@@ -118,6 +119,12 @@ const AdminNoticeEditPage = () => {
           </Button>
         </form>
       </div>
+
+      <NotificationModal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        message="이미 추가된 파일입니다."
+      />
     </>
   )
 }

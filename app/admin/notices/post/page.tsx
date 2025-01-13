@@ -5,6 +5,7 @@ import classNames from 'classnames/bind'
 import { Button } from '@/shared/ui/button'
 import BackHeader from '@/shared/ui/header/back-header'
 import Input from '@/shared/ui/input'
+import NotificationModal from '@/shared/ui/modal/notification-modal'
 import Textarea from '@/shared/ui/textarea'
 import Title from '@/shared/ui/title'
 
@@ -21,7 +22,7 @@ const cx = classNames.bind(styles)
 const AdminNoticePostPage = () => {
   const { formData, onInputChange, setFormData } = useNoticeForm()
   const { mutate: postNotice, isPending } = usePostNotice()
-  const { handleDeleteFile, handleFileChange } = useFileHandler({
+  const { handleDeleteFile, handleFileChange, isModalOpen, handleCloseModal } = useFileHandler({
     formData,
     onInputChange,
     setFormData,
@@ -87,6 +88,12 @@ const AdminNoticePostPage = () => {
             공지 등록하기
           </Button>
         </form>
+
+        <NotificationModal
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+          message="이미 추가된 파일입니다."
+        />
       </div>
     </>
   )
