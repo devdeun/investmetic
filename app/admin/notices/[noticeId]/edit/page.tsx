@@ -66,7 +66,7 @@ const AdminNoticeEditPage = () => {
     const duplicateFiles = selectedFiles.filter((file) => hasDuplicateFile(file))
 
     if (duplicateFiles.length > 0) {
-      alert('이미 추가된 파일이 있습니다.')
+      alert('이미 추가된 파일입니다.')
       return
     }
 

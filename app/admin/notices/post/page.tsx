@@ -10,6 +10,7 @@ import Title from '@/shared/ui/title'
 
 import FileInput from '../../_ui/file-input'
 import InputField from '../../_ui/input-field'
+import NoticeFileItem from '../_ui/notice-file-item'
 import usePostNotice from './_hooks/query/use-post-notice'
 import useNoticeForm from './_hooks/use-notice-form'
 import styles from './page.module.scss'
@@ -17,8 +18,37 @@ import styles from './page.module.scss'
 const cx = classNames.bind(styles)
 
 const AdminNoticePostPage = () => {
-  const { formData, onInputChange } = useNoticeForm()
+  const { formData, onInputChange, setFormData } = useNoticeForm()
   const { mutate: postNotice, isPending } = usePostNotice()
+
+  const handleDeleteFile = (id: string | number) => {
+    setFormData((prev) => ({
+      ...prev,
+      newFiles: prev.newFiles?.filter((file) => file.name !== id),
+    }))
+  }
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFiles = Array.from(e.target.files || [])
+
+    const hasDuplicateFile = (file: File) => {
+      return formData.newFiles?.some((existingFile) => existingFile.name === file.name)
+    }
+
+    const uniqueFiles = selectedFiles.filter((file) => !hasDuplicateFile(file))
+    const duplicateFiles = selectedFiles.filter((file) => hasDuplicateFile(file))
+
+    if (duplicateFiles.length > 0) {
+      alert('이미 추가된 파일입니다.')
+      return
+    }
+
+    if (uniqueFiles.length > 0) {
+      onInputChange('newFiles', [...(formData.newFiles || []), ...uniqueFiles])
+    }
+
+    e.target.value = ''
+  }
 
   return (
     <>
@@ -59,14 +89,23 @@ const AdminNoticePostPage = () => {
             <InputField
               label="파일첨부"
               Input={
-                <FileInput
-                  className={cx('file-input')}
-                  onChange={(e) => onInputChange('newFiles', Array.from(e.target.files || []))}
-                  multiple
-                />
+                <FileInput className={cx('file-input')} onChange={handleFileChange} multiple />
               }
             />
+            {formData.newFiles && formData.newFiles.length > 0 && (
+              <ul className={cx('notice-file-list')}>
+                {formData.newFiles.map((file) => (
+                  <NoticeFileItem
+                    key={file.name}
+                    id={file.name}
+                    name={file.name}
+                    onDeleteFile={handleDeleteFile}
+                  />
+                ))}
+              </ul>
+            )}
           </div>
+
           <Button disabled={isPending} size="small" type="submit" variant="filled">
             공지 등록하기
           </Button>
