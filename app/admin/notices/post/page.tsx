@@ -67,7 +67,12 @@ const AdminNoticePostPage = () => {
             <InputField
               label="파일첨부"
               Input={
-                <FileInput className={cx('file-input')} onChange={handleFileChange} multiple />
+                <FileInput
+                  className={cx('file-input')}
+                  onChange={handleFileChange}
+                  multiple
+                  accept=".jpg,.jpeg,.png,.doc,.docx,.pptx,.ppt"
+                />
               }
             />
             {formData.newFiles && formData.newFiles.length > 0 && (
