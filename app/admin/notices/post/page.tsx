@@ -10,6 +10,7 @@ import Title from '@/shared/ui/title'
 
 import FileInput from '../../_ui/file-input'
 import InputField from '../../_ui/input-field'
+import useFileHandler from '../_hook/use-file-handler'
 import NoticeFileItem from '../_ui/notice-file-item'
 import usePostNotice from './_hooks/query/use-post-notice'
 import useNoticeForm from './_hooks/use-notice-form'
@@ -20,35 +21,11 @@ const cx = classNames.bind(styles)
 const AdminNoticePostPage = () => {
   const { formData, onInputChange, setFormData } = useNoticeForm()
   const { mutate: postNotice, isPending } = usePostNotice()
-
-  const handleDeleteFile = (id: string | number) => {
-    setFormData((prev) => ({
-      ...prev,
-      newFiles: prev.newFiles?.filter((file) => file.name !== id),
-    }))
-  }
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFiles = Array.from(e.target.files || [])
-
-    const hasDuplicateFile = (file: File) => {
-      return formData.newFiles?.some((existingFile) => existingFile.name === file.name)
-    }
-
-    const uniqueFiles = selectedFiles.filter((file) => !hasDuplicateFile(file))
-    const duplicateFiles = selectedFiles.filter((file) => hasDuplicateFile(file))
-
-    if (duplicateFiles.length > 0) {
-      alert('이미 추가된 파일입니다.')
-      return
-    }
-
-    if (uniqueFiles.length > 0) {
-      onInputChange('newFiles', [...(formData.newFiles || []), ...uniqueFiles])
-    }
-
-    e.target.value = ''
-  }
+  const { handleDeleteFile, handleFileChange } = useFileHandler({
+    formData,
+    onInputChange,
+    setFormData,
+  })
 
   return (
     <>

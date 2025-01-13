@@ -15,6 +15,7 @@ import Input from '@/shared/ui/input'
 import Textarea from '@/shared/ui/textarea'
 import Title from '@/shared/ui/title'
 
+import useFileHandler from '../../_hook/use-file-handler'
 import NoticeFileItem from '../../_ui/notice-file-item'
 import useNoticeForm from '../../post/_hooks/use-notice-form'
 import usePatchNotice from './_hooks/query/use-patch-notice'
@@ -27,6 +28,11 @@ const AdminNoticeEditPage = () => {
   const { data } = useNoticeDetail(Number(noticeId as string))
   const { formData, setFormData, onInputChange } = useNoticeForm()
   const { mutate } = usePatchNotice(formData, Number(noticeId as string))
+  const { handleDeleteFile, handleFileChange } = useFileHandler({
+    formData,
+    setFormData,
+    onInputChange,
+  })
 
   useEffect(() => {
     if (data) {
@@ -37,45 +43,6 @@ const AdminNoticeEditPage = () => {
       })
     }
   }, [data, setFormData])
-
-  const handleDeleteFile = (id: number | string) => {
-    if (typeof id === 'number') {
-      setFormData((prev) => ({
-        ...prev,
-        existingFiles: prev.existingFiles?.filter((file) => file.noticeFileId !== id),
-      }))
-    } else {
-      setFormData((prev) => ({
-        ...prev,
-        newFiles: prev.newFiles?.filter((file) => file.name !== id),
-      }))
-    }
-  }
-
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedFiles = Array.from(e.target.files || [])
-
-    const hasDuplicateFile = (file: File) => {
-      return (
-        formData.existingFiles?.some((existingFile) => existingFile.fileName === file.name) ||
-        formData.newFiles?.some((newFile) => newFile.name === file.name)
-      )
-    }
-
-    const uniqueFiles = selectedFiles.filter((file) => !hasDuplicateFile(file))
-    const duplicateFiles = selectedFiles.filter((file) => hasDuplicateFile(file))
-
-    if (duplicateFiles.length > 0) {
-      alert('이미 추가된 파일입니다.')
-      return
-    }
-
-    if (uniqueFiles.length > 0) {
-      onInputChange('newFiles', [...(formData.newFiles || []), ...uniqueFiles])
-    }
-
-    e.target.value = ''
-  }
 
   return (
     <>
