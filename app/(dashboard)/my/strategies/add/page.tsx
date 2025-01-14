@@ -41,10 +41,7 @@ interface StrategyFormDataModel {
 
 interface FormErrorsModel {
   strategyName: string
-  tradeType: string
-  operationCycle: string
   stockTypes: string
-  minimumInvestmentAmount: string
   description: string
   proposalFile?: string
 }
@@ -60,10 +57,7 @@ const initialFormData: StrategyFormDataModel = {
 
 const initialFormErrors: FormErrorsModel = {
   strategyName: '',
-  tradeType: '',
-  operationCycle: '',
   stockTypes: '',
-  minimumInvestmentAmount: '',
   description: '',
   proposalFile: '',
 }
@@ -78,12 +72,7 @@ const StrategyAddPage = () => {
   const validateForm = (): boolean => {
     const newErrors = {
       strategyName: !formData.strategyName ? '전략 명칭을 입력해주세요.' : '',
-      tradeType: !formData.tradeType ? '매매 유형을 선택해주세요.' : '',
-      operationCycle: !formData.operationCycle ? '주기를 선택해주세요.' : '',
       stockTypes: formData.stockTypes.length === 0 ? '종목을 선택해주세요.' : '',
-      minimumInvestmentAmount: !formData.minimumInvestmentAmount
-        ? '최소 운용가능 금액을 선택해주세요.'
-        : '',
       description: !formData.description ? '전략 소개를 입력해주세요.' : '',
     }
 
@@ -93,16 +82,20 @@ const StrategyAddPage = () => {
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
-    const isValidExcelFile =
-      file &&
-      (file.type === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' ||
-        file.type === 'application/vnd.ms-excel')
+    const supportedTypes = [
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+      'application/vnd.ms-excel',
+      'application/pdf',
+      'application/msword',
+      'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+      'text/plain',
+    ]
 
-    if (isValidExcelFile) {
+    if (file && supportedTypes.includes(file.type)) {
       setFormData((prev) => ({ ...prev, proposalFile: file }))
       setFormErrors((prev) => ({ ...prev, proposalFile: '' }))
     } else {
-      setFormErrors((prev) => ({ ...prev, proposalFile: '엑셀 파일만 업로드 가능합니다.' }))
+      setFormErrors((prev) => ({ ...prev, proposalFile: '지원되는 파일 형식이 아닙니다.' }))
     }
   }
 
@@ -169,13 +162,13 @@ const StrategyAddPage = () => {
     <div className={cx('file-upload')}>
       <input
         type="file"
-        accept=".xlsx,.xls"
+        accept=".xlsx,.xls,.pdf,.doc,.docx,.txt"
         onChange={handleFileChange}
         id="proposalFile"
         className={cx('file-input')}
       />
       <label htmlFor="proposalFile" className={cx('file-label')}>
-        <span>{formData.proposalFile?.name || '엑셀 제안서를 업로드해주세요'}</span>
+        <span>{formData.proposalFile?.name || '전략 제안서를 등록해주세요'}</span>
         <FileIcon className={cx('file-icon')} />
       </label>
     </div>
@@ -197,8 +190,6 @@ const StrategyAddPage = () => {
       <Title label="전략 등록" />
       <div className={cx('container')}>
         <form onSubmit={handleSubmit} className={cx('form')}>
-          {error && <div className={cx('error')}>{error}</div>}
-
           <div className={cx('form-row')}>
             <label>전략 명칭</label>
             <div className={cx('form-field')}>
@@ -225,9 +216,6 @@ const StrategyAddPage = () => {
                   titleStyle={{ width: '160px', height: '45px', border: '1px solid #ccc' }}
                   size="large"
                 />
-                {formErrors.tradeType && (
-                  <div className={cx('field-error')}>{formErrors.tradeType}</div>
-                )}
               </div>
             </div>
 
@@ -242,9 +230,6 @@ const StrategyAddPage = () => {
                   titleStyle={{ width: '160px', height: '45px', border: '1px solid #ccc' }}
                   size="large"
                 />
-                {formErrors.operationCycle && (
-                  <div className={cx('field-error')}>{formErrors.operationCycle}</div>
-                )}
               </div>
             </div>
           </div>
@@ -270,9 +255,6 @@ const StrategyAddPage = () => {
                 titleStyle={{ width: '160px', height: '45px', border: '1px solid #ccc' }}
                 size="large"
               />
-              {formErrors.minimumInvestmentAmount && (
-                <div className={cx('field-error')}>{formErrors.minimumInvestmentAmount}</div>
-              )}
             </div>
           </div>
 
@@ -302,9 +284,11 @@ const StrategyAddPage = () => {
           </div>
 
           <p className={cx('notice')}>
+            *제안서는 선택 사항입니다. (허용 파일: xlsx, xls, pdf, doc, docx, txt)
+            <br />
             *매매 유형, 주기, 종목, 최소운용 가능 금액은 추후 수정이 불가합니다.
           </p>
-
+          {error && <div className={cx('error')}>{error}</div>}
           <div className={cx('button-wrapper')}>
             <Button variant="outline" onClick={() => router.back()} type="button">
               취소
