@@ -72,7 +72,7 @@ const ReviewItem = ({
               <button onClick={openModal}>삭제</button>
             </>
           )}
-          {!isReviewer && isAdmin && <button>삭제</button>}
+          {!isReviewer && isAdmin && <button onClick={openModal}>삭제</button>}
         </div>
       </div>
       {isEditable ? (
