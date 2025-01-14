@@ -3,6 +3,7 @@ import { useState } from 'react'
 import classNames from 'classnames/bind'
 
 import { ANALYSIS_PAGE_COUNT } from '@/shared/constants/count-per-page'
+import useDelayedLoading from '@/shared/hooks/custom/use-delayed-loading'
 import useModal from '@/shared/hooks/custom/use-modal'
 import { MyDailyAnalysisModel } from '@/shared/types/strategy-data'
 import { Button } from '@/shared/ui/button'
@@ -49,6 +50,7 @@ const AnalysisContent = ({
   onPageChange,
   isEditable = false,
 }: Props) => {
+  const COLWIDTH = [1.7, 1.7, 1.3, 1.5, 1, 1.5, 1]
   const { mutate } = useGetAnalysisDownload()
   const [uploadType, setUploadType] = useState<'excel' | 'direct' | null>(null)
   const [selectedAnalysis, setSelectedAnalysis] = useState<MyDailyAnalysisModel | null>(null)
@@ -65,12 +67,12 @@ const AnalysisContent = ({
     closeModal: closeEditModal,
   } = useModal()
 
-  const { data: myAnalysisData } = useGetMyDailyAnalysis(
+  const { data: myAnalysisData, isLoading: isMyAnalysisLoading } = useGetMyDailyAnalysis(
     strategyId,
     currentPage,
     ANALYSIS_PAGE_COUNT
   )
-  const { data: publicAnalysisData } = useGetAnalysis(
+  const { data: publicAnalysisData, isLoading: isPublicAnalysisLoading } = useGetAnalysis(
     strategyId,
     type,
     currentPage,
@@ -78,8 +80,10 @@ const AnalysisContent = ({
   )
 
   const analysisData = isEditable ? myAnalysisData : publicAnalysisData
+  const isLoading = isEditable ? isMyAnalysisLoading : isPublicAnalysisLoading
+  const isDelayedLoading = useDelayedLoading(isLoading, 500)
 
-  const { deleteAllAnalysis, isLoading } = useAnalysisUploadMutation(
+  const { deleteAllAnalysis, isLoading: isDeleteAllLoading } = useAnalysisUploadMutation(
     strategyId,
     currentPage,
     ANALYSIS_PAGE_COUNT
@@ -193,14 +197,21 @@ const AnalysisContent = ({
             size="small"
             variant="filled"
             onClick={openDeleteModal}
-            disabled={isLoading}
+            disabled={isDeleteAllLoading}
             className={cx('delete-all-button')}
           >
             전체 삭제
           </Button>
         </div>
       )}
-      {analysisData?.content.length > 0 ? (
+      {isDelayedLoading ? (
+        <VerticalTable.Skeleton
+          tableHead={tableHeader}
+          countPerPage={ANALYSIS_PAGE_COUNT}
+          renderActions={isEditable ? renderActions : undefined}
+          colWidths={COLWIDTH}
+        />
+      ) : analysisData?.content.length > 0 ? (
         <>
           <VerticalTable
             tableHead={tableHeader}
@@ -209,6 +220,7 @@ const AnalysisContent = ({
             countPerPage={ANALYSIS_PAGE_COUNT}
             renderActions={isEditable ? renderActions : undefined}
             hideFirstColumn={isEditable}
+            colWidths={COLWIDTH}
           />
           <Pagination
             currentPage={currentPage}
@@ -252,7 +264,7 @@ const AnalysisContent = ({
         isModalOpen={isDeleteModalOpen}
         onCloseModal={closeDeleteModal}
         onDelete={handleDeleteAll}
-        isPending={isLoading}
+        isPending={isDeleteAllLoading}
       />
     </div>
   )
