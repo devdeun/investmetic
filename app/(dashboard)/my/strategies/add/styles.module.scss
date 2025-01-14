@@ -52,18 +52,14 @@
 }
 
 .error {
-  margin-bottom: 16px;
-  padding: 12px;
-  border-radius: 4px;
-  background-color: $color-white;
-  color: $color-orange-700;
-  font-size: 14px;
+  margin-top: -1rem;
 }
 
-.field-error {
-  margin-top: 8px;
-  color: $color-orange-700;
-  font-size: 14px;
+.field-error,
+.error {
+  color: $color-orange-800;
+  font-size: $text-b3;
+  font-weight: $text-medium;
 }
 
 .loading {
@@ -179,4 +175,5 @@
   @include typo-c1;
   color: $color-gray-600;
   margin: 36px 0;
+  line-height: 1.2rem;
 }
