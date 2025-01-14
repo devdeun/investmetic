@@ -36,3 +36,14 @@
   height: 30px;
   border: 1px solid $color-gray-300;
 }
+
+.notice-files-container {
+  width: 640px;
+  margin-left: auto;
+  margin-top: -28px;
+
+  .notice-file-list {
+    @include typo-b3;
+    font-weight: 500;
+  }
+}

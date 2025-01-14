@@ -7,35 +7,47 @@ import axiosInstance from '@/shared/api/axios'
 import { QUERY_KEY } from '@/shared/constants/query-key'
 import uploadFileWithPresignedUrl from '@/shared/utils/upload-file-with-presigned-url'
 
-import { PatchNoticeResponeseModel } from '../../types'
+import { PatchNoticeResponseModel } from '../../types'
 
-const usePatchNotice = (formData: NoticeFormModel, noticeId: string) => {
+const usePatchNotice = (formData: NoticeFormModel, noticeId: number) => {
   const router = useRouter()
   const queryClient = useQueryClient()
 
   return useMutation({
     mutationFn: async () => {
-      // Presigned URL 요청
-      const uploadResponse = await axiosInstance.patch<PatchNoticeResponeseModel>(
+      const { existingFiles, newFiles } = formData
+
+      const allFilePaths = [
+        ...(existingFiles?.map((file) => file.fileName) ?? []),
+        ...(newFiles?.map((file) => file.name) ?? []),
+      ]
+
+      const allSizes = [
+        ...(existingFiles?.map((_) => 0) ?? []),
+        ...(newFiles?.map((file) => file.size) ?? []),
+      ]
+
+      const uploadResponse = await axiosInstance.patch<PatchNoticeResponseModel>(
         `/api/admin/notices/${noticeId}`,
         {
           title: formData.title,
           content: formData.content,
-          filePaths: formData?.files?.map((file) => file.name) ?? [],
-          sizes: formData?.files?.map((file) => file.size) ?? [],
+          filePaths: allFilePaths,
+          sizes: allSizes,
         }
       )
 
-      const { files } = formData
-      if (!files) return
+      if (!newFiles?.length) return
 
       const presignedUrls = uploadResponse.data.result
-
-      await uploadFileWithPresignedUrl(files, presignedUrls)
+      await uploadFileWithPresignedUrl(newFiles, presignedUrls)
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
         queryKey: [QUERY_KEY.NOTICES],
+      })
+      queryClient.invalidateQueries({
+        queryKey: [QUERY_KEY.NOTICE_DETAIL, noticeId],
       })
       router.replace('/admin/notices')
     },
