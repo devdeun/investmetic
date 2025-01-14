@@ -89,6 +89,8 @@ const StrategyAddPage = () => {
       'application/msword',
       'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
       'text/plain',
+      'application/vnd.ms-powerpoint',
+      'application/vnd.openxmlformats-officedocument.presentationml.presentation',
     ]
 
     if (file && supportedTypes.includes(file.type)) {
@@ -162,7 +164,7 @@ const StrategyAddPage = () => {
     <div className={cx('file-upload')}>
       <input
         type="file"
-        accept=".xlsx,.xls,.pdf,.doc,.docx,.txt"
+        accept=".xlsx,.xls,.pdf,.doc,.docx,.txt,.ppt,.pptx"
         onChange={handleFileChange}
         id="proposalFile"
         className={cx('file-input')}
@@ -284,7 +286,7 @@ const StrategyAddPage = () => {
           </div>
 
           <p className={cx('notice')}>
-            *제안서는 선택 사항입니다. (허용 파일: xlsx, xls, pdf, doc, docx, txt)
+            *제안서는 선택 사항입니다. (허용 파일: xlsx, xls, pdf, doc, docx, txt, ppt, pptx)
             <br />
             *매매 유형, 주기, 종목, 최소운용 가능 금액은 추후 수정이 불가합니다.
           </p>
