@@ -5,6 +5,7 @@
   table {
     width: 100%;
     font-size: $text-b3;
+    table-layout: fixed;
 
     thead {
       background-color: $color-gray-100;
@@ -17,6 +18,9 @@
       vertical-align: middle;
       border-top: 1px solid $color-gray-200;
       border-bottom: 1px solid $color-gray-200;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
     & td:first-child {
       padding-left: 20px;
@@ -39,6 +43,25 @@
       height: 40px;
       font-size: $text-c1;
     }
+  }
+
+  .skeleton-cell {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .skeleton-content {
+    @include skeleton;
+    width: 70%;
+    height: 16px;
+    margin: 4px 0;
+  }
+
+  .skeleton-button {
+    width: 80px;
+    height: 24px;
+    background: $color-gray-200;
+    border-radius: 4px;
   }
 }
 

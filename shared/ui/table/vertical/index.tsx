@@ -32,6 +32,7 @@ export interface VerticalTableProps {
   className?: string
   renderActions?: (row: TableBodyDataType) => ReactNode | null
   hideFirstColumn?: boolean
+  colWidths?: number[]
 }
 
 const VerticalTable = ({
@@ -42,13 +43,24 @@ const VerticalTable = ({
   className,
   renderActions,
   hideFirstColumn = false,
+  colWidths = [],
 }: VerticalTableProps) => {
   const hasData = tableBody.length > 0
   const slicedTableBody = sliceArray(tableBody, countPerPage, currentPage)
 
+  const widths = colWidths.length > 0 ? colWidths : new Array(tableHead.length).fill(1)
+
+  const totalWidth = widths.reduce((sum, width) => sum + width, 0)
+
   return (
     <div className={cx('container', className)}>
       <table>
+        <colgroup>
+          {widths.map((width, index) => (
+            <col key={index} style={{ width: `${(width / totalWidth) * 100}%` }} />
+          ))}
+          {renderActions && <col style={{ width: '150px' }} />}
+        </colgroup>
         <thead>
           <tr>
             {tableHead.map((head) => (
@@ -81,18 +93,52 @@ const VerticalTable = ({
   )
 }
 
-const Skeleton = ({ tableHead, countPerPage, renderActions }: Partial<VerticalTableProps>) => {
+const Skeleton = ({
+  tableHead,
+  countPerPage,
+  renderActions,
+  colWidths = [],
+}: Partial<VerticalTableProps>) => {
+  if (!tableHead || !countPerPage) return null
+
+  const widths = colWidths.length > 0 ? colWidths : new Array(tableHead.length).fill(1)
+
+  const totalWidth = widths.reduce((sum, width) => sum + width, 0)
+
   return (
     <div className={cx('container')}>
       <table>
+        <colgroup>
+          {widths.map((width, index) => (
+            <col key={index} style={{ width: `${(width / totalWidth) * 100}%` }} />
+          ))}
+          {renderActions && <col style={{ width: '150px' }} />}
+        </colgroup>
         <thead>
           <tr>
-            {tableHead?.map((head) => <td key={head}>{head}</td>)}
-            {renderActions && <td>관리</td>}
+            {tableHead.map((head) => (
+              <td key={head}>{head}</td>
+            ))}
+            {renderActions && <td></td>}
           </tr>
         </thead>
+        <tbody>
+          {[...Array(countPerPage)].map((_, rowIdx) => (
+            <tr key={rowIdx}>
+              {tableHead.map((_, colIdx) => (
+                <td key={colIdx} className={cx('skeleton-cell')}>
+                  <div className={cx('skeleton-content')} />
+                </td>
+              ))}
+              {renderActions && (
+                <td className={cx('button-container')}>
+                  <div className={cx('skeleton-button')} />
+                </td>
+              )}
+            </tr>
+          ))}
+        </tbody>
       </table>
-      <div className={cx('no-data')} style={{ height: `calc(40px * ${countPerPage}` }} />
     </div>
   )
 }

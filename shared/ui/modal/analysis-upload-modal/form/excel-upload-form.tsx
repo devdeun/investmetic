@@ -74,6 +74,9 @@ const ExcelUploadForm = ({ strategyId, onClose }: Props) => {
           </a>
         </Button>
       </div>
+      <p className={cx('guide-message')}>
+        *일간분석 데이터 업로드 후 통계지표 집계 및 반영까지 약간의 시간이 소요될 수 있습니다.
+      </p>
 
       {error && <p className={cx('error-message')}>{error}</p>}
 
