@@ -4,7 +4,15 @@ import { QUERY_KEY } from '@/shared/constants/query-key'
 
 import deleteInactiveTrade from '../../_api/delete-inactive-trade'
 
-const useDeleteInactiveTrade = (tradeTypeId: number) => {
+interface Props {
+  tradeTypeId: number
+  options: {
+    onSuccess?: () => void
+    onError?: (error: Error) => void
+  }
+}
+
+const useDeleteInactiveTrade = ({ tradeTypeId, options }: Props) => {
   const queryClient = useQueryClient()
 
   return useMutation({
@@ -13,9 +21,11 @@ const useDeleteInactiveTrade = (tradeTypeId: number) => {
       queryClient.invalidateQueries({
         queryKey: [QUERY_KEY.ADMIN_TRADES],
       })
+      options?.onSuccess?.()
     },
     onError: (err) => {
       console.error('Error : ', err)
+      options?.onError?.(err as Error)
     },
   })
 }
