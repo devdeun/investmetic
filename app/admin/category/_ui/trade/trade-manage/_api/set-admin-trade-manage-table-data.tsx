@@ -1,7 +1,9 @@
 import Image from 'next/image'
 
+import { Button } from '@/shared/ui/button'
+
+import InactiveTradeDeleteButton from '../_ui/inactive-trade-delete-button'
 import TradeActiveStateToggleButton from '../_ui/trade-active-state-toggle-button'
-// import StockActiveStateToggleButton from '../../../stock/stock-manage/_ui/stock-active-state-toggle-button'
 import { TradeResponseModel } from '../types'
 
 const setAdminTradeManageTableData = (data: TradeResponseModel['result'], isActive: boolean) =>
@@ -15,11 +17,14 @@ const setAdminTradeManageTableData = (data: TradeResponseModel['result'], isActi
       height={24}
       key={data.tradeTypeId}
     />,
-    <TradeActiveStateToggleButton
-      active={isActive}
-      tradeTypeId={data.tradeTypeId}
-      key={data.tradeTypeId}
-    />,
+    <Button.ButtonGroup key={data.tradeTypeId}>
+      <TradeActiveStateToggleButton
+        active={isActive}
+        tradeTypeId={data.tradeTypeId}
+        key={data.tradeTypeId}
+      />
+      {!isActive && <InactiveTradeDeleteButton tradeTypeId={data.tradeTypeId} />}
+    </Button.ButtonGroup>,
   ]) ?? []
 
 export default setAdminTradeManageTableData
