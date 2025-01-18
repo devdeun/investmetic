@@ -29,6 +29,10 @@
       }
     }
 
+    td:has(div[class*='dropdown']) {
+      overflow: visible;
+    }
+
     .button-container {
       display: flex;
       justify-content: center;
