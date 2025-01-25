@@ -1,4 +1,4 @@
-const uploadFileWithPresignedUrl = async (files: File[], presignedUrls: string[]) => {
+const uploadFilesWithPresignedUrl = async (files: File[], presignedUrls: string[]) => {
   try {
     await Promise.all(
       files.map((file, idx) => {
@@ -23,4 +23,4 @@ const uploadFileWithPresignedUrl = async (files: File[], presignedUrls: string[]
   }
 }
 
-export default uploadFileWithPresignedUrl
+export default uploadFilesWithPresignedUrl

@@ -5,7 +5,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import axiosInstance from '@/shared/api/axios'
 import { QUERY_KEY } from '@/shared/constants/query-key'
-import uploadFileWithPresignedUrl from '@/shared/utils/upload-file-with-presigned-url'
+import uploadFileWithPresignedUrl from '@/shared/utils/upload-files-with-presigned-url'
 
 import { PatchNoticeResponseModel } from '../../types'
 

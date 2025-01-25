@@ -56,7 +56,8 @@ export interface StrategyResponseModel {
   isSuccess: boolean
   message: string
   result: {
-    presignedUrl: string
+    strategyId: number
+    presignedUrl?: string
   }
   code: number
 }

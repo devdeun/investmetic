@@ -8,6 +8,7 @@ import { useRouter } from 'next/navigation'
 import { FileIcon } from '@/public/icons'
 import classNames from 'classnames/bind'
 
+import { SUPPORTED_FILE_TYPES } from '@/shared/constants/supported-file-types'
 import { Button } from '@/shared/ui/button'
 import BackHeader from '@/shared/ui/header/back-header'
 import Input from '@/shared/ui/input'
@@ -77,21 +78,12 @@ const StrategyAddPage = () => {
     }
 
     setFormErrors(newErrors)
-    return !Object.values(newErrors).some((error) => error)
+    return !Object.values(newErrors).some((err) => err)
   }
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
-    const supportedTypes = [
-      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
-      'application/vnd.ms-excel',
-      'application/pdf',
-      'application/msword',
-      'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-      'text/plain',
-      'application/vnd.ms-powerpoint',
-      'application/vnd.openxmlformats-officedocument.presentationml.presentation',
-    ]
+    const supportedTypes = SUPPORTED_FILE_TYPES
 
     if (file && supportedTypes.includes(file.type)) {
       setFormData((prev) => ({ ...prev, proposalFile: file }))
@@ -101,7 +93,7 @@ const StrategyAddPage = () => {
     }
   }
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (!validateForm() || !formData.tradeType) return
 
@@ -122,7 +114,11 @@ const StrategyAddPage = () => {
       proposalFile: fileInfo,
     }
 
-    registerStrategy(data)
+    try {
+      await registerStrategy(data, formData.proposalFile)
+    } catch (err) {
+      console.error('Strategy registration failed:', err)
+    }
   }
 
   const handleInputChange = (field: keyof StrategyFormDataModel, value: any) => {
