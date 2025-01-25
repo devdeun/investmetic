@@ -16,6 +16,7 @@ export const QUERY_KEY = {
   STRATEGY_ANALYSIS: 'strategyAnalysis',
   STRATEGY_STATISTICS: 'strategyStatistics',
   STRATEGY_SEARCH: 'strategiesSearch',
+  STRATEGY_PROPOSAL_FILE_NAME: 'proposalFileName',
 
   // question
   QUESTION_DETAILS: 'questionDetails',
