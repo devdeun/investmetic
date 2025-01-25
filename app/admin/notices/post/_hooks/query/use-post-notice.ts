@@ -4,7 +4,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import axiosInstance from '@/shared/api/axios'
 import { QUERY_KEY } from '@/shared/constants/query-key'
-import uploadFileWithPresignedUrl from '@/shared/utils/upload-file-with-presigned-url'
+import uploadFilesWithPresignedUrl from '@/shared/utils/upload-files-with-presigned-url'
 
 import { NoticeFormModel } from '../../../types'
 import { PostNoticeResopnseModel } from '../../types'
@@ -15,7 +15,6 @@ const usePostNotice = () => {
 
   return useMutation({
     mutationFn: async (formData: NoticeFormModel) => {
-      // Presigned URL 요청`
       const uploadResponse = await axiosInstance.post<PostNoticeResopnseModel>(
         '/api/admin/notices',
         {
@@ -31,7 +30,7 @@ const usePostNotice = () => {
 
       const presignedUrls = uploadResponse.data.result
 
-      await uploadFileWithPresignedUrl(newFiles, presignedUrls)
+      await uploadFilesWithPresignedUrl(newFiles, presignedUrls)
     },
     onSuccess: () => {
       queryClient.invalidateQueries({

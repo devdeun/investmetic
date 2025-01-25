@@ -5,7 +5,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import axiosInstance from '@/shared/api/axios'
 import { QUERY_KEY } from '@/shared/constants/query-key'
-import uploadFileWithPresignedUrl from '@/shared/utils/upload-files-with-presigned-url'
+import uploadFilesWithPresignedUrl from '@/shared/utils/upload-files-with-presigned-url'
 
 import { PatchNoticeResponseModel } from '../../types'
 
@@ -40,7 +40,7 @@ const usePatchNotice = (formData: NoticeFormModel, noticeId: number) => {
       if (!newFiles?.length) return
 
       const presignedUrls = uploadResponse.data.result
-      await uploadFileWithPresignedUrl(newFiles, presignedUrls)
+      await uploadFilesWithPresignedUrl(newFiles, presignedUrls)
     },
     onSuccess: () => {
       queryClient.invalidateQueries({
