@@ -5,31 +5,80 @@ interface InformationModel {
   description: string | null
 }
 
+interface ProposalModel {
+  proposalFile: File | null
+  proposalModified: boolean
+  proposalFileName: string
+}
+
 interface StateModel {
   information: InformationModel
+  proposal: ProposalModel
 }
 
 interface ActionModel {
   actions: {
     setStrategyName: (name: string) => void
     setDescription: (description: string) => void
+    setProposalFile: (file: File | null) => void
+    setOriginalFileName: (fileName: string) => void
+    setProposalModified: (modified: boolean) => void
+    initializeProposal: (fileName: string) => void
   }
 }
 
-const useEditInformationStore = create<StateModel & ActionModel>((set) => ({
+const initialState: StateModel = {
   information: {
     strategyName: null,
     description: null,
   },
+  proposal: {
+    proposalFile: null,
+    proposalModified: false,
+    proposalFileName: '',
+  },
+}
+
+const useEditInformationStore = create<StateModel & ActionModel>((set) => ({
+  ...initialState,
 
   actions: {
     setStrategyName: (name) =>
       set((state) => ({
         information: { ...state.information, strategyName: name },
       })),
+
     setDescription: (description) =>
       set((state) => ({
         information: { ...state.information, description },
+      })),
+
+    setProposalFile: (file) =>
+      set((state) => ({
+        proposal: {
+          ...state.proposal,
+          proposalFile: file,
+          proposalModified: true,
+        },
+      })),
+
+    setOriginalFileName: (fileName) =>
+      set((state) => ({
+        proposal: { ...state.proposal, originalFileName: fileName },
+      })),
+
+    setProposalModified: (modified) =>
+      set((state) => ({
+        proposal: { ...state.proposal, proposalModified: modified },
+      })),
+
+    initializeProposal: (fileName) =>
+      set((state) => ({
+        proposal: {
+          ...state.proposal,
+          originalFileName: fileName,
+          proposalModified: false,
+        },
       })),
   },
 }))
