@@ -21,7 +21,6 @@ interface ActionModel {
     setStrategyName: (name: string) => void
     setDescription: (description: string) => void
     setProposalFile: (file: File | null) => void
-    setOriginalFileName: (fileName: string) => void
     setProposalModified: (modified: boolean) => void
     initializeProposal: (fileName: string) => void
   }
@@ -58,13 +57,9 @@ const useEditInformationStore = create<StateModel & ActionModel>((set) => ({
         proposal: {
           ...state.proposal,
           proposalFile: file,
+          proposalFileName: file?.name || state.proposal.proposalFileName,
           proposalModified: true,
         },
-      })),
-
-    setOriginalFileName: (fileName) =>
-      set((state) => ({
-        proposal: { ...state.proposal, originalFileName: fileName },
       })),
 
     setProposalModified: (modified) =>
@@ -76,7 +71,7 @@ const useEditInformationStore = create<StateModel & ActionModel>((set) => ({
       set((state) => ({
         proposal: {
           ...state.proposal,
-          originalFileName: fileName,
+          proposalFileName: fileName,
           proposalModified: false,
         },
       })),
