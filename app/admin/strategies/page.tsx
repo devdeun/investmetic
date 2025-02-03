@@ -64,7 +64,11 @@ const AdminStrategyPage = () => {
         />
         <VerticalTable
           tableHead={['No.', '날짜', '전략명', '닉네임', '공개여부', '승인여부', '']}
-          tableBody={setAdminStrategiesTableBody(data.content)}
+          tableBody={setAdminStrategiesTableBody({
+            data: data.content,
+            page: data.page,
+            countPerPage: data.size,
+          })}
           countPerPage={data.size}
           currentPage={1}
         />

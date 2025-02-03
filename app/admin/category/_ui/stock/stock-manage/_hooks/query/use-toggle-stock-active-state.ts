@@ -4,7 +4,7 @@ import { QUERY_KEY } from '@/shared/constants/query-key'
 
 import ToggleStockActiveState from '../../_api/toggle-stock-active-state'
 
-const useToggoleStockActiveState = (stockTypeId: number) => {
+const useToggleStockActiveState = (stockTypeId: number) => {
   const queryClient = useQueryClient()
 
   return useMutation({
@@ -20,4 +20,4 @@ const useToggoleStockActiveState = (stockTypeId: number) => {
   })
 }
 
-export default useToggoleStockActiveState
+export default useToggleStockActiveState

@@ -8,6 +8,7 @@ import classNames from 'classnames/bind'
 import { Button } from '@/shared/ui/button'
 import Pagination from '@/shared/ui/pagination'
 import VerticalTable from '@/shared/ui/table/vertical'
+import { calculateTableNumber } from '@/shared/utils/table'
 
 import useAdminNotices from '../../_hook/query/get-admin-notices'
 import useAdminNoticePage from '../../_hook/use-admin-notice-page'
@@ -16,6 +17,8 @@ import NoticeEditButton from '../button/notice-edit-button'
 import styles from './styles.module.scss'
 
 const cx = classNames.bind(styles)
+
+const COUNT_PER_PAGE = 10
 
 const AdminNoticeTable = () => {
   const { currentPage, setCurrentPage } = useAdminNoticePage()
@@ -26,8 +29,8 @@ const AdminNoticeTable = () => {
   }
 
   const tableBody =
-    data?.content.map((data) => [
-      data.noticeId,
+    data?.content.map((data, idx) => [
+      calculateTableNumber({ page: currentPage, idx, countPerPage: COUNT_PER_PAGE }),
       <Link href={`/notices/${data.noticeId}/detail`} key={data.noticeId}>
         {data.title}
       </Link>,
@@ -52,7 +55,7 @@ const AdminNoticeTable = () => {
       <VerticalTable
         tableHead={['No.', '제목', '내용', '작성일', '']}
         tableBody={tableBody}
-        countPerPage={10}
+        countPerPage={COUNT_PER_PAGE}
         currentPage={1}
       />
       <Pagination
