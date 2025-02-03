@@ -4,7 +4,7 @@ import { CSSProperties } from 'react'
 
 import { Button } from '@/shared/ui/button'
 
-import useToggoleTradeActiveState from '../_hooks/query/use-toggle-trade-active-state'
+import useToggleTradeActiveState from '../_hooks/query/use-toggle-trade-active-state'
 
 interface Props {
   active?: boolean
@@ -12,7 +12,7 @@ interface Props {
 }
 
 const TradeActiveStateToggleButton = ({ active, tradeTypeId }: Props) => {
-  const { mutate, isPending } = useToggoleTradeActiveState(tradeTypeId)
+  const { mutate, isPending } = useToggleTradeActiveState(tradeTypeId)
   const onButtonClick = () => {
     mutate()
   }
@@ -35,4 +35,5 @@ const buttonStyles: CSSProperties = {
   padding: '7px 16px',
   margin: '15px 0',
 }
+
 export default TradeActiveStateToggleButton

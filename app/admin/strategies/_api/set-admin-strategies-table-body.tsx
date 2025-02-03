@@ -1,5 +1,6 @@
 import { Button } from '@/shared/ui/button'
 import { formatDate } from '@/shared/utils/format'
+import { calculateTableNumber } from '@/shared/utils/table'
 
 import AdminStrategiesApproveTd from '../_ui/admin-strategies-approve-td'
 import StrategyDeleteButton from '../_ui/button/strategy-delete-button copy'
@@ -7,10 +8,16 @@ import StrategyEditButton from '../_ui/button/strategy-edit-button'
 import PublicSelect from '../_ui/public-select'
 import { StrategiesResponseModel } from '../types'
 
-const setAdminStrategiesTableBody = (data: StrategiesResponseModel['result']['content']) =>
-  data.map((data) => {
+interface Props {
+  data: StrategiesResponseModel['result']['content']
+  page: number
+  countPerPage: number
+}
+
+const setAdminStrategiesTableBody = ({ data, page, countPerPage }: Props) =>
+  data.map((data, idx) => {
     return [
-      data.strategyId,
+      calculateTableNumber({ page, idx, countPerPage }),
       formatDate(data.createAt),
       data.strategyName,
       data.nickname,

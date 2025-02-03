@@ -77,7 +77,11 @@ const AdminQuestionsPage = () => {
         />
         <VerticalTable
           tableHead={['No.', '제목', '전략명', '트레이더', '질문자', '상태', '']}
-          tableBody={setAdminQuestionTableBody(data.content)}
+          tableBody={setAdminQuestionTableBody({
+            data: data.content,
+            page: data.page,
+            countPerPage: data.size,
+          })}
           countPerPage={data.size}
           currentPage={1}
         />
