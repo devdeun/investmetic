@@ -3,9 +3,9 @@ import { LinkButton } from '@/shared/ui/link-button'
 
 import AdminQuestionDeleteButton from '../_ui/admin-question-delete-button'
 import AdminQuestionStateBox from '../_ui/admin-question-state-box'
-import { AdminQuestionsResponeseModel } from '../types'
+import { AdminQuestionsResponseModel } from '../types'
 
-const setAdminQuestionTableBody = (data: AdminQuestionsResponeseModel['result']['content']) =>
+const setAdminQuestionTableBody = (data: AdminQuestionsResponseModel['result']['content']) =>
   data.map((data, idx) => {
     return [
       idx + 1,
