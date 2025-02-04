@@ -70,7 +70,11 @@ const AdminUsersPage = () => {
         />
         <VerticalTable
           tableHead={['No.', '프로필', '이름', '닉네임', '이메일', '전화번호', '회원분류', '탈퇴']}
-          tableBody={setTableBody({ data: data?.content })}
+          tableBody={setTableBody({
+            data: data?.content,
+            page: data?.page,
+            countPerPage: data.size,
+          })}
           countPerPage={data.size}
           currentPage={1}
         />

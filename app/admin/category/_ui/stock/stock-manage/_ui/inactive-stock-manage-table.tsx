@@ -14,7 +14,12 @@ const InactiveTradeManageTable = () => {
   const { data } = useStocksData('inactive', currentPage, TABLE_BODY_SIZE)
   if (!data) return null
 
-  const tableData = setAdminStockManageTableData(data, false)
+  const tableData = setAdminStockManageTableData({
+    data,
+    isActive: false,
+    page: currentPage,
+    countPerPage: data.size,
+  })
 
   return (
     <ManageTable

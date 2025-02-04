@@ -1,14 +1,21 @@
 import { PATH } from '@/shared/constants/path'
 import { LinkButton } from '@/shared/ui/link-button'
+import { calculateTableNumber } from '@/shared/utils/table'
 
 import AdminQuestionDeleteButton from '../_ui/admin-question-delete-button'
 import AdminQuestionStateBox from '../_ui/admin-question-state-box'
-import { AdminQuestionsResponeseModel } from '../types'
+import { AdminQuestionsResponseModel } from '../types'
 
-const setAdminQuestionTableBody = (data: AdminQuestionsResponeseModel['result']['content']) =>
+interface Props {
+  data: AdminQuestionsResponseModel['result']['content']
+  page: number
+  countPerPage: number
+}
+
+const setAdminQuestionTableBody = ({ data, page, countPerPage }: Props) =>
   data.map((data, idx) => {
     return [
-      idx + 1,
+      calculateTableNumber({ page, idx, countPerPage }),
       data.title,
       data.strategy.name,
       data.trader.userName,

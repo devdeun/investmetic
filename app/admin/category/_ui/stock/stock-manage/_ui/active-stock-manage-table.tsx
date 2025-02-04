@@ -2,8 +2,6 @@
 
 import { useState } from 'react'
 
-import withSuspense from '@/shared/utils/with-suspense'
-
 import ManageTable from '../../../shared/manage-table'
 import setAdminStockManageTableData from '../_api/set-admin-stock-manage-table-data'
 import useStocksData from '../_hooks/query/use-stocks-data'
@@ -16,7 +14,12 @@ const ActiveStockManageTable = () => {
   const { data } = useStocksData('active', currentPage, TABLE_BODY_SIZE)
   if (!data) return null
 
-  const tableData = setAdminStockManageTableData(data, true)
+  const tableData = setAdminStockManageTableData({
+    data,
+    isActive: true,
+    page: currentPage,
+    countPerPage: TABLE_BODY_SIZE,
+  })
 
   return (
     <ManageTable

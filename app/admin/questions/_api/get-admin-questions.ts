@@ -1,7 +1,7 @@
 import axiosInstance from '@/shared/api/axios'
 import { QuestionSearchConditionType, QuestionStateTapType } from '@/shared/types/questions'
 
-import { AdminQuestionsResponeseModel } from '../types'
+import { AdminQuestionsResponseModel } from '../types'
 
 interface ArgModel {
   keyword: string | null
@@ -19,7 +19,7 @@ const getAdminQuestions = async ({
   size = 10,
 }: ArgModel) => {
   try {
-    const res = await axiosInstance<AdminQuestionsResponeseModel>('/api/admin/questions', {
+    const res = await axiosInstance<AdminQuestionsResponseModel>('/api/admin/questions', {
       params: {
         keyword,
         searchCondition,

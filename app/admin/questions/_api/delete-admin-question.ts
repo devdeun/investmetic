@@ -1,6 +1,6 @@
 import axiosInstance from '@/shared/api/axios'
 
-import { AdminQuestionsResponeseModel } from '../types'
+import { AdminQuestionsResponseModel } from '../types'
 
 interface ArgModel {
   strategyId: number
@@ -8,7 +8,7 @@ interface ArgModel {
 }
 const deleteAdminQuestion = async ({ strategyId, questionId }: ArgModel) => {
   try {
-    const res = await axiosInstance.delete<AdminQuestionsResponeseModel>(
+    const res = await axiosInstance.delete<AdminQuestionsResponseModel>(
       `/api/admin/strategies/${strategyId}/questions/${questionId}`
     )
     if (!res.data.isSuccess) throw new Error('Error with code' + res.data.code)

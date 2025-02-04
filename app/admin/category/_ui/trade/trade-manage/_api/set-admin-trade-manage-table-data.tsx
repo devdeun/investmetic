@@ -1,14 +1,22 @@
 import Image from 'next/image'
 
 import { Button } from '@/shared/ui/button'
+import { calculateTableNumber } from '@/shared/utils/table'
 
 import InactiveTradeDeleteButton from '../_ui/inactive-trade-delete-button'
 import TradeActiveStateToggleButton from '../_ui/trade-active-state-toggle-button'
 import { TradeResponseModel } from '../types'
 
-const setAdminTradeManageTableData = (data: TradeResponseModel['result'], isActive: boolean) =>
-  data?.map((data) => [
-    data.tradeTypeId,
+interface Props {
+  data: TradeResponseModel['result']
+  isActive: boolean
+  page: number
+  countPerPage: number
+}
+
+const setAdminTradeManageTableData = ({ data, isActive, page, countPerPage }: Props) =>
+  data?.map((data, idx) => [
+    calculateTableNumber({ page, idx, countPerPage }),
     data.tradeName,
     <Image
       src={data.tradeTypeIconUrl}

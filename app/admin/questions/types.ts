@@ -1,7 +1,7 @@
 import { QuestionStateConditionType } from '@/shared/types/questions'
 import { APIResponseBaseModel } from '@/shared/types/response'
 
-export interface AdminQuestionsResponeseModel extends APIResponseBaseModel<boolean> {
+export interface AdminQuestionsResponseModel extends APIResponseBaseModel<boolean> {
   result: {
     content: Array<{
       strategy: {
