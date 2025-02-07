@@ -10,6 +10,7 @@ import classNames from 'classnames/bind'
 
 import { SUPPORTED_FILE_TYPES } from '@/shared/constants/supported-file-types'
 import { Button } from '@/shared/ui/button'
+import { DropdownValueType } from '@/shared/ui/dropdown/types'
 import BackHeader from '@/shared/ui/header/back-header'
 import Input from '@/shared/ui/input'
 import Select from '@/shared/ui/select'
@@ -121,7 +122,7 @@ const StrategyAddPage = () => {
     }
   }
 
-  const handleInputChange = (field: keyof StrategyFormDataModel, value: any) => {
+  const handleInputChange = (field: keyof StrategyFormDataModel, value: DropdownValueType) => {
     setFormData((prev) => ({ ...prev, [field]: value }))
     setFormErrors((prev) => ({ ...prev, [field]: '' }))
   }

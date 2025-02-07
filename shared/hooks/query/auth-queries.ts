@@ -63,8 +63,8 @@ export const useLogoutMutation = () => {
       useSearchingItemStore.getState().actions.resetState()
       router.replace(PATH.SIGN_IN)
     },
-    onError: (error) => {
-      console.error('Logout failed:', error)
+    onError: (err) => {
+      console.error('Logout failed:', err)
       removeAccessToken()
       useAuthStore.getState().setAuthState({
         isAuthenticated: false,

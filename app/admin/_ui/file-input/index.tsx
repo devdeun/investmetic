@@ -21,7 +21,6 @@ interface Props extends ComponentPropsWithoutRef<'input'> {
 const FileInput = ({
   preview,
   accept = '*',
-  value,
   onChange,
   multiple = false,
   className,
