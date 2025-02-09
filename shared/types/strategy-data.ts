@@ -3,9 +3,9 @@ export interface DailyAnalysisModel {
   principal: number
   transaction: number
   dailyProfitLoss: number
-  dailyProfitLossRate: number
+  dailyProfitLossRate: number | string
   cumulativeProfitLoss: number
-  cumulativeProfitLossRate: number
+  cumulativeProfitLossRate: number | string
 }
 
 export interface MyDailyAnalysisModel {
@@ -13,10 +13,10 @@ export interface MyDailyAnalysisModel {
   dailyDate: string
   transaction: number
   dailyProfitLoss: number
-  dailyProfitLossRate: number
+  dailyProfitLossRate: number | string
   principal: number
   cumulativeProfitLoss: number
-  cumulativeProfitLossRate: number
+  cumulativeProfitLossRate: number | string
 }
 
 export interface MonthlyAnalysisModel {
@@ -24,9 +24,9 @@ export interface MonthlyAnalysisModel {
   monthlyAveragePrincipal: number
   depositsWithdrawals: number
   monthlyProfitLoss: number
-  monthlyProfitLossRate: number
+  monthlyProfitLossRate: number | string
   cumulativeProfitLoss: number
-  cumulativeProfitLossRate: number
+  cumulativeProfitLossRate: number | string
 }
 
 export interface ProfitRateChartDataModel {
