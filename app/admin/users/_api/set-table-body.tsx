@@ -18,6 +18,7 @@ const setTableBody = ({ data, page, countPerPage }: ArgModel) =>
       <Avatar src={data?.imageUrl ?? undefined} key={data.userId} />,
       data.userName,
       data.nickname,
+      data.joinDate,
       data.email,
       data.phone,
       <RoleSelect data={data} key={data.userId} />,
