@@ -1,6 +1,6 @@
 ## investmetic
 
-![inve](https://github.com/user-attachments/assets/04760f5b-1c52-48ee-9bd4-763b947e1899)
+![investmetic](https://github.com/user-attachments/assets/04760f5b-1c52-48ee-9bd4-763b947e1899)
 
 <div align="center">
 
@@ -11,12 +11,10 @@
 
 ## 테스트 계정
 
-| **역할**             | **이메일**                | **비밀번호**     |
-| -------------------- | ------------------------- | ---------------- |
-| **투자자**           | investor@example.com      | investor123      |
-| **트레이더**         | trader@example.com        | trader123        |
-| **트레이더(관리자)** | straderadmin@example.com  | traderadmin123   |
-| **관리자 (관리자)**  | investoradmin@example.com | investoradmin123 |
+| **역할**     | **이메일**           | **비밀번호** |
+| ------------ | -------------------- | ------------ |
+| **투자자**   | investor@example.com | investor123  |
+| **트레이더** | trader@example.com   | trader123    |
 
 <br/>
 
