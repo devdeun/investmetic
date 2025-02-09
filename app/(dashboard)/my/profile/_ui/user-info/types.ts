@@ -11,6 +11,7 @@ export interface ProfileFormModel {
   passwordConfirm: string
   phone: string
   birthDate: string
+  joinDate: string
 }
 
 export interface ProfileFormStateModel {
