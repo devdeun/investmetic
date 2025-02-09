@@ -109,13 +109,7 @@
 
   .edit-button {
     align-self: flex-end;
-  }
-
-  .first-row {
-    display: flex;
-    flex-direction: column;
-    margin-top: 20px;
-    margin-bottom: 36px;
+    margin-bottom: 20px;
   }
 
   .title {
@@ -128,7 +122,6 @@
     display: flex;
     gap: 32px;
     align-items: flex-start;
-    justify-content: space-between;
     margin-bottom: 36px;
   }
 

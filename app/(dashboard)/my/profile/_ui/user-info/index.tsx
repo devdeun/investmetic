@@ -141,17 +141,31 @@ const UserInfo = ({ profile, isEditable = false }: Props) => {
               </LinkButton>
             )}
 
-            <div className={cx('first-row')}>
-              <p className={cx('title')}>이름</p>
-              <Input
-                id="name"
-                name="name"
-                value={form.name}
-                inputSize="compact"
-                className={cx('input')}
-                isWhiteDisabled={!isEditable}
-                disabled={true}
-              />
+            <div className={cx('row')}>
+              <div>
+                <p className={cx('title')}>이름</p>
+                <Input
+                  id="name"
+                  name="name"
+                  value={form.name}
+                  inputSize="compact"
+                  className={cx('input')}
+                  isWhiteDisabled={!isEditable}
+                  disabled={true}
+                />
+              </div>
+              <div>
+                <p className={cx('title')}>가입일자</p>
+                <Input
+                  id="joinDate"
+                  name="joinDate"
+                  value={form.joinDate}
+                  inputSize="compact"
+                  className={cx('input')}
+                  isWhiteDisabled={!isEditable}
+                  disabled={true}
+                />
+              </div>
             </div>
 
             <div className={cx('row')}>

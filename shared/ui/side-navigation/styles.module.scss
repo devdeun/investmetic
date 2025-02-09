@@ -117,6 +117,9 @@
   }
 
   .email {
+    width: 90%;
     font-size: $text-c1;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }

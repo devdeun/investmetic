@@ -69,7 +69,17 @@ const AdminUsersPage = () => {
           }
         />
         <VerticalTable
-          tableHead={['No.', '프로필', '이름', '닉네임', '이메일', '전화번호', '회원분류', '탈퇴']}
+          tableHead={[
+            'No.',
+            '프로필',
+            '이름',
+            '닉네임',
+            '가입 일자',
+            '이메일',
+            '전화번호',
+            '회원분류',
+            '탈퇴',
+          ]}
           tableBody={setTableBody({
             data: data?.content,
             page: data?.page,
@@ -77,6 +87,7 @@ const AdminUsersPage = () => {
           })}
           countPerPage={data.size}
           currentPage={1}
+          colWidths={[1.2, 1.5, 1.5, 2, 2, 3, 2, 2, 2]}
         />
         <Pagination
           currentPage={data?.page}

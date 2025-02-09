@@ -27,6 +27,7 @@ export const useProfileForm = (profile: ProfileModel) => {
     passwordConfirm: '',
     phone: profile?.phone || '',
     birthDate: profile?.birthDate || '',
+    joinDate: profile?.joinDate || '',
   }
 
   const [form, setForm] = useState<ProfileFormModel>(initialForm)
