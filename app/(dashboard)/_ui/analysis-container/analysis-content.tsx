@@ -18,6 +18,7 @@ import useGetMyDailyAnalysis from '../../my/_hooks/query/use-get-my-daily-analys
 import { useMyAnalysisMutation } from '../../my/_hooks/query/use-manage-daily-analysis'
 import useGetAnalysis from '../../strategies/[strategyId]/_hooks/query/use-get-analysis'
 import useGetAnalysisDownload from '../../strategies/[strategyId]/_hooks/query/use-get-analysis-download'
+import { generateFormattedStrategyData } from '../../strategies/[strategyId]/util'
 import { DAILY_TABLE_HEADER, MONTHLY_TABLE_HEADER } from './constants'
 import styles from './styles.module.scss'
 
@@ -82,6 +83,8 @@ const AnalysisContent = ({
   const analysisData = isEditable ? myAnalysisData : publicAnalysisData
   const isLoading = isEditable ? isMyAnalysisLoading : isPublicAnalysisLoading
   const isDelayedLoading = useDelayedLoading(isLoading, 500)
+
+  const analysisContent = generateFormattedStrategyData(analysisData?.content)
 
   const { deleteAllAnalysis, isLoading: isDeleteAllLoading } = useAnalysisUploadMutation(
     strategyId,
@@ -215,7 +218,7 @@ const AnalysisContent = ({
         <>
           <VerticalTable
             tableHead={tableHeader}
-            tableBody={analysisData.content}
+            tableBody={analysisContent}
             currentPage={1}
             countPerPage={ANALYSIS_PAGE_COUNT}
             renderActions={isEditable ? renderActions : undefined}
