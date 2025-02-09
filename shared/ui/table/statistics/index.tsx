@@ -2,7 +2,13 @@ import classNames from 'classnames/bind'
 
 import { formatNumber } from '@/shared/utils/format'
 
-import { STATISTICS_DATE, STATISTICS_PERCENT, inKoreanData } from './constant'
+import {
+  STATISTICS_DATE,
+  STATISTICS_FORMATTED_PERCENT,
+  STATISTICS_PERCENT,
+  STATISTICS_RAW,
+  inKoreanData,
+} from './constant'
 import styles from './styles.module.scss'
 
 const cx = classNames.bind(styles)
@@ -43,11 +49,17 @@ const StatisticsTable = ({ title, statisticsData }: Props) => {
   )
 
   const formatStatisticsValue = (key: string, value: number) => {
-    if (STATISTICS_PERCENT.includes(key)) {
+    if (STATISTICS_FORMATTED_PERCENT.includes(key)) {
       return Number(value).toFixed(2) + ' %'
+    }
+    if (STATISTICS_PERCENT.includes(key)) {
+      return (Number(value) * 100).toFixed(2) + ' %'
     }
     if (STATISTICS_DATE.includes(key)) {
       return formatNumber(value) + ' 일'
+    }
+    if (STATISTICS_RAW.includes(key)) {
+      return formatNumber(value)
     }
     return formatNumber(value) + ' 원'
   }
