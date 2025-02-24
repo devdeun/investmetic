@@ -31,19 +31,21 @@ const AverageMetricsSection = () => {
       <HomeSubtitle>대표 전략 통합 평균 지표</HomeSubtitle>
 
       <div className={cx('container')}>
-        {isLoading && chartData === undefined ? (
+        {isLoading && !chartData ? (
           <Spinner />
-        ) : chartData ? (
-          <div className={cx('contents-wrapper')}>
-            <div className={cx('date-wrapper')}>
-              FROM <span className={cx('date')}>{startDate}</span>TO
-              <span className={cx('date')}>{endDate}</span>
+        ) : (
+          chartData && (
+            <div className={cx('contents-wrapper')}>
+              <div className={cx('date-wrapper')}>
+                FROM <span className={cx('date')}>{startDate}</span>TO
+                <span className={cx('date')}>{endDate}</span>
+              </div>
+              <div className={cx('chart-wrapper')}>
+                <AverageMetricsChart data={chartData} />
+              </div>
             </div>
-            <div className={cx('chart-wrapper')}>
-              <AverageMetricsChart data={chartData} />
-            </div>
-          </div>
-        ) : null}
+          )
+        )}
       </div>
     </section>
   )
