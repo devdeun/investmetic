@@ -82,7 +82,6 @@ const SignInPage = () => {
       const response = await loginMutation.mutateAsync(formData)
 
       if (!response.data.isSuccess) {
-        setErrors(response.data.message || ERROR_MESSAGES.AUTH.LOGIN_FAILED)
         return
       }
 
@@ -102,10 +101,10 @@ const SignInPage = () => {
       router.replace(PATH.STRATEGIES)
     } catch (err) {
       if (err instanceof AxiosError) {
-        if (err.response) {
-          setErrors(err.response.data.message)
+        if (!err.response?.data.isSuccess) {
+          setErrors(err.response?.data.message)
         } else {
-          setErrors(ERROR_MESSAGES.NETWORK.ERROR)
+          setErrors(ERROR_MESSAGES.AUTH.LOGIN_FAILED)
         }
       } else {
         setErrors(ERROR_MESSAGES.AUTH.LOGIN_FAILED)
