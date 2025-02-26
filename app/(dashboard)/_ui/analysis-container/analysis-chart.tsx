@@ -47,8 +47,6 @@ const AnalysisChart = ({ analysisChartData: data }: Props) => {
     xAxis: {
       visible: false,
       categories: data.dates,
-      min: data.dates.length > 30 ? data.dates.length - 30 : 0,
-      max: data.dates.length - 1,
     },
     yAxis: [
       {
