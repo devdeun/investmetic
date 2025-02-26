@@ -2,6 +2,8 @@
 
 import classNames from 'classnames/bind'
 
+import { PATH } from '@/shared/constants/path'
+import { usePagination } from '@/shared/hooks/custom/use-pagination'
 import { QuestionSearchConditionType } from '@/shared/types/questions'
 import Pagination from '@/shared/ui/pagination'
 import SearchInput from '@/shared/ui/search-input'
@@ -36,6 +38,11 @@ const AdminQuestionsPage = () => {
   const { isLoading, data, refetch } = useAdminQuestions({
     ...searchParams,
     stateCondition,
+  })
+
+  const { page, handlePageChange } = usePagination({
+    basePath: PATH.ADMIN_STRATEGIES,
+    pageSize: data?.size || 10,
   })
 
   if (isLoading || !data) return null
@@ -85,7 +92,13 @@ const AdminQuestionsPage = () => {
           countPerPage={data.size}
           currentPage={1}
         />
-        <Pagination currentPage={data.page} maxPage={data.totalPages} onPageChange={() => {}} />
+        {data.content.length > 0 && (
+          <Pagination
+            currentPage={page}
+            maxPage={data.totalPages}
+            onPageChange={handlePageChange}
+          />
+        )}
       </section>
     </>
   )
