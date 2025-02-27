@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react'
 
 import StrategiesIcon from '@/app/(dashboard)/_ui/strategies-item/strategies-icon'
 import { FileIcon } from '@/public/icons'
+import { TrashcanIcon } from '@/public/icons'
 import classNames from 'classnames/bind'
 
 import { SUPPORTED_FILE_TYPES } from '@/shared/constants/supported-file-types'
@@ -23,6 +24,7 @@ interface Props {
   iconUrls?: string[]
   iconNames?: string[]
   isEditable?: boolean
+  error?: Error
 }
 
 const StrategyNameBox = ({
@@ -32,12 +34,14 @@ const StrategyNameBox = ({
   iconUrls,
   iconNames,
   isEditable = false,
+  error,
 }: Props) => {
   const information = useEditInformationStore((state) => state.information)
   const proposal = useEditInformationStore((state) => state.proposal)
   const setStrategyName = useEditInformationStore((state) => state.actions.setStrategyName)
   const setProposalFile = useEditInformationStore((state) => state.actions.setProposalFile)
   const initializeProposal = useEditInformationStore((state) => state.actions.initializeProposal)
+  const setProposalModified = useEditInformationStore((state) => state.actions.setProposalModified)
 
   const { refetch } = useGetProposalFileName(strategyId)
   const { mutate } = useGetProposalDownload()
@@ -67,6 +71,16 @@ const StrategyNameBox = ({
   const handleProposalClick = () => {
     if (fileInputRef.current) {
       fileInputRef.current.click()
+    }
+  }
+
+  const handleProposalDelete = () => {
+    if (selectedFile || proposal.proposalFileName) {
+      setSelectedFile(null)
+      setProposalFile(null)
+      initializeProposal('')
+      setProposalModified(true)
+      setFileError('')
     }
   }
 
@@ -120,11 +134,15 @@ const StrategyNameBox = ({
           />
           <div className={cx('proposal-input-wrapper')}>
             <Input readOnly value={displayFileName} className={cx('file-name-input')} />
-            <button onClick={handleProposalClick} className={cx('proposal-button')}>
+            <button onClick={handleProposalClick} className={cx('proposal-button', 'modify')}>
               <FileIcon />
             </button>
+            <button onClick={handleProposalDelete} className={cx('proposal-button', 'delete')}>
+              <TrashcanIcon />
+            </button>
           </div>
-          {fileError && <p className={cx('file-error')}>{fileError}</p>}
+          {error && <p className={cx('error-message')}>{error.message}</p>}
+          {fileError && <p className={cx('error-message')}>{fileError}</p>}
         </div>
       )}
     </div>

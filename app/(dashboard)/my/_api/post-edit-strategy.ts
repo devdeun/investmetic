@@ -32,7 +32,7 @@ const postEditStrategy = async (
     )
     return response.data
   } catch (err) {
-    throw new Error('전략 정보 수정 실패', err as AxiosError)
+    throw new Error('서버 오류로 제안서 수정에 실패했습니다.', err as AxiosError)
   }
 }
 

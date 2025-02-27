@@ -37,7 +37,7 @@ const StrategyManagePage = ({ params }: { params: { strategyId: string } }) => {
     strategyId: strategyNumber,
   })
 
-  const { mutate: editStrategy, isError, error } = usePostEditStrategy()
+  const { mutateAsync: editStrategy, error } = usePostEditStrategy()
 
   const { detailsSideData, detailsInformationData } = detailsInfoData || {}
   const { detailsInformationData: subscribeInfo } = subscribeData || {}
@@ -45,7 +45,7 @@ const StrategyManagePage = ({ params }: { params: { strategyId: string } }) => {
     if (!Array.isArray(data)) return data.data !== undefined
   })
 
-  const handleUpdateInformation = async () => {
+  const handleUpdateInformation = () => {
     const editedInformation = useEditInformationStore.getState().information
     const { proposal } = useEditInformationStore.getState()
 
@@ -54,38 +54,36 @@ const StrategyManagePage = ({ params }: { params: { strategyId: string } }) => {
     }
 
     setIsSubmitting(true)
-    try {
-      const information = {
-        strategyName: editedInformation.strategyName,
-        description: editedInformation.description,
-        proposalModified: proposal.proposalModified,
-        ...(proposal.proposalFile && {
-          proposalFile: {
-            proposalFileName: proposal.proposalFile.name,
-            proposalFileSize: proposal.proposalFile.size,
-          },
-        }),
-      }
 
-      editStrategy(
-        { strategyId: strategyNumber, information, file: proposal.proposalFile || undefined },
-        {
-          onSuccess: async () => {
-            await refetch()
-            const newProposalFileName = proposal.proposalFile?.name || proposal.proposalFileName
-            useEditInformationStore.getState().actions.initializeProposal(newProposalFileName)
-            setIsEditable(false)
-          },
-          onError: (err) => {
-            console.error('전략 수정 실패:', err)
-          },
-        }
-      )
-    } catch (err) {
-      console.error('Failed to update strategy:', err)
-    } finally {
-      setIsSubmitting(false)
+    const information = {
+      strategyName: editedInformation.strategyName,
+      description: editedInformation.description,
+      proposalModified: proposal.proposalModified,
+      ...(proposal.proposalFile && {
+        proposalFile: {
+          proposalFileName: proposal.proposalFile.name,
+          proposalFileSize: proposal.proposalFile.size,
+        },
+      }),
     }
+
+    editStrategy({
+      strategyId: strategyNumber,
+      information,
+      file: proposal.proposalFile || undefined,
+    })
+      .then(async () => {
+        await refetch()
+        const newProposalFileName = proposal.proposalFile?.name || proposal.proposalFileName
+        useEditInformationStore.getState().actions.initializeProposal(newProposalFileName)
+        setIsEditable(false)
+      })
+      .catch((err) => {
+        console.error('전략 수정 실패:', err)
+      })
+      .finally(() => {
+        setIsSubmitting(false)
+      })
   }
 
   return (
@@ -114,15 +112,13 @@ const StrategyManagePage = ({ params }: { params: { strategyId: string } }) => {
           </Button>
         )}
       </div>
-      {isError && (
-        <div className={cx('error')}>{(error as Error)?.message || '오류가 발생했습니다.'}</div>
-      )}
       <div className={cx('strategy-container')}>
         {detailsInformationData && (
           <DetailsInformation
             information={detailsInformationData}
             strategyId={strategyNumber}
             isEditable={isEditable}
+            error={error as Error}
             type="my"
           />
         )}

@@ -15,12 +15,14 @@ interface Props {
   information: StrategyDetailsInformationModel
   type?: 'default' | 'my'
   isEditable?: boolean
+  error?: Error
 }
 
 const DetailsInformation = ({
   strategyId,
   information,
   type = 'default',
+  error,
   isEditable = false,
 }: Props) => {
   const percentageToArray = [
@@ -35,6 +37,7 @@ const DetailsInformation = ({
     <>
       <div className={cx('information-top')}>
         <StrategyNameBox
+          error={error}
           iconUrls={[
             information.tradeTypeIconUrl,
             ...(information.stockTypeInfo?.stockTypeIconUrls ?? []),
