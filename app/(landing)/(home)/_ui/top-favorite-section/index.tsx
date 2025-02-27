@@ -32,6 +32,7 @@ const TopFavoriteSection = () => {
               favoriteStrategies.map((strategy, idx) => (
                 <li key={strategy.strategyId}>
                   <TopFavoriteCard
+                    id={strategy.strategyId}
                     ranking={idx + 1}
                     nickname={strategy.nickname}
                     title={strategy.strategyName}
