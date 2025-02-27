@@ -55,6 +55,9 @@
         border-radius: 8px;
         cursor: default;
         color: $color-gray-700;
+        padding-right: 70px;
+        text-overflow: ellipsis;
+        padding-left: 16px;
       }
 
       .proposal-button {
@@ -73,13 +76,21 @@
           width: 20px;
           height: 20px;
         }
+
+        &.modify {
+          right: 40px;
+        }
+
+        &.delete {
+          right: 12px;
+        }
       }
     }
 
-    .file-error {
+    .error-message {
       @include typo-c1;
       color: $color-orange-700;
-      margin-top: 4px;
+      margin-top: 8px;
     }
   }
 
