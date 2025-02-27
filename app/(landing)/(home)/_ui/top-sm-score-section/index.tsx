@@ -26,6 +26,7 @@ const TopSmScoreSection = () => {
             {topSmScoreStrategies.map((strategy, idx) => (
               <li key={strategy.strategyId}>
                 <TopSmScoreCard
+                  id={strategy.strategyId}
                   size={idx > 0 ? 'small' : 'large'}
                   ranking={idx + 1}
                   nickname={strategy.nickname}

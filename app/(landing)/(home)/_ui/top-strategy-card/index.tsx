@@ -1,5 +1,8 @@
+import Link from 'next/link'
+
 import classNames from 'classnames/bind'
 
+import { PATH } from '@/shared/constants/path'
 import Avatar from '@/shared/ui/avatar'
 import TotalStar from '@/shared/ui/total-star'
 
@@ -15,12 +18,17 @@ import {
 const cx = classNames.bind(styles)
 
 interface Props {
+  id: number
   size?: CardSizeType
   children: React.ReactNode
 }
 
-const TopStrategyCard = ({ size, children }: Props) => {
-  return <div className={cx('card-container', size)}>{children}</div>
+const TopStrategyCard = ({ id, size, children }: Props) => {
+  return (
+    <Link className={cx('card-container', size)} href={`${PATH.STRATEGIES}/${id}`}>
+      {children}
+    </Link>
+  )
 }
 
 const ContentsWrapper = ({ children }: { children: React.ReactNode }) => {
