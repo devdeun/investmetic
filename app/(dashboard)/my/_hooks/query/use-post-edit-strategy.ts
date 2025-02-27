@@ -1,4 +1,4 @@
-import { QueryClient, useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import uploadFileWithPresignedUrl from '@/shared/api/upload-file-with-presigned-url'
 import { QUERY_KEY } from '@/shared/constants/query-key'
@@ -9,7 +9,7 @@ import postEditStrategy, {
 } from '../../_api/post-edit-strategy'
 
 const usePostEditStrategy = () => {
-  const queryClient = new QueryClient()
+  const queryClient = useQueryClient()
 
   return useMutation<
     EditStrategyResponseModel,
