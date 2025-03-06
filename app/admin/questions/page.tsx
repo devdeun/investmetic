@@ -41,7 +41,7 @@ const AdminQuestionsPage = () => {
   })
 
   const { page, handlePageChange } = usePagination({
-    basePath: PATH.ADMIN_STRATEGIES,
+    basePath: PATH.ADMIN_QUESTIONS,
     pageSize: data?.size || 10,
   })
 
