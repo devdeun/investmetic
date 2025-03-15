@@ -21,26 +21,40 @@ interface Props {
 }
 
 const FindPasswordModal = ({ isOpen, onClose }: Props) => {
-  const [error, setError] = useState('')
+  const [notice, setNotice] = useState('')
+  const [isSuccess, setIsSuccess] = useState(false)
+
   const {
     formData,
     step,
     isPending,
+    countdown,
+    formatCountdown,
+    isEmailVerified,
+    isPasswordReset,
     handleInputChange,
     handleRequestCode,
     handleVerifyEmail,
     handlePasswordReset,
+    handleNextStep,
     setStep,
     resetForm,
   } = useResetPassword({
-    onSuccess: onClose,
-    onError: (message) => setError(message),
+    onSuccess: (message) => {
+      setNotice(message)
+      setIsSuccess(true)
+    },
+    onError: (message) => {
+      setNotice(message)
+      setIsSuccess(false)
+    },
   })
 
   useEffect(() => {
     if (!isOpen) {
       resetForm()
-      setError('')
+      setNotice('')
+      setIsSuccess(false)
       setStep(1)
     }
   }, [isOpen, resetForm, setStep])
@@ -53,7 +67,13 @@ const FindPasswordModal = ({ isOpen, onClose }: Props) => {
       className={cx('container')}
     >
       {step === 1 && (
-        <form onSubmit={handleVerifyEmail} className={cx('form')}>
+        <form
+          onSubmit={(e) => {
+            e.preventDefault()
+            handleNextStep()
+          }}
+          className={cx('form')}
+        >
           <p className={cx('explanation')}>본인 인증을 위해 가입한 이메일 주소를 입력해주세요.</p>
           <div className={cx('input-group')}>
             <label>이메일 주소</label>
@@ -65,13 +85,13 @@ const FindPasswordModal = ({ isOpen, onClose }: Props) => {
                 value={formData.email}
                 onChange={handleInputChange}
                 placeholder="이메일을 입력하세요"
-                disabled={isPending}
+                disabled={isPending || isEmailVerified}
                 required
               />
               <Button
                 type="button"
                 onClick={handleRequestCode}
-                disabled={isPending || !formData.email}
+                disabled={isPending || !formData.email || isEmailVerified}
                 variant="filled"
               >
                 인증
@@ -88,25 +108,36 @@ const FindPasswordModal = ({ isOpen, onClose }: Props) => {
                 value={formData.code}
                 onChange={handleInputChange}
                 placeholder="인증번호를 입력하세요"
-                disabled={isPending}
+                disabled={isPending || isEmailVerified}
                 required
               />
               <Button
                 type="button"
                 onClick={handleVerifyEmail}
-                disabled={isPending || !formData.code}
+                disabled={isPending || !formData.code || isEmailVerified}
                 variant="outline"
               >
                 확인
               </Button>
             </div>
+            {countdown > 0 && !isEmailVerified && (
+              <p className={cx('countdown')}>인증 코드 유효시간: {formatCountdown()}</p>
+            )}
           </div>
-          {error && <p className={cx('error')}>{error}</p>}
+
+          {notice && (
+            <p className={cx('notice', { success: isSuccess, error: !isSuccess })}>{notice}</p>
+          )}
+
           <div className={cx('buttons')}>
             <Button type="button" onClick={onClose} variant="outline">
               닫기
             </Button>
-            <Button type="submit" disabled={isPending} variant="filled">
+            <Button
+              type="submit"
+              disabled={isPending || !formData.email || !formData.code || !isEmailVerified}
+              variant="filled"
+            >
               다음
             </Button>
           </div>
@@ -115,7 +146,7 @@ const FindPasswordModal = ({ isOpen, onClose }: Props) => {
 
       {step === 2 && (
         <form onSubmit={handlePasswordReset} className={cx('form')}>
-          <p className={cx('explanation')}>본인 인증을 위해 가입한 이메일 주소를 입력해주세요.</p>
+          <p className={cx('explanation')}>새로운 비밀번호를 설정합니다.</p>
           <div className={cx('input-group')}>
             <label>새 비밀번호</label>
             <Input
@@ -125,9 +156,10 @@ const FindPasswordModal = ({ isOpen, onClose }: Props) => {
               value={formData.password}
               onChange={handleInputChange}
               placeholder="새 비밀번호를 입력하세요"
-              disabled={isPending}
+              disabled={isPending || isPasswordReset}
               required
             />
+            <p className={cx('password-guide')}>* 영문과 숫자를 포함한 6~20자로 입력해주세요.</p>
           </div>
           <div className={cx('input-group')}>
             <label>비밀번호 확인</label>
@@ -138,18 +170,34 @@ const FindPasswordModal = ({ isOpen, onClose }: Props) => {
               value={formData.passwordConfirm}
               onChange={handleInputChange}
               placeholder="비밀번호를 다시 입력하세요"
-              disabled={isPending}
+              disabled={isPending || isPasswordReset}
               required
             />
           </div>
-          {error && <p className={cx('error')}>{error}</p>}
+
+          {notice && (
+            <p className={cx('notice', { success: isSuccess, error: !isSuccess })}>{notice}</p>
+          )}
+
           <div className={cx('buttons')}>
-            <Button type="button" onClick={() => setStep(1)} variant="outline">
-              이전
-            </Button>
-            <Button type="submit" disabled={isPending} variant="filled">
-              재설정
-            </Button>
+            {isPasswordReset ? (
+              <Button type="button" onClick={onClose} variant="filled">
+                닫기
+              </Button>
+            ) : (
+              <>
+                <Button type="button" onClick={onClose} variant="outline">
+                  닫기
+                </Button>
+                <Button
+                  type="submit"
+                  disabled={isPending || !formData.password || !formData.passwordConfirm}
+                  variant="filled"
+                >
+                  재설정
+                </Button>
+              </>
+            )}
           </div>
         </form>
       )}
