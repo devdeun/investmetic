@@ -207,7 +207,7 @@ const InformationPage = () => {
               className={cx('input')}
               errorMessage={errors.password}
             />
-            <small>* 비밀번호는 문자, 숫자 포함 6~20자로 구성되어야 합니다.</small>
+            <small>* 비밀번호는 영문과 숫자 포함 6~20자로 구성되어야 합니다.</small>
           </div>
         </div>
 
