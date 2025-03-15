@@ -5,7 +5,7 @@ export const ERROR_MESSAGES = {
   FORM: {
     REQUIRED_FIELDS: '이메일과 비밀번호를 입력해주세요.',
     EMAIL: '이메일 형식이 올바르지 않습니다.',
-    PASSWORD: '비밀번호는 8자 이상, 영문과 숫자를 포함해야 합니다.',
+    PASSWORD: '비밀번호는 6~20자로 영문과 숫자를 포함해야 합니다.',
     PHONE: '휴대폰 번호 형식이 올바르지 않습니다.',
   },
 } as const

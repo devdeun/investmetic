@@ -292,7 +292,7 @@ const UserInfo = ({ profile, isEditable = false }: Props) => {
             {isEditable && (
               <div>
                 <p className={cx('notification')}>
-                  * 비밀번호는 문자, 숫자 포함 6~20자로 구성되어야 합니다.
+                  * 비밀번호는 영문과 숫자를 포함하여 6~20자로 구성되어야 합니다.
                 </p>
               </div>
             )}
