@@ -51,6 +51,26 @@ export const useResetPassword = ({ onSuccess, onError }: UseResetPasswordProps) 
     return { isValid: true, message: '' }
   }
 
+  const startCountdown = useCallback((duration: number) => {
+    if (timerRef.current) {
+      clearInterval(timerRef.current)
+      timerRef.current = null
+    }
+
+    setCountdown(duration)
+
+    timerRef.current = setInterval(() => {
+      setCountdown((prev) => {
+        if (prev <= 1) {
+          clearInterval(timerRef.current as NodeJS.Timeout)
+          timerRef.current = null
+          return 0
+        }
+        return prev - 1
+      })
+    }, 1000)
+  }, [])
+
   const handleVerifyEmail = async (e?: React.FormEvent) => {
     e?.preventDefault()
 
@@ -151,7 +171,7 @@ export const useResetPassword = ({ onSuccess, onError }: UseResetPasswordProps) 
 
       if (response.data.isSuccess) {
         memoizedOnSuccess('인증코드가 발송되었습니다. 30분 내에 입력해주세요.')
-        setCountdown(1800)
+        startCountdown(1800)
       } else {
         memoizedOnError(response.data.message || '인증코드 발송에 실패했습니다.')
       }
@@ -167,24 +187,16 @@ export const useResetPassword = ({ onSuccess, onError }: UseResetPasswordProps) 
     } finally {
       controllerRef.current = null
     }
-  }, [formData.email, memoizedOnError, memoizedOnSuccess])
+  }, [formData.email, memoizedOnError, memoizedOnSuccess, startCountdown])
 
   useEffect(() => {
-    if (countdown > 0) {
-      timerRef.current = setInterval(() => {
-        setCountdown((prev) => prev - 1)
-      }, 1000)
-    } else if (timerRef.current) {
-      clearInterval(timerRef.current)
-      timerRef.current = null
-    }
-
     return () => {
       if (timerRef.current) {
         clearInterval(timerRef.current)
+        timerRef.current = null
       }
     }
-  }, [countdown])
+  }, [])
 
   const formatCountdown = () => {
     const minutes = Math.floor(countdown / 60)
@@ -217,6 +229,7 @@ export const useResetPassword = ({ onSuccess, onError }: UseResetPasswordProps) 
 
     memoizedOnSuccess('')
     memoizedOnError('')
+    setStep(1)
   }, [memoizedOnSuccess, memoizedOnError])
 
   useEffect(() => {
@@ -243,7 +256,6 @@ export const useResetPassword = ({ onSuccess, onError }: UseResetPasswordProps) 
     handleVerifyEmail,
     handlePasswordReset,
     handleNextStep,
-    setStep,
     resetForm,
   }
 }

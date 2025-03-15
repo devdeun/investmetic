@@ -37,7 +37,6 @@ const FindPasswordModal = ({ isOpen, onClose }: Props) => {
     handleVerifyEmail,
     handlePasswordReset,
     handleNextStep,
-    setStep,
     resetForm,
   } = useResetPassword({
     onSuccess: (message) => {
@@ -55,9 +54,8 @@ const FindPasswordModal = ({ isOpen, onClose }: Props) => {
       resetForm()
       setNotice('')
       setIsSuccess(false)
-      setStep(1)
     }
-  }, [isOpen, resetForm, setStep])
+  }, [isOpen])
 
   return (
     <Modal
