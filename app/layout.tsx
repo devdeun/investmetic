@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
 
+import { GoogleAnalytics } from '@next/third-parties/google'
+
 import { QueryProvider } from '@/shared/providers'
 import { AuthProvider } from '@/shared/providers/auth-provider'
 import '@/shared/styles/global.scss'
@@ -22,6 +24,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => {
             <div id="modal-root" />
           </AuthProvider>
         </QueryProvider>
+        <GoogleAnalytics gaId="G-KW2Z1H0QES" />
       </body>
     </html>
   )
