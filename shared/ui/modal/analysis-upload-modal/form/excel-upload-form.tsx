@@ -69,7 +69,7 @@ const ExcelUploadForm = ({ strategyId, onClose }: Props) => {
           </button>
         </label>
         <Button variant="outline" className={cx('guide-button')} disabled={isLoading}>
-          <a href="/files/엑셀업로드설명.xls" download="엑셀업로드설명.xls">
+          <a href="/files/upload-guide.xls" download="엑셀업로드설명.xls">
             업로드 가이드 다운
           </a>
         </Button>
